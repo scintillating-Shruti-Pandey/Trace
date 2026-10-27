@@ -1,0 +1,2547 @@
+{
+  "version": "1.0",
+  "split": "test",
+  "locked": true,
+  "created_at": "2026-10-25 01:55:07 Asia/Calcutta",
+  "description": "Held-out test query split per Engineering Spec \u00a713.1 and \u00a713.2. Formally locked and sealed.",
+  "query_count": 95,
+  "composition": {
+    "video_only": 20,
+    "doc_only": 15,
+    "multi_hop": 30,
+    "visual": 10,
+    "unanswerable": 10,
+    "paraphrase": 10
+  },
+  "queries": [
+    {
+      "query_id": "test-vid-001",
+      "type": "video-only",
+      "query": "How is preparation performed during equipment maintenance?",
+      "action_label": "preparation",
+      "essential_asset_ids": [
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d",
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "7bc76893-e082-4d0f-9035-93034e4e16a8",
+        "64e9b072-fb38-491b-a10a-3278379d090c",
+        "0d25045f-2269-47df-9295-93c31e483dfa",
+        "1bd8b5ca-46d4-4fcf-8adf-d1929435c662",
+        "741fb672-52f7-4901-9137-adb550ba6341"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            11.87,
+            29.67
+          ]
+        ],
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d": [
+          [
+            34.69,
+            72.56
+          ]
+        ],
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            2.8,
+            119.68
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            8.51,
+            100.01
+          ]
+        ],
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            0.0,
+            25.09
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-002",
+      "type": "video-only",
+      "query": "Locate the video moment showing assemble upper hinge.",
+      "action_label": "assemble upper hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_segment_ids": [
+        "0730684b-b687-411d-a8cb-dfba9430ce5d",
+        "c6608a58-96b5-4e5b-a6a7-bb516587ed3b",
+        "aac7b38e-045a-4b59-9990-f1cba180c016",
+        "fcec1ea3-2824-4e66-88bb-13ac2de4c594",
+        "6cd6bd30-e085-446d-92bd-94644444a420"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            342.87,
+            689.31
+          ]
+        ],
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            414.67,
+            676.16
+          ],
+          [
+            692.65,
+            699.96
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            6.07,
+            243.51
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            400.28,
+            823.59
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-003",
+      "type": "video-only",
+      "query": "Show the step where the technician does attach upper bar.",
+      "action_label": "attach upper bar",
+      "essential_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1"
+      ],
+      "essential_segment_ids": [
+        "31db3177-c4dc-4086-8320-13f28328c75d",
+        "f946e242-1ec9-4d59-9bf0-6cf789edf646",
+        "31a2d6d8-1e21-4713-a6d9-dd7b33892d2b",
+        "911ff616-ec79-4e53-9834-adc78815743f",
+        "a2a3e20f-d80f-45b6-a0f2-3aef223825d6"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            175.5,
+            234.97
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            286.87,
+            369.9
+          ],
+          [
+            532.16,
+            639.5
+          ],
+          [
+            671.49,
+            679.3
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            246.69,
+            377.21
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-004",
+      "type": "video-only",
+      "query": "Find the interval demonstrating assemble middle hinge on the workpiece.",
+      "action_label": "assemble middle hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_segment_ids": [
+        "037880c8-f957-4c91-b4ac-9c42b3975439",
+        "da5e5cea-3fe4-41fb-a11d-e61e55feba99",
+        "875a0c63-d217-4250-b40f-d46f51a48718",
+        "bade7eee-d1e7-4733-9317-1ec7bbe74648",
+        "932f03c1-5d39-48c2-b67b-8d06908b6b70",
+        "a61fd47e-d2f2-43bb-a54e-576ae61d2ff0",
+        "13efb9a0-17f1-4c4f-a74e-79310367a361",
+        "0fc7cd52-23c7-4423-82e6-c8fcccbf2154",
+        "893e2d4b-d121-429e-b043-50f14d070028"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            135.18,
+            342.87
+          ],
+          [
+            689.31,
+            704.94
+          ]
+        ],
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            168.61,
+            398.76
+          ],
+          [
+            676.16,
+            692.65
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            243.51,
+            492.09
+          ],
+          [
+            731.15,
+            735.84
+          ],
+          [
+            741.36,
+            754.65
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            125.71,
+            400.28
+          ],
+          [
+            827.42,
+            839.13
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-005",
+      "type": "video-only",
+      "query": "How is attach top plate performed during equipment maintenance?",
+      "action_label": "attach top plate",
+      "essential_asset_ids": [
+        "3af2970a-e708-41ab-894f-b4dd3200109f",
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "7f302bea-5402-4a95-8445-5885c7fa6177",
+        "937996ed-ce6b-4d71-92b3-1a5b81239eff"
+      ],
+      "gold_spans_by_asset": {
+        "3af2970a-e708-41ab-894f-b4dd3200109f": [
+          [
+            94.9,
+            157.49
+          ]
+        ],
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            177.68,
+            232.8
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-006",
+      "type": "video-only",
+      "query": "Locate the video moment showing put on gloves.",
+      "action_label": "put on gloves",
+      "essential_asset_ids": [
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d"
+      ],
+      "essential_segment_ids": [
+        "83d95235-2814-4214-a8e6-e8261b632d59"
+      ],
+      "gold_spans_by_asset": {
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d": [
+          [
+            17.02,
+            34.69
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-007",
+      "type": "video-only",
+      "query": "Show the step where the technician does attach wooden plate.",
+      "action_label": "attach wooden plate",
+      "essential_asset_ids": [
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "1986c27c-604b-44aa-b6ae-ee614285e9da"
+      ],
+      "gold_spans_by_asset": {
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            617.1,
+            694.94
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-008",
+      "type": "video-only",
+      "query": "Find the interval demonstrating attach connector plates on the workpiece.",
+      "action_label": "attach connector plates",
+      "essential_asset_ids": [
+        "3af2970a-e708-41ab-894f-b4dd3200109f",
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "82714706-ff9c-4c0a-b91b-6be4ac9cbc83",
+        "6db05611-fdcb-42a5-9a85-9c8dc500b2d4"
+      ],
+      "gold_spans_by_asset": {
+        "3af2970a-e708-41ab-894f-b4dd3200109f": [
+          [
+            373.63,
+            551.02
+          ]
+        ],
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            500.73,
+            617.1
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-009",
+      "type": "video-only",
+      "query": "How is adjust height performed during equipment maintenance?",
+      "action_label": "adjust height",
+      "essential_asset_ids": [
+        "76f8c610-0fdc-414c-b0e2-8617521775ea"
+      ],
+      "essential_segment_ids": [
+        "f93103f3-3a77-454b-b973-c88d2f53fabe"
+      ],
+      "gold_spans_by_asset": {
+        "76f8c610-0fdc-414c-b0e2-8617521775ea": [
+          [
+            4.07,
+            13.37
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-010",
+      "type": "video-only",
+      "query": "Locate the video moment showing test.",
+      "action_label": "test",
+      "essential_asset_ids": [
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a",
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c",
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54",
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b",
+        "7c553436-f15e-45ca-9229-cae2b2d867f8",
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b",
+        "1718202b-49db-459d-97d9-7868f324fe3b"
+      ],
+      "essential_segment_ids": [
+        "40e2d9b0-fbb8-4d25-b933-e84e25a7d468",
+        "7881d481-91df-4f5b-9002-3753470ab95e",
+        "c5a42b57-3ce5-4944-bedc-4c292de7133a",
+        "5330aae6-2986-43af-8031-a7d3129b731e",
+        "ce5b3185-b3ca-4712-a4cd-d269cc122972",
+        "0f6dfb06-0e14-4bcc-a86c-961b6107d5f8",
+        "8dc35455-7cbe-4648-85a2-1177954678f8",
+        "34646bd6-6644-4ab4-87a5-7ffb791b4ef4"
+      ],
+      "gold_spans_by_asset": {
+        "7c553436-f15e-45ca-9229-cae2b2d867f8": [
+          [
+            382.15,
+            392.56
+          ]
+        ],
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            728.07,
+            774.83
+          ]
+        ],
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a": [
+          [
+            701.36,
+            718.9
+          ]
+        ],
+        "1718202b-49db-459d-97d9-7868f324fe3b": [
+          [
+            432.52,
+            478.36
+          ]
+        ],
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54": [
+          [
+            604.42,
+            722.33
+          ]
+        ],
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b": [
+          [
+            492.41,
+            501.59
+          ]
+        ],
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b": [
+          [
+            458.36,
+            467.31
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            765.75,
+            801.9
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-011",
+      "type": "video-only",
+      "query": "Show the step where the technician does attach camera and plate.",
+      "action_label": "attach camera and plate",
+      "essential_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1"
+      ],
+      "essential_segment_ids": [
+        "a78a8dc6-a349-4f54-a2ed-ae57a8864510",
+        "753b61b7-8639-4125-b409-86d7894017a5",
+        "4c09ac26-cbad-4e7a-8a2b-274fe9f32c8e",
+        "ae1aa039-c6d6-4c5c-b6f4-3393a87ab8e4"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            234.97,
+            335.27
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            369.9,
+            532.16
+          ],
+          [
+            639.5,
+            671.49
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            377.21,
+            793.18
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-012",
+      "type": "video-only",
+      "query": "Find the interval demonstrating attach tabletop on the workpiece.",
+      "action_label": "attach tabletop",
+      "essential_asset_ids": [
+        "76f8c610-0fdc-414c-b0e2-8617521775ea",
+        "0f01d43c-87f2-4331-b35e-7b1055e073de"
+      ],
+      "essential_segment_ids": [
+        "9b46c3c8-b872-452f-814f-74dcce43b0e2",
+        "f32ae272-5592-4728-9465-c1c898d4f022"
+      ],
+      "gold_spans_by_asset": {
+        "76f8c610-0fdc-414c-b0e2-8617521775ea": [
+          [
+            13.37,
+            173.97
+          ]
+        ],
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            547.44,
+            764.08
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-013",
+      "type": "video-only",
+      "query": "How is attach zip ties performed during equipment maintenance?",
+      "action_label": "attach zip ties",
+      "essential_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_segment_ids": [
+        "3a22aafb-f535-41df-83e6-e9cc8af3dda1"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            53.76,
+            136.44
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-014",
+      "type": "video-only",
+      "query": "Locate the video moment showing turn on.",
+      "action_label": "turn on",
+      "essential_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_segment_ids": [
+        "2ede54e0-bffa-45b0-9c0d-9f8644105992"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            176.38,
+            193.03
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-015",
+      "type": "video-only",
+      "query": "Show the step where the technician does attach feet.",
+      "action_label": "attach feet",
+      "essential_asset_ids": [
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d"
+      ],
+      "essential_segment_ids": [
+        "59ec960f-dcca-4535-b692-1874298ed13a"
+      ],
+      "gold_spans_by_asset": {
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d": [
+          [
+            72.56,
+            497.26
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-016",
+      "type": "video-only",
+      "query": "Find the interval demonstrating plug in on the workpiece.",
+      "action_label": "plug in",
+      "essential_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_segment_ids": [
+        "73707854-d49a-4184-8afa-e7447e112215"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            136.44,
+            146.17
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-017",
+      "type": "video-only",
+      "query": "How is disassemble performed during equipment maintenance?",
+      "action_label": "disassemble",
+      "essential_asset_ids": [
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c",
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53"
+      ],
+      "essential_segment_ids": [
+        "a3b0c883-fd1d-4f6a-9974-df9abab51c88",
+        "d7bba08b-6de8-417f-a95a-f2bed82d76ca",
+        "b6ca1e54-7a36-4ed2-811b-b5775b9fdcae"
+      ],
+      "gold_spans_by_asset": {
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            119.68,
+            526.95
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            100.01,
+            246.35
+          ],
+          [
+            326.99,
+            484.8
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-018",
+      "type": "video-only",
+      "query": "Locate the video moment showing attach plates.",
+      "action_label": "attach plates",
+      "essential_asset_ids": [
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1"
+      ],
+      "essential_segment_ids": [
+        "49c41509-423f-4acd-bf38-95a8a40493c5"
+      ],
+      "gold_spans_by_asset": {
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            25.04,
+            365.74
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-019",
+      "type": "video-only",
+      "query": "Show the step where the technician does inspect.",
+      "action_label": "inspect",
+      "essential_asset_ids": [
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c",
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54",
+        "58ec0fb6-85cc-47be-b6bb-9bcd9a0e9f05",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b",
+        "a072cf61-dcfe-4b71-96d0-969c83f1641e",
+        "7d983111-1468-4ec1-9441-324a7183f923",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b",
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "1718202b-49db-459d-97d9-7868f324fe3b"
+      ],
+      "essential_segment_ids": [
+        "7b1682e9-82f3-4dbf-8fa1-e6e6f371f6e9",
+        "f1d8dafa-f74c-448b-8a25-864d040bfde4",
+        "5a98260c-09c4-4081-af8e-f984bfae5af6",
+        "47502b08-4265-4126-8254-dafa2181eeae",
+        "e9b4ae0f-ee9a-41c2-87eb-e741c7ba00d0",
+        "57021b96-d868-432c-b6af-bc8ecb81e8fd",
+        "5bc209d7-8de8-473b-8bc2-bd05b4b6a842",
+        "68dacbe9-1d60-4314-b21a-2435172f08b9",
+        "1e0fcf26-585c-4b22-8173-ae61c7031bb9",
+        "f7f456a2-8565-44ea-a706-bfcd8c65c8cf",
+        "cbeb23ec-1c11-41e2-b7ef-87220555425d",
+        "eeebd778-b30d-4ffa-b73b-a71d055061b4",
+        "dce27e4f-452e-4405-8c72-625b02acae91",
+        "34862564-2e3a-4fa7-8918-17650b631670"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            704.94,
+            739.09
+          ]
+        ],
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            699.96,
+            758.93
+          ]
+        ],
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a": [
+          [
+            0.83,
+            17.71
+          ]
+        ],
+        "1718202b-49db-459d-97d9-7868f324fe3b": [
+          [
+            9.93,
+            67.88
+          ]
+        ],
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54": [
+          [
+            15.39,
+            92.74
+          ]
+        ],
+        "a072cf61-dcfe-4b71-96d0-969c83f1641e": [
+          [
+            14.52,
+            94.74
+          ]
+        ],
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b": [
+          [
+            1.64,
+            42.95
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            759.27,
+            818.85
+          ]
+        ],
+        "7d983111-1468-4ec1-9441-324a7183f923": [
+          [
+            232.29,
+            362.88
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            841.79,
+            872.8
+          ]
+        ],
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b": [
+          [
+            198.74,
+            204.92
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            246.35,
+            263.87
+          ],
+          [
+            484.8,
+            569.17
+          ]
+        ],
+        "58ec0fb6-85cc-47be-b6bb-9bcd9a0e9f05": [
+          [
+            213.74,
+            280.97
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-vid-020",
+      "type": "video-only",
+      "query": "Find the interval demonstrating attach hard disk on the workpiece.",
+      "action_label": "attach hard disk",
+      "essential_asset_ids": [
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "c269add9-3631-45f6-89f2-66bd1552fefc"
+      ],
+      "gold_spans_by_asset": {
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            244.09,
+            443.96
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-doc-001",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 2.0 Step-by-Step LOTO Protocol > Five-Step Procedure of Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual?",
+      "essential_asset_ids": [
+        "306ee683-3048-4f3d-843e-46cb09d04190"
+      ],
+      "essential_chunk_ids": [
+        "6a3da8e8-af87-4a26-8c9e-d32d122e2a01"
+      ],
+      "target_document": "Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual",
+      "target_section": "2.0 Step-by-Step LOTO Protocol > Five-Step Procedure",
+      "reference_answer": "According to Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual (2.0 Step-by-Step LOTO Protocol > Five-Step Procedure), Standard Five-Step Zero Energy Protocol: Step 1: Notify affected operators of machine shutdown."
+    },
+    {
+      "query_id": "test-doc-002",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 2.0 Filter Cartridge Extraction > Element Inspection & Bowl Cleaning of Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP?",
+      "essential_asset_ids": [
+        "2f1acac6-9ddf-43a9-8469-16fe6f345b07"
+      ],
+      "essential_chunk_ids": [
+        "ae99b758-048f-4e81-99da-820820e628f2"
+      ],
+      "target_document": "Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP",
+      "target_section": "2.0 Filter Cartridge Extraction > Element Inspection & Bowl Cleaning",
+      "reference_answer": "According to Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP (2.0 Filter Cartridge Extraction > Element Inspection & Bowl Cleaning), Unscrew the filter bowl using a 32 mm socket on the hex drive nut."
+    },
+    {
+      "query_id": "test-doc-003",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 1.0 Motor Specifications > Rating Plate & Winding Parameters of Industrial AC Induction Drive Motor Service & Overhaul Manual?",
+      "essential_asset_ids": [
+        "a61e0718-9205-4d74-b84b-af53fc7dec82"
+      ],
+      "essential_chunk_ids": [
+        "0cfd688e-ce77-4fa7-90b8-00a27bdc3742"
+      ],
+      "target_document": "Industrial AC Induction Drive Motor Service & Overhaul Manual",
+      "target_section": "1.0 Motor Specifications > Rating Plate & Winding Parameters",
+      "reference_answer": "According to Industrial AC Induction Drive Motor Service & Overhaul Manual (1.0 Motor Specifications > Rating Plate & Winding Parameters), Model MOT-AC-3750 is a 3."
+    },
+    {
+      "query_id": "test-doc-004",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 1.0 Safety Isolation > Depressurization & Fluid Containment of Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP?",
+      "essential_asset_ids": [
+        "2f1acac6-9ddf-43a9-8469-16fe6f345b07"
+      ],
+      "essential_chunk_ids": [
+        "ad67675d-a875-4676-ba53-bd52db717428"
+      ],
+      "target_document": "Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP",
+      "target_section": "1.0 Safety Isolation > Depressurization & Fluid Containment",
+      "reference_answer": "According to Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP (1.0 Safety Isolation > Depressurization & Fluid Containment), Shut down electric drive motor and tag out circuit breaker."
+    },
+    {
+      "query_id": "test-doc-005",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 2.0 Connector Audit > Oxidation & Pin Fretting Rectification of Workstation Wiring Harness Ground Fault & Connector Oxidation Report?",
+      "essential_asset_ids": [
+        "a26f51f7-c23d-449d-81a4-1bd50cd437d7"
+      ],
+      "essential_chunk_ids": [
+        "9cebea8a-46f2-48c2-9868-e15b6b412f9e"
+      ],
+      "target_document": "Workstation Wiring Harness Ground Fault & Connector Oxidation Report",
+      "target_section": "2.0 Connector Audit > Oxidation & Pin Fretting Rectification",
+      "reference_answer": "According to Workstation Wiring Harness Ground Fault & Connector Oxidation Report (2.0 Connector Audit > Oxidation & Pin Fretting Rectification), Secondary inspection of harness circular connector (P/N CON-M12-8P) revealed green copper oxidation and fretting corrosion on contact pins 3 and 7 due to coolant mist ingress past a degraded silicone seal gasket."
+    },
+    {
+      "query_id": "test-doc-006",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 1.0 Lubricant Selection > ISO VG 68 Slideway Oil of Machine Tool Slide-Way Lubrication & Way Lube Replenishment SOP?",
+      "essential_asset_ids": [
+        "12c72137-cb78-49ac-b49f-d7f9d1adba2f"
+      ],
+      "essential_chunk_ids": [
+        "38295b1f-1365-4a09-8b08-cf0075bae531"
+      ],
+      "target_document": "Machine Tool Slide-Way Lubrication & Way Lube Replenishment SOP",
+      "target_section": "1.0 Lubricant Selection > ISO VG 68 Slideway Oil",
+      "reference_answer": "According to Machine Tool Slide-Way Lubrication & Way Lube Replenishment SOP (1.0 Lubricant Selection > ISO VG 68 Slideway Oil), Machine tool linear guide ways and ball screws require specialized slideway lubricant meeting DIN 51502 CGLP classification (Mobil Vactra Oil No."
+    },
+    {
+      "query_id": "test-doc-007",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 1.0 Mechanical Installation > VESA Bracket & Arm Fastening of Display Monitor Mount & Operator Console Integration SOP?",
+      "essential_asset_ids": [
+        "e56d5a52-d14e-4fe1-8dbb-b89fb815da0f"
+      ],
+      "essential_chunk_ids": [
+        "1291aac1-59ce-46d8-ab03-dba3b78b6bd2"
+      ],
+      "target_document": "Display Monitor Mount & Operator Console Integration SOP",
+      "target_section": "1.0 Mechanical Installation > VESA Bracket & Arm Fastening",
+      "reference_answer": "According to Display Monitor Mount & Operator Console Integration SOP (1.0 Mechanical Installation > VESA Bracket & Arm Fastening), Mount the articulating monitor arm support bracket (P/N ARM-MNT-VESA) onto the designated workstation vertical extrusion rail at eye level (height 1250 mm from floor)."
+    },
+    {
+      "query_id": "test-doc-008",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 2.0 Automated Lubricator Inspection > Pressure Pulse & Metering of Machine Tool Slide-Way Lubrication & Way Lube Replenishment SOP?",
+      "essential_asset_ids": [
+        "12c72137-cb78-49ac-b49f-d7f9d1adba2f"
+      ],
+      "essential_chunk_ids": [
+        "b0cfb07e-44fc-497a-a45d-cb3e610abd43"
+      ],
+      "target_document": "Machine Tool Slide-Way Lubrication & Way Lube Replenishment SOP",
+      "target_section": "2.0 Automated Lubricator Inspection > Pressure Pulse & Metering",
+      "reference_answer": "According to Machine Tool Slide-Way Lubrication & Way Lube Replenishment SOP (2.0 Automated Lubricator Inspection > Pressure Pulse & Metering), Inspect automated cyclic lubrication pump (P/N LUB-PMP-AUTO)."
+    },
+    {
+      "query_id": "test-doc-009",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 1.0 Vibration Analysis > Spectral Peaks & High Frequency Acceleration of Drive Motor Vibration & Bearing Thermal Overheat Diagnostic Report?",
+      "essential_asset_ids": [
+        "657f9e98-f5c0-48a0-a313-515343d24389"
+      ],
+      "essential_chunk_ids": [
+        "24a6a35c-e5e7-443c-9bad-32d15b1a53d9"
+      ],
+      "target_document": "Drive Motor Vibration & Bearing Thermal Overheat Diagnostic Report",
+      "target_section": "1.0 Vibration Analysis > Spectral Peaks & High Frequency Acceleration",
+      "reference_answer": "According to Drive Motor Vibration & Bearing Thermal Overheat Diagnostic Report (1.0 Vibration Analysis > Spectral Peaks & High Frequency Acceleration), Emergency diagnostic report on main drive motor MOT-AC-3750 Unit 02 following acoustic alarms."
+    },
+    {
+      "query_id": "test-doc-010",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment of Multi-Axis Mechanical Hinge Assembly & Alignment SOP?",
+      "essential_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_chunk_ids": [
+        "58a7c1cd-6667-406a-81b4-b32a27c4c1b2"
+      ],
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment",
+      "reference_answer": "According to Multi-Axis Mechanical Hinge Assembly & Alignment SOP (2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment), Install the middle articulating hinge assembly (P/N HNG-MID-ART) at intermediate height 650 mm."
+    },
+    {
+      "query_id": "test-doc-011",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 1.0 Technical Specs > Power Input & Auxiliary Bus Outputs of Workstation Electrical Power Distribution Unit Operating Manual?",
+      "essential_asset_ids": [
+        "a69cfeba-15f7-4baa-b738-d83b828f253f"
+      ],
+      "essential_chunk_ids": [
+        "380516ae-5731-4ba0-9007-14acc20620bd"
+      ],
+      "target_document": "Workstation Electrical Power Distribution Unit Operating Manual",
+      "target_section": "1.0 Technical Specs > Power Input & Auxiliary Bus Outputs",
+      "reference_answer": "According to Workstation Electrical Power Distribution Unit Operating Manual (1.0 Technical Specs > Power Input & Auxiliary Bus Outputs), Power Distribution Unit PDU-400-24 provides clean conditioned power for assembly workstations."
+    },
+    {
+      "query_id": "test-doc-012",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 1.0 Toolroom Audit > Torque Wrench Drift & Micrometer Anvil Damage of Toolroom Calibration Deviation & Workstation 5S Audit Report?",
+      "essential_asset_ids": [
+        "4e4f4bd9-fa91-42a4-9588-925973224e76"
+      ],
+      "essential_chunk_ids": [
+        "fbaaaff5-38ac-4bea-adc9-e7979a545456"
+      ],
+      "target_document": "Toolroom Calibration Deviation & Workstation 5S Audit Report",
+      "target_section": "1.0 Toolroom Audit > Torque Wrench Drift & Micrometer Anvil Damage",
+      "reference_answer": "According to Toolroom Calibration Deviation & Workstation 5S Audit Report (1.0 Toolroom Audit > Torque Wrench Drift & Micrometer Anvil Damage), Quarterly metrology audit of assembly tool crib TC-01."
+    },
+    {
+      "query_id": "test-doc-013",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 1.0 Base Structure > Frame Rails & Corner Brackets of Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual?",
+      "essential_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_chunk_ids": [
+        "d1f9d46f-3966-41f4-9e77-e4c39339b3ef"
+      ],
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.0 Base Structure > Frame Rails & Corner Brackets",
+      "reference_answer": "According to Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (1.0 Base Structure > Frame Rails & Corner Brackets), The modular workstation structure uses 45x45 mm heavy-duty aluminum extrusion rails (P/N AL-4545-HD)."
+    },
+    {
+      "query_id": "test-doc-014",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 2.0 Thermal & Lubricant Inspection > Root Cause & Resolution of Drive Motor Vibration & Bearing Thermal Overheat Diagnostic Report?",
+      "essential_asset_ids": [
+        "657f9e98-f5c0-48a0-a313-515343d24389"
+      ],
+      "essential_chunk_ids": [
+        "05a66a95-c210-4384-8296-fcc5b06d2793"
+      ],
+      "target_document": "Drive Motor Vibration & Bearing Thermal Overheat Diagnostic Report",
+      "target_section": "2.0 Thermal & Lubricant Inspection > Root Cause & Resolution",
+      "reference_answer": "According to Drive Motor Vibration & Bearing Thermal Overheat Diagnostic Report (2.0 Thermal & Lubricant Inspection > Root Cause & Resolution), FLIR thermal imaging recorded DE bearing cap temperature at 92."
+    },
+    {
+      "query_id": "test-doc-015",
+      "type": "doc-only",
+      "query": "What procedure or specification is mandated in 3.0 Rotor & Stator Inspection > Air Gap & Core Lamination of Industrial AC Induction Drive Motor Service & Overhaul Manual?",
+      "essential_asset_ids": [
+        "a61e0718-9205-4d74-b84b-af53fc7dec82"
+      ],
+      "essential_chunk_ids": [
+        "50a4689f-afaa-4aa5-a275-a0657b139075"
+      ],
+      "target_document": "Industrial AC Induction Drive Motor Service & Overhaul Manual",
+      "target_section": "3.0 Rotor & Stator Inspection > Air Gap & Core Lamination",
+      "reference_answer": "According to Industrial AC Induction Drive Motor Service & Overhaul Manual (3.0 Rotor & Stator Inspection > Air Gap & Core Lamination), Carefully slide the rotor assembly axially out of the stator bore without contacting or dragging on the stator insulation sleeves."
+    },
+    {
+      "query_id": "test-mhop-001",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'assemble lower hinge' in Multi-Axis Mechanical Hinge Assembly & Alignment SOP and when is it demonstrated?",
+      "action_label": "assemble lower hinge",
+      "essential_video_asset_ids": [
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72"
+      ],
+      "essential_chunk_ids": [
+        "8a3fec2b-75ae-4b4e-aa82-8bb621ee9242"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            29.67,
+            135.18
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "1.0 Lower Hinge Assembly > Hinge Bracket & Pivot Pin",
+      "link_note": "Documents mounting and alignment of lower hinge bracket on the frame rail.",
+      "reference_answer": "During 'assemble lower hinge' shown in 'IndEgo User 15 411 2410 2' at 29.7s\u2013135.2s, Multi-Axis Mechanical Hinge Assembly & Alignment SOP (1.0 Lower Hinge Assembly > Hinge Bracket & Pivot Pin) mandates: Documents mounting and alignment of lower hinge bracket on the frame rail.."
+    },
+    {
+      "query_id": "test-mhop-002",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'clean up' in Workstation Teardown, Hand Tool Maintenance & 5S Standard SOP and when is it demonstrated?",
+      "action_label": "clean up",
+      "essential_video_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660"
+      ],
+      "essential_doc_asset_ids": [
+        "bdb65de0-d49c-480c-a421-88d296f74deb"
+      ],
+      "essential_segment_ids": [
+        "ffa83154-f6ce-4032-a0e8-b6f4732cdac0"
+      ],
+      "essential_chunk_ids": [
+        "a90afd80-f32e-48a4-bfe8-ab5806d2e93a"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            700.34,
+            707.9
+          ]
+        ]
+      },
+      "target_document": "Workstation Teardown, Hand Tool Maintenance & 5S Standard SOP",
+      "target_section": "1.0 Workstation Cleanliness > Swarf Cleanup & Solvent Wipedown",
+      "link_note": "Documents final workspace cleanup, swarf removal, and solvent wipedown per Workstation 5S Standard SOP Section 1.0.",
+      "reference_answer": "During 'clean up' shown in 'IndEgo 7020e12d-d5a2-4f01-beab-94f38d887eca' at 700.3s\u2013707.9s, Workstation Teardown, Hand Tool Maintenance & 5S Standard SOP (1.0 Workstation Cleanliness > Swarf Cleanup & Solvent Wipedown) mandates: Documents final workspace cleanup, swarf removal, and solvent wipedown per Workstation 5S Standard SOP Section 1.0.."
+    },
+    {
+      "query_id": "test-mhop-003",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'attach vertical bar' in Workstation Frame Distortion & Fastener Loosening Inspection Report and when is it demonstrated?",
+      "action_label": "attach vertical bar",
+      "essential_video_asset_ids": [
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1"
+      ],
+      "essential_doc_asset_ids": [
+        "0b5461fc-f843-423f-b31e-202847348b7d"
+      ],
+      "essential_segment_ids": [
+        "722b95f4-b00f-4433-b2b6-a2f99db49387"
+      ],
+      "essential_chunk_ids": [
+        "b6dfc5c0-887f-4f90-a86d-b45f0d907d61"
+      ],
+      "gold_spans_by_asset": {
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            365.74,
+            758.55
+          ]
+        ]
+      },
+      "target_document": "Workstation Frame Distortion & Fastener Loosening Inspection Report",
+      "target_section": "2.0 Corrective Actions > Retorque, Loctite & Re-Square",
+      "link_note": "Inspection report Section 2.0 specifies retorquing to 15.0 Nm and applying Loctite 243 threadlocker to prevent upright post wobble.",
+      "reference_answer": "During 'attach vertical bar' shown in 'IndEgo User 14 User 17 407 0601 3' at 365.7s\u2013758.6s, Workstation Frame Distortion & Fastener Loosening Inspection Report (2.0 Corrective Actions > Retorque, Loctite & Re-Square) mandates: Inspection report Section 2.0 specifies retorquing to 15.0 Nm and applying Loctite 243 threadlocker to prevent upright post wobble.."
+    },
+    {
+      "query_id": "test-mhop-004",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'preparation' in Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual and when is it demonstrated?",
+      "action_label": "preparation",
+      "essential_video_asset_ids": [
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53"
+      ],
+      "essential_doc_asset_ids": [
+        "306ee683-3048-4f3d-843e-46cb09d04190"
+      ],
+      "essential_segment_ids": [
+        "0d25045f-2269-47df-9295-93c31e483dfa"
+      ],
+      "essential_chunk_ids": [
+        "6a3da8e8-af87-4a26-8c9e-d32d122e2a01"
+      ],
+      "gold_spans_by_asset": {
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            2.8,
+            119.68
+          ]
+        ]
+      },
+      "target_document": "Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual",
+      "target_section": "2.0 Step-by-Step LOTO Protocol > Five-Step Procedure",
+      "link_note": "LOTO Manual Section 2.0 specifies the 5-step energy isolation protocol required before machine teardown.",
+      "reference_answer": "During 'preparation' shown in 'IndEgo User 15 412 0110 1' at 2.8s\u2013119.7s, Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual (2.0 Step-by-Step LOTO Protocol > Five-Step Procedure) mandates: LOTO Manual Section 2.0 specifies the 5-step energy isolation protocol required before machine teardown.."
+    },
+    {
+      "query_id": "test-mhop-005",
+      "type": "multi-hop",
+      "relation": "depicts",
+      "query": "What requirement is documented for 'assemble lower hinge' in Multi-Axis Mechanical Hinge Assembly & Alignment SOP and when is it demonstrated?",
+      "action_label": "assemble lower hinge",
+      "essential_video_asset_ids": [
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "4a56be85-7e79-4fb5-aaa1-241d366ae7c0"
+      ],
+      "essential_chunk_ids": [
+        "8ed539f5-7635-4b88-8ba3-8da06dbace8e"
+      ],
+      "gold_spans_by_asset": {
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            754.65,
+            759.11
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "1.1 Lower Hinge Assembly > Torque & Clearance Inspection",
+      "link_note": "Depicts lower pivot pin seated in bushing.",
+      "reference_answer": "During 'assemble lower hinge' shown in 'IndEgo User 16 410 0110 2' at 754.7s\u2013759.1s, Multi-Axis Mechanical Hinge Assembly & Alignment SOP (1.1 Lower Hinge Assembly > Torque & Clearance Inspection) mandates: Depicts lower pivot pin seated in bushing.."
+    },
+    {
+      "query_id": "test-mhop-006",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'attach vertical bar' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "attach vertical bar",
+      "essential_video_asset_ids": [
+        "f68de13c-47af-4d19-b5bd-da9066b231c1"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "0ef33731-ae7d-4ee3-a469-041e0490610e"
+      ],
+      "essential_chunk_ids": [
+        "ff0aaca2-015b-4ebc-9919-b39d0b817ee8"
+      ],
+      "gold_spans_by_asset": {
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            89.89,
+            246.69
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "2.1 Superstructure > Vertical Support Bars & Top Crossbeam",
+      "link_note": "Documents mounting vertical support bars to base frame rails.",
+      "reference_answer": "During 'attach vertical bar' shown in 'IndEgo User 1 411 2110 1' at 89.9s\u2013246.7s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (2.1 Superstructure > Vertical Support Bars & Top Crossbeam) mandates: Documents mounting vertical support bars to base frame rails.."
+    },
+    {
+      "query_id": "test-mhop-007",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'disassemble' in Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP and when is it demonstrated?",
+      "action_label": "disassemble",
+      "essential_video_asset_ids": [
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_doc_asset_ids": [
+        "2f1acac6-9ddf-43a9-8469-16fe6f345b07"
+      ],
+      "essential_segment_ids": [
+        "b6ca1e54-7a36-4ed2-811b-b5775b9fdcae"
+      ],
+      "essential_chunk_ids": [
+        "ae99b758-048f-4e81-99da-820820e628f2"
+      ],
+      "gold_spans_by_asset": {
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            326.99,
+            484.8
+          ]
+        ]
+      },
+      "target_document": "Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP",
+      "target_section": "2.0 Filter Cartridge Extraction > Element Inspection & Bowl Cleaning",
+      "link_note": "SOP Section 2.0 specifies inspecting pleat valleys of 10-micron fiberglass element for metallic particulate.",
+      "reference_answer": "During 'disassemble' shown in 'IndEgo User 2 410 0210 1' at 327.0s\u2013484.8s, Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP (2.0 Filter Cartridge Extraction > Element Inspection & Bowl Cleaning) mandates: SOP Section 2.0 specifies inspecting pleat valleys of 10-micron fiberglass element for metallic particulate.."
+    },
+    {
+      "query_id": "test-mhop-008",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'assemble upper frame' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "assemble upper frame",
+      "essential_video_asset_ids": [
+        "0f01d43c-87f2-4331-b35e-7b1055e073de"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "9049bb55-2667-4394-b31a-1f2c4b94d3c4"
+      ],
+      "essential_chunk_ids": [
+        "ff0aaca2-015b-4ebc-9919-b39d0b817ee8"
+      ],
+      "gold_spans_by_asset": {
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            268.5,
+            547.44
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "2.1 Superstructure > Vertical Support Bars & Top Crossbeam",
+      "link_note": "Documents upper superstructure frame assembly across two technicians.",
+      "reference_answer": "During 'assemble upper frame' shown in 'IndEgo User 16 User 2 411 2510 2' at 268.5s\u2013547.4s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (2.1 Superstructure > Vertical Support Bars & Top Crossbeam) mandates: Documents upper superstructure frame assembly across two technicians.."
+    },
+    {
+      "query_id": "test-mhop-009",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'attach tabletop' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "attach tabletop",
+      "essential_video_asset_ids": [
+        "0f01d43c-87f2-4331-b35e-7b1055e073de"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "f32ae272-5592-4728-9465-c1c898d4f022"
+      ],
+      "essential_chunk_ids": [
+        "82678b32-e98c-4707-822e-4342587db9af"
+      ],
+      "gold_spans_by_asset": {
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            547.44,
+            764.08
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "2.0 Tabletop Installation > Surface Mounting & Clamping Plates",
+      "link_note": "Documents placement of high-density resin tabletop onto frame.",
+      "reference_answer": "During 'attach tabletop' shown in 'IndEgo User 16 User 2 411 2510 2' at 547.4s\u2013764.1s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (2.0 Tabletop Installation > Surface Mounting & Clamping Plates) mandates: Documents placement of high-density resin tabletop onto frame.."
+    },
+    {
+      "query_id": "test-mhop-010",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'attach feet' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "attach feet",
+      "essential_video_asset_ids": [
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "59ec960f-dcca-4535-b692-1874298ed13a"
+      ],
+      "essential_chunk_ids": [
+        "33183cd7-3141-4897-9924-1203f0cf2534"
+      ],
+      "gold_spans_by_asset": {
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d": [
+          [
+            72.56,
+            497.26
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.1 Base Structure > Horizontal Support Bars & Leveling Feet",
+      "link_note": "Documents threading M12 articulated leveling feet into lower corner base brackets.",
+      "reference_answer": "During 'attach feet' shown in 'IndEgo User 17 User 14 411 2810 2' at 72.6s\u2013497.3s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (1.1 Base Structure > Horizontal Support Bars & Leveling Feet) mandates: Documents threading M12 articulated leveling feet into lower corner base brackets.."
+    },
+    {
+      "query_id": "test-mhop-011",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'attach bottom plate' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "attach bottom plate",
+      "essential_video_asset_ids": [
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "3c118388-0ebf-4a16-8b68-82c1323b81fc"
+      ],
+      "essential_chunk_ids": [
+        "33183cd7-3141-4897-9924-1203f0cf2534"
+      ],
+      "gold_spans_by_asset": {
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            443.96,
+            500.73
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.1 Base Structure > Horizontal Support Bars & Leveling Feet",
+      "link_note": "Documents bottom plate attachment to horizontal support rails.",
+      "reference_answer": "During 'attach bottom plate' shown in 'IndEgo User 15 412 1510 3' at 444.0s\u2013500.7s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (1.1 Base Structure > Horizontal Support Bars & Leveling Feet) mandates: Documents bottom plate attachment to horizontal support rails.."
+    },
+    {
+      "query_id": "test-mhop-012",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'attach hard disk' in Display Monitor Mount & Operator Console Integration SOP and when is it demonstrated?",
+      "action_label": "attach hard disk",
+      "essential_video_asset_ids": [
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_doc_asset_ids": [
+        "e56d5a52-d14e-4fe1-8dbb-b89fb815da0f"
+      ],
+      "essential_segment_ids": [
+        "c269add9-3631-45f6-89f2-66bd1552fefc"
+      ],
+      "essential_chunk_ids": [
+        "27f8856c-de7d-4d45-b28f-d151b151a99a"
+      ],
+      "gold_spans_by_asset": {
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            244.09,
+            443.96
+          ]
+        ]
+      },
+      "target_document": "Display Monitor Mount & Operator Console Integration SOP",
+      "target_section": "2.0 Cable Routing > Power Connection & Grounding Verification",
+      "link_note": "Documents mounting internal data storage drive and securing SATA and low-voltage DC power harness.",
+      "reference_answer": "During 'attach hard disk' shown in 'IndEgo User 15 412 1510 3' at 244.1s\u2013444.0s, Display Monitor Mount & Operator Console Integration SOP (2.0 Cable Routing > Power Connection & Grounding Verification) mandates: Documents mounting internal data storage drive and securing SATA and low-voltage DC power harness.."
+    },
+    {
+      "query_id": "test-mhop-013",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'assemble upper hinge' in Multi-Axis Mechanical Hinge Assembly & Alignment SOP and when is it demonstrated?",
+      "action_label": "assemble upper hinge",
+      "essential_video_asset_ids": [
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "6cd6bd30-e085-446d-92bd-94644444a420"
+      ],
+      "essential_chunk_ids": [
+        "6d1802fb-b9d6-4f45-a5f7-2008bdb01159"
+      ],
+      "gold_spans_by_asset": {
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            400.28,
+            823.59
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "3.0 Upper Hinge Assembly > Top Pivot & Detent Latch",
+      "link_note": "Documents upper hinge pivot bracket installation.",
+      "reference_answer": "During 'assemble upper hinge' shown in 'IndEgo User 16 411 2310 2' at 400.3s\u2013823.6s, Multi-Axis Mechanical Hinge Assembly & Alignment SOP (3.0 Upper Hinge Assembly > Top Pivot & Detent Latch) mandates: Documents upper hinge pivot bracket installation.."
+    },
+    {
+      "query_id": "test-mhop-014",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'attach top plate' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "attach top plate",
+      "essential_video_asset_ids": [
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "937996ed-ce6b-4d71-92b3-1a5b81239eff"
+      ],
+      "essential_chunk_ids": [
+        "82678b32-e98c-4707-822e-4342587db9af"
+      ],
+      "gold_spans_by_asset": {
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            177.68,
+            232.8
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "2.0 Tabletop Installation > Surface Mounting & Clamping Plates",
+      "link_note": "Manual Section 2.0 specifies clamping plates and 8.5 Nm torque for tabletop mounting hardware.",
+      "reference_answer": "During 'attach top plate' shown in 'IndEgo User 15 412 1510 3' at 177.7s\u2013232.8s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (2.0 Tabletop Installation > Surface Mounting & Clamping Plates) mandates: Manual Section 2.0 specifies clamping plates and 8.5 Nm torque for tabletop mounting hardware.."
+    },
+    {
+      "query_id": "test-mhop-015",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'turn on' in System Electrical Power-Up & Pre-Operation Verification SOP and when is it demonstrated?",
+      "action_label": "turn on",
+      "essential_video_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_doc_asset_ids": [
+        "8186ca49-3fb9-4a81-81c6-11cbbffd6fea"
+      ],
+      "essential_segment_ids": [
+        "2ede54e0-bffa-45b0-9c0d-9f8644105992"
+      ],
+      "essential_chunk_ids": [
+        "cad1cd8a-5eee-4595-bf22-b9faec809146"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            176.38,
+            193.03
+          ]
+        ]
+      },
+      "target_document": "System Electrical Power-Up & Pre-Operation Verification SOP",
+      "target_section": "3.0 Safety Circuit Validation > E-Stop Trip & Interlock Test",
+      "link_note": "SOP Section 3.0 specifies mandatory emergency stop pushbutton depression to verify safety relay de-energization within 20 ms.",
+      "reference_answer": "During 'turn on' shown in 'IndEgo User 1 412 2010 3' at 176.4s\u2013193.0s, System Electrical Power-Up & Pre-Operation Verification SOP (3.0 Safety Circuit Validation > E-Stop Trip & Interlock Test) mandates: SOP Section 3.0 specifies mandatory emergency stop pushbutton depression to verify safety relay de-energization within 20 ms.."
+    },
+    {
+      "query_id": "test-mhop-016",
+      "type": "multi-hop",
+      "relation": "depicts",
+      "query": "What requirement is documented for 'attach camera and plate' in Camera Mounting Bracket & Optical Plate Installation SOP and when is it demonstrated?",
+      "action_label": "attach camera and plate",
+      "essential_video_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660"
+      ],
+      "essential_doc_asset_ids": [
+        "d6497311-8b00-4a1a-92ca-11c6bfaa57f8"
+      ],
+      "essential_segment_ids": [
+        "753b61b7-8639-4125-b409-86d7894017a5"
+      ],
+      "essential_chunk_ids": [
+        "057911eb-0520-4b99-a639-8b4e76a9c4a4"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            369.9,
+            532.16
+          ]
+        ]
+      },
+      "target_document": "Camera Mounting Bracket & Optical Plate Installation SOP",
+      "target_section": "1.0 Positioning > Vertical Bar Mounting Bracket",
+      "link_note": "Depicts camera support collar clamp (P/N CAM-CLR-45) clamped onto the vertical post.",
+      "reference_answer": "During 'attach camera and plate' shown in 'IndEgo 7020e12d-d5a2-4f01-beab-94f38d887eca' at 369.9s\u2013532.2s, Camera Mounting Bracket & Optical Plate Installation SOP (1.0 Positioning > Vertical Bar Mounting Bracket) mandates: Depicts camera support collar clamp (P/N CAM-CLR-45) clamped onto the vertical post.."
+    },
+    {
+      "query_id": "test-mhop-017",
+      "type": "multi-hop",
+      "relation": "depicts",
+      "query": "What requirement is documented for 'assemble upper hinge' in Multi-Axis Mechanical Hinge Assembly & Alignment SOP and when is it demonstrated?",
+      "action_label": "assemble upper hinge",
+      "essential_video_asset_ids": [
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "0730684b-b687-411d-a8cb-dfba9430ce5d"
+      ],
+      "essential_chunk_ids": [
+        "6d1802fb-b9d6-4f45-a5f7-2008bdb01159"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            342.87,
+            689.31
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "3.0 Upper Hinge Assembly > Top Pivot & Detent Latch",
+      "link_note": "Depicts upper hinge bracket (P/N HNG-BRK-UP) and spring-loaded ball detent latch.",
+      "reference_answer": "During 'assemble upper hinge' shown in 'IndEgo User 15 411 2410 2' at 342.9s\u2013689.3s, Multi-Axis Mechanical Hinge Assembly & Alignment SOP (3.0 Upper Hinge Assembly > Top Pivot & Detent Latch) mandates: Depicts upper hinge bracket (P/N HNG-BRK-UP) and spring-loaded ball detent latch.."
+    },
+    {
+      "query_id": "test-mhop-018",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'repair' in Machine Tool Slide-Way Lubrication & Way Lube Replenishment SOP and when is it demonstrated?",
+      "action_label": "repair",
+      "essential_video_asset_ids": [
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b"
+      ],
+      "essential_doc_asset_ids": [
+        "12c72137-cb78-49ac-b49f-d7f9d1adba2f"
+      ],
+      "essential_segment_ids": [
+        "469a82ba-cda9-4f6a-b8cb-ff7bdecab7a6"
+      ],
+      "essential_chunk_ids": [
+        "38295b1f-1365-4a09-8b08-cf0075bae531"
+      ],
+      "gold_spans_by_asset": {
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b": [
+          [
+            42.95,
+            492.41
+          ]
+        ]
+      },
+      "target_document": "Machine Tool Slide-Way Lubrication & Way Lube Replenishment SOP",
+      "target_section": "1.0 Lubricant Selection > ISO VG 68 Slideway Oil",
+      "link_note": "Specifies ISO VG 68 tackified slideway oil replenishment and clearing clogged metering orifices.",
+      "reference_answer": "During 'repair' shown in 'IndEgo User 16 407 0511 1' at 43.0s\u2013492.4s, Machine Tool Slide-Way Lubrication & Way Lube Replenishment SOP (1.0 Lubricant Selection > ISO VG 68 Slideway Oil) mandates: Specifies ISO VG 68 tackified slideway oil replenishment and clearing clogged metering orifices.."
+    },
+    {
+      "query_id": "test-mhop-019",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'clean up' in Workstation Teardown, Hand Tool Maintenance & 5S Standard SOP and when is it demonstrated?",
+      "action_label": "clean up",
+      "essential_video_asset_ids": [
+        "0f01d43c-87f2-4331-b35e-7b1055e073de"
+      ],
+      "essential_doc_asset_ids": [
+        "bdb65de0-d49c-480c-a421-88d296f74deb"
+      ],
+      "essential_segment_ids": [
+        "0f7a3038-e6cc-4f35-a925-de79eb61def4"
+      ],
+      "essential_chunk_ids": [
+        "a90afd80-f32e-48a4-bfe8-ab5806d2e93a"
+      ],
+      "gold_spans_by_asset": {
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            783.04,
+            840.02
+          ]
+        ]
+      },
+      "target_document": "Workstation Teardown, Hand Tool Maintenance & 5S Standard SOP",
+      "target_section": "1.0 Workstation Cleanliness > Swarf Cleanup & Solvent Wipedown",
+      "link_note": "Documents workbench clean down following tabletop mounting.",
+      "reference_answer": "During 'clean up' shown in 'IndEgo User 16 User 2 411 2510 2' at 783.0s\u2013840.0s, Workstation Teardown, Hand Tool Maintenance & 5S Standard SOP (1.0 Workstation Cleanliness > Swarf Cleanup & Solvent Wipedown) mandates: Documents workbench clean down following tabletop mounting.."
+    },
+    {
+      "query_id": "test-mhop-020",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'attach vertical bar' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "attach vertical bar",
+      "essential_video_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "eb259d66-c1a5-4a2b-b1fd-855a018e0c4c"
+      ],
+      "essential_chunk_ids": [
+        "ff0aaca2-015b-4ebc-9919-b39d0b817ee8"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            59.05,
+            175.5
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "2.1 Superstructure > Vertical Support Bars & Top Crossbeam",
+      "link_note": "Documents attaching vertical bars to base frame rails with corner brackets.",
+      "reference_answer": "During 'attach vertical bar' shown in 'IndEgo User 15 411 2309 2 1' at 59.0s\u2013175.5s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (2.1 Superstructure > Vertical Support Bars & Top Crossbeam) mandates: Documents attaching vertical bars to base frame rails with corner brackets.."
+    },
+    {
+      "query_id": "test-mhop-021",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'attach feet' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "attach feet",
+      "essential_video_asset_ids": [
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "59ec960f-dcca-4535-b692-1874298ed13a"
+      ],
+      "essential_chunk_ids": [
+        "33183cd7-3141-4897-9924-1203f0cf2534"
+      ],
+      "gold_spans_by_asset": {
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d": [
+          [
+            72.56,
+            497.26
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.1 Base Structure > Horizontal Support Bars & Leveling Feet",
+      "link_note": "Specifies leveling feet height adjustment range (0-35 mm) and 18.0 Nm jam nut lock torque.",
+      "reference_answer": "During 'attach feet' shown in 'IndEgo User 17 User 14 411 2810 2' at 72.6s\u2013497.3s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (1.1 Base Structure > Horizontal Support Bars & Leveling Feet) mandates: Specifies leveling feet height adjustment range (0-35 mm) and 18.0 Nm jam nut lock torque.."
+    },
+    {
+      "query_id": "test-mhop-022",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'inspect' in Hydraulic System Pressure Instability & Valve Leakage Diagnostic Report and when is it demonstrated?",
+      "action_label": "inspect",
+      "essential_video_asset_ids": [
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b"
+      ],
+      "essential_doc_asset_ids": [
+        "df581bfc-49ba-4f93-8bde-4c52a17eedf3"
+      ],
+      "essential_segment_ids": [
+        "cbeb23ec-1c11-41e2-b7ef-87220555425d"
+      ],
+      "essential_chunk_ids": [
+        "e15c8616-6d86-4efb-a53f-cda09c99e7d2"
+      ],
+      "gold_spans_by_asset": {
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b": [
+          [
+            198.74,
+            204.92
+          ]
+        ]
+      },
+      "target_document": "Hydraulic System Pressure Instability & Valve Leakage Diagnostic Report",
+      "target_section": "1.0 Diagnostic Findings > Clamping Pressure Loss & Valve Chatter",
+      "link_note": "Documents initial visual inspection of hydraulic line pressure gauge showing erratic pressure needle oscillation.",
+      "reference_answer": "During 'inspect' shown in 'IndEgo User 15 412 1510 1' at 198.7s\u2013204.9s, Hydraulic System Pressure Instability & Valve Leakage Diagnostic Report (1.0 Diagnostic Findings > Clamping Pressure Loss & Valve Chatter) mandates: Documents initial visual inspection of hydraulic line pressure gauge showing erratic pressure needle oscillation.."
+    },
+    {
+      "query_id": "test-mhop-023",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'inspect' in Multi-Axis Mechanical Hinge Assembly & Alignment SOP and when is it demonstrated?",
+      "action_label": "inspect",
+      "essential_video_asset_ids": [
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "f7f456a2-8565-44ea-a706-bfcd8c65c8cf"
+      ],
+      "essential_chunk_ids": [
+        "8ed539f5-7635-4b88-8ba3-8da06dbace8e"
+      ],
+      "gold_spans_by_asset": {
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            841.79,
+            872.8
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "1.1 Lower Hinge Assembly > Torque & Clearance Inspection",
+      "link_note": "Documents final articulation clearance inspection.",
+      "reference_answer": "During 'inspect' shown in 'IndEgo User 16 411 2310 2' at 841.8s\u2013872.8s, Multi-Axis Mechanical Hinge Assembly & Alignment SOP (1.1 Lower Hinge Assembly > Torque & Clearance Inspection) mandates: Documents final articulation clearance inspection.."
+    },
+    {
+      "query_id": "test-mhop-024",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'disassemble' in Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP and when is it demonstrated?",
+      "action_label": "disassemble",
+      "essential_video_asset_ids": [
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_doc_asset_ids": [
+        "2f1acac6-9ddf-43a9-8469-16fe6f345b07"
+      ],
+      "essential_segment_ids": [
+        "b6ca1e54-7a36-4ed2-811b-b5775b9fdcae"
+      ],
+      "essential_chunk_ids": [
+        "ad67675d-a875-4676-ba53-bd52db717428"
+      ],
+      "gold_spans_by_asset": {
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            326.99,
+            484.8
+          ]
+        ]
+      },
+      "target_document": "Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP",
+      "target_section": "1.0 Safety Isolation > Depressurization & Fluid Containment",
+      "link_note": "Documents filter housing isolation and sump tray positioning.",
+      "reference_answer": "During 'disassemble' shown in 'IndEgo User 2 410 0210 1' at 327.0s\u2013484.8s, Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP (1.0 Safety Isolation > Depressurization & Fluid Containment) mandates: Documents filter housing isolation and sump tray positioning.."
+    },
+    {
+      "query_id": "test-mhop-025",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'repair' in Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP and when is it demonstrated?",
+      "action_label": "repair",
+      "essential_video_asset_ids": [
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b"
+      ],
+      "essential_doc_asset_ids": [
+        "2f1acac6-9ddf-43a9-8469-16fe6f345b07"
+      ],
+      "essential_segment_ids": [
+        "192d7e69-0ff8-40b3-997f-c6fd87481b01"
+      ],
+      "essential_chunk_ids": [
+        "5e3cd784-7000-479f-a476-b22168219a2f"
+      ],
+      "gold_spans_by_asset": {
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b": [
+          [
+            204.92,
+            441.05
+          ]
+        ]
+      },
+      "target_document": "Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP",
+      "target_section": "3.0 Seal Ring Installation > Nitrile O-Ring & Bowl Torquing",
+      "link_note": "SOP Section 3.0 specifies replacing 70 Shore A NBR seals and torquing filter bowl to 45.0 Nm.",
+      "reference_answer": "During 'repair' shown in 'IndEgo User 15 412 1510 1' at 204.9s\u2013441.1s, Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP (3.0 Seal Ring Installation > Nitrile O-Ring & Bowl Torquing) mandates: SOP Section 3.0 specifies replacing 70 Shore A NBR seals and torquing filter bowl to 45.0 Nm.."
+    },
+    {
+      "query_id": "test-mhop-026",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'attach plates' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "attach plates",
+      "essential_video_asset_ids": [
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "49c41509-423f-4acd-bf38-95a8a40493c5"
+      ],
+      "essential_chunk_ids": [
+        "d1f9d46f-3966-41f4-9e77-e4c39339b3ef"
+      ],
+      "gold_spans_by_asset": {
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            25.04,
+            365.74
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.0 Base Structure > Frame Rails & Corner Brackets",
+      "link_note": "Documents the alignment and bolting of corner reinforcement gusset plates onto the 45x45 mm base rails.",
+      "reference_answer": "During 'attach plates' shown in 'IndEgo User 14 User 17 407 0601 3' at 25.0s\u2013365.7s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (1.0 Base Structure > Frame Rails & Corner Brackets) mandates: Documents the alignment and bolting of corner reinforcement gusset plates onto the 45x45 mm base rails.."
+    },
+    {
+      "query_id": "test-mhop-027",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'connect base' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "connect base",
+      "essential_video_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "aa1d5e1a-5604-40e6-a546-1428af9edf74"
+      ],
+      "essential_chunk_ids": [
+        "33183cd7-3141-4897-9924-1203f0cf2534"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            6.07,
+            59.05
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.1 Base Structure > Horizontal Support Bars & Leveling Feet",
+      "link_note": "Section 1.1 specifies M12 threaded leveling feet adjustment with jam nut locked at 18.0 Nm.",
+      "reference_answer": "During 'connect base' shown in 'IndEgo User 15 411 2309 2 1' at 6.1s\u201359.0s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (1.1 Base Structure > Horizontal Support Bars & Leveling Feet) mandates: Section 1.1 specifies M12 threaded leveling feet adjustment with jam nut locked at 18.0 Nm.."
+    },
+    {
+      "query_id": "test-mhop-028",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "What requirement is documented for 'inspect' in Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP and when is it demonstrated?",
+      "action_label": "inspect",
+      "essential_video_asset_ids": [
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_doc_asset_ids": [
+        "2f1acac6-9ddf-43a9-8469-16fe6f345b07"
+      ],
+      "essential_segment_ids": [
+        "dce27e4f-452e-4405-8c72-625b02acae91"
+      ],
+      "essential_chunk_ids": [
+        "ae99b758-048f-4e81-99da-820820e628f2"
+      ],
+      "gold_spans_by_asset": {
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            484.8,
+            569.17
+          ]
+        ]
+      },
+      "target_document": "Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP",
+      "target_section": "2.0 Filter Cartridge Extraction > Element Inspection & Bowl Cleaning",
+      "link_note": "Documents filter bowl inspection and magnetic plug examination.",
+      "reference_answer": "During 'inspect' shown in 'IndEgo User 2 410 0210 1' at 484.8s\u2013569.2s, Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP (2.0 Filter Cartridge Extraction > Element Inspection & Bowl Cleaning) mandates: Documents filter bowl inspection and magnetic plug examination.."
+    },
+    {
+      "query_id": "test-mhop-029",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'turn on' in Facility Manufacturing Equipment Annual Preventive Maintenance Review and when is it demonstrated?",
+      "action_label": "turn on",
+      "essential_video_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_doc_asset_ids": [
+        "4724ed01-f9a5-41a7-b5c0-a23c7bd1f14b"
+      ],
+      "essential_segment_ids": [
+        "2ede54e0-bffa-45b0-9c0d-9f8644105992"
+      ],
+      "essential_chunk_ids": [
+        "1e24cea6-18f4-4188-b291-b02f5f61ce67"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            176.38,
+            193.03
+          ]
+        ]
+      },
+      "target_document": "Facility Manufacturing Equipment Annual Preventive Maintenance Review",
+      "target_section": "2.0 Recommendations > Standardization & Sensor Upgrades",
+      "link_note": "Annual Review Section 2.0 specifies upgrading operator workstations with optical safety light curtains and unified 24V bus monitoring.",
+      "reference_answer": "During 'turn on' shown in 'IndEgo User 1 412 2010 3' at 176.4s\u2013193.0s, Facility Manufacturing Equipment Annual Preventive Maintenance Review (2.0 Recommendations > Standardization & Sensor Upgrades) mandates: Annual Review Section 2.0 specifies upgrading operator workstations with optical safety light curtains and unified 24V bus monitoring.."
+    },
+    {
+      "query_id": "test-mhop-030",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What requirement is documented for 'connect center bar' in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual and when is it demonstrated?",
+      "action_label": "connect center bar",
+      "essential_video_asset_ids": [
+        "0f01d43c-87f2-4331-b35e-7b1055e073de"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "f2a941ce-0ab0-4fc7-befd-1cc9703bdce1"
+      ],
+      "essential_chunk_ids": [
+        "33183cd7-3141-4897-9924-1203f0cf2534"
+      ],
+      "gold_spans_by_asset": {
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            186.38,
+            265.21
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.1 Base Structure > Horizontal Support Bars & Leveling Feet",
+      "link_note": "Manual Section 1.1 specifies transverse center brace spacing at 600 mm from front rail.",
+      "reference_answer": "During 'connect center bar' shown in 'IndEgo User 16 User 2 411 2510 2' at 186.4s\u2013265.2s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual (1.1 Base Structure > Horizontal Support Bars & Leveling Feet) mandates: Manual Section 1.1 specifies transverse center brace spacing at 600 mm from front rail.."
+    },
+    {
+      "query_id": "test-vis-001",
+      "type": "visual",
+      "query": "Visual keyframe displaying connect center bar",
+      "essential_asset_ids": [
+        "0f01d43c-87f2-4331-b35e-7b1055e073de"
+      ],
+      "essential_image_ids": [
+        "da6466d9-2565-5dfb-819b-3114235a828a"
+      ],
+      "target_description": "connect center bar"
+    },
+    {
+      "query_id": "test-vis-002",
+      "type": "visual",
+      "query": "Visual keyframe displaying assemble middle hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f"
+      ],
+      "essential_image_ids": [
+        "74d8894b-1a3b-54f6-9c84-8940255ccdb1"
+      ],
+      "target_description": "assemble middle hinge"
+    },
+    {
+      "query_id": "test-vis-003",
+      "type": "visual",
+      "query": "Visual keyframe displaying inspect",
+      "essential_asset_ids": [
+        "1718202b-49db-459d-97d9-7868f324fe3b"
+      ],
+      "essential_image_ids": [
+        "c2ae3c28-645a-508f-b5de-d22e17166bdf"
+      ],
+      "target_description": "inspect"
+    },
+    {
+      "query_id": "test-vis-004",
+      "type": "visual",
+      "query": "Visual keyframe displaying repair",
+      "essential_asset_ids": [
+        "1718202b-49db-459d-97d9-7868f324fe3b"
+      ],
+      "essential_image_ids": [
+        "4ab1c0a2-1752-55ee-8c90-9ea4092b9341"
+      ],
+      "target_description": "repair"
+    },
+    {
+      "query_id": "test-vis-005",
+      "type": "visual",
+      "query": "Visual keyframe displaying inspect",
+      "essential_asset_ids": [
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54"
+      ],
+      "essential_image_ids": [
+        "d868b9c7-2165-52d4-847d-05fa615811da"
+      ],
+      "target_description": "inspect"
+    },
+    {
+      "query_id": "test-vis-006",
+      "type": "visual",
+      "query": "Visual keyframe displaying assemble middle hinge",
+      "essential_asset_ids": [
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_image_ids": [
+        "699b8479-5a88-5b5d-bc91-ed43ce576ea5"
+      ],
+      "target_description": "assemble middle hinge"
+    },
+    {
+      "query_id": "test-vis-007",
+      "type": "visual",
+      "query": "Visual keyframe displaying inspect",
+      "essential_asset_ids": [
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b"
+      ],
+      "essential_image_ids": [
+        "81e64918-783e-5ba8-8b10-cadde602802d"
+      ],
+      "target_description": "inspect"
+    },
+    {
+      "query_id": "test-vis-008",
+      "type": "visual",
+      "query": "Visual keyframe displaying assemble upper hinge",
+      "essential_asset_ids": [
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_image_ids": [
+        "98dcb920-4610-5773-890e-d94e0f6bac25"
+      ],
+      "target_description": "assemble upper hinge"
+    },
+    {
+      "query_id": "test-vis-009",
+      "type": "visual",
+      "query": "Visual keyframe displaying attach vertical bar",
+      "essential_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660"
+      ],
+      "essential_image_ids": [
+        "f6a044e0-6863-5b28-ac30-37a8e7c10e57"
+      ],
+      "target_description": "attach vertical bar"
+    },
+    {
+      "query_id": "test-vis-010",
+      "type": "visual",
+      "query": "Visual keyframe displaying repair",
+      "essential_asset_ids": [
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b"
+      ],
+      "essential_image_ids": [
+        "929d5fb2-83b3-5ec2-bfd8-9bf2337fc240"
+      ],
+      "target_description": "repair"
+    },
+    {
+      "query_id": "test-unans-001",
+      "type": "unanswerable",
+      "query": "Geothermal steam turbine high-pressure shaft seal replacement interval.",
+      "difficulty": "hard",
+      "expected_topic": "geothermal turbine",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-unans-002",
+      "type": "unanswerable",
+      "query": "Blast furnace crucible carbon brick refractory wear inspection.",
+      "difficulty": "hard",
+      "expected_topic": "blast furnace",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-unans-003",
+      "type": "unanswerable",
+      "query": "Submerged arc welding flux recovery suction pressure setting.",
+      "difficulty": "hard",
+      "expected_topic": "submerged arc",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-unans-004",
+      "type": "unanswerable",
+      "query": "Cryogenic liquid hydrogen propellant turbopump cavitation limit.",
+      "difficulty": "hard",
+      "expected_topic": "turbopump",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-unans-005",
+      "type": "unanswerable",
+      "query": "Semiconductor cleanroom EUV pellicle laser transmission threshold.",
+      "difficulty": "hard",
+      "expected_topic": "cleanroom EUV",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-unans-006",
+      "type": "unanswerable",
+      "query": "Titanium airframe friction stir welding anvil pin traverse speed.",
+      "difficulty": "hard",
+      "expected_topic": "friction stir welding",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-unans-007",
+      "type": "unanswerable",
+      "query": "Locomotive regenerative dynamic braking grid resistor coolant ratio.",
+      "difficulty": "hard",
+      "expected_topic": "braking resistor",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-unans-008",
+      "type": "unanswerable",
+      "query": "Underwater oil well subsea blow-out preventer ram hydraulic pressure.",
+      "difficulty": "hard",
+      "expected_topic": "blow-out preventer",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-unans-009",
+      "type": "unanswerable",
+      "query": "Rotary kiln clinker tire clearance tolerance for cement plants.",
+      "difficulty": "hard",
+      "expected_topic": "rotary kiln",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-unans-010",
+      "type": "unanswerable",
+      "query": "Hydroelectric Francis runner cavitation pitting depth limits.",
+      "difficulty": "hard",
+      "expected_topic": "Francis runner",
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "test-para-001a",
+      "pair_id": "para-pair-001",
+      "type": "paraphrase",
+      "variant": "A",
+      "query": "Fastening the lower hinge bracket onto the mounting frame",
+      "action_label": "assemble lower hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_segment_ids": [
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72",
+        "4eb6e413-4e15-4c8f-9495-c3458791dabd",
+        "ecde7380-fc67-4769-818f-b4e60780971a",
+        "cef3583b-f33b-4a26-8007-12a1e4dc0479",
+        "942894dc-ad34-4b83-89d0-8c2ef0d4fb37",
+        "4a56be85-7e79-4fb5-aaa1-241d366ae7c0",
+        "c86f84df-930a-485f-91ef-d3b37a8f2a5a"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            29.67,
+            135.18
+          ]
+        ],
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            15.95,
+            168.61
+          ],
+          [
+            398.76,
+            414.67
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            492.1,
+            731.15
+          ],
+          [
+            735.84,
+            741.36
+          ],
+          [
+            754.65,
+            759.11
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            7.43,
+            125.71
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-para-001b",
+      "pair_id": "para-pair-001",
+      "type": "paraphrase",
+      "variant": "B",
+      "query": "Securing the hinge bottom bracket to the frame assembly",
+      "action_label": "assemble lower hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_segment_ids": [
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72",
+        "4eb6e413-4e15-4c8f-9495-c3458791dabd",
+        "ecde7380-fc67-4769-818f-b4e60780971a",
+        "cef3583b-f33b-4a26-8007-12a1e4dc0479",
+        "942894dc-ad34-4b83-89d0-8c2ef0d4fb37",
+        "4a56be85-7e79-4fb5-aaa1-241d366ae7c0",
+        "c86f84df-930a-485f-91ef-d3b37a8f2a5a"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            29.67,
+            135.18
+          ]
+        ],
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            15.95,
+            168.61
+          ],
+          [
+            398.76,
+            414.67
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            492.1,
+            731.15
+          ],
+          [
+            735.84,
+            741.36
+          ],
+          [
+            754.65,
+            759.11
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            7.43,
+            125.71
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-para-002a",
+      "pair_id": "para-pair-002",
+      "type": "paraphrase",
+      "variant": "A",
+      "query": "Connecting the workstation base plate to support legs",
+      "action_label": "connect base",
+      "essential_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1"
+      ],
+      "essential_segment_ids": [
+        "aa1d5e1a-5604-40e6-a546-1428af9edf74",
+        "89f50fda-66fe-4195-b9a5-650ec8b6c5b2",
+        "f9ba0e2c-d6fb-46c9-8e87-5bd154ca4895",
+        "f8161e40-cc86-4693-bb4d-c00aaa48864b"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            6.07,
+            59.05
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            4.42,
+            155.13
+          ],
+          [
+            688.09,
+            694.43
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            6.99,
+            89.89
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-para-002b",
+      "pair_id": "para-pair-002",
+      "type": "paraphrase",
+      "variant": "B",
+      "query": "Attaching the bottom base foundation to vertical supports",
+      "action_label": "connect base",
+      "essential_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1"
+      ],
+      "essential_segment_ids": [
+        "aa1d5e1a-5604-40e6-a546-1428af9edf74",
+        "89f50fda-66fe-4195-b9a5-650ec8b6c5b2",
+        "f9ba0e2c-d6fb-46c9-8e87-5bd154ca4895",
+        "f8161e40-cc86-4693-bb4d-c00aaa48864b"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            6.07,
+            59.05
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            4.42,
+            155.13
+          ],
+          [
+            688.09,
+            694.43
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            6.99,
+            89.89
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-para-003a",
+      "pair_id": "para-pair-003",
+      "type": "paraphrase",
+      "variant": "A",
+      "query": "Mounting the vertical guide bar into the upright channel",
+      "action_label": "attach vertical bar",
+      "essential_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455",
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1"
+      ],
+      "essential_segment_ids": [
+        "722b95f4-b00f-4433-b2b6-a2f99db49387",
+        "eb259d66-c1a5-4a2b-b1fd-855a018e0c4c",
+        "e53a29b6-7e75-47c0-93eb-1fa13ac5635d",
+        "5d22fac4-ec25-4394-badf-ab543bdaa608",
+        "0ef33731-ae7d-4ee3-a469-041e0490610e"
+      ],
+      "gold_spans_by_asset": {
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            365.74,
+            758.55
+          ]
+        ],
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            59.05,
+            175.5
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            155.13,
+            286.87
+          ],
+          [
+            679.3,
+            688.09
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            89.89,
+            246.69
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-para-003b",
+      "pair_id": "para-pair-003",
+      "type": "paraphrase",
+      "variant": "B",
+      "query": "Securing the upright vertical bar to the main workstation post",
+      "action_label": "attach vertical bar",
+      "essential_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455",
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1"
+      ],
+      "essential_segment_ids": [
+        "722b95f4-b00f-4433-b2b6-a2f99db49387",
+        "eb259d66-c1a5-4a2b-b1fd-855a018e0c4c",
+        "e53a29b6-7e75-47c0-93eb-1fa13ac5635d",
+        "5d22fac4-ec25-4394-badf-ab543bdaa608",
+        "0ef33731-ae7d-4ee3-a469-041e0490610e"
+      ],
+      "gold_spans_by_asset": {
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            365.74,
+            758.55
+          ]
+        ],
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            59.05,
+            175.5
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            155.13,
+            286.87
+          ],
+          [
+            679.3,
+            688.09
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            89.89,
+            246.69
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-para-004a",
+      "pair_id": "para-pair-004",
+      "type": "paraphrase",
+      "variant": "A",
+      "query": "Dismantling the motor rotor shaft and bearing assembly",
+      "action_label": "disassemble rotor",
+      "essential_asset_ids": [
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_segment_ids": [
+        "7bc76893-e082-4d0f-9035-93034e4e16a8",
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            11.87,
+            29.67
+          ],
+          [
+            29.67,
+            135.18
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-para-004b",
+      "pair_id": "para-pair-004",
+      "type": "paraphrase",
+      "variant": "B",
+      "query": "Removing the rotating rotor component from the stator housing",
+      "action_label": "disassemble rotor",
+      "essential_asset_ids": [
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_segment_ids": [
+        "7bc76893-e082-4d0f-9035-93034e4e16a8",
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            11.87,
+            29.67
+          ],
+          [
+            29.67,
+            135.18
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-para-005a",
+      "pair_id": "para-pair-005",
+      "type": "paraphrase",
+      "variant": "A",
+      "query": "Checking the casing housing for surface cracks and defects",
+      "action_label": "inspect housing",
+      "essential_asset_ids": [
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_segment_ids": [
+        "7bc76893-e082-4d0f-9035-93034e4e16a8",
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            11.87,
+            29.67
+          ],
+          [
+            29.67,
+            135.18
+          ]
+        ]
+      }
+    },
+    {
+      "query_id": "test-para-005b",
+      "pair_id": "para-pair-005",
+      "type": "paraphrase",
+      "variant": "B",
+      "query": "Examining the outer equipment housing for wear and alignment",
+      "action_label": "inspect housing",
+      "essential_asset_ids": [
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_segment_ids": [
+        "7bc76893-e082-4d0f-9035-93034e4e16a8",
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            11.87,
+            29.67
+          ],
+          [
+            29.67,
+            135.18
+          ]
+        ]
+      }
+    }
+  ]
+}

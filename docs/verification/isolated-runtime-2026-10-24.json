@@ -1,0 +1,7 @@
+{
+  "exit_code": 0,
+  "stdout": "{\n  \"torch\": \"2.6.0+cu124\",\n  \"transformers\": \"5.17.0\",\n  \"cuda_runtime\": \"12.4\",\n  \"gpu\": \"NVIDIA GeForce RTX 4050 Laptop GPU\",\n  \"imports_seconds\": 22.516,\n  \"tiny_random_backbone_shape\": [\n    1,\n    4,\n    32\n  ],\n  \"finite\": true,\n  \"pretrained_weights_loaded\": false,\n  \"offline\": true\n}\n",
+  "stderr": "",
+  "installed_logical_bytes": 5007398646,
+  "pip_check": "No broken requirements found"
+}

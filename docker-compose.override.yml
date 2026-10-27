@@ -1,0 +1,12 @@
+# Local development: use workspace code with the existing dependency image.
+# No package/model/image downloads are needed for source-only changes.
+services:
+  api:
+    volumes:
+      - ./backend/app:/app/app:ro
+  migrate:
+    volumes:
+      - ./backend/alembic:/app/alembic:ro
+  worker:
+    volumes:
+      - ./backend/app:/app/app:ro

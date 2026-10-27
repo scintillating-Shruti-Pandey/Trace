@@ -1,0 +1,1377 @@
+{
+  "version": "1.1",
+  "split": "dev",
+  "description": "IndEgo 25-video grounded development query set per engineering spec \u00a713. Evaluates text-to-video retrieval against the 114 human-annotated keysteps. Caveat: Tests annotation-text semantic alignment; 1,091 secondary windows contain procedural timestamp captions rather than full multimodal captions.",
+  "circularity_disclosure": "Queries are written to reflect procedural operations present in the 114 keysteps. Locked held-out test split remains separate and unrun until Phase 6.",
+  "query_count": 31,
+  "video_only_count": 26,
+  "unanswerable_count": 5,
+  "queries": [
+    {
+      "query_id": "dev-001",
+      "type": "video-only",
+      "query": "How is the lower hinge assembled on the frame?",
+      "action_label": "assemble lower hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_segment_ids": [
+        "4eb6e413-4e15-4c8f-9495-c3458791dabd",
+        "ecde7380-fc67-4769-818f-b4e60780971a",
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72",
+        "cef3583b-f33b-4a26-8007-12a1e4dc0479",
+        "942894dc-ad34-4b83-89d0-8c2ef0d4fb37",
+        "4a56be85-7e79-4fb5-aaa1-241d366ae7c0",
+        "c86f84df-930a-485f-91ef-d3b37a8f2a5a"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            15.949,
+            168.61166
+          ],
+          [
+            398.758,
+            414.66724
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            29.669,
+            135.18132
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            492.095,
+            731.1481
+          ],
+          [
+            735.836,
+            741.3596
+          ],
+          [
+            754.654,
+            759.1092
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            7.427,
+            125.71059
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 14 User 15 2410 1",
+      "primary_gold_span": [
+        15.949,
+        168.61166
+      ],
+      "num_gold_videos": 4,
+      "num_gold_segments": 7
+    },
+    {
+      "query_id": "dev-002",
+      "type": "video-only",
+      "query": "Show me the segment where the technician installs the lower hinge.",
+      "action_label": "assemble lower hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_segment_ids": [
+        "4eb6e413-4e15-4c8f-9495-c3458791dabd",
+        "ecde7380-fc67-4769-818f-b4e60780971a",
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72",
+        "cef3583b-f33b-4a26-8007-12a1e4dc0479",
+        "942894dc-ad34-4b83-89d0-8c2ef0d4fb37",
+        "4a56be85-7e79-4fb5-aaa1-241d366ae7c0",
+        "c86f84df-930a-485f-91ef-d3b37a8f2a5a"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            15.949,
+            168.61166
+          ],
+          [
+            398.758,
+            414.66724
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            29.669,
+            135.18132
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            492.095,
+            731.1481
+          ],
+          [
+            735.836,
+            741.3596
+          ],
+          [
+            754.654,
+            759.1092
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            7.427,
+            125.71059
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 14 User 15 2410 1",
+      "primary_gold_span": [
+        15.949,
+        168.61166
+      ],
+      "num_gold_videos": 4,
+      "num_gold_segments": 7
+    },
+    {
+      "query_id": "dev-003",
+      "type": "video-only",
+      "query": "What is the step for assembling the middle hinge?",
+      "action_label": "assemble middle hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_segment_ids": [
+        "875a0c63-d217-4250-b40f-d46f51a48718",
+        "bade7eee-d1e7-4733-9317-1ec7bbe74648",
+        "037880c8-f957-4c91-b4ac-9c42b3975439",
+        "da5e5cea-3fe4-41fb-a11d-e61e55feba99",
+        "932f03c1-5d39-48c2-b67b-8d06908b6b70",
+        "a61fd47e-d2f2-43bb-a54e-576ae61d2ff0",
+        "13efb9a0-17f1-4c4f-a74e-79310367a361",
+        "0fc7cd52-23c7-4423-82e6-c8fcccbf2154",
+        "893e2d4b-d121-429e-b043-50f14d070028"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            168.612,
+            398.7581
+          ],
+          [
+            676.163,
+            692.648
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            135.181,
+            342.86823
+          ],
+          [
+            689.31,
+            704.93976
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            243.51,
+            492.09473
+          ],
+          [
+            731.148,
+            735.8356
+          ],
+          [
+            741.36,
+            754.65393
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            125.711,
+            400.27747
+          ],
+          [
+            827.419,
+            839.1303
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 14 User 15 2410 1",
+      "primary_gold_span": [
+        168.612,
+        398.7581
+      ],
+      "num_gold_videos": 4,
+      "num_gold_segments": 9
+    },
+    {
+      "query_id": "dev-004",
+      "type": "video-only",
+      "query": "Where is the middle hinge attached?",
+      "action_label": "assemble middle hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_segment_ids": [
+        "875a0c63-d217-4250-b40f-d46f51a48718",
+        "bade7eee-d1e7-4733-9317-1ec7bbe74648",
+        "037880c8-f957-4c91-b4ac-9c42b3975439",
+        "da5e5cea-3fe4-41fb-a11d-e61e55feba99",
+        "932f03c1-5d39-48c2-b67b-8d06908b6b70",
+        "a61fd47e-d2f2-43bb-a54e-576ae61d2ff0",
+        "13efb9a0-17f1-4c4f-a74e-79310367a361",
+        "0fc7cd52-23c7-4423-82e6-c8fcccbf2154",
+        "893e2d4b-d121-429e-b043-50f14d070028"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            168.612,
+            398.7581
+          ],
+          [
+            676.163,
+            692.648
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            135.181,
+            342.86823
+          ],
+          [
+            689.31,
+            704.93976
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            243.51,
+            492.09473
+          ],
+          [
+            731.148,
+            735.8356
+          ],
+          [
+            741.36,
+            754.65393
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            125.711,
+            400.27747
+          ],
+          [
+            827.419,
+            839.1303
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 14 User 15 2410 1",
+      "primary_gold_span": [
+        168.612,
+        398.7581
+      ],
+      "num_gold_videos": 4,
+      "num_gold_segments": 9
+    },
+    {
+      "query_id": "dev-005",
+      "type": "video-only",
+      "query": "Show the upper hinge assembly procedure.",
+      "action_label": "assemble upper hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_segment_ids": [
+        "c6608a58-96b5-4e5b-a6a7-bb516587ed3b",
+        "aac7b38e-045a-4b59-9990-f1cba180c016",
+        "0730684b-b687-411d-a8cb-dfba9430ce5d",
+        "fcec1ea3-2824-4e66-88bb-13ac2de4c594",
+        "6cd6bd30-e085-446d-92bd-94644444a420"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            414.667,
+            676.1633
+          ],
+          [
+            692.648,
+            699.963
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            342.868,
+            689.3096
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            6.065,
+            243.51013
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            400.277,
+            823.5938
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 14 User 15 2410 1",
+      "primary_gold_span": [
+        414.667,
+        676.1633
+      ],
+      "num_gold_videos": 4,
+      "num_gold_segments": 5
+    },
+    {
+      "query_id": "dev-006",
+      "type": "video-only",
+      "query": "Demonstrate attaching the upper hinge.",
+      "action_label": "assemble upper hinge",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_segment_ids": [
+        "c6608a58-96b5-4e5b-a6a7-bb516587ed3b",
+        "aac7b38e-045a-4b59-9990-f1cba180c016",
+        "0730684b-b687-411d-a8cb-dfba9430ce5d",
+        "fcec1ea3-2824-4e66-88bb-13ac2de4c594",
+        "6cd6bd30-e085-446d-92bd-94644444a420"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            414.667,
+            676.1633
+          ],
+          [
+            692.648,
+            699.963
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            342.868,
+            689.3096
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            6.065,
+            243.51013
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            400.277,
+            823.5938
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 14 User 15 2410 1",
+      "primary_gold_span": [
+        414.667,
+        676.1633
+      ],
+      "num_gold_videos": 4,
+      "num_gold_segments": 5
+    },
+    {
+      "query_id": "dev-007",
+      "type": "video-only",
+      "query": "Where does the operator attach the power connection?",
+      "action_label": "attach power connection",
+      "essential_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_segment_ids": [
+        "a73c3a4c-5ed6-4f70-b2a2-e6d34b650e80"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            1.878,
+            53.76137
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 1 412 2010 3",
+      "primary_gold_span": [
+        1.878,
+        53.76137
+      ],
+      "num_gold_videos": 1,
+      "num_gold_segments": 1
+    },
+    {
+      "query_id": "dev-008",
+      "type": "video-only",
+      "query": "Show the video segment attaching the camera and plate.",
+      "action_label": "attach camera and plate",
+      "essential_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "753b61b7-8639-4125-b409-86d7894017a5",
+        "4c09ac26-cbad-4e7a-8a2b-274fe9f32c8e",
+        "ae1aa039-c6d6-4c5c-b6f4-3393a87ab8e4",
+        "a78a8dc6-a349-4f54-a2ed-ae57a8864510"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            369.9,
+            532.15796
+          ],
+          [
+            639.503,
+            671.48566
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            377.212,
+            793.17676
+          ]
+        ],
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            234.965,
+            335.27032
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo 7020e12d-d5a2-4f01-beab-94f38d887eca",
+      "primary_gold_span": [
+        369.9,
+        532.15796
+      ],
+      "num_gold_videos": 3,
+      "num_gold_segments": 4
+    },
+    {
+      "query_id": "dev-009",
+      "type": "video-only",
+      "query": "Mounting the camera plate to the vertical bar.",
+      "action_label": "attach camera and plate",
+      "essential_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "753b61b7-8639-4125-b409-86d7894017a5",
+        "4c09ac26-cbad-4e7a-8a2b-274fe9f32c8e",
+        "ae1aa039-c6d6-4c5c-b6f4-3393a87ab8e4",
+        "a78a8dc6-a349-4f54-a2ed-ae57a8864510"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            369.9,
+            532.15796
+          ],
+          [
+            639.503,
+            671.48566
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            377.212,
+            793.17676
+          ]
+        ],
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            234.965,
+            335.27032
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo 7020e12d-d5a2-4f01-beab-94f38d887eca",
+      "primary_gold_span": [
+        369.9,
+        532.15796
+      ],
+      "num_gold_videos": 3,
+      "num_gold_segments": 4
+    },
+    {
+      "query_id": "dev-010",
+      "type": "video-only",
+      "query": "Locate where the connector plates are secured.",
+      "action_label": "attach connector plates",
+      "essential_asset_ids": [
+        "3af2970a-e708-41ab-894f-b4dd3200109f",
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "82714706-ff9c-4c0a-b91b-6be4ac9cbc83",
+        "6db05611-fdcb-42a5-9a85-9c8dc500b2d4"
+      ],
+      "gold_spans_by_asset": {
+        "3af2970a-e708-41ab-894f-b4dd3200109f": [
+          [
+            373.632,
+            551.0227
+          ]
+        ],
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            500.732,
+            617.0995
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 1 411 1610 3",
+      "primary_gold_span": [
+        373.632,
+        551.0227
+      ],
+      "num_gold_videos": 2,
+      "num_gold_segments": 2
+    },
+    {
+      "query_id": "dev-011",
+      "type": "video-only",
+      "query": "Installing the top plate on the assembly.",
+      "action_label": "attach top plate",
+      "essential_asset_ids": [
+        "3af2970a-e708-41ab-894f-b4dd3200109f",
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "7f302bea-5402-4a95-8445-5885c7fa6177",
+        "937996ed-ce6b-4d71-92b3-1a5b81239eff"
+      ],
+      "gold_spans_by_asset": {
+        "3af2970a-e708-41ab-894f-b4dd3200109f": [
+          [
+            94.901,
+            157.4892
+          ]
+        ],
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            177.676,
+            232.80351
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 1 411 1610 3",
+      "primary_gold_span": [
+        94.901,
+        157.4892
+      ],
+      "num_gold_videos": 2,
+      "num_gold_segments": 2
+    },
+    {
+      "query_id": "dev-012",
+      "type": "video-only",
+      "query": "Securing the bottom plate to the structure.",
+      "action_label": "attach bottom plate",
+      "essential_asset_ids": [
+        "3af2970a-e708-41ab-894f-b4dd3200109f",
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "236da91e-f3f7-489e-b30c-d5c092897e71",
+        "3c118388-0ebf-4a16-8b68-82c1323b81fc"
+      ],
+      "gold_spans_by_asset": {
+        "3af2970a-e708-41ab-894f-b4dd3200109f": [
+          [
+            277.862,
+            362.29196
+          ]
+        ],
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            443.957,
+            500.73163
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 1 411 1610 3",
+      "primary_gold_span": [
+        277.862,
+        362.29196
+      ],
+      "num_gold_videos": 2,
+      "num_gold_segments": 2
+    },
+    {
+      "query_id": "dev-013",
+      "type": "video-only",
+      "query": "How is the tabletop mounted onto the frame?",
+      "action_label": "attach tabletop",
+      "essential_asset_ids": [
+        "0f01d43c-87f2-4331-b35e-7b1055e073de",
+        "76f8c610-0fdc-414c-b0e2-8617521775ea"
+      ],
+      "essential_segment_ids": [
+        "f32ae272-5592-4728-9465-c1c898d4f022",
+        "9b46c3c8-b872-452f-814f-74dcce43b0e2"
+      ],
+      "gold_spans_by_asset": {
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            547.437,
+            764.0755
+          ]
+        ],
+        "76f8c610-0fdc-414c-b0e2-8617521775ea": [
+          [
+            13.371,
+            173.96533
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 16 User 2 411 2510 2",
+      "primary_gold_span": [
+        547.437,
+        764.0755
+      ],
+      "num_gold_videos": 2,
+      "num_gold_segments": 2
+    },
+    {
+      "query_id": "dev-014",
+      "type": "video-only",
+      "query": "Assembling and connecting the base frame.",
+      "action_label": "connect base",
+      "essential_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "89f50fda-66fe-4195-b9a5-650ec8b6c5b2",
+        "f9ba0e2c-d6fb-46c9-8e87-5bd154ca4895",
+        "f8161e40-cc86-4693-bb4d-c00aaa48864b",
+        "aa1d5e1a-5604-40e6-a546-1428af9edf74"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            4.416,
+            155.12785
+          ],
+          [
+            688.089,
+            694.43335
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            6.986,
+            89.88759
+          ]
+        ],
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            6.066,
+            59.04675
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo 7020e12d-d5a2-4f01-beab-94f38d887eca",
+      "primary_gold_span": [
+        4.416,
+        155.12785
+      ],
+      "num_gold_videos": 3,
+      "num_gold_segments": 4
+    },
+    {
+      "query_id": "dev-015",
+      "type": "video-only",
+      "query": "Connecting base components of the structure.",
+      "action_label": "connect base",
+      "essential_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "89f50fda-66fe-4195-b9a5-650ec8b6c5b2",
+        "f9ba0e2c-d6fb-46c9-8e87-5bd154ca4895",
+        "f8161e40-cc86-4693-bb4d-c00aaa48864b",
+        "aa1d5e1a-5604-40e6-a546-1428af9edf74"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            4.416,
+            155.12785
+          ],
+          [
+            688.089,
+            694.43335
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            6.986,
+            89.88759
+          ]
+        ],
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            6.066,
+            59.04675
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo 7020e12d-d5a2-4f01-beab-94f38d887eca",
+      "primary_gold_span": [
+        4.416,
+        155.12785
+      ],
+      "num_gold_videos": 3,
+      "num_gold_segments": 4
+    },
+    {
+      "query_id": "dev-016",
+      "type": "video-only",
+      "query": "Where is the vertical bar positioned and fastened?",
+      "action_label": "attach vertical bar",
+      "essential_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "e53a29b6-7e75-47c0-93eb-1fa13ac5635d",
+        "5d22fac4-ec25-4394-badf-ab543bdaa608",
+        "0ef33731-ae7d-4ee3-a469-041e0490610e",
+        "722b95f4-b00f-4433-b2b6-a2f99db49387",
+        "eb259d66-c1a5-4a2b-b1fd-855a018e0c4c"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            155.128,
+            286.86926
+          ],
+          [
+            679.297,
+            688.089
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            89.888,
+            246.68927
+          ]
+        ],
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            365.737,
+            758.5524
+          ]
+        ],
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            59.047,
+            175.50226
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo 7020e12d-d5a2-4f01-beab-94f38d887eca",
+      "primary_gold_span": [
+        155.128,
+        286.86926
+      ],
+      "num_gold_videos": 4,
+      "num_gold_segments": 5
+    },
+    {
+      "query_id": "dev-017",
+      "type": "video-only",
+      "query": "Mounting the upper bar across the frame.",
+      "action_label": "attach upper bar",
+      "essential_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "f946e242-1ec9-4d59-9bf0-6cf789edf646",
+        "31a2d6d8-1e21-4713-a6d9-dd7b33892d2b",
+        "911ff616-ec79-4e53-9834-adc78815743f",
+        "a2a3e20f-d80f-45b6-a0f2-3aef223825d6",
+        "31db3177-c4dc-4086-8320-13f28328c75d"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            286.869,
+            369.90027
+          ],
+          [
+            532.158,
+            639.5032
+          ],
+          [
+            671.486,
+            679.2969
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            246.689,
+            377.21213
+          ]
+        ],
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            175.502,
+            234.9652
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo 7020e12d-d5a2-4f01-beab-94f38d887eca",
+      "primary_gold_span": [
+        286.869,
+        369.90027
+      ],
+      "num_gold_videos": 3,
+      "num_gold_segments": 5
+    },
+    {
+      "query_id": "dev-018",
+      "type": "video-only",
+      "query": "Where is the component inspected and cleaned for maintenance?",
+      "action_label": "inspect and clean",
+      "essential_asset_ids": [
+        "3af2970a-e708-41ab-894f-b4dd3200109f",
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "23ef9245-b569-4204-84ae-f87ed69d7073",
+        "c2d4fd92-9044-4bff-aa76-53c95c609ed0"
+      ],
+      "gold_spans_by_asset": {
+        "3af2970a-e708-41ab-894f-b4dd3200109f": [
+          [
+            2.865,
+            94.90069
+          ]
+        ],
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            25.086,
+            31.89764
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 1 411 1610 3",
+      "primary_gold_span": [
+        2.865,
+        94.90069
+      ],
+      "num_gold_videos": 2,
+      "num_gold_segments": 2
+    },
+    {
+      "query_id": "dev-019",
+      "type": "video-only",
+      "query": "Show the disassembly of the motor casing and components.",
+      "action_label": "disassemble",
+      "essential_asset_ids": [
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_segment_ids": [
+        "a3b0c883-fd1d-4f6a-9974-df9abab51c88",
+        "d7bba08b-6de8-417f-a95a-f2bed82d76ca",
+        "b6ca1e54-7a36-4ed2-811b-b5775b9fdcae"
+      ],
+      "gold_spans_by_asset": {
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            119.676,
+            526.9549
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            100.009,
+            246.35222
+          ],
+          [
+            326.991,
+            484.795
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 15 412 0110 1",
+      "primary_gold_span": [
+        119.676,
+        526.9549
+      ],
+      "num_gold_videos": 2,
+      "num_gold_segments": 3
+    },
+    {
+      "query_id": "dev-020",
+      "type": "video-only",
+      "query": "Disassembling the unit for repair inspection.",
+      "action_label": "disassemble",
+      "essential_asset_ids": [
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_segment_ids": [
+        "a3b0c883-fd1d-4f6a-9974-df9abab51c88",
+        "d7bba08b-6de8-417f-a95a-f2bed82d76ca",
+        "b6ca1e54-7a36-4ed2-811b-b5775b9fdcae"
+      ],
+      "gold_spans_by_asset": {
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            119.676,
+            526.9549
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            100.009,
+            246.35222
+          ],
+          [
+            326.991,
+            484.795
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 15 412 0110 1",
+      "primary_gold_span": [
+        119.676,
+        526.9549
+      ],
+      "num_gold_videos": 2,
+      "num_gold_segments": 3
+    },
+    {
+      "query_id": "dev-021",
+      "type": "video-only",
+      "query": "Where is the repair procedure performed on the machine?",
+      "action_label": "repair",
+      "essential_asset_ids": [
+        "7d983111-1468-4ec1-9441-324a7183f923",
+        "a072cf61-dcfe-4b71-96d0-969c83f1641e",
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54",
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b",
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a",
+        "1718202b-49db-459d-97d9-7868f324fe3b",
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b",
+        "58ec0fb6-85cc-47be-b6bb-9bcd9a0e9f05"
+      ],
+      "essential_segment_ids": [
+        "ec9bd35c-08c8-47db-8225-27bd2a176d19",
+        "7dbfbca6-9ca6-4d10-8e31-42021c33eae7",
+        "c5433990-9d36-4726-91fd-8eac78cd95c7",
+        "192d7e69-0ff8-40b3-997f-c6fd87481b01",
+        "653ad80f-eb92-46a3-875e-b6aeec4da71b",
+        "a15dfc55-54cf-46df-a66b-3375342ac628",
+        "469a82ba-cda9-4f6a-b8cb-ff7bdecab7a6",
+        "0cabced4-5105-4bf8-afea-47a88405ce5b"
+      ],
+      "gold_spans_by_asset": {
+        "7d983111-1468-4ec1-9441-324a7183f923": [
+          [
+            362.885,
+            666.84656
+          ]
+        ],
+        "a072cf61-dcfe-4b71-96d0-969c83f1641e": [
+          [
+            94.743,
+            501.81476
+          ]
+        ],
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54": [
+          [
+            92.737,
+            604.41675
+          ]
+        ],
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b": [
+          [
+            204.924,
+            441.0536
+          ]
+        ],
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a": [
+          [
+            17.714,
+            701.3608
+          ]
+        ],
+        "1718202b-49db-459d-97d9-7868f324fe3b": [
+          [
+            67.877,
+            432.5231
+          ]
+        ],
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b": [
+          [
+            42.953,
+            492.4122
+          ]
+        ],
+        "58ec0fb6-85cc-47be-b6bb-9bcd9a0e9f05": [
+          [
+            280.969,
+            798.395
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 1 1910 repair",
+      "primary_gold_span": [
+        362.885,
+        666.84656
+      ],
+      "num_gold_videos": 8,
+      "num_gold_segments": 8
+    },
+    {
+      "query_id": "dev-022",
+      "type": "video-only",
+      "query": "Testing the completed assembly after repair.",
+      "action_label": "test",
+      "essential_asset_ids": [
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54",
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53",
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b",
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a",
+        "1718202b-49db-459d-97d9-7868f324fe3b",
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b",
+        "7c553436-f15e-45ca-9229-cae2b2d867f8",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_segment_ids": [
+        "ce5b3185-b3ca-4712-a4cd-d269cc122972",
+        "7881d481-91df-4f5b-9002-3753470ab95e",
+        "8dc35455-7cbe-4648-85a2-1177954678f8",
+        "c5a42b57-3ce5-4944-bedc-4c292de7133a",
+        "5330aae6-2986-43af-8031-a7d3129b731e",
+        "0f6dfb06-0e14-4bcc-a86c-961b6107d5f8",
+        "40e2d9b0-fbb8-4d25-b933-e84e25a7d468",
+        "34646bd6-6644-4ab4-87a5-7ffb791b4ef4"
+      ],
+      "gold_spans_by_asset": {
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54": [
+          [
+            604.417,
+            722.3313
+          ]
+        ],
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            728.069,
+            774.8325
+          ]
+        ],
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b": [
+          [
+            458.356,
+            467.30618
+          ]
+        ],
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a": [
+          [
+            701.361,
+            718.89624
+          ]
+        ],
+        "1718202b-49db-459d-97d9-7868f324fe3b": [
+          [
+            432.523,
+            478.35922
+          ]
+        ],
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b": [
+          [
+            492.412,
+            501.5856
+          ]
+        ],
+        "7c553436-f15e-45ca-9229-cae2b2d867f8": [
+          [
+            382.148,
+            392.55658
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            765.752,
+            801.90125
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 14 2325 451 2",
+      "primary_gold_span": [
+        604.417,
+        722.3313
+      ],
+      "num_gold_videos": 8,
+      "num_gold_segments": 8
+    },
+    {
+      "query_id": "dev-023",
+      "type": "video-only",
+      "query": "Clean up of the workstation and tools after the task.",
+      "action_label": "clean up",
+      "essential_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1",
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53",
+        "7c553436-f15e-45ca-9229-cae2b2d867f8",
+        "0f01d43c-87f2-4331-b35e-7b1055e073de",
+        "76f8c610-0fdc-414c-b0e2-8617521775ea",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_segment_ids": [
+        "ffa83154-f6ce-4032-a0e8-b6f4732cdac0",
+        "7a957ee2-a3ec-4785-9ef2-401a6d578130",
+        "753cf2ce-74d3-494f-a679-989bfe369c8b",
+        "eb6ef156-78e7-4176-a516-5ece226003f2",
+        "0f7a3038-e6cc-4f35-a925-de79eb61def4",
+        "6773a333-ed28-493f-873d-2e74ff4a7f59",
+        "754d494f-1d8e-44ca-8e3c-210b87bb4ea4"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            700.336,
+            707.8989
+          ]
+        ],
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            758.552,
+            809.12854
+          ]
+        ],
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            774.833,
+            818.15466
+          ]
+        ],
+        "7c553436-f15e-45ca-9229-cae2b2d867f8": [
+          [
+            392.557,
+            528.43976
+          ]
+        ],
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            783.044,
+            840.02386
+          ]
+        ],
+        "76f8c610-0fdc-414c-b0e2-8617521775ea": [
+          [
+            183.159,
+            408.4606
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            801.901,
+            851.98834
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo 7020e12d-d5a2-4f01-beab-94f38d887eca",
+      "primary_gold_span": [
+        700.336,
+        707.8989
+      ],
+      "num_gold_videos": 7,
+      "num_gold_segments": 7
+    },
+    {
+      "query_id": "dev-024",
+      "type": "video-only",
+      "query": "Plugging in electrical power to the test unit.",
+      "action_label": "plug in",
+      "essential_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_segment_ids": [
+        "73707854-d49a-4184-8afa-e7447e112215"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            136.441,
+            146.1701
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 1 412 2010 3",
+      "primary_gold_span": [
+        136.441,
+        146.1701
+      ],
+      "num_gold_videos": 1,
+      "num_gold_segments": 1
+    },
+    {
+      "query_id": "dev-025",
+      "type": "video-only",
+      "query": "Attaching the display monitor to the mount.",
+      "action_label": "attach monitor",
+      "essential_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_segment_ids": [
+        "2dc6ecd1-99b5-4a48-bf42-0d20317c30aa"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            146.17,
+            172.18005
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 1 412 2010 3",
+      "primary_gold_span": [
+        146.17,
+        172.18005
+      ],
+      "num_gold_videos": 1,
+      "num_gold_segments": 1
+    },
+    {
+      "query_id": "dev-026",
+      "type": "video-only",
+      "query": "Powering on and turning on the system.",
+      "action_label": "turn on",
+      "essential_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_segment_ids": [
+        "2ede54e0-bffa-45b0-9c0d-9f8644105992"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            176.375,
+            193.03384
+          ]
+        ]
+      },
+      "primary_asset": "IndEgo User 1 412 2010 3",
+      "primary_gold_span": [
+        176.375,
+        193.03384
+      ],
+      "num_gold_videos": 1,
+      "num_gold_segments": 1
+    },
+    {
+      "query_id": "dev-027",
+      "type": "unanswerable",
+      "query": "Replacing the hydraulic pump oil filter and seal ring.",
+      "action_label": null,
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "gold_spans_by_asset": {},
+      "primary_asset": null,
+      "primary_gold_span": null,
+      "num_gold_videos": 0,
+      "num_gold_segments": 0
+    },
+    {
+      "query_id": "dev-028",
+      "type": "unanswerable",
+      "query": "Calibrating the optical pyrometer on the furnace nozzle.",
+      "action_label": null,
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "gold_spans_by_asset": {},
+      "primary_asset": null,
+      "primary_gold_span": null,
+      "num_gold_videos": 0,
+      "num_gold_segments": 0
+    },
+    {
+      "query_id": "dev-029",
+      "type": "unanswerable",
+      "query": "Torque specification for high-pressure fuel injectors.",
+      "action_label": null,
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "gold_spans_by_asset": {},
+      "primary_asset": null,
+      "primary_gold_span": null,
+      "num_gold_videos": 0,
+      "num_gold_segments": 0
+    },
+    {
+      "query_id": "dev-030",
+      "type": "unanswerable",
+      "query": "Flushing cooling jacket with glycol solvent.",
+      "action_label": null,
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "gold_spans_by_asset": {},
+      "primary_asset": null,
+      "primary_gold_span": null,
+      "num_gold_videos": 0,
+      "num_gold_segments": 0
+    },
+    {
+      "query_id": "dev-031",
+      "type": "unanswerable",
+      "query": "Replacing cracked carbon commutator brushes.",
+      "action_label": null,
+      "essential_asset_ids": [],
+      "essential_segment_ids": [],
+      "gold_spans_by_asset": {},
+      "primary_asset": null,
+      "primary_gold_span": null,
+      "num_gold_videos": 0,
+      "num_gold_segments": 0
+    }
+  ]
+}

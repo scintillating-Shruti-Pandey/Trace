@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trace Project Master Study Guide — Every Single Detail Explained</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1120;
+      --surface: #131d33;
+      --surface-card: #18243e;
+      --border: #223456;
+      --border-bright: #3b82f6;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --brand: #3b82f6;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+
+    /* Header Banner */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+      border: 1px solid #3b82f6;
+      border-radius: 16px;
+      padding: 36px 30px;
+      margin-bottom: 36px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .badge-hero {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+
+    .team-box {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    .team-member {
+      color: #93c5fd;
+    }
+    .team-member strong {
+      color: #ffffff;
+    }
+
+    /* Section Styling */
+    .sec {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .sec-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+      letter-spacing: 0.08em;
+    }
+
+    h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 20px 0 10px 0;
+      color: #93c5fd;
+    }
+
+    p {
+      color: #cbd5e1;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    /* Simple Baby Explainer Box */
+    .baby-box {
+      background: rgba(16, 185, 129, 0.08);
+      border-left: 4px solid var(--emerald);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .baby-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      color: #34d399;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .baby-text {
+      color: #e2e8f0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    /* Analogy Box */
+    .analogy-box {
+      background: rgba(245, 158, 11, 0.08);
+      border-left: 4px solid var(--amber);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .analogy-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      color: #fbbf24;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    /* Cards Grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #60a5fa;
+      margin-bottom: 4px;
+    }
+
+    /* Teacher Question Accordion */
+    .q-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .q-card:hover {
+      border-color: #3b82f6;
+    }
+
+    .q-header {
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .q-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      background: #1e3a8a;
+      color: #93c5fd;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    .q-arrow {
+      color: #64748b;
+      font-size: 0.9rem;
+      transition: transform 0.2s;
+    }
+
+    .q-card.open .q-arrow {
+      transform: rotate(180deg);
+      color: #3b82f6;
+    }
+
+    .q-body {
+      padding: 0 20px 20px 20px;
+      display: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 10px;
+      padding-top: 14px;
+    }
+
+    .q-card.open .q-body {
+      display: block;
+    }
+
+    .answer-script {
+      background: #090d16;
+      border-left: 3px solid #3b82f6;
+      padding: 14px 16px;
+      border-radius: 0 6px 6px 0;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .answer-script strong {
+      color: #60a5fa;
+    }
+
+    .why-script {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+
+    /* Key Numbers Strip */
+    .num-strip {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .num-pill {
+      background: #0f172a;
+      border: 1px solid #334155;
+      padding: 10px 16px;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .num-pill .val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fbbf24;
+    }
+
+    .num-pill .lbl {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Code & Formulas */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #1e293b;
+      color: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    /* TOC */
+    .toc {
+      background: rgba(30, 58, 138, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 16px 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .toc-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 0.88rem;
+    }
+
+    .toc-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .toc-links a:hover {
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Top Hero Banner -->
+    <div class="hero">
+      <span class="badge-hero">Intelligent Model Design using AI · Capstone Viva Guide</span>
+      <h1>Trace: Multimodal Manufacturing Intelligence & Video Search with RAG</h1>
+      <p class="subtitle">The Complete "Explain It Like I'm 5" Guide + Deep Technical Defense Cheat Sheet for Full Marks</p>
+      <div class="team-box">
+        <div class="team-member">Student 1: <strong>Shruti Pandey</strong> (S24CSEU0527)</div>
+        <div class="team-member">Student 2: <strong>Satvick Miglani</strong> (S24CSEU0476)</div>
+        <div class="team-member">Budget: <strong>6.0 GB VRAM · $0.00 Spend</strong></div>
+      </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <div class="toc-title">Quick Jump to Sections</div>
+      <div class="toc-links">
+        <a href="#part1">1. The 30-Second Elevator Pitch</a>
+        <a href="#part2">2. The Big Problem (Why Regular AI Fails)</a>
+        <a href="#part3">3. The Solution & Architecture (Like Legos)</a>
+        <a href="#part4">4. The 4 Magic Components (Analogies)</a>
+        <a href="#part5">5. The Corpus & The 4 Subsystems</a>
+        <a href="#part6">6. The 10 Deadly Teacher Questions (Word-for-Word Answers)</a>
+        <a href="#part7">7. Quick Formula & Number Reference</a>
+      </div>
+    </div>
+
+    <!-- PART 1: ELEVATOR PITCH -->
+    <div class="sec" id="part1">
+      <div class="sec-tag">Part 1 · The Simplest Explanation Possible</div>
+      <h2>👶 What is this project in plain English?</h2>
+      
+      <div class="baby-box">
+        <div class="baby-title">🍼 Imagine this exact scenario:</div>
+        <p class="baby-text">
+          You are a new factory worker. Your boss says: <em>"Go fix the giant hydraulic pump and tighten the casing bolts!"</em><br><br>
+          You are terrified because:
+          <br>1. The pump manual is a <strong>300-page boring PDF book</strong> full of tiny text.
+          <br>2. There are <strong>100 hours of video recordings</strong> of older mechanics working, but you don't know where to look.
+          <br>3. If you ask <strong>ChatGPT</strong>, it might invent a fake number like "tighten to 15 Nm", and the pump will explode under pressure!
+          <br><br>
+          <strong>TRACE solves this completely!</strong> You type: <em>"casing bolt torque hydraulic pump"</em>.<br>
+          In <strong>0.3 seconds</strong>, TRACE shows you:
+          <br>• The <strong>exact 5-second video moment</strong> where the mechanic picks up the torque wrench and tightens the bolt.
+          <br>• The <strong>exact paragraph in the manual</strong> saying: <em>"Tighten to 24.5 Nm in a cross pattern"</em>.
+          <br>• And if you ask a silly question like <em>"How long does underwater glue take to dry?"</em>, TRACE is smart enough to say: <em>"I don't know, that's not a pump question!"</em> instead of making up a lie!
+        </p>
+      </div>
+    </div>
+
+    <!-- PART 2: THE PROBLEM -->
+    <div class="sec" id="part2">
+      <div class="sec-tag">Part 2 · The Problem We Are Solving</div>
+      <h2>💥 Why can't the teacher just say "Why didn't you use standard ChatGPT or LangChain?"</h2>
+      
+      <p>This is the #1 question teachers ask. Here is the exact reason why standard text AI fails in physical engineering:</p>
+
+      <div class="grid-2">
+        <div class="card" style="border-left: 3px solid #ef4444;">
+          <div class="card-title">❌ What Standard Text RAG Does</div>
+          <p style="font-size: 0.88rem; color: #cbd5e1;">
+            • Takes a PDF and cuts it into dumb chunks of 500 words.<br>
+            • Slices directly through tables! The bolt name is in chunk #1, and the torque number is lost in chunk #2.<br>
+            • <strong>Cannot see video!</strong> It has zero idea what the mechanic's hands are doing.<br>
+            • When asked about a video, text RAG gets <strong>0.0% accuracy</strong>.
+          </p>
+        </div>
+        <div class="card" style="border-left: 3px solid #10b981;">
+          <div class="card-title">✅ What Trace Does Instead</div>
+          <p style="font-size: 0.88rem; color: #cbd5e1;">
+            • <strong>Structure-Aware Chunking</strong>: Keeps tables and headers intact with breadcrumbs (§3.0 > §3.2).<br>
+            • <strong>Multi-Modal</strong>: Uses vision AI (SigLIP 2) to look at video frames + text AI (BGE-M3) to understand spoken words.<br>
+            • <strong>Evidence Graph</strong>: 154 pre-audited bridges connecting video timestamps to manual sections.<br>
+            • Gets <strong>73.3% accuracy</strong> (+46.7% boost!).
+          </p>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="analogy-title">💡 The "Vocabulary Gap" Analogy (Crucial Concept!)</div>
+        <p style="margin-bottom:0; font-size: 0.9rem; color: #f1f5f9;">
+          In videos, mechanics talk casually: <em>"Alright, let's screw down these outer bolts."</em><br>
+          In textbooks, engineers write formally: <em>"M10 Grade 8.8 Hex Casing Fastener, 24.5 Nm preload."</em><br>
+          Notice that <strong>not a single word matches!</strong> If you only do keyword search, you find nothing. Trace uses deep dense embeddings (BGE-M3) and human evidence links to understand that these two sentences mean the exact same physical action.
+        </p>
+      </div>
+    </div>
+
+    <!-- PART 3: ARCHITECTURE -->
+    <div class="sec" id="part3">
+      <div class="sec-tag">Part 3 · The Architecture Pipeline</div>
+      <h2>🏗️ How the System Works Step-by-Step (The Lego Blocks)</h2>
+
+      <p>When you click "Search" in TRACE, 5 things happen in order in less than 387 milliseconds:</p>
+
+      <div style="background: #090d16; padding: 20px; border-radius: 10px; border: 1px solid #1e293b; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.8; margin-bottom: 16px;">
+        <span style="color: #60a5fa;">Step 1: QUERY</span> &rarr; Technician types: <em>"casing bolt torque hydraulic pump"</em><br>
+        <span style="color: #fbbf24;">Step 2: DUAL RETRIEVAL</span> &rarr; Run TWO searches at the same time:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• <strong>Dense BGE-M3</strong> finds similar meanings (1024-dim vector)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• <strong>Sparse BM25</strong> finds exact codes ("M10", "24.5 Nm")<br>
+        <span style="color: #34d399;">Step 3: RRF FUSION</span> &rarr; Merges both searches into one fair ranking list<br>
+        <span style="color: #a855f7;">Step 4: GRAPH EXPANSION</span> &rarr; Follows the 154 links to pull connected manual pages<br>
+        <span style="color: #f43f5e;">Step 5: TEMPORAL SNIPER</span> &rarr; Shrinks 2-minute video span to exact 10 seconds and seeks 2 seconds early
+      </div>
+    </div>
+
+    <!-- PART 4: THE 4 MAGIC COMPONENTS -->
+    <div class="sec" id="part4">
+      <div class="sec-tag">Part 4 · Deep Dive into Models</div>
+      <h2>🧠 The 4 Magic Components & Their Everyday Analogies</h2>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">1. BGE-M3 (The Brainy Librarian)</div>
+          <p style="font-size: 0.85rem; color: #94a3b8;"><strong>What it is:</strong> 1024-dimensional dense semantic embedding model.</p>
+          <p style="font-size: 0.88rem; color: #cbd5e1;"><strong>Simple Analogy:</strong> It turns any sentence into a GPS location in "meaning space". If sentence A is "tighten bolt" and sentence B is "torque fastener", they get almost the exact same latitude and longitude!</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">2. BM25 (The Exact-Match Detective)</div>
+          <p style="font-size: 0.85rem; color: #94a3b8;"><strong>What it is:</strong> Classic frequency-based lexical keyword matching algorithm.</p>
+          <p style="font-size: 0.88rem; color: #cbd5e1;"><strong>Simple Analogy:</strong> Like `Ctrl + F` on steroids. Dense AI sometimes gets confused between "M8" and "M10". BM25 guarantees that exact part numbers and numbers are never mixed up!</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">3. SigLIP 2 (The Camera Eyes)</div>
+          <p style="font-size: 0.85rem; color: #94a3b8;"><strong>What it is:</strong> Google's state-of-the-art vision-language model.</p>
+          <p style="font-size: 0.88rem; color: #cbd5e1;"><strong>Simple Analogy:</strong> It looks at a picture from a video frame and translates what it sees into the exact same coordinates as text. It knows what a "torque wrench" looks like even if nobody speaks in the audio!</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">4. The Evidence Graph (The Bridges)</div>
+          <p style="font-size: 0.85rem; color: #94a3b8;"><strong>What it is:</strong> 154 human-audited edges linking video timecodes to manual sections.</p>
+          <p style="font-size: 0.88rem; color: #cbd5e1;"><strong>Simple Analogy:</strong> Imagine sticking a sticky note on a video timestamp saying: <em>"To know why he did this, read page 42, section 3.2 of the pump book!"</em></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 5: CORPUS & NUMBERS -->
+    <div class="sec" id="part5">
+      <div class="sec-tag">Part 5 · Memory Numbers You Must Know</div>
+      <h2>📊 The Exact Numbers to Memorize for Full Marks</h2>
+
+      <div class="num-strip">
+        <div class="num-pill">
+          <div class="val">207</div>
+          <div class="lbl">Total Artifacts</div>
+        </div>
+        <div class="num-pill">
+          <div class="val">25</div>
+          <div class="lbl">Videos (4.6 hrs)</div>
+        </div>
+        <div class="num-pill">
+          <div class="val">28</div>
+          <div class="lbl">Manuals & SOPs</div>
+        </div>
+        <div class="num-pill">
+          <div class="val">154</div>
+          <div class="lbl">Evidence Links</div>
+        </div>
+        <div class="num-pill">
+          <div class="val">6.0 GB</div>
+          <div class="lbl">VRAM Budget</div>
+        </div>
+      </div>
+
+      <h3>The 4 Equipment Subsystems (Remember these 4!):</h3>
+      <div class="grid-2">
+        <div class="card" style="border-top: 3px solid #ea580c;">
+          <div class="card-title" style="color: #ea580c;">1. Mechanical (21 Assets · 39.6%)</div>
+          <p style="font-size: 0.85rem; color: #cbd5e1;">
+            • <strong>What it is:</strong> Machine frames, tabletop aluminum extrusions (45x45 mm rails), multi-axis hinges.<br>
+            • <strong>Key Spec:</strong> 14.5 Nm torque for M8 T-slot bolts.
+          </p>
+        </div>
+        <div class="card" style="border-top: 3px solid #0284c7;">
+          <div class="card-title" style="color: #0284c7;">2. Hydraulic (15 Assets · 28.3%)</div>
+          <p style="font-size: 0.85rem; color: #cbd5e1;">
+            • <strong>What it is:</strong> High-pressure axial piston pumps, cylinders, swashplates, valve plates.<br>
+            • <strong>Key Spec:</strong> 24.5 Nm casing bolt torque, 0.015 mm valve plate runout limit.
+          </p>
+        </div>
+        <div class="card" style="border-top: 3px solid #ec4899;">
+          <div class="card-title" style="color: #ec4899;">3. Rotating Machinery (13 Assets · 24.5%)</div>
+          <p style="font-size: 0.85rem; color: #cbd5e1;">
+            • <strong>What it is:</strong> Motor drive shafts, flexible spider couplings, deep groove ball bearings.<br>
+            • <strong>Key Spec:</strong> Radial dial runout < 0.012 mm, 1800 RPM.
+          </p>
+        </div>
+        <div class="card" style="border-top: 3px solid #8b5cf6;">
+          <div class="card-title" style="color: #8b5cf6;">4. Electrical & Sensors (4 Assets · 7.5%)</div>
+          <p style="font-size: 0.85rem; color: #cbd5e1;">
+            • <strong>What it is:</strong> Optical machine vision cameras, collar clamp brackets, inspection fixtures.<br>
+            • <strong>Key Spec:</strong> Leveling alignment tolerance ±0.1°, 100% calibration.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 6: TEACHER QUESTIONS -->
+    <div class="sec" id="part6">
+      <div class="sec-tag">Part 6 · Master Viva Cheat Sheet</div>
+      <h2>🎯 The Top 10 Teacher Grill Questions & Word-for-Word Answers</h2>
+      <p style="color: #94a3b8; font-size: 0.9rem;">Click any question to view the exact explanation and the professional academic script to speak in front of the teacher:</p>
+
+      <!-- Q1 -->
+      <div class="q-card open">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q1</span> "What exactly is RAG, and why is standard RAG not enough for your project?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "Sir/Ma'am, RAG stands for Retrieval-Augmented Generation. Instead of relying solely on an LLM's frozen internal weights, RAG retrieves external evidence from a knowledge base and feeds it into the prompt so the AI answers with verified facts.<br><br>
+            However, <strong>standard RAG is strictly text-based and ungrounded</strong>. In manufacturing plants, procedures are inherently physical and visual. A technician cannot use a system that only retrieves generic text paragraphs; they need sub-second temporal video grounding to see <em>how</em> the action is performed, coupled with the exact manual specification. Naive text RAG fails to bridge video transcripts with technical manuals, resulting in 0% joint retrieval recall."
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q-card">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q2</span> "What embedding model did you use and what does 1024-dimensional mean?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "We utilized <strong>BGE-M3 (BAAI/bge-m3)</strong>. It is a multi-functional embedding model that outputs a 1024-dimensional dense vector.<br><br>
+            When we say 1024-dimensional, it means each procedural video segment and technical manual chunk is mathematically converted into an array of 1024 floating-point numbers. These numbers represent high-level semantic coordinates in a latent conceptual space. We then compute cosine distance (`<=>` operator in PostgreSQL pgvector) between the query vector and document vectors to measure semantic similarity."
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q-card">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q3</span> "If you have dense vectors, why do you still need BM25?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "Dense embeddings are excellent at semantic generalization, but they suffer from <strong>lexical blur</strong> on precise alphanumeric engineering codes. For example, a dense model often places 'M8' and 'M10' or '14.5 Nm' and '24.5 Nm' in very close vector proximity because they are grammatically and contextually similar.<br><br>
+            In heavy industrial maintenance, confusing M8 with M10 is disastrous. Therefore, we use <strong>BM25 as a sparse lexical handle</strong> to guarantee that exact fastener dimensions, part numbers, and torque quantities receive an exact keyword match boost."
+          </div>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q-card">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q4</span> "How do you combine BM25 and BGE-M3? What is RRF?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "We combine them using <strong>Reciprocal Rank Fusion (RRF)</strong> with a smoothing constant k=60.<br><br>
+            Instead of trying to normalize and add raw score values (which fail because BM25 scores are unbounded positive numbers while cosine scores are bounded between 0 and 1), RRF strictly uses the <em>rank position</em> of the document in each retrieval list using the formula: <code>Score = Sum( 1 / (60 + Rank_i) )</code>.<br>
+            This produces a robust, parameter-free ranking that gives high priority to items that perform well across both lexical and semantic lanes."
+          </div>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="q-card">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q5</span> "What are the 154 evidence links? Why did you need them?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "The 154 evidence links represent a pre-audited cross-modal relational graph connecting procedural video intervals directly to authoritative manual chunks.<br><br>
+            In our ablation study, we proved that retrieval alone only scored 0.0% joint recall because colloquial spoken language in videos (`'tighten down outer bolts'`) diverges completely from formal engineering text (`'M10 casing bolt 24.5 Nm'`). By traversing this 1-hop evidence graph during search (Link Expansion), our system achieved an immediate <strong>+46.7% retrieval lift</strong>, raising Joint Recall@10 from 0% to 73.3%."
+          </div>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="q-card">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q6</span> "How does your system guarantee zero hallucinations? What is the Honesty Gate?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "We enforce two strict architectural mechanisms:<br><br>
+            1. <strong>Strict Footnote Citations</strong>: The synthesis engine is conditioned exclusively on retrieved chunks. Every claim must carry a bracketed footnote citation (`[E1]`, `[E2]`) mapped directly to a verified video timestamp and manual chunk.<br>
+            2. <strong>The Honesty Gate</strong>: When a query falls outside the manufacturing domain (such as our test query <em>'curing time underwater epoxy'</em>), an out-of-domain classifier rejects the query and abstains with <strong>100% precision</strong> rather than fabricating an answer."
+          </div>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="q-card">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q7</span> "What is your hardware budget and how does it run locally?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "Trace was intentionally engineered to operate under strict factory-edge constraints: a fixed <strong>6.0 GB VRAM laptop GPU (NVIDIA RTX 4050 Laptop GPU)</strong> with <strong>$0.00 monetary spend</strong> (zero paid cloud API calls).<br><br>
+            To prevent CUDA Out-Of-Memory exceptions, we execute sequential inference with torch mixed-precision (`fp16`) and aggressive garbage collection, maintaining memory consumption under 4.8 GB (under 80% threshold). Video streams are decoded in memory, avoiding redundant local disk caches."
+          </div>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="q-card">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q8</span> "What are your ablation study results (A0 through A7)?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "We conducted an 11-configuration ablation study (A0 to A10) evaluated across 10,000 bootstrap resamples:<br>
+            • <strong>A0 (BM25 only)</strong> & <strong>A1 (Text RAG)</strong>: 0.0% Joint Recall@10 (cannot link video to text).<br>
+            • <strong>A3 (+video-caption)</strong>: 70.0% Joint Recall@10 (brings video transcripts into context).<br>
+            • <strong>A5 (+evidence links)</strong>: <strong>73.3% Joint Recall@10</strong>, 0.7759 Joint MRR@20 (the connective layer).<br>
+            • <strong>A7 (Full System)</strong>: 73.3% Recall, 0.7759 MRR, sub-387 ms end-to-end latency."
+          </div>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="q-card">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q9</span> "What is IoU in your temporal window refinement?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "IoU stands for <strong>Intersection over Union</strong>. In temporal video grounding, it measures the temporal overlap between our predicted procedure interval $[t_{start}, t_{end}]$ and the human ground-truth span.<br><br>
+            <code>IoU = Length(Intersection) / Length(Union)</code><br>
+            We enforce an <code>IoU > 0.5</code> threshold, and automatically offset the playhead by <code>t_start - 2.0s</code> as a lead-in buffer so the operator observes the machine setup state prior to fastener engagement."
+          </div>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="q-card">
+        <div class="q-header" onclick="this.parentElement.classList.toggle('open')">
+          <div><span class="q-badge">Q10</span> "How do you prove your model didn't just overfit to your 25 videos?"</div>
+          <div class="q-arrow">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="answer-script">
+            <strong>Say this to the teacher:</strong><br>
+            "We evaluated our frozen, unchanged BGE-M3 dense retriever against an external out-of-domain benchmark: <strong>LoVR (Long Video Reasoning)</strong> with 200 held-out industrial equipment inspection caption-query pairs held strictly in RAM.<br><br>
+            Trace achieved an impressive <strong>84.5% Top-1 accuracy</strong>, <strong>96.0% Top-5 accuracy</strong>, and an MRR of <strong>0.892</strong> on completely unseen external machinery without any fine-tuning. This proves that our dense representations capture genuine procedural mechanics rather than memorizing our dataset."
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PART 7: QUICK FORMULA REFERENCE -->
+    <div class="sec" id="part7">
+      <div class="sec-tag">Part 7 · Technical Formula & Metric Cheat Sheet</div>
+      <h2>📐 Formulas You Might Be Asked to Write on the Board</h2>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Reciprocal Rank Fusion (RRF)</div>
+          <p style="font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-size: 0.9rem;">
+            RRF(d) = Σ [ 1 / (k + rank_i(d)) ]
+          </p>
+          <p style="font-size: 0.82rem; color: #94a3b8;">Where k = 60 (standard smoothing constant), and rank_i(d) is the item's rank position in retrieval lane i (BGE-M3 or BM25).</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Cosine Similarity (pgvector `<=>`)</div>
+          <p style="font-family: 'JetBrains Mono', monospace; color: #34d399; font-size: 0.9rem;">
+            cos(u, v) = (u · v) / ( ||u|| * ||v|| )
+          </p>
+          <p style="font-size: 0.82rem; color: #94a3b8;">In pgvector, cosine distance is <code>1 - cos(u,v)</code>, queried using the <code><=></code> operator to find nearest neighbors.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Temporal IoU (Intersection over Union)</div>
+          <p style="font-family: 'JetBrains Mono', monospace; color: #60a5fa; font-size: 0.9rem;">
+            IoU = |S_pred ∩ S_gt| / |S_pred ∪ S_gt|
+          </p>
+          <p style="font-size: 0.82rem; color: #94a3b8;">Measures temporal boundary accuracy. Must exceed 0.5 for a video procedural prediction to be counted as successful.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Mean Reciprocal Rank (MRR@20)</div>
+          <p style="font-family: 'JetBrains Mono', monospace; color: #a855f7; font-size: 0.9rem;">
+            MRR = (1 / |Q|) * Σ (1 / rank_first_relevant)
+          </p>
+          <p style="font-size: 0.82rem; color: #94a3b8;">Trace scores <strong>0.7759 Joint MRR@20</strong>, meaning the ground truth evidence is almost always in the #1 or #2 retrieved position.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final Encouragement Banner -->
+    <div style="text-align: center; padding: 30px; background: rgba(59, 130, 246, 0.08); border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.2);">
+      <h3 style="color: #60a5fa; margin-top: 0;">You've Got This, Shruti & Satvick! 🎓</h3>
+      <p style="max-width: 600px; margin: 0 auto; color: #cbd5e1; font-size: 0.92rem;">
+        You have built a rigorous, mathematically verified, multi-modal industrial intelligence system that solves real problems in factory safety and maintenance. Walk into your viva with total confidence!
+      </p>
+    </div>
+
+  </div>
+
+</body>
+</html>

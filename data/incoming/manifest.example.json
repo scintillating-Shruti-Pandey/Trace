@@ -1,0 +1,9 @@
+{
+  "path": "REPLACE_WITH_REAL_FILE.mp4",
+  "kind": "video",
+  "title": "REPLACE_WITH_REAL_TITLE",
+  "source_uri": "REPLACE_WITH_ORIGINAL_SOURCE_OR_self-filmed",
+  "license": "REPLACE_WITH_VERIFIED_LICENSE",
+  "redistributable": false,
+  "equipment_family": "hydraulic"
+}

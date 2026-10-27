@@ -1,0 +1,36 @@
+{
+  "torch": {
+    "returncode": 0,
+    "stdout": "2.5.1+cu121\ncuda True\ntensor_sum 5.0\n",
+    "stderr": ""
+  },
+  "transformers": {
+    "timeout_seconds": 20,
+    "stdout": "",
+    "stderr": ""
+  },
+  "cache": {
+    "models--sentence-transformers--all-MiniLM-L6-v2": {
+      "file_count": 15,
+      "logical_bytes": 91578407,
+      "snapshot_files": [
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\config.json",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\config_sentence_transformers.json",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\model.safetensors",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\modules.json",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\README.md",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\sentence_bert_config.json",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\special_tokens_map.json",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\tokenizer.json",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\tokenizer_config.json",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\vocab.txt",
+        "snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\1_Pooling\\config.json"
+      ]
+    }
+  },
+  "transformers_diagnostic": {
+    "timeout_seconds": 40,
+    "stdout": "",
+    "stderr": "Lib\\importlib\\metadata\\__init__.py\", line 498 in skip_missing_files\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\importlib\\metadata\\_functools.py\", line 102 in wrapper\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\importlib\\metadata\\__init__.py\", line 500 in files\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\importlib\\metadata\\__init__.py\", line 959 in _top_level_inferred\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\importlib\\metadata\\__init__.py\", line 947 in packages_distributions\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\transformers\\utils\\import_utils.py\", line 47 in <module>\n  File \"<frozen importlib._bootstrap>\", line 488 in _call_with_frames_removed\n  File \"<frozen importlib._bootstrap_external>\", line 995 in exec_module\n  File \"<frozen importlib._bootstrap>\", line 935 in _load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1331 in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1360 in _find_and_load\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\transformers\\utils\\generic.py\", line 39 in <module>\n  File \"<frozen importlib._bootstrap>\", line 488 in _call_with_frames_removed\n  File \"<frozen importlib._bootstrap_external>\", line 995 in exec_module\n  File \"<frozen importlib._bootstrap>\", line 935 in _load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1331 in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1360 in _find_and_load\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\transformers\\utils\\auto_docstring.py\", line 33 in <module>\n  File \"<frozen importlib._bootstrap>\", line 488 in _call_with_frames_removed\n  File \"<frozen importlib._bootstrap_external>\", line 995 in exec_module\n  File \"<frozen importlib._bootstrap>\", line 935 in _load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1331 in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1360 in _find_and_load\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\transformers\\utils\\__init__.py\", line 22 in <module>\n  File \"<frozen importlib._bootstrap>\", line 488 in _call_with_frames_removed\n  File \"<frozen importlib._bootstrap_external>\", line 995 in exec_module\n  File \"<frozen importlib._bootstrap>\", line 935 in _load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1331 in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1360 in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 488 in _call_with_frames_removed\n  File \"<frozen importlib._bootstrap>\", line 1310 in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1360 in _find_and_load\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\transformers\\dependency_versions_check.py\", line 16 in <module>\n  File \"<frozen importlib._bootstrap>\", line 488 in _call_with_frames_removed\n  File \"<frozen importlib._bootstrap_external>\", line 995 in exec_module\n  File \"<frozen importlib._bootstrap>\", line 935 in _load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1331 in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1360 in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 488 in _call_with_frames_removed\n  File \"<frozen importlib._bootstrap>\", line 1415 in _handle_fromlist\n  File \"C:\\Users\\Satvick\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\transformers\\__init__.py\", line 30 in <module>\n  File \"<frozen importlib._bootstrap>\", line 488 in _call_with_frames_removed\n  File \"<frozen importlib._bootstrap_external>\", line 995 in exec_module\n  File \"<frozen importlib._bootstrap>\", line 935 in _load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1331 in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1360 in _find_and_load\n  File \"<string>\", line 1 in <module>\n"
+  }
+}

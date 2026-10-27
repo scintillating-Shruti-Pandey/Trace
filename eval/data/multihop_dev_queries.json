@@ -1,0 +1,944 @@
+{
+  "version": "1.0",
+  "split": "dev",
+  "description": "Multi-hop cross-modal development query set per engineering spec \u00a713.2 and \u00a713.5. Each query requires retrieving BOTH the video segment and the technical document chunk. Enables rigorous evaluation of full-set joint retrieval and validates the connective layer under the Section 13.5 A5 ablation (--no-link-expansion).",
+  "query_count": 30,
+  "relation_distribution": {
+    "specifies": 10,
+    "documents": 10,
+    "depicts": 5,
+    "contradicts": 5
+  },
+  "queries": [
+    {
+      "query_id": "mhop-dev-001",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What tightening torque is specified for assemble and in which video interval is this procedure demonstrated?",
+      "action_label": "assemble",
+      "essential_video_asset_ids": [
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53"
+      ],
+      "essential_doc_asset_ids": [
+        "ebdcadfc-4daf-4754-a47c-2d32ce12c822"
+      ],
+      "essential_segment_ids": [
+        "912dd6d2-8ae2-45e7-a940-2d7bb3907b40"
+      ],
+      "essential_chunk_ids": [
+        "996a055e-2dbb-4439-b9eb-e00d77d0626e"
+      ],
+      "gold_spans_by_asset": {
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            526.96,
+            695.28
+          ]
+        ]
+      },
+      "target_document": "Variable Displacement Axial Piston Hydraulic Pump Technical Manual",
+      "target_section": "3.0 Overhaul & Cylinder Block > Piston Shoes & Valve Plate Tolerances",
+      "reference_answer": "During the procedure 'assemble' shown at 527.0s\u2013695.3s, Variable Displacement Axial Piston Hydraulic Pump Technical Manual \u00a7 3.0 Overhaul & Cylinder Block > Piston Shoes & Valve Plate Tolerances mandates the following specification: Manual Section 3.0 specifies 24.5 Nm casing bolt torque and valve plate runout tolerance under 0.015 mm.",
+      "link_note": "Manual Section 3.0 specifies 24.5 Nm casing bolt torque and valve plate runout tolerance under 0.015 mm."
+    },
+    {
+      "query_id": "mhop-dev-002",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What tightening torque is specified for assemble lower hinge and in which video interval is this procedure demonstrated?",
+      "action_label": "assemble lower hinge",
+      "essential_video_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "4eb6e413-4e15-4c8f-9495-c3458791dabd"
+      ],
+      "essential_chunk_ids": [
+        "8ed539f5-7635-4b88-8ba3-8da06dbace8e"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            15.95,
+            168.61
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "1.1 Lower Hinge Assembly > Torque & Clearance Inspection",
+      "reference_answer": "During the procedure 'assemble lower hinge' shown at 15.9s\u2013168.6s, Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 1.1 Lower Hinge Assembly > Torque & Clearance Inspection mandates the following specification: SOP Section 1.1 specifies two-stage torque (5.0 Nm first stage, 9.5 Nm final stage) and 0.25 mm nominal axial clearance for the lower hinge bracket.",
+      "link_note": "SOP Section 1.1 specifies two-stage torque (5.0 Nm first stage, 9.5 Nm final stage) and 0.25 mm nominal axial clearance for the lower hinge bracket."
+    },
+    {
+      "query_id": "mhop-dev-003",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What technical specifications govern assemble middle hinge in Multi-Axis Mechanical Hinge Assembly & Alignment SOP and where is this action shown in video?",
+      "action_label": "assemble middle hinge",
+      "essential_video_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "875a0c63-d217-4250-b40f-d46f51a48718"
+      ],
+      "essential_chunk_ids": [
+        "58a7c1cd-6667-406a-81b4-b32a27c4c1b2"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            168.61,
+            398.76
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment",
+      "reference_answer": "During the procedure 'assemble middle hinge' shown at 168.6s\u2013398.8s, Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment mandates the following specification: Section 2.0 specifies tightening the central pre-load hex nut to 4.2 Nm to achieve smooth rotation without binding.",
+      "link_note": "Section 2.0 specifies tightening the central pre-load hex nut to 4.2 Nm to achieve smooth rotation without binding."
+    },
+    {
+      "query_id": "mhop-dev-004",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What tightening torque is specified for assemble upper hinge and in which video interval is this procedure demonstrated?",
+      "action_label": "assemble upper hinge",
+      "essential_video_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "c6608a58-96b5-4e5b-a6a7-bb516587ed3b"
+      ],
+      "essential_chunk_ids": [
+        "6d1802fb-b9d6-4f45-a5f7-2008bdb01159"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            414.67,
+            676.16
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "3.0 Upper Hinge Assembly > Top Pivot & Detent Latch",
+      "reference_answer": "During the procedure 'assemble upper hinge' shown at 414.7s\u2013676.2s, Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 3.0 Upper Hinge Assembly > Top Pivot & Detent Latch mandates the following specification: Section 3.0 specifies 8.0 Nm torque for M6 clamping screws and detent retention force verification of 25 N +/- 5 N.",
+      "link_note": "Section 3.0 specifies 8.0 Nm torque for M6 clamping screws and detent retention force verification of 25 N +/- 5 N."
+    },
+    {
+      "query_id": "mhop-dev-005",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What tightening torque is specified for attach camera and plate and in which video interval is this procedure demonstrated?",
+      "action_label": "attach camera and plate",
+      "essential_video_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_doc_asset_ids": [
+        "d6497311-8b00-4a1a-92ca-11c6bfaa57f8"
+      ],
+      "essential_segment_ids": [
+        "a78a8dc6-a349-4f54-a2ed-ae57a8864510"
+      ],
+      "essential_chunk_ids": [
+        "f4b2aa75-0c59-4a45-a906-4b9cd38b528a"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            234.97,
+            335.27
+          ]
+        ]
+      },
+      "target_document": "Camera Mounting Bracket & Optical Plate Installation SOP",
+      "target_section": "2.0 Camera Plate Attachment > Anodized Plate Fasteners",
+      "reference_answer": "During the procedure 'attach camera and plate' shown at 235.0s\u2013335.3s, Camera Mounting Bracket & Optical Plate Installation SOP \u00a7 2.0 Camera Plate Attachment > Anodized Plate Fasteners mandates the following specification: Specifies 3.2 Nm torque on M4 titanium fasteners for mounting the anodized optical plate.",
+      "link_note": "Specifies 3.2 Nm torque on M4 titanium fasteners for mounting the anodized optical plate."
+    },
+    {
+      "query_id": "mhop-dev-006",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What tightening torque is specified for attach connector plates and in which video interval is this procedure demonstrated?",
+      "action_label": "attach connector plates",
+      "essential_video_asset_ids": [
+        "3af2970a-e708-41ab-894f-b4dd3200109f"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "82714706-ff9c-4c0a-b91b-6be4ac9cbc83"
+      ],
+      "essential_chunk_ids": [
+        "d1f9d46f-3966-41f4-9e77-e4c39339b3ef"
+      ],
+      "gold_spans_by_asset": {
+        "3af2970a-e708-41ab-894f-b4dd3200109f": [
+          [
+            373.63,
+            551.02
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.0 Base Structure > Frame Rails & Corner Brackets",
+      "reference_answer": "During the procedure 'attach connector plates' shown at 373.6s\u2013551.0s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual \u00a7 1.0 Base Structure > Frame Rails & Corner Brackets mandates the following specification: Specifies gusset connector plate M8 bolt torque of 14.5 Nm with spring washers.",
+      "link_note": "Specifies gusset connector plate M8 bolt torque of 14.5 Nm with spring washers."
+    },
+    {
+      "query_id": "mhop-dev-007",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What tightening torque is specified for attach feet and in which video interval is this procedure demonstrated?",
+      "action_label": "attach feet",
+      "essential_video_asset_ids": [
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "59ec960f-dcca-4535-b692-1874298ed13a"
+      ],
+      "essential_chunk_ids": [
+        "33183cd7-3141-4897-9924-1203f0cf2534"
+      ],
+      "gold_spans_by_asset": {
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d": [
+          [
+            72.56,
+            497.26
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.1 Base Structure > Horizontal Support Bars & Leveling Feet",
+      "reference_answer": "During the procedure 'attach feet' shown at 72.6s\u2013497.3s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual \u00a7 1.1 Base Structure > Horizontal Support Bars & Leveling Feet mandates the following specification: Specifies leveling feet height adjustment range (0-35 mm) and 18.0 Nm jam nut lock torque.",
+      "link_note": "Specifies leveling feet height adjustment range (0-35 mm) and 18.0 Nm jam nut lock torque."
+    },
+    {
+      "query_id": "mhop-dev-008",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What tightening torque is specified for attach monitor and in which video interval is this procedure demonstrated?",
+      "action_label": "attach monitor",
+      "essential_video_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_doc_asset_ids": [
+        "e56d5a52-d14e-4fe1-8dbb-b89fb815da0f"
+      ],
+      "essential_segment_ids": [
+        "2dc6ecd1-99b5-4a48-bf42-0d20317c30aa"
+      ],
+      "essential_chunk_ids": [
+        "1291aac1-59ce-46d8-ab03-dba3b78b6bd2"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            146.17,
+            172.18
+          ]
+        ]
+      },
+      "target_document": "Display Monitor Mount & Operator Console Integration SOP",
+      "target_section": "1.0 Mechanical Installation > VESA Bracket & Arm Fastening",
+      "reference_answer": "During the procedure 'attach monitor' shown at 146.2s\u2013172.2s, Display Monitor Mount & Operator Console Integration SOP \u00a7 1.0 Mechanical Installation > VESA Bracket & Arm Fastening mandates the following specification: Specifies 2.5 Nm torque for M4 VESA mounting screws and check of friction joint tilt resistance.",
+      "link_note": "Specifies 2.5 Nm torque for M4 VESA mounting screws and check of friction joint tilt resistance."
+    },
+    {
+      "query_id": "mhop-dev-009",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What tightening torque is specified for attach power connection and in which video interval is this procedure demonstrated?",
+      "action_label": "attach power connection",
+      "essential_video_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_doc_asset_ids": [
+        "a69cfeba-15f7-4baa-b738-d83b828f253f"
+      ],
+      "essential_segment_ids": [
+        "a73c3a4c-5ed6-4f70-b2a2-e6d34b650e80"
+      ],
+      "essential_chunk_ids": [
+        "d0bba7b7-b8b5-4193-a16b-cd0b0a930ce4"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            1.88,
+            53.76
+          ]
+        ]
+      },
+      "target_document": "Workstation Electrical Power Distribution Unit Operating Manual",
+      "target_section": "3.0 Wiring Standard > Color Codes & Terminal Block Connections",
+      "reference_answer": "During the procedure 'attach power connection' shown at 1.9s\u201353.8s, Workstation Electrical Power Distribution Unit Operating Manual \u00a7 3.0 Wiring Standard > Color Codes & Terminal Block Connections mandates the following specification: Operating Manual Section 3.0 specifies DIN rail terminal block torque of 1.2 Nm and ferrules on all stranded wires.",
+      "link_note": "Operating Manual Section 3.0 specifies DIN rail terminal block torque of 1.2 Nm and ferrules on all stranded wires."
+    },
+    {
+      "query_id": "mhop-dev-010",
+      "type": "multi-hop",
+      "relation": "specifies",
+      "query": "What tightening torque is specified for attach tabletop and in which video interval is this procedure demonstrated?",
+      "action_label": "attach tabletop",
+      "essential_video_asset_ids": [
+        "0f01d43c-87f2-4331-b35e-7b1055e073de"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "f32ae272-5592-4728-9465-c1c898d4f022"
+      ],
+      "essential_chunk_ids": [
+        "82678b32-e98c-4707-822e-4342587db9af"
+      ],
+      "gold_spans_by_asset": {
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            547.44,
+            764.08
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "2.0 Tabletop Installation > Surface Mounting & Clamping Plates",
+      "reference_answer": "During the procedure 'attach tabletop' shown at 547.4s\u2013764.1s, Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual \u00a7 2.0 Tabletop Installation > Surface Mounting & Clamping Plates mandates the following specification: Specifies perimeter clamping plate arrangement and 8.5 Nm tightening torque.",
+      "link_note": "Specifies perimeter clamping plate arrangement and 8.5 Nm tightening torque."
+    },
+    {
+      "query_id": "mhop-dev-011",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where adjust height is executed and what procedure is documented in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual.",
+      "action_label": "adjust height",
+      "essential_video_asset_ids": [
+        "76f8c610-0fdc-414c-b0e2-8617521775ea"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "f93103f3-3a77-454b-b973-c88d2f53fabe"
+      ],
+      "essential_chunk_ids": [
+        "33183cd7-3141-4897-9924-1203f0cf2534"
+      ],
+      "gold_spans_by_asset": {
+        "76f8c610-0fdc-414c-b0e2-8617521775ea": [
+          [
+            4.07,
+            13.37
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.1 Base Structure > Horizontal Support Bars & Leveling Feet",
+      "reference_answer": "The video interval from 4.1s to 13.4s shows 'adjust height'. This corresponds to Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual \u00a7 1.1 Base Structure > Horizontal Support Bars & Leveling Feet, which documents: Documents leveling feet adjustment to set working height.",
+      "link_note": "Documents leveling feet adjustment to set working height."
+    },
+    {
+      "query_id": "mhop-dev-012",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where assemble is executed and what procedure is documented in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual.",
+      "action_label": "assemble",
+      "essential_video_asset_ids": [
+        "7c553436-f15e-45ca-9229-cae2b2d867f8"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "06963cd6-5d06-4970-8584-fc1e05f4e084"
+      ],
+      "essential_chunk_ids": [
+        "d1f9d46f-3966-41f4-9e77-e4c39339b3ef"
+      ],
+      "gold_spans_by_asset": {
+        "7c553436-f15e-45ca-9229-cae2b2d867f8": [
+          [
+            4.06,
+            382.15
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.0 Base Structure > Frame Rails & Corner Brackets",
+      "reference_answer": "The video interval from 4.1s to 382.1s shows 'assemble'. This corresponds to Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual \u00a7 1.0 Base Structure > Frame Rails & Corner Brackets, which documents: Documents extrusion rail fastening and bracket alignment.",
+      "link_note": "Documents extrusion rail fastening and bracket alignment."
+    },
+    {
+      "query_id": "mhop-dev-013",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where assemble lower hinge is executed and what procedure is documented in Multi-Axis Mechanical Hinge Assembly & Alignment SOP.",
+      "action_label": "assemble lower hinge",
+      "essential_video_asset_ids": [
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "c86f84df-930a-485f-91ef-d3b37a8f2a5a"
+      ],
+      "essential_chunk_ids": [
+        "8a3fec2b-75ae-4b4e-aa82-8bb621ee9242"
+      ],
+      "gold_spans_by_asset": {
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            7.43,
+            125.71
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "1.0 Lower Hinge Assembly > Hinge Bracket & Pivot Pin",
+      "reference_answer": "The video interval from 7.4s to 125.7s shows 'assemble lower hinge'. This corresponds to Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 1.0 Lower Hinge Assembly > Hinge Bracket & Pivot Pin, which documents: Documents lower hinge bracket attachment to workstation base.",
+      "link_note": "Documents lower hinge bracket attachment to workstation base."
+    },
+    {
+      "query_id": "mhop-dev-014",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where assemble middle hinge is executed and what procedure is documented in Multi-Axis Mechanical Hinge Assembly & Alignment SOP.",
+      "action_label": "assemble middle hinge",
+      "essential_video_asset_ids": [
+        "9adcde18-2769-485e-aba9-3138e15d6bc0"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "0fc7cd52-23c7-4423-82e6-c8fcccbf2154"
+      ],
+      "essential_chunk_ids": [
+        "58a7c1cd-6667-406a-81b4-b32a27c4c1b2"
+      ],
+      "gold_spans_by_asset": {
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            125.71,
+            400.28
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment",
+      "reference_answer": "The video interval from 125.7s to 400.3s shows 'assemble middle hinge'. This corresponds to Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment, which documents: Documents middle articulation joint assembly and washer insertion.",
+      "link_note": "Documents middle articulation joint assembly and washer insertion."
+    },
+    {
+      "query_id": "mhop-dev-015",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where assemble upper frame is executed and what procedure is documented in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual.",
+      "action_label": "assemble upper frame",
+      "essential_video_asset_ids": [
+        "0f01d43c-87f2-4331-b35e-7b1055e073de"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "9049bb55-2667-4394-b31a-1f2c4b94d3c4"
+      ],
+      "essential_chunk_ids": [
+        "ff0aaca2-015b-4ebc-9919-b39d0b817ee8"
+      ],
+      "gold_spans_by_asset": {
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            268.5,
+            547.44
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "2.1 Superstructure > Vertical Support Bars & Top Crossbeam",
+      "reference_answer": "The video interval from 268.5s to 547.4s shows 'assemble upper frame'. This corresponds to Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual \u00a7 2.1 Superstructure > Vertical Support Bars & Top Crossbeam, which documents: Documents upper superstructure frame assembly across two technicians.",
+      "link_note": "Documents upper superstructure frame assembly across two technicians."
+    },
+    {
+      "query_id": "mhop-dev-016",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where assemble upper hinge is executed and what procedure is documented in Multi-Axis Mechanical Hinge Assembly & Alignment SOP.",
+      "action_label": "assemble upper hinge",
+      "essential_video_asset_ids": [
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "fcec1ea3-2824-4e66-88bb-13ac2de4c594"
+      ],
+      "essential_chunk_ids": [
+        "6d1802fb-b9d6-4f45-a5f7-2008bdb01159"
+      ],
+      "gold_spans_by_asset": {
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            6.07,
+            243.51
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "3.0 Upper Hinge Assembly > Top Pivot & Detent Latch",
+      "reference_answer": "The video interval from 6.1s to 243.5s shows 'assemble upper hinge'. This corresponds to Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 3.0 Upper Hinge Assembly > Top Pivot & Detent Latch, which documents: Documents upper hinge positioning and fastening on upper horizontal beam.",
+      "link_note": "Documents upper hinge positioning and fastening on upper horizontal beam."
+    },
+    {
+      "query_id": "mhop-dev-017",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where attach bottom plate is executed and what procedure is documented in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual.",
+      "action_label": "attach bottom plate",
+      "essential_video_asset_ids": [
+        "3af2970a-e708-41ab-894f-b4dd3200109f"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "236da91e-f3f7-489e-b30c-d5c092897e71"
+      ],
+      "essential_chunk_ids": [
+        "33183cd7-3141-4897-9924-1203f0cf2534"
+      ],
+      "gold_spans_by_asset": {
+        "3af2970a-e708-41ab-894f-b4dd3200109f": [
+          [
+            277.86,
+            362.29
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.1 Base Structure > Horizontal Support Bars & Leveling Feet",
+      "reference_answer": "The video interval from 277.9s to 362.3s shows 'attach bottom plate'. This corresponds to Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual \u00a7 1.1 Base Structure > Horizontal Support Bars & Leveling Feet, which documents: Documents bottom plate attachment to horizontal support rails.",
+      "link_note": "Documents bottom plate attachment to horizontal support rails."
+    },
+    {
+      "query_id": "mhop-dev-018",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where attach camera and plate is executed and what procedure is documented in Camera Mounting Bracket & Optical Plate Installation SOP.",
+      "action_label": "attach camera and plate",
+      "essential_video_asset_ids": [
+        "59e728a1-9e42-4b22-b5b6-6551241ca660"
+      ],
+      "essential_doc_asset_ids": [
+        "d6497311-8b00-4a1a-92ca-11c6bfaa57f8"
+      ],
+      "essential_segment_ids": [
+        "753b61b7-8639-4125-b409-86d7894017a5"
+      ],
+      "essential_chunk_ids": [
+        "057911eb-0520-4b99-a639-8b4e76a9c4a4"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            369.9,
+            532.16
+          ]
+        ]
+      },
+      "target_document": "Camera Mounting Bracket & Optical Plate Installation SOP",
+      "target_section": "1.0 Positioning > Vertical Bar Mounting Bracket",
+      "reference_answer": "The video interval from 369.9s to 532.2s shows 'attach camera and plate'. This corresponds to Camera Mounting Bracket & Optical Plate Installation SOP \u00a7 1.0 Positioning > Vertical Bar Mounting Bracket, which documents: SOP Section 1.0 documents the positioning of the camera support collar clamp (P/N CAM-CLR-45) at 450 mm height above the workstation frame.",
+      "link_note": "SOP Section 1.0 documents the positioning of the camera support collar clamp (P/N CAM-CLR-45) at 450 mm height above the workstation frame."
+    },
+    {
+      "query_id": "mhop-dev-019",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where attach feet is executed and what procedure is documented in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual.",
+      "action_label": "attach feet",
+      "essential_video_asset_ids": [
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "59ec960f-dcca-4535-b692-1874298ed13a"
+      ],
+      "essential_chunk_ids": [
+        "33183cd7-3141-4897-9924-1203f0cf2534"
+      ],
+      "gold_spans_by_asset": {
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d": [
+          [
+            72.56,
+            497.26
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.1 Base Structure > Horizontal Support Bars & Leveling Feet",
+      "reference_answer": "The video interval from 72.6s to 497.3s shows 'attach feet'. This corresponds to Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual \u00a7 1.1 Base Structure > Horizontal Support Bars & Leveling Feet, which documents: Documents threading M12 articulated leveling feet into lower corner base brackets.",
+      "link_note": "Documents threading M12 articulated leveling feet into lower corner base brackets."
+    },
+    {
+      "query_id": "mhop-dev-020",
+      "type": "multi-hop",
+      "relation": "documents",
+      "query": "Find the video segment where attach hard disk is executed and what procedure is documented in Display Monitor Mount & Operator Console Integration SOP.",
+      "action_label": "attach hard disk",
+      "essential_video_asset_ids": [
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_doc_asset_ids": [
+        "e56d5a52-d14e-4fe1-8dbb-b89fb815da0f"
+      ],
+      "essential_segment_ids": [
+        "c269add9-3631-45f6-89f2-66bd1552fefc"
+      ],
+      "essential_chunk_ids": [
+        "27f8856c-de7d-4d45-b28f-d151b151a99a"
+      ],
+      "gold_spans_by_asset": {
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            244.09,
+            443.96
+          ]
+        ]
+      },
+      "target_document": "Display Monitor Mount & Operator Console Integration SOP",
+      "target_section": "2.0 Cable Routing > Power Connection & Grounding Verification",
+      "reference_answer": "The video interval from 244.1s to 444.0s shows 'attach hard disk'. This corresponds to Display Monitor Mount & Operator Console Integration SOP \u00a7 2.0 Cable Routing > Power Connection & Grounding Verification, which documents: Documents mounting internal data storage drive and securing SATA and low-voltage DC power harness.",
+      "link_note": "Documents mounting internal data storage drive and securing SATA and low-voltage DC power harness."
+    },
+    {
+      "query_id": "mhop-dev-021",
+      "type": "multi-hop",
+      "relation": "depicts",
+      "query": "Show the video moment depicting the physical component for assemble lower hinge as referenced in Multi-Axis Mechanical Hinge Assembly & Alignment SOP.",
+      "action_label": "assemble lower hinge",
+      "essential_video_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "4eb6e413-4e15-4c8f-9495-c3458791dabd"
+      ],
+      "essential_chunk_ids": [
+        "8a3fec2b-75ae-4b4e-aa82-8bb621ee9242"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            15.95,
+            168.61
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "1.0 Lower Hinge Assembly > Hinge Bracket & Pivot Pin",
+      "reference_answer": "The physical component described in Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 1.0 Lower Hinge Assembly > Hinge Bracket & Pivot Pin is depicted in the video segment 'assemble lower hinge' at 15.9s\u2013168.6s. Detail: Depicts lower hinge mounting bracket (P/N HNG-BRK-LOW) and hardened pivot pin (PIN-12H6).",
+      "link_note": "Depicts lower hinge mounting bracket (P/N HNG-BRK-LOW) and hardened pivot pin (PIN-12H6)."
+    },
+    {
+      "query_id": "mhop-dev-022",
+      "type": "multi-hop",
+      "relation": "depicts",
+      "query": "Show the video moment depicting the physical component for assemble middle hinge as referenced in Multi-Axis Mechanical Hinge Assembly & Alignment SOP.",
+      "action_label": "assemble middle hinge",
+      "essential_video_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "bade7eee-d1e7-4733-9317-1ec7bbe74648"
+      ],
+      "essential_chunk_ids": [
+        "58a7c1cd-6667-406a-81b4-b32a27c4c1b2"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            676.16,
+            692.65
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment",
+      "reference_answer": "The physical component described in Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment is depicted in the video segment 'assemble middle hinge' at 676.2s\u2013692.6s. Detail: Directly depicts the articulating middle joint and adjustment hex nut during intermediate position checks.",
+      "link_note": "Directly depicts the articulating middle joint and adjustment hex nut during intermediate position checks."
+    },
+    {
+      "query_id": "mhop-dev-023",
+      "type": "multi-hop",
+      "relation": "depicts",
+      "query": "Show the video moment depicting the physical component for assemble upper hinge as referenced in Multi-Axis Mechanical Hinge Assembly & Alignment SOP.",
+      "action_label": "assemble upper hinge",
+      "essential_video_asset_ids": [
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "0730684b-b687-411d-a8cb-dfba9430ce5d"
+      ],
+      "essential_chunk_ids": [
+        "6d1802fb-b9d6-4f45-a5f7-2008bdb01159"
+      ],
+      "gold_spans_by_asset": {
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            342.87,
+            689.31
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "3.0 Upper Hinge Assembly > Top Pivot & Detent Latch",
+      "reference_answer": "The physical component described in Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 3.0 Upper Hinge Assembly > Top Pivot & Detent Latch is depicted in the video segment 'assemble upper hinge' at 342.9s\u2013689.3s. Detail: Depicts upper hinge bracket (P/N HNG-BRK-UP) and spring-loaded ball detent latch.",
+      "link_note": "Depicts upper hinge bracket (P/N HNG-BRK-UP) and spring-loaded ball detent latch."
+    },
+    {
+      "query_id": "mhop-dev-024",
+      "type": "multi-hop",
+      "relation": "depicts",
+      "query": "Show the video moment depicting the physical component for attach camera and plate as referenced in Camera Mounting Bracket & Optical Plate Installation SOP.",
+      "action_label": "attach camera and plate",
+      "essential_video_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_doc_asset_ids": [
+        "d6497311-8b00-4a1a-92ca-11c6bfaa57f8"
+      ],
+      "essential_segment_ids": [
+        "a78a8dc6-a349-4f54-a2ed-ae57a8864510"
+      ],
+      "essential_chunk_ids": [
+        "f4b2aa75-0c59-4a45-a906-4b9cd38b528a"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            234.97,
+            335.27
+          ]
+        ]
+      },
+      "target_document": "Camera Mounting Bracket & Optical Plate Installation SOP",
+      "target_section": "2.0 Camera Plate Attachment > Anodized Plate Fasteners",
+      "reference_answer": "The physical component described in Camera Mounting Bracket & Optical Plate Installation SOP \u00a7 2.0 Camera Plate Attachment > Anodized Plate Fasteners is depicted in the video segment 'attach camera and plate' at 235.0s\u2013335.3s. Detail: Depicts black anodized camera mounting plate (P/N CMP-402) and titanium M4 countersunk screws.",
+      "link_note": "Depicts black anodized camera mounting plate (P/N CMP-402) and titanium M4 countersunk screws."
+    },
+    {
+      "query_id": "mhop-dev-025",
+      "type": "multi-hop",
+      "relation": "depicts",
+      "query": "Show the video moment depicting the physical component for attach plates as referenced in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual.",
+      "action_label": "attach plates",
+      "essential_video_asset_ids": [
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1"
+      ],
+      "essential_doc_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_segment_ids": [
+        "49c41509-423f-4acd-bf38-95a8a40493c5"
+      ],
+      "essential_chunk_ids": [
+        "d1f9d46f-3966-41f4-9e77-e4c39339b3ef"
+      ],
+      "gold_spans_by_asset": {
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            25.04,
+            365.74
+          ]
+        ]
+      },
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual",
+      "target_section": "1.0 Base Structure > Frame Rails & Corner Brackets",
+      "reference_answer": "The physical component described in Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual \u00a7 1.0 Base Structure > Frame Rails & Corner Brackets is depicted in the video segment 'attach plates' at 25.0s\u2013365.7s. Detail: Depicts corner reinforcement gusset plates and M8 T-slot nuts.",
+      "link_note": "Depicts corner reinforcement gusset plates and M8 T-slot nuts."
+    },
+    {
+      "query_id": "mhop-dev-026",
+      "type": "multi-hop",
+      "relation": "contradicts",
+      "query": "Identify the procedural contradiction or safety violation occurring during adjust height relative to Workstation Frame Distortion & Fastener Loosening Inspection Report.",
+      "action_label": "adjust height",
+      "essential_video_asset_ids": [
+        "76f8c610-0fdc-414c-b0e2-8617521775ea"
+      ],
+      "essential_doc_asset_ids": [
+        "0b5461fc-f843-423f-b31e-202847348b7d"
+      ],
+      "essential_segment_ids": [
+        "f93103f3-3a77-454b-b973-c88d2f53fabe"
+      ],
+      "essential_chunk_ids": [
+        "43efbcea-caf6-4039-aad6-f71a60482f91"
+      ],
+      "gold_spans_by_asset": {
+        "76f8c610-0fdc-414c-b0e2-8617521775ea": [
+          [
+            4.07,
+            13.37
+          ]
+        ]
+      },
+      "target_document": "Workstation Frame Distortion & Fastener Loosening Inspection Report",
+      "target_section": "1.0 Inspection Findings > Joint Torque & Frame Squareness",
+      "reference_answer": "During 'adjust height' (4.1s\u201313.4s), a direct contradiction with Workstation Frame Distortion & Fastener Loosening Inspection Report \u00a7 1.0 Inspection Findings > Joint Torque & Frame Squareness was identified: Technician adjusts one leveling foot without checking spirit level on the transverse rail, contradicting frame leveling protocol.",
+      "link_note": "Technician adjusts one leveling foot without checking spirit level on the transverse rail, contradicting frame leveling protocol."
+    },
+    {
+      "query_id": "mhop-dev-027",
+      "type": "multi-hop",
+      "relation": "contradicts",
+      "query": "Identify the procedural contradiction or safety violation occurring during assemble relative to Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP.",
+      "action_label": "assemble",
+      "essential_video_asset_ids": [
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_doc_asset_ids": [
+        "2f1acac6-9ddf-43a9-8469-16fe6f345b07"
+      ],
+      "essential_segment_ids": [
+        "f249da2a-2573-4890-a018-47b238e8e171"
+      ],
+      "essential_chunk_ids": [
+        "5e3cd784-7000-479f-a476-b22168219a2f"
+      ],
+      "gold_spans_by_asset": {
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            569.17,
+            765.75
+          ]
+        ]
+      },
+      "target_document": "Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP",
+      "target_section": "3.0 Seal Ring Installation > Nitrile O-Ring & Bowl Torquing",
+      "reference_answer": "During 'assemble' (569.2s\u2013765.8s), a direct contradiction with Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP \u00a7 3.0 Seal Ring Installation > Nitrile O-Ring & Bowl Torquing was identified: Technician presses replacement nitrile O-ring into bowl groove dry without pre-lubricating with ISO VG 46 oil, risking elastomer shear damage.",
+      "link_note": "Technician presses replacement nitrile O-ring into bowl groove dry without pre-lubricating with ISO VG 46 oil, risking elastomer shear damage."
+    },
+    {
+      "query_id": "mhop-dev-028",
+      "type": "multi-hop",
+      "relation": "contradicts",
+      "query": "Identify the procedural contradiction or safety violation occurring during assemble lower hinge relative to Multi-Axis Mechanical Hinge Assembly & Alignment SOP.",
+      "action_label": "assemble lower hinge",
+      "essential_video_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f"
+      ],
+      "essential_doc_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_segment_ids": [
+        "ecde7380-fc67-4769-818f-b4e60780971a"
+      ],
+      "essential_chunk_ids": [
+        "8ed539f5-7635-4b88-8ba3-8da06dbace8e"
+      ],
+      "gold_spans_by_asset": {
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            398.76,
+            414.67
+          ]
+        ]
+      },
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP",
+      "target_section": "1.1 Lower Hinge Assembly > Torque & Clearance Inspection",
+      "reference_answer": "During 'assemble lower hinge' (398.8s\u2013414.7s), a direct contradiction with Multi-Axis Mechanical Hinge Assembly & Alignment SOP \u00a7 1.1 Lower Hinge Assembly > Torque & Clearance Inspection was identified: Technician performs rapid manual retightening without a torque wrench, contradicting SOP Section 1.1 mandatory calibrated torque verification.",
+      "link_note": "Technician performs rapid manual retightening without a torque wrench, contradicting SOP Section 1.1 mandatory calibrated torque verification."
+    },
+    {
+      "query_id": "mhop-dev-029",
+      "type": "multi-hop",
+      "relation": "contradicts",
+      "query": "Identify the procedural contradiction or safety violation occurring during attach plates relative to Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual.",
+      "action_label": "attach plates",
+      "essential_video_asset_ids": [
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1"
+      ],
+      "essential_doc_asset_ids": [
+        "306ee683-3048-4f3d-843e-46cb09d04190"
+      ],
+      "essential_segment_ids": [
+        "49c41509-423f-4acd-bf38-95a8a40493c5"
+      ],
+      "essential_chunk_ids": [
+        "fa3ab0b2-956e-45da-a96c-bb93aead5190"
+      ],
+      "gold_spans_by_asset": {
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            25.04,
+            365.74
+          ]
+        ]
+      },
+      "target_document": "Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual",
+      "target_section": "1.0 General Safety > Hazardous Energy Isolation Standard",
+      "reference_answer": "During 'attach plates' (25.0s\u2013365.7s), a direct contradiction with Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual \u00a7 1.0 General Safety > Hazardous Energy Isolation Standard was identified: Technician handles freshly cut aluminum extrusion rails with sharp burrs barehanded, contradicting ANSI Level 4 cut-protection glove mandate.",
+      "link_note": "Technician handles freshly cut aluminum extrusion rails with sharp burrs barehanded, contradicting ANSI Level 4 cut-protection glove mandate."
+    },
+    {
+      "query_id": "mhop-dev-030",
+      "type": "multi-hop",
+      "relation": "contradicts",
+      "query": "Identify the procedural contradiction or safety violation occurring during attach vertical bar relative to Workstation Frame Distortion & Fastener Loosening Inspection Report.",
+      "action_label": "attach vertical bar",
+      "essential_video_asset_ids": [
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_doc_asset_ids": [
+        "0b5461fc-f843-423f-b31e-202847348b7d"
+      ],
+      "essential_segment_ids": [
+        "eb259d66-c1a5-4a2b-b1fd-855a018e0c4c"
+      ],
+      "essential_chunk_ids": [
+        "b6dfc5c0-887f-4f90-a86d-b45f0d907d61"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            59.05,
+            175.5
+          ]
+        ]
+      },
+      "target_document": "Workstation Frame Distortion & Fastener Loosening Inspection Report",
+      "target_section": "2.0 Corrective Actions > Retorque, Loctite & Re-Square",
+      "reference_answer": "During 'attach vertical bar' (59.0s\u2013175.5s), a direct contradiction with Workstation Frame Distortion & Fastener Loosening Inspection Report \u00a7 2.0 Corrective Actions > Retorque, Loctite & Re-Square was identified: Technician bolts upright vertical posts dry without applying medium-strength threadlocker, contradicting inspection report corrective mandate.",
+      "link_note": "Technician bolts upright vertical posts dry without applying medium-strength threadlocker, contradicting inspection report corrective mandate."
+    }
+  ]
+}

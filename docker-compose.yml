@@ -1,0 +1,91 @@
+name: trace
+
+x-app: &app
+  build:
+    context: ./backend
+  environment: &app-env
+    DATABASE_URL: postgresql+psycopg://trace:trace@db:5432/trace
+    REDIS_URL: redis://redis:6379/0
+    INCOMING_DIR: /data/incoming
+    BLOB_ENDPOINT: http://blob:9000
+    BLOB_BUCKET: trace
+    BLOB_ACCESS_KEY: trace-local
+    BLOB_SECRET_KEY: trace-local-development
+    INGEST_ENABLED: ${INGEST_ENABLED:-false}
+    SEARCH_ENABLED: ${SEARCH_ENABLED:-false}
+    EMBEDDING_ENDPOINT: ${EMBEDDING_ENDPOINT:-http://host.docker.internal:8001/v1/embeddings}
+    VISUAL_ENDPOINT: ${VISUAL_ENDPOINT:-http://host.docker.internal:8002}
+  volumes:
+    - ./data/incoming:/data/incoming:ro
+
+services:
+  db:
+    image: pgvector/pgvector:0.8.0-pg16
+    environment:
+      POSTGRES_USER: trace
+      POSTGRES_PASSWORD: trace
+      POSTGRES_DB: trace
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trace -d trace"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["127.0.0.1:6379:6379"]
+    volumes: ["redis-data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  blob:
+    profiles: [media]
+    build: ./infra/minio
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: trace-local
+      MINIO_ROOT_PASSWORD: trace-local-development
+    ports: ["127.0.0.1:9000:9000", "127.0.0.1:9001:9001"]
+    volumes: ["blob-data:/data"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  migrate:
+    <<: *app
+    command: ["alembic", "upgrade", "head"]
+    depends_on:
+      db: {condition: service_healthy}
+  api:
+    <<: *app
+    environment:
+      <<: *app-env
+      SEARCH_ENABLED: "true"
+    command: ["uvicorn", "app.main:create_app", "--factory", "--host", "0.0.0.0"]
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      redis: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/readyz')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  worker:
+    <<: *app
+    profiles: [media]
+    command: ["arq", "app.ingest.worker.WorkerSettings"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      redis: {condition: service_healthy}
+      blob: {condition: service_healthy}
+
+volumes:
+  postgres-data:
+  redis-data:
+  blob-data:

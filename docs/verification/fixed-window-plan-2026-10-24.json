@@ -1,0 +1,8 @@
+{
+  "source_report": "indego-final-2026-10-24.jsonl",
+  "source_count": 25,
+  "planned_window_count": 1091,
+  "method": "fixed-30s",
+  "fresh_media_access": false,
+  "indexed": false
+}

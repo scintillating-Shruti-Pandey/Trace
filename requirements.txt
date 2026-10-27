@@ -1,0 +1,26 @@
+# ==============================================================================
+# TRACE DEPENDENCY REQUIREMENTS
+# ==============================================================================
+
+# Core FastAPI & Database Stack (Also pre-installed in Docker Compose)
+fastapi>=0.115,<1.0
+uvicorn>=0.30,<1.0
+sqlalchemy>=2.0,<3.0
+pydantic-settings>=2.5,<3.0
+alembic>=1.13,<2.0
+psycopg[binary]>=3.2,<4.0
+arq>=0.26,<1.0
+boto3>=1.35,<2.0
+httpx>=0.27,<1.0
+
+# Testing & Linting
+pytest>=8.0,<10.0
+ruff>=0.9,<1.0
+
+# Optional Local GPU Model Microservices (scripts/serve_embeddings.py & serve_visual.py)
+# Only required if serving BGE-M3 and SigLIP 2 directly on host GPU
+torch>=2.0.0
+transformers>=4.40.0
+accelerate>=0.30.0
+sentencepiece>=0.2.0
+pillow>=10.0.0

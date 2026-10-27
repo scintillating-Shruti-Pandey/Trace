@@ -1,0 +1,400 @@
+{
+  "version": "1.0",
+  "split": "dev",
+  "description": "Document-only development query set per engineering spec \u00a716.5.",
+  "query_count": 30,
+  "doc_only_count": 25,
+  "unanswerable_count": 5,
+  "queries": [
+    {
+      "query_id": "doc-dev-001",
+      "type": "doc-only",
+      "query": "What is the tightening torque for the M8 corner gusset screws on the base frame?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_chunk_ids": [
+        "d1f9d46f-3966-41f4-9e77-e4c39339b3ef"
+      ],
+      "target_section": "1.0 Base Structure > Frame Rails & Corner Brackets",
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual"
+    },
+    {
+      "query_id": "doc-dev-002",
+      "type": "doc-only",
+      "query": "What is the allowable diagonal tolerance between opposite base corners during frame assembly?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_chunk_ids": [
+        "d1f9d46f-3966-41f4-9e77-e4c39339b3ef"
+      ],
+      "target_section": "1.0 Base Structure > Frame Rails & Corner Brackets",
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual"
+    },
+    {
+      "query_id": "doc-dev-003",
+      "type": "doc-only",
+      "query": "How should the composite tabletop be secured to the extrusion frame?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "444b9748-abd6-4957-8407-e93e2d530c77"
+      ],
+      "essential_chunk_ids": [
+        "82678b32-e98c-4707-822e-4342587db9af"
+      ],
+      "target_section": "2.0 Tabletop Installation > Surface Mounting & Clamping Plates",
+      "target_document": "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual"
+    },
+    {
+      "query_id": "doc-dev-004",
+      "type": "doc-only",
+      "query": "What is the required axial clearance between lower hinge leaf and bracket collar?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_chunk_ids": [
+        "8ed539f5-7635-4b88-8ba3-8da06dbace8e"
+      ],
+      "target_section": "1.1 Lower Hinge Assembly > Torque & Clearance Inspection",
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP"
+    },
+    {
+      "query_id": "doc-dev-005",
+      "type": "doc-only",
+      "query": "How is the friction resistance adjusted on the middle articulating hinge?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "1fa00ecb-a6e7-47c8-89c2-2cfc3c868c5e"
+      ],
+      "essential_chunk_ids": [
+        "58a7c1cd-6667-406a-81b4-b32a27c4c1b2"
+      ],
+      "target_section": "2.0 Middle Hinge Assembly > Articulation Joint & Friction Adjustment",
+      "target_document": "Multi-Axis Mechanical Hinge Assembly & Alignment SOP"
+    },
+    {
+      "query_id": "doc-dev-006",
+      "type": "doc-only",
+      "query": "What is the part number and dimensions of the camera mounting plate?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "d6497311-8b00-4a1a-92ca-11c6bfaa57f8"
+      ],
+      "essential_chunk_ids": [
+        "f4b2aa75-0c59-4a45-a906-4b9cd38b528a"
+      ],
+      "target_section": "2.0 Camera Plate Attachment > Anodized Plate Fasteners",
+      "target_document": "Camera Mounting Bracket & Optical Plate Installation SOP"
+    },
+    {
+      "query_id": "doc-dev-007",
+      "type": "doc-only",
+      "query": "What damping material is placed between the camera plate and vertical collar clamp?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "d6497311-8b00-4a1a-92ca-11c6bfaa57f8"
+      ],
+      "essential_chunk_ids": [
+        "f4b2aa75-0c59-4a45-a906-4b9cd38b528a"
+      ],
+      "target_section": "2.0 Camera Plate Attachment > Anodized Plate Fasteners",
+      "target_document": "Camera Mounting Bracket & Optical Plate Installation SOP"
+    },
+    {
+      "query_id": "doc-dev-008",
+      "type": "doc-only",
+      "query": "What corrective action was taken for frame bolt loosening under cyclic vibration?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "0b5461fc-f843-423f-b31e-202847348b7d"
+      ],
+      "essential_chunk_ids": [
+        "b6dfc5c0-887f-4f90-a86d-b45f0d907d61"
+      ],
+      "target_section": "2.0 Corrective Actions > Retorque, Loctite & Re-Square",
+      "target_document": "Workstation Frame Distortion & Fastener Loosening Inspection Report"
+    },
+    {
+      "query_id": "doc-dev-009",
+      "type": "doc-only",
+      "query": "What tool is required to extract the NDE end-bell on drive motor MOT-AC-3750?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "a61e0718-9205-4d74-b84b-af53fc7dec82"
+      ],
+      "essential_chunk_ids": [
+        "8f7a96d4-cc2c-4d79-ad6d-884fd0072aee"
+      ],
+      "target_section": "2.0 Disassembly Procedure > Motor Casing & End-Bell Removal",
+      "target_document": "Industrial AC Induction Drive Motor Service & Overhaul Manual"
+    },
+    {
+      "query_id": "doc-dev-010",
+      "type": "doc-only",
+      "query": "What is the nominal radial air gap between motor rotor and stator bore?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "a61e0718-9205-4d74-b84b-af53fc7dec82"
+      ],
+      "essential_chunk_ids": [
+        "50a4689f-afaa-4aa5-a275-a0657b139075"
+      ],
+      "target_section": "3.0 Rotor & Stator Inspection > Air Gap & Core Lamination",
+      "target_document": "Industrial AC Induction Drive Motor Service & Overhaul Manual"
+    },
+    {
+      "query_id": "doc-dev-011",
+      "type": "doc-only",
+      "query": "What is the maximum heating temperature for thermal mounting of drive motor bearings?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "effb04de-34e8-4608-8911-6e7f00aeb4ca"
+      ],
+      "essential_chunk_ids": [
+        "09953138-a21f-4112-b754-d91db0fde3ad"
+      ],
+      "target_section": "2.0 Induction Heating > Thermal Mounting & Seating",
+      "target_document": "Deep Groove & Cylindrical Roller Bearing Replacement SOP"
+    },
+    {
+      "query_id": "doc-dev-012",
+      "type": "doc-only",
+      "query": "What type of synthetic grease is specified for open motor bearing relubrication?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "effb04de-34e8-4608-8911-6e7f00aeb4ca"
+      ],
+      "essential_chunk_ids": [
+        "b6dd9974-44df-404c-9033-17b757d8d33e"
+      ],
+      "target_section": "3.0 Lubrication > Synthetic Grease Specification & Regreasing",
+      "target_document": "Deep Groove & Cylindrical Roller Bearing Replacement SOP"
+    },
+    {
+      "query_id": "doc-dev-013",
+      "type": "doc-only",
+      "query": "What is the minimum allowable service length for carbon commutator brushes?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "e1ba2f32-82ef-4530-a17a-67aa3596217c"
+      ],
+      "essential_chunk_ids": [
+        "df06a9e3-d6ae-4b51-ba96-7fc353b106a4"
+      ],
+      "target_section": "1.0 Brush Inspection > Wear Limit & Spring Tension",
+      "target_document": "Carbon Commutator Brush Inspection & Replacement SOP"
+    },
+    {
+      "query_id": "doc-dev-014",
+      "type": "doc-only",
+      "query": "What vibration frequency identified the outer race bearing fault on motor Unit 02?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "657f9e98-f5c0-48a0-a313-515343d24389"
+      ],
+      "essential_chunk_ids": [
+        "24a6a35c-e5e7-443c-9bad-32d15b1a53d9"
+      ],
+      "target_section": "1.0 Vibration Analysis > Spectral Peaks & High Frequency Acceleration",
+      "target_document": "Drive Motor Vibration & Bearing Thermal Overheat Diagnostic Report"
+    },
+    {
+      "query_id": "doc-dev-015",
+      "type": "doc-only",
+      "query": "What is the maximum continuous case drain pressure for hydraulic pump A10VSO45?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "ebdcadfc-4daf-4754-a47c-2d32ce12c822"
+      ],
+      "essential_chunk_ids": [
+        "be205960-5ff4-4cc5-a957-2a98cb1fa2e4"
+      ],
+      "target_section": "1.0 Specifications > Pressure Ratings & Displacement Parameters",
+      "target_document": "Variable Displacement Axial Piston Hydraulic Pump Technical Manual"
+    },
+    {
+      "query_id": "doc-dev-016",
+      "type": "doc-only",
+      "query": "How is the hydraulic pressure compensator valve adjusted to 180 bar?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "ebdcadfc-4daf-4754-a47c-2d32ce12c822"
+      ],
+      "essential_chunk_ids": [
+        "f44e8f19-de34-4139-959b-48c2e7de962b"
+      ],
+      "target_section": "2.0 Pressure Control Valve > Relief Valve Setting & Compensator Adjustment",
+      "target_document": "Variable Displacement Axial Piston Hydraulic Pump Technical Manual"
+    },
+    {
+      "query_id": "doc-dev-017",
+      "type": "doc-only",
+      "query": "What safety procedure is required before opening the hydraulic filter bowl?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "2f1acac6-9ddf-43a9-8469-16fe6f345b07"
+      ],
+      "essential_chunk_ids": [
+        "ad67675d-a875-4676-ba53-bd52db717428"
+      ],
+      "target_section": "1.0 Safety Isolation > Depressurization & Fluid Containment",
+      "target_document": "Hydraulic Filter Element & Elastomer Seal Ring Replacement SOP"
+    },
+    {
+      "query_id": "doc-dev-018",
+      "type": "doc-only",
+      "query": "What solvent temperature and circulation rate are specified for cooling jacket descaling?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "3d749b31-1a08-468e-8b75-a0090cb2028c"
+      ],
+      "essential_chunk_ids": [
+        "059eb768-8f39-46d1-a672-6decc5f7cf56"
+      ],
+      "target_section": "1.0 Flushing Rig Setup > Closed-Loop Solvent Circulation",
+      "target_document": "Hydraulic Cooling Jacket Solvent Flush & Leak Check SOP"
+    },
+    {
+      "query_id": "doc-dev-019",
+      "type": "doc-only",
+      "query": "What test pressure is required for the hydraulic cooling jacket hydrostatic leak check?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "3d749b31-1a08-468e-8b75-a0090cb2028c"
+      ],
+      "essential_chunk_ids": [
+        "0c0bde98-7441-4e92-b907-f991e9d45819"
+      ],
+      "target_section": "2.0 Neutralization & Hydrostatic Pressure Leak Test",
+      "target_document": "Hydraulic Cooling Jacket Solvent Flush & Leak Check SOP"
+    },
+    {
+      "query_id": "doc-dev-020",
+      "type": "doc-only",
+      "query": "What caused the pressure fluctuations and valve chatter on automated clamping Line 3?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "df581bfc-49ba-4f93-8bde-4c52a17eedf3"
+      ],
+      "essential_chunk_ids": [
+        "267f2768-024e-416c-983e-428e720dae9a"
+      ],
+      "target_section": "2.0 Root Cause & Teardown > Silt Lock & Spool Erosion",
+      "target_document": "Hydraulic System Pressure Instability & Valve Leakage Diagnostic Report"
+    },
+    {
+      "query_id": "doc-dev-021",
+      "type": "doc-only",
+      "query": "What are the output ratings of the 24V DC auxiliary bus on PDU-400-24?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "a69cfeba-15f7-4baa-b738-d83b828f253f"
+      ],
+      "essential_chunk_ids": [
+        "380516ae-5731-4ba0-9007-14acc20620bd"
+      ],
+      "target_section": "1.0 Technical Specs > Power Input & Auxiliary Bus Outputs",
+      "target_document": "Workstation Electrical Power Distribution Unit Operating Manual"
+    },
+    {
+      "query_id": "doc-dev-022",
+      "type": "doc-only",
+      "query": "How quickly do the redundant safety contactors de-energize when an E-stop is pressed?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "a69cfeba-15f7-4baa-b738-d83b828f253f"
+      ],
+      "essential_chunk_ids": [
+        "a196f71d-1329-4bf6-9de0-e604fd6c10de"
+      ],
+      "target_section": "2.0 Safety Features > Emergency Stop & Safety Relay Integration",
+      "target_document": "Workstation Electrical Power Distribution Unit Operating Manual"
+    },
+    {
+      "query_id": "doc-dev-023",
+      "type": "doc-only",
+      "query": "What is the maximum allowable grounding continuity resistance for the display monitor?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "e56d5a52-d14e-4fe1-8dbb-b89fb815da0f"
+      ],
+      "essential_chunk_ids": [
+        "27f8856c-de7d-4d45-b28f-d151b151a99a"
+      ],
+      "target_section": "2.0 Cable Routing > Power Connection & Grounding Verification",
+      "target_document": "Display Monitor Mount & Operator Console Integration SOP"
+    },
+    {
+      "query_id": "doc-dev-024",
+      "type": "doc-only",
+      "query": "What drawbar retention pull force is required for the ISO 40 spindle toolholder?",
+      "difficulty": "medium",
+      "essential_asset_ids": [
+        "129624de-dd0a-4292-bbb0-a7cc7a4fbc21"
+      ],
+      "essential_chunk_ids": [
+        "90b72123-394e-4ea5-86ea-c301a1e4b446"
+      ],
+      "target_section": "1.0 Spindle Design > Ceramic Hybrid Bearings & Taper Specs",
+      "target_document": "CNC Machining Center Spindle Maintenance & Taper Inspection Manual"
+    },
+    {
+      "query_id": "doc-dev-025",
+      "type": "doc-only",
+      "query": "What five steps comprise the standard zero energy LOTO protocol?",
+      "difficulty": "easy",
+      "essential_asset_ids": [
+        "306ee683-3048-4f3d-843e-46cb09d04190"
+      ],
+      "essential_chunk_ids": [
+        "6a3da8e8-af87-4a26-8c9e-d32d122e2a01"
+      ],
+      "target_section": "2.0 Step-by-Step LOTO Protocol > Five-Step Procedure",
+      "target_document": "Manufacturing Facility Machinery Safety & Lockout/Tagout (LOTO) Manual"
+    },
+    {
+      "query_id": "doc-dev-026",
+      "type": "unanswerable",
+      "query": "What is the curing time for underwater epoxy on deep-sea pipeline flanges?",
+      "difficulty": "hard",
+      "essential_asset_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "doc-dev-027",
+      "type": "unanswerable",
+      "query": "Calibrating the optical pyrometer on the blast furnace nozzle.",
+      "difficulty": "hard",
+      "essential_asset_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "doc-dev-028",
+      "type": "unanswerable",
+      "query": "Turbine blade cryogenic coating inspection for supersonic jet engines.",
+      "difficulty": "hard",
+      "essential_asset_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "doc-dev-029",
+      "type": "unanswerable",
+      "query": "Fiber optic splice attenuation loss threshold for telecom trunk lines.",
+      "difficulty": "hard",
+      "essential_asset_ids": [],
+      "essential_chunk_ids": []
+    },
+    {
+      "query_id": "doc-dev-030",
+      "type": "unanswerable",
+      "query": "Refueling protocol for heavy water nuclear reactor cooling pools.",
+      "difficulty": "hard",
+      "essential_asset_ids": [],
+      "essential_chunk_ids": []
+    }
+  ]
+}

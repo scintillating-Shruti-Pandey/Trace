@@ -1,0 +1,27 @@
+.venv/
+.venv-models/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.env
+data/*
+!data/incoming/
+data/incoming/*
+!data/incoming/README.md
+!data/incoming/manifest.example.json
+!data/external/
+data/external/*
+!data/external/README.md
+!data/external/SETUP_REPORT.md
+node_modules/
+dist/
+
+# Intermediate phase evaluation notes (Superceded by docs/eval-reports/final.md & HANDOVER)
+docs/eval-report-phase*.md
+docs/eval-report-multihop.md
+docs/data-readiness-*.md
+docs/dependency-audit.md
+docs/phase1-review-and-fixes.md
+docs/verified-sources.md

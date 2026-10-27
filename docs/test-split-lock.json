@@ -1,0 +1,12 @@
+{
+  "file": "eval/data/test_queries.json",
+  "query_count": 95,
+  "sha256": "11f8a304901486c2054186d8e095491699e50cc3ff2eba507bfe573e6d4476e3",
+  "locked_at": "2026-10-25 01:55:07 Asia/Calcutta",
+  "status": "LOCKED",
+  "rules": [
+    "Never tuned against (\u00a713.1)",
+    "Evaluated exactly three runs with fixed seeds (\u00a713.6)",
+    "Full ablation matrix (A0-A10) reported with bootstrap CIs (\u00a713.5)"
+  ]
+}

@@ -1,0 +1,866 @@
+{
+  "version": "1.0",
+  "split": "dev",
+  "description": "Visual development query set for Phase 3 industrial-image retrieval per engineering spec \u00a713.2, \u00a716.4. Evaluates visual-text retrieval against representative industrial workpiece keyframes extracted from the 114 keysteps. Exit gate requirement: Visual Recall@5 >= 0.60.",
+  "query_count": 20,
+  "queries": [
+    {
+      "query_id": "vis-dev-001",
+      "type": "visual",
+      "query": "black anodized camera mounting plate attached to vertical bar",
+      "action_label": "attach camera and plate",
+      "visual_description": "Depicts black anodized aluminum camera mounting plate (CMP-402) secured to vertical extrusion.",
+      "essential_asset_ids": [
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "a78a8dc6-a349-4f54-a2ed-ae57a8864510",
+        "753b61b7-8639-4125-b409-86d7894017a5",
+        "ae1aa039-c6d6-4c5c-b6f4-3393a87ab8e4",
+        "4c09ac26-cbad-4e7a-8a2b-274fe9f32c8e"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            234.97,
+            335.27
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            369.9,
+            532.16
+          ],
+          [
+            639.5,
+            671.49
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            377.21,
+            793.18
+          ]
+        ]
+      },
+      "candidate_segment_count": 4
+    },
+    {
+      "query_id": "vis-dev-002",
+      "type": "visual",
+      "query": "lower hinge bracket and hardened pivot pin mounted on base frame",
+      "action_label": "assemble lower hinge",
+      "visual_description": "Depicts lower hinge mounting bracket and hardened pivot pin seated against extrusion channel.",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8"
+      ],
+      "essential_segment_ids": [
+        "c86f84df-930a-485f-91ef-d3b37a8f2a5a",
+        "4eb6e413-4e15-4c8f-9495-c3458791dabd",
+        "af51b7f6-2238-42b5-93e4-a9b5d044ad72",
+        "ecde7380-fc67-4769-818f-b4e60780971a",
+        "cef3583b-f33b-4a26-8007-12a1e4dc0479",
+        "942894dc-ad34-4b83-89d0-8c2ef0d4fb37",
+        "4a56be85-7e79-4fb5-aaa1-241d366ae7c0"
+      ],
+      "gold_spans_by_asset": {
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            7.43,
+            125.71
+          ]
+        ],
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            15.95,
+            168.61
+          ],
+          [
+            398.76,
+            414.67
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            29.67,
+            135.18
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            492.1,
+            731.15
+          ],
+          [
+            735.84,
+            741.36
+          ],
+          [
+            754.65,
+            759.11
+          ]
+        ]
+      },
+      "candidate_segment_count": 7
+    },
+    {
+      "query_id": "vis-dev-003",
+      "type": "visual",
+      "query": "middle articulation hinge joint with central friction pre-load nut",
+      "action_label": "assemble middle hinge",
+      "visual_description": "Depicts middle articulation joint and friction pre-load hex nut assembly.",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8"
+      ],
+      "essential_segment_ids": [
+        "0fc7cd52-23c7-4423-82e6-c8fcccbf2154",
+        "037880c8-f957-4c91-b4ac-9c42b3975439",
+        "875a0c63-d217-4250-b40f-d46f51a48718",
+        "932f03c1-5d39-48c2-b67b-8d06908b6b70",
+        "bade7eee-d1e7-4733-9317-1ec7bbe74648",
+        "da5e5cea-3fe4-41fb-a11d-e61e55feba99",
+        "a61fd47e-d2f2-43bb-a54e-576ae61d2ff0",
+        "13efb9a0-17f1-4c4f-a74e-79310367a361",
+        "893e2d4b-d121-429e-b043-50f14d070028"
+      ],
+      "gold_spans_by_asset": {
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            125.71,
+            400.28
+          ],
+          [
+            827.42,
+            839.13
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            135.18,
+            342.87
+          ],
+          [
+            689.31,
+            704.94
+          ]
+        ],
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            168.61,
+            398.76
+          ],
+          [
+            676.16,
+            692.65
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            243.51,
+            492.09
+          ],
+          [
+            731.15,
+            735.84
+          ],
+          [
+            741.36,
+            754.65
+          ]
+        ]
+      },
+      "candidate_segment_count": 9
+    },
+    {
+      "query_id": "vis-dev-004",
+      "type": "visual",
+      "query": "upper hinge top pivot and detent latch mechanism",
+      "action_label": "assemble upper hinge",
+      "visual_description": "Depicts upper hinge pivot pin and spring detent latch assembly.",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8"
+      ],
+      "essential_segment_ids": [
+        "fcec1ea3-2824-4e66-88bb-13ac2de4c594",
+        "0730684b-b687-411d-a8cb-dfba9430ce5d",
+        "6cd6bd30-e085-446d-92bd-94644444a420",
+        "c6608a58-96b5-4e5b-a6a7-bb516587ed3b",
+        "aac7b38e-045a-4b59-9990-f1cba180c016"
+      ],
+      "gold_spans_by_asset": {
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            6.07,
+            243.51
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            342.87,
+            689.31
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            400.28,
+            823.59
+          ]
+        ],
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            414.67,
+            676.16
+          ],
+          [
+            692.65,
+            699.96
+          ]
+        ]
+      },
+      "candidate_segment_count": 5
+    },
+    {
+      "query_id": "vis-dev-005",
+      "type": "visual",
+      "query": "M12 articulated leveling foot threaded into base corner bracket",
+      "action_label": "attach feet",
+      "visual_description": "Depicts articulated leveling feet with rubber base threaded into lower corner brackets.",
+      "essential_asset_ids": [
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d"
+      ],
+      "essential_segment_ids": [
+        "59ec960f-dcca-4535-b692-1874298ed13a"
+      ],
+      "gold_spans_by_asset": {
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d": [
+          [
+            72.56,
+            497.26
+          ]
+        ]
+      },
+      "candidate_segment_count": 1
+    },
+    {
+      "query_id": "vis-dev-006",
+      "type": "visual",
+      "query": "VESA display monitor mount and articulated support arm",
+      "action_label": "attach monitor",
+      "visual_description": "Depicts operator console monitor fastened to VESA mounting bracket and arm.",
+      "essential_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_segment_ids": [
+        "2dc6ecd1-99b5-4a48-bf42-0d20317c30aa"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            146.17,
+            172.18
+          ]
+        ]
+      },
+      "candidate_segment_count": 1
+    },
+    {
+      "query_id": "vis-dev-007",
+      "type": "visual",
+      "query": "aluminum extrusion corner gusset reinforcement plates with M8 fasteners",
+      "action_label": "attach plates",
+      "visual_description": "Depicts 90-degree corner gusset reinforcement plates aligning base frame rails.",
+      "essential_asset_ids": [
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1"
+      ],
+      "essential_segment_ids": [
+        "49c41509-423f-4acd-bf38-95a8a40493c5"
+      ],
+      "gold_spans_by_asset": {
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            25.04,
+            365.74
+          ]
+        ]
+      },
+      "candidate_segment_count": 1
+    },
+    {
+      "query_id": "vis-dev-008",
+      "type": "visual",
+      "query": "overhead horizontal crossbeam mounted across vertical upright bars",
+      "action_label": "attach upper bar",
+      "visual_description": "Depicts top horizontal crossbeam bridging left and right upright vertical bars.",
+      "essential_asset_ids": [
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "31db3177-c4dc-4086-8320-13f28328c75d",
+        "a2a3e20f-d80f-45b6-a0f2-3aef223825d6",
+        "f946e242-1ec9-4d59-9bf0-6cf789edf646",
+        "31a2d6d8-1e21-4713-a6d9-dd7b33892d2b",
+        "911ff616-ec79-4e53-9834-adc78815743f"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            175.5,
+            234.97
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            246.69,
+            377.21
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            286.87,
+            369.9
+          ],
+          [
+            532.16,
+            639.5
+          ],
+          [
+            671.49,
+            679.3
+          ]
+        ]
+      },
+      "candidate_segment_count": 5
+    },
+    {
+      "query_id": "vis-dev-009",
+      "type": "visual",
+      "query": "vertical support extrusion bar fastened to base workstation frame",
+      "action_label": "attach vertical bar",
+      "visual_description": "Depicts 1100 mm vertical upright bar standing on workstation frame rail.",
+      "essential_asset_ids": [
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "eb259d66-c1a5-4a2b-b1fd-855a018e0c4c",
+        "0ef33731-ae7d-4ee3-a469-041e0490610e",
+        "e53a29b6-7e75-47c0-93eb-1fa13ac5635d",
+        "722b95f4-b00f-4433-b2b6-a2f99db49387",
+        "5d22fac4-ec25-4394-badf-ab543bdaa608"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            59.05,
+            175.5
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            89.89,
+            246.69
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            155.13,
+            286.87
+          ],
+          [
+            679.3,
+            688.09
+          ]
+        ],
+        "fd44884d-89c4-4b9d-8415-911a36ed77f1": [
+          [
+            365.74,
+            758.55
+          ]
+        ]
+      },
+      "candidate_segment_count": 5
+    },
+    {
+      "query_id": "vis-dev-010",
+      "type": "visual",
+      "query": "composite tabletop secured with perimeter surface clamping plates",
+      "action_label": "attach tabletop",
+      "visual_description": "Depicts composite work surface clamped down onto aluminum extrusion perimeter.",
+      "essential_asset_ids": [
+        "0f01d43c-87f2-4331-b35e-7b1055e073de",
+        "76f8c610-0fdc-414c-b0e2-8617521775ea"
+      ],
+      "essential_segment_ids": [
+        "9b46c3c8-b872-452f-814f-74dcce43b0e2",
+        "f32ae272-5592-4728-9465-c1c898d4f022"
+      ],
+      "gold_spans_by_asset": {
+        "76f8c610-0fdc-414c-b0e2-8617521775ea": [
+          [
+            13.37,
+            173.97
+          ]
+        ],
+        "0f01d43c-87f2-4331-b35e-7b1055e073de": [
+          [
+            547.44,
+            764.08
+          ]
+        ]
+      },
+      "candidate_segment_count": 2
+    },
+    {
+      "query_id": "vis-dev-011",
+      "type": "visual",
+      "query": "internal data storage drive and SATA power cabling harness",
+      "action_label": "attach hard disk",
+      "visual_description": "Depicts hard disk drive installed in chassis and SATA data cable connection.",
+      "essential_asset_ids": [
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c"
+      ],
+      "essential_segment_ids": [
+        "c269add9-3631-45f6-89f2-66bd1552fefc"
+      ],
+      "gold_spans_by_asset": {
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            244.09,
+            443.96
+          ]
+        ]
+      },
+      "candidate_segment_count": 1
+    },
+    {
+      "query_id": "vis-dev-012",
+      "type": "visual",
+      "query": "electrical power distribution unit terminal block wiring on DIN rail",
+      "action_label": "attach power connection",
+      "visual_description": "Depicts power distribution unit with color-coded stranded wires wired to DIN rail.",
+      "essential_asset_ids": [
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69"
+      ],
+      "essential_segment_ids": [
+        "a73c3a4c-5ed6-4f70-b2a2-e6d34b650e80"
+      ],
+      "gold_spans_by_asset": {
+        "75018ad8-13ce-4e5d-8770-5f739c2f9a69": [
+          [
+            1.88,
+            53.76
+          ]
+        ]
+      },
+      "candidate_segment_count": 1
+    },
+    {
+      "query_id": "vis-dev-013",
+      "type": "visual",
+      "query": "disassembly of axial piston hydraulic pump cylinder block and swashplate",
+      "action_label": "disassemble",
+      "visual_description": "Depicts technician extracting cylinder block and piston assembly from hydraulic pump casing.",
+      "essential_asset_ids": [
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_segment_ids": [
+        "d7bba08b-6de8-417f-a95a-f2bed82d76ca",
+        "a3b0c883-fd1d-4f6a-9974-df9abab51c88",
+        "b6ca1e54-7a36-4ed2-811b-b5775b9fdcae"
+      ],
+      "gold_spans_by_asset": {
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            100.01,
+            246.35
+          ],
+          [
+            326.99,
+            484.8
+          ]
+        ],
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            119.68,
+            526.95
+          ]
+        ]
+      },
+      "candidate_segment_count": 3
+    },
+    {
+      "query_id": "vis-dev-014",
+      "type": "visual",
+      "query": "inspection of hydraulic valve plate and bronze piston shoe surfaces",
+      "action_label": "inspect",
+      "visual_description": "Depicts visual inspection of valve plate sealing face and piston shoes for cavitation wear.",
+      "essential_asset_ids": [
+        "9c368f88-63d0-408a-9563-4033e4ae522f",
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54",
+        "7d983111-1468-4ec1-9441-324a7183f923",
+        "58ec0fb6-85cc-47be-b6bb-9bcd9a0e9f05",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "a072cf61-dcfe-4b71-96d0-969c83f1641e",
+        "1718202b-49db-459d-97d9-7868f324fe3b",
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b",
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c",
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a",
+        "9adcde18-2769-485e-aba9-3138e15d6bc0",
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8"
+      ],
+      "essential_segment_ids": [
+        "5a98260c-09c4-4081-af8e-f984bfae5af6",
+        "5bc209d7-8de8-473b-8bc2-bd05b4b6a842",
+        "47502b08-4265-4126-8254-dafa2181eeae",
+        "57021b96-d868-432c-b6af-bc8ecb81e8fd",
+        "e9b4ae0f-ee9a-41c2-87eb-e741c7ba00d0",
+        "cbeb23ec-1c11-41e2-b7ef-87220555425d",
+        "34862564-2e3a-4fa7-8918-17650b631670",
+        "1e0fcf26-585c-4b22-8173-ae61c7031bb9",
+        "eeebd778-b30d-4ffa-b73b-a71d055061b4",
+        "dce27e4f-452e-4405-8c72-625b02acae91",
+        "f1d8dafa-f74c-448b-8a25-864d040bfde4",
+        "7b1682e9-82f3-4dbf-8fa1-e6e6f371f6e9",
+        "68dacbe9-1d60-4314-b21a-2435172f08b9",
+        "f7f456a2-8565-44ea-a706-bfcd8c65c8cf"
+      ],
+      "gold_spans_by_asset": {
+        "bff3000e-d2ba-4aac-b0f7-f88dd261087a": [
+          [
+            0.83,
+            17.71
+          ]
+        ],
+        "548d323e-622e-4ec0-acbd-f9ff7c7a072b": [
+          [
+            1.64,
+            42.95
+          ]
+        ],
+        "1718202b-49db-459d-97d9-7868f324fe3b": [
+          [
+            9.93,
+            67.88
+          ]
+        ],
+        "a072cf61-dcfe-4b71-96d0-969c83f1641e": [
+          [
+            14.52,
+            94.74
+          ]
+        ],
+        "78d300a3-816a-4ed9-bcd8-3d45322f5f54": [
+          [
+            15.39,
+            92.74
+          ]
+        ],
+        "67f7f2ec-c31f-4cda-87e8-abe38124d81b": [
+          [
+            198.74,
+            204.92
+          ]
+        ],
+        "58ec0fb6-85cc-47be-b6bb-9bcd9a0e9f05": [
+          [
+            213.74,
+            280.97
+          ]
+        ],
+        "7d983111-1468-4ec1-9441-324a7183f923": [
+          [
+            232.29,
+            362.88
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            246.35,
+            263.87
+          ],
+          [
+            484.8,
+            569.17
+          ]
+        ],
+        "9c368f88-63d0-408a-9563-4033e4ae522f": [
+          [
+            699.96,
+            758.93
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            704.94,
+            739.09
+          ]
+        ],
+        "3db72fc6-6438-4aad-9a0a-fff8df7999f8": [
+          [
+            759.27,
+            818.85
+          ]
+        ],
+        "9adcde18-2769-485e-aba9-3138e15d6bc0": [
+          [
+            841.79,
+            872.8
+          ]
+        ]
+      },
+      "candidate_segment_count": 14
+    },
+    {
+      "query_id": "vis-dev-015",
+      "type": "visual",
+      "query": "hydraulic pump casing bolt assembly and valve housing reinstallation",
+      "action_label": "assemble",
+      "visual_description": "Depicts technician reassembling hydraulic pump end cover bolts.",
+      "essential_asset_ids": [
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53",
+        "7c553436-f15e-45ca-9229-cae2b2d867f8",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c"
+      ],
+      "essential_segment_ids": [
+        "06963cd6-5d06-4970-8584-fc1e05f4e084",
+        "c314536e-ece4-4dd8-b7bc-1b9775ea1825",
+        "912dd6d2-8ae2-45e7-a940-2d7bb3907b40",
+        "f249da2a-2573-4890-a018-47b238e8e171"
+      ],
+      "gold_spans_by_asset": {
+        "7c553436-f15e-45ca-9229-cae2b2d867f8": [
+          [
+            4.06,
+            382.15
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            263.87,
+            326.99
+          ],
+          [
+            569.17,
+            765.75
+          ]
+        ],
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            526.96,
+            695.28
+          ]
+        ]
+      },
+      "candidate_segment_count": 4
+    },
+    {
+      "query_id": "vis-dev-016",
+      "type": "visual",
+      "query": "adjusting leveling foot height with open-ended wrench",
+      "action_label": "adjust height",
+      "visual_description": "Depicts technician turning jam nut on articulated leveling foot to adjust workstation height.",
+      "essential_asset_ids": [
+        "76f8c610-0fdc-414c-b0e2-8617521775ea"
+      ],
+      "essential_segment_ids": [
+        "f93103f3-3a77-454b-b973-c88d2f53fabe"
+      ],
+      "gold_spans_by_asset": {
+        "76f8c610-0fdc-414c-b0e2-8617521775ea": [
+          [
+            4.07,
+            13.37
+          ]
+        ]
+      },
+      "candidate_segment_count": 1
+    },
+    {
+      "query_id": "vis-dev-017",
+      "type": "visual",
+      "query": "connecting 45x45 mm aluminum extrusion base rails into rectangular frame",
+      "action_label": "connect base",
+      "visual_description": "Depicts four base extrusion rails joined at 90-degree corners to form the base perimeter.",
+      "essential_asset_ids": [
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "89f50fda-66fe-4195-b9a5-650ec8b6c5b2",
+        "aa1d5e1a-5604-40e6-a546-1428af9edf74",
+        "f8161e40-cc86-4693-bb4d-c00aaa48864b",
+        "f9ba0e2c-d6fb-46c9-8e87-5bd154ca4895"
+      ],
+      "gold_spans_by_asset": {
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            4.42,
+            155.13
+          ],
+          [
+            688.09,
+            694.43
+          ]
+        ],
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            6.07,
+            59.05
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            6.99,
+            89.89
+          ]
+        ]
+      },
+      "candidate_segment_count": 4
+    },
+    {
+      "query_id": "vis-dev-018",
+      "type": "visual",
+      "query": "preparation of tools and mechanical parts on workstation before assembly",
+      "action_label": "preparation",
+      "visual_description": "Depicts layout of hand tools, fasteners, and bracket hardware on assembly workbench.",
+      "essential_asset_ids": [
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53",
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb",
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c",
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c",
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d"
+      ],
+      "essential_segment_ids": [
+        "741fb672-52f7-4901-9137-adb550ba6341",
+        "0d25045f-2269-47df-9295-93c31e483dfa",
+        "1bd8b5ca-46d4-4fcf-8adf-d1929435c662",
+        "7bc76893-e082-4d0f-9035-93034e4e16a8",
+        "64e9b072-fb38-491b-a10a-3278379d090c"
+      ],
+      "gold_spans_by_asset": {
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            0.0,
+            25.09
+          ]
+        ],
+        "c1cbbf94-926f-4d75-a66d-27e5bfe26c53": [
+          [
+            2.8,
+            119.68
+          ]
+        ],
+        "054135df-2471-4d2a-b23a-7fbf0b1a115c": [
+          [
+            8.51,
+            100.01
+          ]
+        ],
+        "7a5d3f88-4b0c-4083-9963-89704fd1f8eb": [
+          [
+            11.87,
+            29.67
+          ]
+        ],
+        "1d3b3dcc-a318-4125-a913-dbf182b8625d": [
+          [
+            34.69,
+            72.56
+          ]
+        ]
+      },
+      "candidate_segment_count": 5
+    },
+    {
+      "query_id": "vis-dev-019",
+      "type": "visual",
+      "query": "attaching aluminum connector gusset plates to frame superstructure",
+      "action_label": "attach connector plates",
+      "visual_description": "Depicts fastening triangular connector plates with T-slot nuts onto aluminum profiles.",
+      "essential_asset_ids": [
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c",
+        "3af2970a-e708-41ab-894f-b4dd3200109f"
+      ],
+      "essential_segment_ids": [
+        "82714706-ff9c-4c0a-b91b-6be4ac9cbc83",
+        "6db05611-fdcb-42a5-9a85-9c8dc500b2d4"
+      ],
+      "gold_spans_by_asset": {
+        "3af2970a-e708-41ab-894f-b4dd3200109f": [
+          [
+            373.63,
+            551.02
+          ]
+        ],
+        "7ca2bea4-ed96-498d-abfe-517d03880e9c": [
+          [
+            500.73,
+            617.1
+          ]
+        ]
+      },
+      "candidate_segment_count": 2
+    },
+    {
+      "query_id": "vis-dev-020",
+      "type": "visual",
+      "query": "camera support collar clamp positioned on vertical bar at operational height",
+      "action_label": "attach camera and plate",
+      "visual_description": "Depicts clamping camera support collar clamp (CAM-CLR-45) onto the upright extrusion bar.",
+      "essential_asset_ids": [
+        "f68de13c-47af-4d19-b5bd-da9066b231c1",
+        "59e728a1-9e42-4b22-b5b6-6551241ca660",
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455"
+      ],
+      "essential_segment_ids": [
+        "a78a8dc6-a349-4f54-a2ed-ae57a8864510",
+        "753b61b7-8639-4125-b409-86d7894017a5",
+        "ae1aa039-c6d6-4c5c-b6f4-3393a87ab8e4",
+        "4c09ac26-cbad-4e7a-8a2b-274fe9f32c8e"
+      ],
+      "gold_spans_by_asset": {
+        "b9a5b990-b072-4fa7-a9aa-e295593c9455": [
+          [
+            234.97,
+            335.27
+          ]
+        ],
+        "59e728a1-9e42-4b22-b5b6-6551241ca660": [
+          [
+            369.9,
+            532.16
+          ],
+          [
+            639.5,
+            671.49
+          ]
+        ],
+        "f68de13c-47af-4d19-b5bd-da9066b231c1": [
+          [
+            377.21,
+            793.18
+          ]
+        ]
+      },
+      "candidate_segment_count": 4
+    }
+  ]
+}
