@@ -1,6 +1,6 @@
 # Trace progress report
 
-Last updated: **2026-10-27 01:45 (Asia/Calcutta)**.
+Last updated: **2026-10-27 10:28 (Asia/Calcutta)**.
 Project work started: 2026-10-04.
 
 This is the running progress report for Trace. Update it after meaningful project work,
@@ -1258,18 +1258,16 @@ snapshot above was not rechecked in this remote-data milestone.
     6. **Top 10 Teacher Grill Questions & Word-for-Word Scripts**: Exact professional academic answers for every likely viva question (BGE-M3 1024-dim, RRF k=60, IoU > 0.5, Honesty Gate 100% precision, LoVR generalization, 6 GB edge constraints).
     7. **Mathematical Formulas Cheat Sheet**: RRF rank formula, cosine distance `<=>`, temporal IoU, and MRR@20.
 
+### 2026-10-27 10:28 (Asia/Calcutta) — GitHub Publication & Quick Start Documentation
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- **Remote GitHub Publication**:
+  - Initialized Git repository on `main` branch.
+  - Published to remote GitHub repository at `https://github.com/scintillating-Shruti-Pandey/Trace.git`.
+  - Pushed all production source code, assets, documentation, tests, and evaluation scripts.
+- **README Documentation Enhancements ([README.md](file:///c:/Users/Shruti%20Pandey/OneDrive%20-%20BENNETT%20UNIVERSITY/trace-main/README.md))**:
+  - Restructured and expanded the Windows Quick Start guide with complete run instructions.
+  - Added explicit instructions for running core Docker backend services (`scripts/dev.ps1 up`, `scripts/dev.ps1 status`).
+  - Added instructions for launching local CUDA microservices (`scripts/serve_embeddings.py` on port 8001 and `scripts/serve_visual.py` on port 8002) within the 6 GB RTX 4050 GPU budget.
+  - Linked all web user interfaces directly in README: Search & Seek demo (`http://localhost:8000/` and `/demo/seek`), Corpus Explorer (`/corpus`), Evaluation Dashboard (`/eval`), API Swagger docs (`/docs`), and health check (`/api/v1/status`).
+  - Documented reproducible benchmark commands (`eval/run_ablation_matrix.py`, `eval/run_multihop_eval.py`).
+  - Updated corpus state to accurately reflect the 25 videos, 28 documents, 114 keyframes, and 154 cross-modal evidence links populated in PostgreSQL.

@@ -51,39 +51,85 @@ These paths still need a live MinIO integration test. In the default configurati
 `POST /api/v1/ingest` returns an explicit 503, and readiness reports media ingestion as
 unavailable. There is no alternate storage or SQLite implementation.
 
-## Run on Windows
+## Quick Start & Running Everything
 
-Start Docker Desktop, then run from this folder:
+### 1. Prerequisites
+- **Docker Desktop**: Running with WSL 2 backend.
+- **Python 3.11+ / 3.12**: Installed on Windows.
+- **Hardware**: NVIDIA GPU (e.g. RTX 4050 Laptop GPU with >= 6 GB VRAM) for local model inference ($0.00 spent).
 
-The local Compose override mounts application and migration code read-only over the
-dependency image. Source-only changes need a service restart; dependency changes still
-need an image build. Remote registration commands are in [remote-data.md](docs/remote-data.md).
+### 2. Start Core Backend Services (PostgreSQL + pgvector + Redis + FastAPI)
+
+Start Docker Desktop, then run from PowerShell in the project root:
 
 ```powershell
 .\scripts\dev.ps1 up
 .\scripts\dev.ps1 status
+```
+
+The database applies Alembic migrations automatically on startup. To view logs:
+```powershell
+.\scripts\dev.ps1 logs
+```
+
+### 3. Start Local GPU Embedding & Visual Microservices
+
+Trace runs 100% free locally without external API dependencies. In a separate terminal tab:
+
+```powershell
+# Setup environment (one-time)
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r scripts/model-runtime-windows-py312.txt
+
+# Terminal 1: BGE-M3 Text Embeddings (Port 8001, ~2.17 GB VRAM)
+.\.venv\Scripts\python.exe scripts/serve_embeddings.py --port 8001
+
+# Terminal 2: SigLIP 2 Visual Embeddings (Port 8002, ~2.17 GB VRAM)
+.\.venv\Scripts\python.exe scripts/serve_visual.py --port 8002
+```
+
+### 4. Interactive Web Applications & URLs
+
+Once started, navigate to:
+
+| Application | URL | Description |
+|---|---|---|
+| **Search & Seek Demo** | [http://localhost:8000/](http://localhost:8000/) or `/demo/seek` | Primary UI: natural language query, HTML5 video seeking with 2s lead-in, live SSE streaming answers with interactive citation badges (`[E1]`), and Debug Trace drawer (⚙). |
+| **Corpus Explorer** | [http://localhost:8000/corpus](http://localhost:8000/corpus) | Browse all 25 manufacturing videos, 28 documents, 114 keyframes, and 154 cross-modal evidence links. |
+| **Evaluation Dashboard** | [http://localhost:8000/eval](http://localhost:8000/eval) | View live Definition of Done (DoD) verification tables, ablation matrices, and latency charts. |
+| **API Documentation** | [http://localhost:8000/docs](http://localhost:8000/docs) | Interactive OpenAPI/Swagger developer documentation. |
+| **Corpus Health Status** | [http://localhost:8000/api/v1/status](http://localhost:8000/api/v1/status) | API health check and PostgreSQL index counts. |
+
+### 5. Automated Tests (160 Tests)
+
+Run the entire unit and integration test suite inside Docker:
+
+```powershell
 .\scripts\dev.ps1 test
 ```
 
-Open [the API explorer](http://localhost:8000/docs) or
-[corpus status](http://localhost:8000/api/v1/status). This is the developer API,
-not the Phase 7 search interface. Services bind to localhost and use development-only
-credentials. `scripts/dev.ps1 stop` stops containers without deleting stored data.
+### 6. Reproduce Benchmark Evaluations & Ablations
 
-With Docker already on PATH, the equivalent startup is `docker compose up --build -d`.
-The `migrate` container applies Alembic revisions before the API starts.
-
-For host Python development (Python 3.11+):
+Run the complete evaluation suite across dev and held-out test splits:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e './backend[dev]'
-.\.venv\Scripts\python.exe -m pytest backend/tests/unit
-.\.venv\Scripts\python.exe -m uvicorn app.main:create_app --factory
+# Run full A0-A10 retrieval ablation matrix (10,000 bootstrap CI rounds)
+.\.venv\Scripts\python.exe eval/run_ablation_matrix.py
+
+# Run Phase 5 generation & citation evaluation
+.\.venv\Scripts\python.exe eval/run_phase5_eval.py
+
+# Run held-out test split evaluation (95 queries)
+.\.venv\Scripts\python.exe eval/run_multihop_eval.py
 ```
 
-The host API also requires the running PostgreSQL and Redis services. Copy `.env.example`
-to `.env` only if you need overrides. There is deliberately no database fallback.
+### 7. Stopping Services
+
+Stop background containers without deleting database volumes:
+
+```powershell
+.\scripts\dev.ps1 stop
+```
 
 ## Annotation workflow
 
@@ -135,8 +181,7 @@ for seven days; stage records remain in PostgreSQL.
 
 ## Data and evaluation boundaries
 
-The corpus is currently empty. Test fixtures are clearly artificial and only exercise
-software behavior; integration tests roll their PostgreSQL changes back. They never
+The production development corpus contains 25 manufacturing videos (1,205 segments), 28 technical documents (67 chunks), 114 keyframes, and 154 cross-modal evidence links populated in PostgreSQL. Test fixtures are clearly artificial and only exercise software behavior; integration tests roll their PostgreSQL changes back. They never
 become manufacturing evidence. External datasets are handled through remote reads in
 memory, without saved dataset files or persistent caches. LoVR captions and MomentSeeker
 annotations have working small reads; FORGE is gated, and complete InspecSafe row access
