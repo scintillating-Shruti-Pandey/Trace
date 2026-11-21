@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     redis_url: str = "redis://127.0.0.1:6379/0"
     ingest_enabled: bool = False
     search_enabled: bool = False
+    auth_enabled: bool = False  # Set True to enforce API key authentication
     incoming_dir: Path = Path("data/incoming")
     blob_endpoint: str = "http://127.0.0.1:9000"
     blob_bucket: str = "trace"

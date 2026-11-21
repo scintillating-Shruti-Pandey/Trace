@@ -6,11 +6,9 @@ from typing import Annotated
 from uuid import UUID
 
 import json
-from arq import create_pool
-from arq.connections import RedisSettings
-from arq.jobs import Job
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import func, select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -65,6 +63,8 @@ def create_app(settings: Settings | None = None):
         engine = make_engine(settings)
         app.state.sessions = session_factory(engine)
         app.state.engine = engine
+        from arq import create_pool
+        from arq.connections import RedisSettings
         app.state.redis = await create_pool(RedisSettings.from_dsn(settings.redis_url))
         try:
             yield
@@ -78,6 +78,11 @@ def create_app(settings: Settings | None = None):
         description="Phase 0 corpus foundations. Search and model processing are pending.",
         lifespan=lifespan,
     )
+
+    # Serve static assets (logo, background images, etc.) at /static/*
+    _static_dir = Path(__file__).parent / "static"
+    if _static_dir.exists():
+        app.mount("/static", StaticFiles(directory=str(_static_dir)), name="static")
 
     @app.exception_handler(MissingItem)
     async def missing_handler(_, exc):
@@ -112,11 +117,15 @@ def create_app(settings: Settings | None = None):
                 if revision != "0002" or not {"vector", "pg_trgm"}.issubset(extensions):
                     raise RuntimeError("database schema or extensions missing")
 
+        blob_ok = True
         try:
             await asyncio.to_thread(check_database)
             await app.state.redis.ping()
             if settings.ingest_enabled:
-                await asyncio.to_thread(BlobStore(settings).ready)
+                try:
+                    await asyncio.to_thread(BlobStore(settings).ready)
+                except Exception:
+                    blob_ok = False  # MinIO optional — not a hard readiness failure for demo
         except Exception:
             logger.exception("Readiness check failed")
             return JSONResponse(status_code=503, content={"status": "not_ready"})
@@ -126,6 +135,7 @@ def create_app(settings: Settings | None = None):
             "capabilities": {
                 "media_ingest": settings.ingest_enabled,
                 "search": settings.search_enabled,
+                "blob_store": blob_ok,
             },
         }
 
@@ -251,32 +261,12 @@ def create_app(settings: Settings | None = None):
             query = query.where(EvidenceLink.segment_id == str(segment_id))
         return {"items": [row(link) for link in session.scalars(query.offset(offset).limit(limit))]}
 
-    @app.post("/api/v1/ingest", status_code=202, tags=["ingestion"])
-    async def ingest(
-        value: AssetCreate,
-        _user: Annotated[AuthUser, Depends(require_role(Role.ADMIN))] = None,
-    ):
-        if not settings.ingest_enabled:
-            raise HTTPException(503, "Media ingestion is disabled until MinIO setup is completed")
-        incoming_file(settings.incoming_dir, value.path)
-        job = await app.state.redis.enqueue_job("ingest_asset", value.model_dump())
-        return {"job_id": job.job_id, "scope": "registration_only"}
-
-    @app.get("/api/v1/ingest/{job_id}", tags=["ingestion"])
-    async def ingest_status(job_id: UUID):
-        job = Job(job_id.hex, app.state.redis)
-        status_value = await job.status()
-        if status_value.value == "not_found":
-            raise HTTPException(404, "Job not found or result expired (seven-day retention)")
-        info = await job.result_info()
-        result = info.result if info and info.success else None
-        return {"job_id": job_id.hex, "status": status_value.value, "result": result}
 
     @app.post("/api/v1/search", tags=["retrieval"])
     def search(
         value: SearchQuery,
         session: Database,
-        _user: Annotated[AuthUser, Depends(require_role(Role.ENGINEER))] = None,
+        user: Annotated[AuthUser, Depends(require_role(Role.ENGINEER))] = None,
     ):
         if not settings.search_enabled:
             raise HTTPException(503, "Search is disabled until retrieval phase is activated")

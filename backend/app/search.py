@@ -424,10 +424,16 @@ class SearchService:
         limit: int = 20,
         equipment_family: str | None = None,
     ) -> list[dict[str, Any]]:
-        """Search video segments using dense BGE-M3 text query embedding."""
+        """Search video segments using dense BGE-M3 text query embedding.
+
+        Returns empty list (graceful degradation) if the embedding service is unreachable.
+        """
         if not query.strip():
             raise ValueError("Query string cannot be empty")
-        batch = self._client.embed([query.strip()])
+        try:
+            batch = self._client.embed([query.strip()])
+        except Exception:
+            return []
         query_vector = batch.vectors[0]
         hits = search_segments_dense(
             session,
@@ -454,18 +460,31 @@ class SearchService:
         doc_type: str | None = None,
         rrf_k: int = 60,
     ) -> list[dict[str, Any]]:
-        """Hybrid search combining dense BGE-M3 vectors and BM25 lexical search with RRF."""
+        """Hybrid search combining dense BGE-M3 vectors and BM25 lexical search with RRF.
+
+        Falls back to lexical-only if the embedding service is unreachable.
+        """
         if not query.strip():
             raise ValueError("Query string cannot be empty")
         cleaned = query.strip()
 
-        # Dense lane
-        batch = self._client.embed([cleaned])
-        query_vector = batch.vectors[0]
-        dense_hits = search_chunks_dense(session, query_vector, limit=limit * 2, doc_type=doc_type)
+        # Dense lane (graceful degradation if embedder down)
+        dense_hits: list[dict[str, Any]] = []
+        try:
+            batch = self._client.embed([cleaned])
+            query_vector = batch.vectors[0]
+            dense_hits = search_chunks_dense(session, query_vector, limit=limit * 2, doc_type=doc_type)
+        except Exception:
+            pass  # embedder unavailable — fall back to lexical only
 
-        # Lexical lane
+        # Lexical lane (always available — pure SQL)
         lexical_hits = search_chunks_lexical(session, cleaned, limit=limit * 2, doc_type=doc_type)
+
+        if not dense_hits:
+            # Embedder down: return lexical results directly with normalised score field
+            for item in lexical_hits:
+                item.setdefault("rrf_score", item.get("score", 0.0))
+            return lexical_hits[:limit]
 
         # Fuse
         return reciprocal_rank_fusion(

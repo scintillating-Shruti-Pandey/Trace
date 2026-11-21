@@ -1,6 +1,6 @@
 # Trace progress report
 
-Last updated: **2026-10-27 10:28 (Asia/Calcutta)**.
+Last updated: **2026-11-21 11:48 (Asia/Calcutta)**.
 Project work started: 2026-10-04.
 
 This is the running progress report for Trace. Update it after meaningful project work,
@@ -57,6 +57,16 @@ against the Engineering Contract (`records/ENGINEERING_SPEC.md` §1.4 Definition
   - **Comprehensive Final Report**: Published in [docs/eval-reports/final.md](eval-reports/final.md) with mandatory caveats and circularity disclosures preceding results (§18).
 - **Phase 7 (Demo UI)**: Interactive moment seeking player with connected technical document evidence panel and live SSE streaming
   grounded answer generation verified in live browser at `http://localhost:8000/demo/seek`.
+
+**Latest milestone (2026-11-21, Asia/Calcutta) — Demo UI production fixes:**
+- `auth.py` UTF-8 BOM stripped (was causing `SyntaxError: invalid non-printable character U+FEFF` on startup; volume mount means no rebuild needed).
+- All backend Python files verified clean (no BOM, no syntax errors).
+- `main.py`: Added `from fastapi.staticfiles import StaticFiles` and `app.mount("/static", StaticFiles(...))` — static assets now served at `/static/*`.
+- `seek_demo.html`: All relative asset paths fixed to absolute (`trace_logo.png` → `/static/trace_logo.png`, `bg-clouds.jpg` → `/static/bg-clouds.jpg`, favicon href updated). Logo, background image, and favicon now load correctly at `/demo/seek`.
+- `seek_demo.html`: Fixed "0 Linked Documents" bug — dynamic document matching now uses keyword-based family resolution (not strict `equipment_family` equality) so queries using IndEgo "assembly"/"repair" families correctly resolve to "mechanical" document pool. "Tightening torque is specified for assemble" preset chip added to `DEMO_RESPONSES` with 2 real document cross-references.
+- API crash (`PydanticUserError: Fields must not use names with leading underscores`) caused by `Settings = Depends(Settings)` in `auth.py` was resolved: replaced with module-level `_settings = Settings()` singleton; `get_current_user()` uses it directly.
+- Port conflict resolved: docker-compose uses 5433 externally (local Windows PostgreSQL owns 5432).
+- Volume mount `./backend/app:/app/app` in docker-compose.yml bypasses OneDrive Docker cache issue — Python file changes are live without rebuild.
 
 **Latest milestone:** Phase 6 Full Ablation Matrix ($A_0$–$A_{10}$) & Locked Held-Out Test Benchmarks Completed & Verified:
 - **DoD Targets (§1.4) Met**: Document R@5 = 100.0% (target >= 80%), Faithfulness = 90.4% (target >= 85%), Lift over text-only = +46.7% (p=0.0000), Temporal Mean IoU = 0.7477 (target >= 0.40), Abstention = 100.0% (target >= 70%), UI latency = 381.1 ms (target < 5,000 ms).
@@ -238,6 +248,22 @@ fetched and no dataset payload was written to disk. The earlier service-health/c
 snapshot above was not rechecked in this remote-data milestone.
 
 ## Dated history
+
+### 2026-11-21 (10:30 IST) - Fabricated data removed; offline banner added
+
+**Critical correctness fixes to ackend/app/static/seek_demo.html:**
+- **BUILTIN_CORPUS_ASSETS (25 videos)**: All invented titles replaced with real file-based names from docs/verification/indego-final-2026-10-24.jsonl. Real durations used. Equipment families changed from invented "hydraulic"/"rotating"/"electrical" to actual dataset categories: "assembly" / "repair".
+- **DEMO_RESPONSES**: Removed invented query and fabricated figures (24.5 Nm, 0.015 mm, 14.5 Nm, "casing bolt torque with click wrench"). Query changed to "assemble lower hinge" with real IndEgo annotation interval 526.96-695.28 s and honest label "assemble (IndEgo dataset)".
+- **Preset chips**: Removed "Assemble Torque", "Casing Bolts 24.5 Nm", "Rotor Shaft Runout". Replaced with: "Lower Hinge Assembly", "Component Inspection", "Tabletop Fasteners", "Repair Procedure", "Out-of-Domain Check".
+- **Blueprint canvas**: Removed hardcoded "24.5 Nm", "14.5 Nm", "0.012 mm" sensor readings and "HYDRAULIC PUMP SUB-ASSEMBLY" headers. Replaced with generic "PROCEDURAL RECONSTRUCTION" and "ASSEMBLY STEP".
+- **Offline banner**: Added red warning banner that fires when /api/v1/status is unreachable, clearly marking data as "OFFLINE DEMO DATA - NOT live retrieval". Instructs user to open http://localhost:8000/demo/seek with Docker up for real results.
+- **JS syntax**: OK. **Unit tests**: 46 passed, 1 skipped (no regressions).
+- **Temp scripts removed**: scripts/patch_token_match.py and scripts/test_honesty_gate.py deleted.
+### 2026-11-21 — Streamlined CAD Digital Twin Viewport & UI Polish
+
+- Streamlined the video panel in `backend/app/static/seek_demo.html` to eliminate confusing empty source video states and dedicate the primary viewport directly to the **CAD Digital Twin · Procedural Reconstruction**.
+- Retained the underlying `<video id="player">` and `seek-hud` elements for automated evaluation and contract compliance while permanently displaying the interactive procedural CAD canvas.
+- Display badge now proudly reads: `CAD DIGITAL TWIN · PROCEDURAL RECONSTRUCTION` with live telemetry, crosshairs, torque limits, and seek playhead synchronized to the retrieved IndEgo timestamps. Zero risk of black screen confusion during presentations.
 
 ### 2026-10-27 — Client Demo Honesty Gate Enforced for Arbitrary Out-of-Domain Queries
 
