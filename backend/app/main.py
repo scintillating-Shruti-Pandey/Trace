@@ -425,6 +425,50 @@ def create_app(settings: Settings | None = None):
 
         return StreamingResponse(sse_event_stream(), media_type="text/event-stream")
 
+    # ------------------------------------------------------------------ #
+    #  IVP — Image & Video Processing API (classical computer vision)    #
+    # ------------------------------------------------------------------ #
+    @app.post("/api/v1/ivp/analyze", tags=["ivp"])
+    def ivp_analyze_frame(file: bytes = None):
+        """Run all 8 classical IVP techniques on an uploaded image frame.
+
+        Accepts raw image bytes (multipart/form-data).
+        Returns color space stats, histogram metrics, edge density,
+        morphology fill ratios, SIFT/ORB keypoint counts, and HOG descriptor stats.
+        Useful for the IVP lab demonstration component of TRACE.
+        """
+        try:
+            from app.ivp.processing import run_full_ivp_pipeline, make_synthetic_frame  # type: ignore
+        except ImportError:
+            raise HTTPException(500, "opencv-python-headless is not installed. Run: pip install opencv-python-headless")
+
+        try:
+            import cv2
+            import numpy as np
+            if file:
+                arr = np.frombuffer(file, np.uint8)
+                bgr = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+                if bgr is None:
+                    raise HTTPException(400, "Cannot decode image — send valid JPEG or PNG bytes")
+            else:
+                # Synthetic test frame (demo mode)
+                from scripts.ivp_demo import make_synthetic_frame as msf  # type: ignore
+                bgr = msf()
+
+            results = run_full_ivp_pipeline(bgr)
+            # Strip base64 images from API response (keep metrics only — images are large)
+            slim = {}
+            for key, data in results.items():
+                slim[key] = {
+                    "technique":   data.get("technique"),
+                    "description": data.get("description"),
+                    "metrics":     {k: v for k, v in data.get("metrics", {}).items()
+                                    if not isinstance(v, (list, dict))},
+                }
+            return slim
+        except Exception as exc:
+            raise HTTPException(500, f"IVP pipeline error: {exc}") from exc
+
     @app.get("/", response_class=HTMLResponse, tags=["demo"])
     def root():
         demo_path = Path(__file__).parent / "static" / "seek_demo.html"
