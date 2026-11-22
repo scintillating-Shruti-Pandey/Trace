@@ -1297,3 +1297,23 @@ snapshot above was not rechecked in this remote-data milestone.
   - Linked all web user interfaces directly in README: Search & Seek demo (`http://localhost:8000/` and `/demo/seek`), Corpus Explorer (`/corpus`), Evaluation Dashboard (`/eval`), API Swagger docs (`/docs`), and health check (`/api/v1/status`).
   - Documented reproducible benchmark commands (`eval/run_ablation_matrix.py`, `eval/run_multihop_eval.py`).
   - Updated corpus state to accurately reflect the 25 videos, 28 documents, 114 keyframes, and 154 cross-modal evidence links populated in PostgreSQL.
+
+### 2026-11-22 12:40 (Asia/Calcutta) — Engineering Compliance & Diagnostics Alignment
+
+- **Engineering Compliance (DoD) Gate Alignment ([seek_demo.html](file:///c:/Users/Shruti%20Pandey/OneDrive%20-%20BENNETT%20UNIVERSITY/trace-main/backend/app/static/seek_demo.html))**:
+  - Aligned the Engineering Compliance tab with the exact contract specified in `records/ENGINEERING_SPEC.md` §1.4 (Definition of Done).
+  - Replaced the incomplete 4-card layout with the complete set of all 6 specification gates:
+    1. **Gate 1 (Video Segment Recall@5)**: 73.3% [95% CI: 56.7%–86.7%] (Dev: 88.5%, spec target $\ge 70.0\%$: **PASSED**).
+    2. **Gate 2 (Temporal Localization IoU)**: 0.7477 (spec target mean IoU $\ge 0.40$: **PASSED**).
+    3. **Gate 3 (Document Chunk Recall@5)**: 100.0% (spec target $\ge 80.0\%$: **PASSED**).
+    4. **Gate 4 (Grounded Faithfulness)**: 90.4% (spec target $\ge 85.0\%$: **PASSED**).
+    5. **Gate 5 (Multi-Hop Retrieval Lift)**: +46.7% over text-only baseline ($p = 0.0000$: **PASSED**).
+    6. **Gate 6 (Full-Loop Warm Latency)**: 381.1 ms p95 (spec target $< 5,000\text{ ms}$: **PASSED**).
+  - Added a dedicated secondary strip displaying key quality & hardware metrics: Honesty Gate Precision (100.0%), Judge-Human Agreement ($\kappa = 0.8667$), Automated Test Suite (160/160 passing), and Fixed Hardware Budget ($0.00 spend on 6 GB RTX 4050).
+
+- **Diagnostics & Telemetry Console Overhaul**:
+  - Modernized the Diagnostics Drawer (`debug-drawer`) styling to deep slate (`rgba(15, 23, 42, 0.98)` with brand blue border).
+  - Added a dedicated **Hardware & Engine Provenance** section detailing the compute accelerator (RTX 4050 6 GB), $0.00 expenditure, BGE-M3 (1024-D), SigLIP 2 (1152-D), PostgreSQL 16 + pgvector, and OpenCV 4.9+ IVP preprocessing engine.
+  - Added `IVP_PREPROCESSING_ENGINE` and `HONESTY_GATE_PRECISION` to active feature flag inspection.
+  - Fixed telemetry latency waterfall (`dt-*`) and candidate provenance breakdown (`dbg-*`) to dynamically update on both live API searches and fallback offline queries.
+  - Verified clean syntax with Python's `html.parser` and committed to Git (`main`).
