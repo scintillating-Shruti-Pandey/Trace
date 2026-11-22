@@ -5555,7 +5555,7 @@
     let lastAnimTimestamp = null;
     let currentCaption = "Assembly keystep - annotation label: assemble (IndEgo dataset)";
     let currentStepTitle = "IndEgo Assembly Procedure";
-    let currentEquipmentFamily = "assembly";
+    let currentEquipmentFamily = "mechanical";
     let currentRefinedStart = 528.0;
     let currentRefinedEnd = 692.0;
 
@@ -5721,7 +5721,7 @@
       // ==============================================================
       // SCENE 2: MECHANICAL EQUIPMENT (Aluminum Extrusion Frame Rail & Hinge)
       // ==============================================================
-      else if (fam === 'mechanical') {
+      else if (fam === 'mechanical' || fam === 'assembly' || fam === 'repair') {
         simCtx.save();
         simCtx.translate(cx, cy);
 
@@ -5739,39 +5739,56 @@
         simCtx.strokeRect(-120, -15, 25, 30);
         simCtx.strokeRect(95, -15, 25, 30);
 
-        // Corner Gusset Bracket
-        simCtx.fillStyle = 'rgba(234, 88, 12, 0.15)';
+        // Multi-Axis Lower Hinge Pivot Flange (Mechanical CAD Symbol)
+        simCtx.fillStyle = 'rgba(234, 88, 12, 0.18)';
         simCtx.strokeStyle = '#fbbf24';
         simCtx.lineWidth = 2.5;
         simCtx.beginPath();
         simCtx.moveTo(-120, -70);
-        simCtx.lineTo(-170, -70);
-        simCtx.lineTo(-120, -120);
+        simCtx.lineTo(-175, -70);
+        simCtx.lineTo(-175, -130);
+        simCtx.lineTo(-120, -130);
         simCtx.closePath();
         simCtx.fill();
         simCtx.stroke();
 
-        // M8 T-Slot Bolt with Click Wrench Indicator
-        const boltX = -145;
-        const boltY = -95;
+        // Hinge Pivot Pin Cylinder & Center Axis
+        simCtx.fillStyle = '#ea580c';
+        simCtx.strokeStyle = '#fbbf24';
+        simCtx.lineWidth = 2;
+        simCtx.beginPath();
+        simCtx.arc(-148, -100, 14, 0, Math.PI * 2);
+        simCtx.fill();
+        simCtx.stroke();
+        simCtx.beginPath();
+        simCtx.arc(-148, -100, 5, 0, Math.PI * 2);
+        simCtx.fillStyle = '#050810';
+        simCtx.fill();
+
+        // M8 Fastener Bolt with Torque Indicator
+        const boltX = -148;
+        const boltY = -50;
         simCtx.fillStyle = '#fbbf24';
         simCtx.beginPath();
-        simCtx.arc(boltX, boltY, 6.5, 0, Math.PI * 2);
+        simCtx.arc(boltX, boltY, 7, 0, Math.PI * 2);
         simCtx.fill();
 
         simCtx.strokeStyle = '#d97706';
         simCtx.lineWidth = 3;
         simCtx.beginPath();
         simCtx.moveTo(boltX, boltY);
-        simCtx.lineTo(boltX - 60 + Math.sin(simAngle * 4) * 5, boltY - 45);
+        simCtx.lineTo(boltX - 60 + Math.sin(simAngle * 4) * 6, boltY - 45);
         simCtx.stroke();
         simCtx.fillStyle = '#ea580c';
-        simCtx.fillRect(boltX - 75, boltY - 55, 22, 12);
+        simCtx.fillRect(boltX - 78, boltY - 55, 26, 14);
 
-        // Dimension Callouts
-        simCtx.font = '600 11px "JetBrains Mono", monospace';
+        // Calibrated CAD Telemetry Callouts
+        simCtx.font = '700 12px "JetBrains Mono", monospace';
+        simCtx.fillStyle = '#fbbf24';
+        simCtx.fillText('LOWER HINGE PIVOT PIN & FRAME PROFILE', -130, 95);
+        simCtx.font = '500 10px "JetBrains Mono", monospace';
         simCtx.fillStyle = '#94a3b8';
-        simCtx.fillText('WORKSTATION ASSEMBLY PROFILE', -95, 95);
+        simCtx.fillText('TORQUE: 25 Nm (ISO 6789) · CLEARANCE: ±0.15mm', -130, 112);
 
         simCtx.restore();
       }
@@ -6072,6 +6089,7 @@
         else if (str.includes('sensor') || str.includes('camera') || str.includes('optical')) eqFam = 'electrical';
         else eqFam = 'mechanical';
       }
+      if (eqFam === 'assembly' || eqFam === 'repair') eqFam = 'mechanical';
       currentEquipmentFamily = eqFam;
 
       hudRefined.innerText = `${formatTime(refinedStart)} \u2013 ${formatTime(refinedEnd)}`;
