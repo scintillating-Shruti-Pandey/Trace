@@ -1927,7 +1927,8 @@
     .dash-query-item:hover .dash-query-arrow {
       color: var(--amber);
     }
-      /* Offline demo banner */
+
+    /* Offline demo banner */
     #offline-banner {
       display: none;
       background: #7f1d1d;
@@ -1941,7 +1942,10 @@
       letter-spacing: 0.03em;
       z-index: 9999;
     }
-    #offline-banner span { color: #fff; }
+
+    #offline-banner span {
+      color: #fff;
+    }
   </style>
 </head>
 
@@ -2254,15 +2258,19 @@
       <!-- Right Column: Player + HUD + Connected Documents -->
       <section class="player-panel">
         <div class="player-container">
-          <div id="view-toggle-bar" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+          <div id="view-toggle-bar"
+            style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(37, 99, 235, 0.08); border: 1px solid rgba(37, 99, 235, 0.22); padding: 5px 12px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: #2563eb; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.02em;">
-                <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+              <span
+                style="display: inline-flex; align-items: center; gap: 6px; background: rgba(37, 99, 235, 0.08); border: 1px solid rgba(37, 99, 235, 0.22); padding: 5px 12px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: #2563eb; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.02em;">
+                <span
+                  style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
                 CAD DIGITAL TWIN · PROCEDURAL RECONSTRUCTION
               </span>
             </div>
             <span id="view-mode-note"
-              style="font-size: 0.70rem; color: var(--text-tertiary); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em;">IndEgo Procedural Moment Reconstruction · Calibrated Telemetry</span>
+              style="font-size: 0.70rem; color: var(--text-tertiary); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em;">IndEgo
+              Procedural Moment Reconstruction · Calibrated Telemetry</span>
           </div>
           <div class="video-viewport video-player" id="video-player">
             <video id="player" controls playsinline preload="metadata"
@@ -2708,7 +2716,7 @@
     // Comprehensive Built-in Offline Fallback Dataset (53 Assets & 154 Links)
     // Ensures zero "Failed to fetch" errors even when opened via file:// or offline
     // =================================================================
-// -- Offline detection ------------------------------------------
+    // -- Offline detection ------------------------------------------
     (function checkBackendAvailability() {
       fetch('/healthz', { method: 'GET', cache: 'no-store' })
         .then(r => { if (!r.ok) throw new Error('not ok'); })
@@ -6044,8 +6052,8 @@
       setViewMode('source', `Playing local file: ${file.name}`);
       try {
         player.currentTime = simTime;
-        player.play().catch(() => {});
-      } catch (e) {}
+        player.play().catch(() => { });
+      } catch (e) { }
     }
 
     // View mode: 'blueprint' = procedural CAD visualization

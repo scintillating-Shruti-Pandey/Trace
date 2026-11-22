@@ -58,6 +58,24 @@ against the Engineering Contract (`records/ENGINEERING_SPEC.md` §1.4 Definition
 - **Phase 7 (Demo UI)**: Interactive moment seeking player with connected technical document evidence panel and live SSE streaming
   grounded answer generation verified in live browser at `http://localhost:8000/demo/seek`.
 
+**Latest milestone (2026-11-23, Asia/Calcutta) — Proper LLM-based RAG generation (M2 requirement):**
+- `backend/app/generation.py` — Fully rewritten to include real LLM-based RAG generation:
+  - **`OllamaLLMClient`**: HTTP client for local Ollama API server (`http://localhost:11434`). Supports sync `generate()`, async `agenerate()`, and streaming `stream_generate()`. Free, local, $0.00.
+  - **`LLMGroundedAnswerGenerator`**: Primary generator. Builds structured RAG prompt (numbered evidence items + query + strict citation rules), calls Ollama LLM, post-processes output to strip any hallucinated citation IDs (§16.6 gate), falls back transparently to template generator if Ollama is unreachable.
+  - **`build_rag_prompt()`**: New function that constructs the structured prompt given evidence items. Evidence is passed as numbered blocks ([E1]...[En]) with source type, title, locator, and text. LLM is instructed to cite only provided IDs.
+  - **`GroundedAnswerGenerator`**: Retained as fallback (zero dependencies, always available).
+  - **`GenerationResult.llm_used`**: New field — `True` when Ollama LLM generated the answer, `False` when template fallback was used.
+  - All Appendix D rules, abstention gate, and §16.6 citation validation preserved in both paths.
+- `backend/app/config.py` — Added `llm_enabled` (bool, default `True`), `llm_endpoint` (str, `http://localhost:11434`), `llm_model` (str, `gemma2:2b`), `llm_timeout` (float, 60.0). Configurable via `.env`.
+- `backend/app/main.py` — Both `/api/v1/generate` and `/api/v1/generate/stream` now instantiate `LLMGroundedAnswerGenerator` when `settings.llm_enabled` is True, else fall back to `GroundedAnswerGenerator`.
+- `backend/app/schemas.py` — `GenerateResponse` gains `llm_used: bool = False` field.
+- `requirements.txt` — Updated comments; `httpx` (already present) is used directly for Ollama calls; no new required dependency added.
+- **Smoke test verified**: `python -c "..."` smoke test passes — template generator, RAG prompt builder, Ollama availability check, and `LLMGroundedAnswerGenerator` with graceful fallback all working correctly.
+- **LLM setup instructions**: To activate full LLM generation, install Ollama (`https://ollama.com/download`), run `ollama serve`, pull a model (`ollama pull gemma2:2b`). The API will auto-detect and use it.
+- **Zero spending maintained**: $0.00. Ollama is fully local/free. If Ollama is not running, template generator serves as fallback — system is never broken.
+
+**Latest milestone (2026-11-21, Asia/Calcutta) — Demo UI production fixes:**
+
 **Latest milestone (2026-11-21, Asia/Calcutta) — Demo UI production fixes:**
 - `auth.py` UTF-8 BOM stripped (was causing `SyntaxError: invalid non-printable character U+FEFF` on startup; volume mount means no rebuild needed).
 - All backend Python files verified clean (no BOM, no syntax errors).

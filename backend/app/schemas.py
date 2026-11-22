@@ -110,3 +110,4 @@ class GenerateResponse(BaseModel):
     abstention_reason: str | None = None
     citations: list[CitationItem]
     evidence_count: int
+    llm_used: bool = False   # True if Ollama LLM generated the answer; False if template fallback

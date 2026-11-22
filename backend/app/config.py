@@ -23,6 +23,25 @@ class Settings(BaseSettings):
     embedding_api_key: SecretStr | None = None
     visual_endpoint: str = "http://127.0.0.1:8002"
 
+    # ---------------------------------------------------------------------------
+    # LLM Generation settings (Ollama — local, free, $0.00)
+    # ---------------------------------------------------------------------------
+    # llm_enabled: Set True to use Ollama LLM for grounded answer generation.
+    #   Falls back to template generator automatically if Ollama is unreachable.
+    # llm_endpoint: Ollama API base URL (default: http://localhost:11434).
+    #   Inside Docker Compose use http://host.docker.internal:11434
+    # llm_model: Any model pulled via `ollama pull <model>`.
+    #   Recommended (smallest/fastest on RTX 4050 6 GB VRAM):
+    #     gemma2:2b    (~1.6 GB VRAM) — Google Gemma 2 2B, best quality/speed ratio
+    #     llama3.2:3b  (~2.0 GB VRAM) — Meta Llama 3.2 3B
+    #     phi3:mini    (~2.3 GB VRAM) — Microsoft Phi-3 Mini
+    #     mistral:7b   (~4.1 GB VRAM) — Mistral 7B (larger, higher quality)
+    # llm_timeout: Max seconds to wait for Ollama to respond.
+    llm_enabled: bool = True
+    llm_endpoint: str = "http://localhost:11434"
+    llm_model: str = "gemma2:2b"
+    llm_timeout: float = 60.0
+
     @field_validator("database_url")
     @classmethod
     def postgres_only(cls, value: str) -> str:

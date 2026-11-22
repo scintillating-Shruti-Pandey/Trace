@@ -20,6 +20,7 @@ from app.embeddings import BgeM3Client
 from app.generation import (
     CitationValidationError,
     GroundedAnswerGenerator,
+    LLMGroundedAnswerGenerator,
     assemble_evidence,
     validate_citations,
 )
@@ -353,7 +354,11 @@ def create_app(settings: Settings | None = None):
             link_expansion=value.link_expansion,
         )
         evidence = assemble_evidence(multimodal, top_k=value.limit)
-        generator = GroundedAnswerGenerator()
+        generator = LLMGroundedAnswerGenerator(
+            ollama_endpoint=settings.llm_endpoint,
+            ollama_model=settings.llm_model,
+            timeout=settings.llm_timeout,
+        ) if settings.llm_enabled else GroundedAnswerGenerator()
         try:
             result = generator.generate(value.query, evidence)
         except CitationValidationError as e:
@@ -380,6 +385,7 @@ def create_app(settings: Settings | None = None):
             abstention_reason=result.abstention_reason,
             citations=citation_items,
             evidence_count=result.evidence_count,
+            llm_used=result.llm_used,
         )
 
     @app.get("/api/v1/generate/stream", tags=["generation"])
@@ -413,7 +419,11 @@ def create_app(settings: Settings | None = None):
                     return assemble_evidence(multimodal, top_k=limit)
 
         evidence = await asyncio.to_thread(retrieve)
-        generator = GroundedAnswerGenerator()
+        generator = LLMGroundedAnswerGenerator(
+            ollama_endpoint=settings.llm_endpoint,
+            ollama_model=settings.llm_model,
+            timeout=settings.llm_timeout,
+        ) if settings.llm_enabled else GroundedAnswerGenerator()
 
         async def sse_event_stream():
             try:
