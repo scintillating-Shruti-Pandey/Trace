@@ -261,13 +261,25 @@ class OllamaLLMClient:
         return self._model
 
     def is_available(self) -> bool:
-        """Return True if the Ollama server is reachable (health check)."""
-        try:
-            with httpx.Client(timeout=3.0) as client:
-                r = client.get(f"{self._endpoint}/api/tags")
-                return r.status_code == 200
-        except Exception:
-            return False
+        """Return True if the Ollama server is reachable (health check).
+
+        Automatically tests host.docker.internal:11434 if localhost:11434 fails,
+        enabling transparent operation both inside and outside Docker containers.
+        """
+        candidate_endpoints = [self._endpoint]
+        if "localhost" in self._endpoint or "127.0.0.1" in self._endpoint:
+            candidate_endpoints.append("http://host.docker.internal:11434")
+
+        for ep in candidate_endpoints:
+            try:
+                with httpx.Client(timeout=3.0) as client:
+                    r = client.get(f"{ep}/api/tags")
+                    if r.status_code == 200:
+                        self._endpoint = ep  # bind working endpoint
+                        return True
+            except Exception:
+                continue
+        return False
 
     def generate(self, prompt: str) -> str:
         """Call Ollama /api/generate (non-streaming) and return the full response text."""

@@ -15,6 +15,8 @@ x-app: &app
     SEARCH_ENABLED: ${SEARCH_ENABLED:-false}
     EMBEDDING_ENDPOINT: ${EMBEDDING_ENDPOINT:-http://host.docker.internal:8001/v1/embeddings}
     VISUAL_ENDPOINT: ${VISUAL_ENDPOINT:-http://host.docker.internal:8002}
+    LLM_ENDPOINT: ${LLM_ENDPOINT:-http://host.docker.internal:11434}
+    LLM_MODEL: ${LLM_MODEL:-llama3.2:3b}
   volumes:
     - ./data/incoming:/data/incoming:ro
 
