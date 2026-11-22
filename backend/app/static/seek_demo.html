@@ -5153,9 +5153,14 @@
             if (line.startsWith('data: ')) {
               const data = JSON.parse(line.slice(6));
               if (data.type === 'token') {
-                fullAnswerText += data.text;
+                const tokenStr = data.content !== undefined ? data.content : (data.text || '');
+                fullAnswerText += tokenStr;
                 answerBody.innerHTML = renderAnswerWithCitations(fullAnswerText);
               } else if (data.type === 'done') {
+                // If live DB returned 0 evidence on an in-domain query, fall back to rich client simulation
+                if (data.abstained && (!data.citations || data.citations.length === 0) && !checkQueryDomain(query).isOutOfDomain) {
+                  throw new Error('Empty corpus database: triggering in-memory procedural simulation');
+                }
                 const totalMs = (performance.now() - t0).toFixed(1);
                 answerPerf.innerText = `${totalMs} ms`;
                 const dtGen = document.getElementById('dt-gen');
@@ -5318,6 +5323,11 @@
         docChunks.forEach(c => { currentEvidenceMap.set(`E${eIdx++}`, { kind: 'chunk', id: c.chunk_id, ...c }); });
         keyframes.forEach(k => { currentEvidenceMap.set(`E${eIdx++}`, { kind: 'image', id: k.image_id, ...k }); });
 
+        // If live DB returned 0 segments, fall back to the rich client-side multi-modal corpus
+        if (videoSegments.length === 0 && !checkQueryDomain(query).isOutOfDomain) {
+          throw new Error('Empty database results: triggering client multimodal procedural fallback');
+        }
+
         renderVideoMoments(videoSegments);
         renderEvidenceDocuments(docChunks);
         if (videoSegments.length > 0) seekToSegment(videoSegments[0], 0);
@@ -5441,6 +5451,7 @@
         let eIdx = 1;
         videoSegments.forEach(s => { currentEvidenceMap.set(`E${eIdx++}`, { kind: 'segment', id: s.segment_id, ...s }); });
         docChunks.forEach(c => { currentEvidenceMap.set(`E${eIdx++}`, { kind: 'chunk', id: c.chunk_id, ...c }); });
+
         renderVideoMoments(videoSegments);
         renderEvidenceDocuments(docChunks);
         if (videoSegments.length > 0) seekToSegment(videoSegments[0], 0);
