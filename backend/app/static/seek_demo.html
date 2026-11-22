@@ -5719,76 +5719,237 @@
       }
 
       // ==============================================================
-      // SCENE 2: MECHANICAL EQUIPMENT (Aluminum Extrusion Frame Rail & Hinge)
+      // SCENE 2: MECHANICAL EQUIPMENT (3D Isometric Lower Hinge Assembly)
       // ==============================================================
       else if (fam === 'mechanical' || fam === 'assembly' || fam === 'repair') {
         simCtx.save();
         simCtx.translate(cx, cy);
 
-        // 45x45 Structural Extrusion Profile Wireframe
-        simCtx.strokeStyle = '#ea580c';
-        simCtx.lineWidth = 2;
-        // Outer box
-        simCtx.strokeRect(-120, -70, 240, 140);
-        simCtx.strokeStyle = 'rgba(234, 88, 12, 0.4)';
-        // Center hollow core
-        simCtx.strokeRect(-35, -35, 70, 70);
-        // 4 T-Slots
-        simCtx.strokeRect(-15, -70, 30, 25);
-        simCtx.strokeRect(-15, 45, 30, 25);
-        simCtx.strokeRect(-120, -15, 25, 30);
-        simCtx.strokeRect(95, -15, 25, 30);
+        // Dynamic swing angle of the moving hinge leaf based on simulation time
+        const swingAngle = Math.sin(simAngle * 2) * 0.45 + 0.55; // 0.1 to 1.0 rad (~6° to ~57°)
 
-        // Multi-Axis Lower Hinge Pivot Flange (Mechanical CAD Symbol)
-        simCtx.fillStyle = 'rgba(234, 88, 12, 0.18)';
-        simCtx.strokeStyle = '#fbbf24';
-        simCtx.lineWidth = 2.5;
+        // --- Isometric 3D Projection Helper ---
+        // Converts 3D coordinates (x, y, z) into screen (X, Y)
+        const iso = (x, y, z) => {
+          const cos30 = 0.866;
+          const sin30 = 0.5;
+          return {
+            x: (x - y) * cos30,
+            y: (x + y) * sin30 - z
+          };
+        };
+
+        // Draw 3D Isometric Box Wireframe & Shaded Face
+        const drawIsoBox = (x, y, z, dx, dy, dz, strokeStyle, fillStyle) => {
+          const p1 = iso(x, y, z);
+          const p2 = iso(x + dx, y, z);
+          const p3 = iso(x + dx, y + dy, z);
+          const p4 = iso(x, y + dy, z);
+          const p5 = iso(x, y, z + dz);
+          const p6 = iso(x + dx, y, z + dz);
+          const p7 = iso(x + dx, y + dy, z + dz);
+          const p8 = iso(x, y + dy, z + dz);
+
+          simCtx.strokeStyle = strokeStyle;
+          simCtx.fillStyle = fillStyle;
+          simCtx.lineWidth = 1.5;
+
+          // Top Face
+          simCtx.beginPath();
+          simCtx.moveTo(p5.x, p5.y); simCtx.lineTo(p6.x, p6.y);
+          simCtx.lineTo(p7.x, p7.y); simCtx.lineTo(p8.x, p8.y);
+          simCtx.closePath();
+          if (fillStyle) simCtx.fill();
+          simCtx.stroke();
+
+          // Left-Front Face
+          simCtx.beginPath();
+          simCtx.moveTo(p5.x, p5.y); simCtx.lineTo(p8.x, p8.y);
+          simCtx.lineTo(p4.x, p4.y); simCtx.lineTo(p1.x, p1.y);
+          simCtx.closePath();
+          if (fillStyle) simCtx.fill();
+          simCtx.stroke();
+
+          // Right-Front Face
+          simCtx.beginPath();
+          simCtx.moveTo(p8.x, p8.y); simCtx.lineTo(p7.x, p7.y);
+          simCtx.lineTo(p3.x, p3.y); simCtx.lineTo(p4.x, p4.y);
+          simCtx.closePath();
+          if (fillStyle) simCtx.fill();
+          simCtx.stroke();
+        };
+
+        // --- 1. Vertical 45x45 Aluminum Extrusion Column ---
+        drawIsoBox(-140, -40, -110, 70, 70, 220, '#ea580c', 'rgba(234, 88, 12, 0.08)');
+        // T-Slot groove indents on front faces
+        drawIsoBox(-115, -40, -110, 20, 10, 220, 'rgba(251, 191, 36, 0.4)', 'rgba(15, 23, 42, 0.6)');
+        drawIsoBox(-140, -15, -110, 10, 20, 220, 'rgba(251, 191, 36, 0.4)', 'rgba(15, 23, 42, 0.6)');
+
+        // --- 2. Lower Hinge Fixed Leaf Bracket (Mounted to Rail) ---
+        drawIsoBox(-70, -35, -50, 18, 60, 100, '#fbbf24', 'rgba(251, 191, 36, 0.15)');
+
+        // Counterbored Fastener Screws [M8x20 DIN 912 Allen Screws]
+        const sTop = iso(-70, -15, 30);
+        const sBot = iso(-70, -15, -30);
+        [sTop, sBot].forEach(pt => {
+          simCtx.strokeStyle = '#fbbf24';
+          simCtx.fillStyle = '#050810';
+          simCtx.lineWidth = 1.5;
+          simCtx.beginPath();
+          simCtx.arc(pt.x, pt.y, 6, 0, Math.PI * 2);
+          simCtx.fill(); simCtx.stroke();
+          simCtx.strokeStyle = '#d97706';
+          simCtx.strokeRect(pt.x - 2.5, pt.y - 2.5, 5, 5);
+        });
+
+        // Fixed Knuckle Barrels (Upper & Lower Knuckles)
+        drawIsoBox(-52, -15, 25, 28, 24, 25, '#fbbf24', 'rgba(217, 119, 6, 0.25)');
+        drawIsoBox(-52, -15, -50, 28, 24, 25, '#fbbf24', 'rgba(217, 119, 6, 0.25)');
+
+        // --- 3. Hardened Pivot Pin & Center Axis ---
+        const pinTop = iso(-38, -3, 60);
+        const pinBot = iso(-38, -3, -65);
+        // Dashed Center Axis Line
+        simCtx.strokeStyle = 'rgba(6, 182, 212, 0.7)';
+        simCtx.lineWidth = 1.5;
+        simCtx.setLineDash([6, 4]);
         simCtx.beginPath();
-        simCtx.moveTo(-120, -70);
-        simCtx.lineTo(-175, -70);
-        simCtx.lineTo(-175, -130);
-        simCtx.lineTo(-120, -130);
+        simCtx.moveTo(pinTop.x, pinTop.y - 18);
+        simCtx.lineTo(pinBot.x, pinBot.y + 18);
+        simCtx.stroke();
+        simCtx.setLineDash([]);
+
+        // Pin Shaft Cylinder Body
+        simCtx.strokeStyle = '#38bdf8';
+        simCtx.fillStyle = 'rgba(56, 189, 248, 0.22)';
+        simCtx.lineWidth = 2;
+        simCtx.beginPath();
+        simCtx.moveTo(pinTop.x - 7, pinTop.y);
+        simCtx.lineTo(pinTop.x + 7, pinTop.y);
+        simCtx.lineTo(pinBot.x + 7, pinBot.y);
+        simCtx.lineTo(pinBot.x - 7, pinBot.y);
+        simCtx.closePath();
+        simCtx.fill();
+        simCtx.stroke();
+        // Pin Top Cap
+        simCtx.beginPath();
+        simCtx.arc(pinTop.x, pinTop.y, 9, 0, Math.PI * 2);
+        simCtx.fillStyle = '#0284c7';
+        simCtx.fill();
+        simCtx.stroke();
+
+        // --- 4. Moving Hinge Leaf (Interlocking Middle Knuckle + Swiveling Flange) ---
+        // Center Knuckle (Fits snugly between upper and lower knuckles)
+        drawIsoBox(-52, -15, -15, 28, 24, 32, '#f97316', 'rgba(249, 115, 22, 0.25)');
+
+        // Swinging Leaf Arm (Rotates dynamically around pivot pin)
+        const armLen = 95;
+        const armEndX = -38 + Math.cos(swingAngle) * armLen;
+        const armEndY = -3 + Math.sin(swingAngle) * armLen;
+        const armMid1 = iso(-38, -3, 15);
+        const armMid2 = iso(-38, -3, -15);
+        const armEnd1 = iso(armEndX, armEndY, 15);
+        const armEnd2 = iso(armEndX, armEndY, -15);
+
+        simCtx.strokeStyle = '#f97316';
+        simCtx.fillStyle = 'rgba(249, 115, 22, 0.18)';
+        simCtx.lineWidth = 2;
+        simCtx.beginPath();
+        simCtx.moveTo(armMid1.x, armMid1.y);
+        simCtx.lineTo(armEnd1.x, armEnd1.y);
+        simCtx.lineTo(armEnd2.x, armEnd2.y);
+        simCtx.lineTo(armMid2.x, armMid2.y);
         simCtx.closePath();
         simCtx.fill();
         simCtx.stroke();
 
-        // Hinge Pivot Pin Cylinder & Center Axis
-        simCtx.fillStyle = '#ea580c';
+        // Movable Leaf Mounting Bore
+        const hole1 = iso(armEndX * 0.75 - 38 * 0.25, armEndY * 0.75 - 3 * 0.25, 0);
         simCtx.strokeStyle = '#fbbf24';
-        simCtx.lineWidth = 2;
         simCtx.beginPath();
-        simCtx.arc(-148, -100, 14, 0, Math.PI * 2);
-        simCtx.fill();
+        simCtx.arc(hole1.x, hole1.y, 5, 0, Math.PI * 2);
         simCtx.stroke();
-        simCtx.beginPath();
-        simCtx.arc(-148, -100, 5, 0, Math.PI * 2);
-        simCtx.fillStyle = '#050810';
-        simCtx.fill();
 
-        // M8 Fastener Bolt with Torque Indicator
-        const boltX = -148;
-        const boltY = -50;
+        // Swing Motion Arc Indicator
+        simCtx.strokeStyle = 'rgba(251, 191, 36, 0.6)';
+        simCtx.lineWidth = 1.5;
+        simCtx.setLineDash([4, 4]);
+        simCtx.beginPath();
+        const arcCenter = iso(-38, -3, -20);
+        const arcStart = iso(-38 + 70, -3, -20);
+        const arcEnd = iso(-38 + Math.cos(swingAngle) * 70, -3 + Math.sin(swingAngle) * 70, -20);
+        simCtx.moveTo(arcStart.x, arcStart.y);
+        simCtx.quadraticCurveTo(arcCenter.x + 40, arcCenter.y + 35, arcEnd.x, arcEnd.y);
+        simCtx.stroke();
+        simCtx.setLineDash([]);
+
+        // Rotation Angle Gauge
+        simCtx.font = '700 11px "JetBrains Mono", monospace';
         simCtx.fillStyle = '#fbbf24';
-        simCtx.beginPath();
-        simCtx.arc(boltX, boltY, 7, 0, Math.PI * 2);
-        simCtx.fill();
+        const deg = Math.round(swingAngle * (180 / Math.PI));
+        simCtx.fillText(`θ = ${deg}°`, arcEnd.x + 8, arcEnd.y - 4);
 
+        // --- 5. Torque Calibration Tool & Specification Readout ---
+        const wrenchTip = iso(-70, -15, -30);
         simCtx.strokeStyle = '#d97706';
         simCtx.lineWidth = 3;
         simCtx.beginPath();
-        simCtx.moveTo(boltX, boltY);
-        simCtx.lineTo(boltX - 60 + Math.sin(simAngle * 4) * 6, boltY - 45);
+        simCtx.moveTo(wrenchTip.x, wrenchTip.y);
+        simCtx.lineTo(wrenchTip.x - 70, wrenchTip.y + 25);
         simCtx.stroke();
         simCtx.fillStyle = '#ea580c';
-        simCtx.fillRect(boltX - 78, boltY - 55, 26, 14);
+        simCtx.fillRect(wrenchTip.x - 92, wrenchTip.y + 18, 24, 14);
 
-        // Calibrated CAD Telemetry Callouts
+        // Digital Torque Readout Pill
+        simCtx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+        simCtx.strokeStyle = '#10b981';
+        simCtx.lineWidth = 1.5;
+        simCtx.strokeRect(wrenchTip.x - 130, wrenchTip.y - 35, 115, 38);
+        simCtx.fillRect(wrenchTip.x - 130, wrenchTip.y - 35, 115, 38);
+
+        simCtx.font = '700 11px "JetBrains Mono", monospace';
+        simCtx.fillStyle = '#10b981';
+        simCtx.fillText('TORQUE: 25.0 Nm', wrenchTip.x - 122, wrenchTip.y - 20);
+        simCtx.font = '500 9px "JetBrains Mono", monospace';
+        simCtx.fillStyle = '#94a3b8';
+        simCtx.fillText('SPEC: ISO 6789 (±1 Nm)', wrenchTip.x - 122, wrenchTip.y - 6);
+
+        // --- 6. Technical Dimension Callouts & Exploded Leader Lines ---
+        const callouts = [
+          { pt: iso(-140, -5, 100), text: '45x45 STRUCTURAL EXTRUSION (6061-T6)', dx: -180, dy: -25 },
+          { pt: pinTop, text: 'HARDENED STEEL PIVOT PIN (Ø12.0 mm H7)', dx: 40, dy: -40 },
+          { pt: armEnd1, text: 'MULTI-AXIS MOVING HINGE FLANGE (0°-120°)', dx: 45, dy: 15 }
+        ];
+
+        callouts.forEach(c => {
+          simCtx.strokeStyle = 'rgba(148, 163, 184, 0.5)';
+          simCtx.lineWidth = 1;
+          simCtx.beginPath();
+          simCtx.moveTo(c.pt.x, c.pt.y);
+          simCtx.lineTo(c.pt.x + c.dx * 0.5, c.pt.y + c.dy);
+          simCtx.lineTo(c.pt.x + c.dx, c.pt.y + c.dy);
+          simCtx.stroke();
+
+          simCtx.fillStyle = '#fbbf24';
+          simCtx.beginPath();
+          simCtx.arc(c.pt.x, c.pt.y, 2.5, 0, Math.PI * 2);
+          simCtx.fill();
+
+          simCtx.font = '600 10px "JetBrains Mono", monospace';
+          simCtx.fillStyle = '#cbd5e1';
+          const alignRight = c.dx < 0;
+          simCtx.textAlign = alignRight ? 'right' : 'left';
+          simCtx.fillText(c.text, c.pt.x + c.dx + (alignRight ? -4 : 4), c.pt.y + c.dy - 3);
+          simCtx.textAlign = 'left';
+        });
+
+        // Title Block Badge at bottom of isometric viewport
         simCtx.font = '700 12px "JetBrains Mono", monospace';
         simCtx.fillStyle = '#fbbf24';
-        simCtx.fillText('LOWER HINGE PIVOT PIN & FRAME PROFILE', -130, 95);
+        simCtx.fillText('CAD DIGITAL TWIN · ISOMETRIC LOWER HINGE ASSEMBLY', -170, 145);
         simCtx.font = '500 10px "JetBrains Mono", monospace';
         simCtx.fillStyle = '#94a3b8';
-        simCtx.fillText('TORQUE: 25 Nm (ISO 6789) · CLEARANCE: ±0.15mm', -130, 112);
+        simCtx.fillText('DWG: IND-HNG-411-02 · 3D THIRD-ANGLE PROJECTION · LIVE KINEMATICS', -170, 162);
 
         simCtx.restore();
       }
