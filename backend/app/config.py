@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     # llm_timeout: Max seconds to wait for Ollama to respond.
     llm_enabled: bool = True
     llm_endpoint: str = "http://localhost:11434"
-    llm_model: str = "gemma2:2b"
+    llm_model: str = "llama3.2:3b"
     llm_timeout: float = 60.0
 
     @field_validator("database_url")

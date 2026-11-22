@@ -249,7 +249,7 @@ class OllamaLLMClient:
     def __init__(
         self,
         endpoint: str = "http://localhost:11434",
-        model: str = "gemma2:2b",
+        model: str = "llama3.2:3b",
         timeout: float = 60.0,
     ):
         self._endpoint = endpoint.rstrip("/")
