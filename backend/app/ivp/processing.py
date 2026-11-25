@@ -49,9 +49,9 @@ def analyze_color_spaces(bgr: np.ndarray) -> dict[str, Any]:
     Returns all three conversions with channel-level statistics.
     """
     gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
-    hsv  = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
-    lab  = cv2.cvtColor(bgr, cv2.COLOR_BGR2LAB)
-    rgb  = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+    hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
+    lab = cv2.cvtColor(bgr, cv2.COLOR_BGR2LAB)
+    rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
 
     h, s, v = cv2.split(hsv)
     l_ch, a_ch, b_ch = cv2.split(lab)
@@ -147,15 +147,15 @@ def analyze_filtering(bgr: np.ndarray) -> dict[str, Any]:
     gray = _to_gray(bgr)
 
     # Gaussian blur — noise reduction before edge detection
-    blur_3  = cv2.GaussianBlur(gray, (3, 3), 0)
-    blur_7  = cv2.GaussianBlur(gray, (7, 7), 0)
+    blur_3 = cv2.GaussianBlur(gray, (3, 3), 0)
+    blur_7 = cv2.GaussianBlur(gray, (7, 7), 0)
     blur_15 = cv2.GaussianBlur(gray, (15, 15), 0)
 
     # Sharpening kernel (unsharp masking)
     kernel_sharp = np.array([
-        [ 0, -1,  0],
+        [0, -1,  0],
         [-1,  5, -1],
-        [ 0, -1,  0]
+        [0, -1,  0]
     ], dtype=np.float32)
     sharpened = cv2.filter2D(gray, -1, kernel_sharp)
     sharpened = np.clip(sharpened, 0, 255).astype(np.uint8)
@@ -164,7 +164,7 @@ def analyze_filtering(bgr: np.ndarray) -> dict[str, Any]:
     kernel_emboss = np.array([
         [-2, -1,  0],
         [-1,  1,  1],
-        [ 0,  1,  2]
+        [0,  1,  2]
     ], dtype=np.float32)
     embossed = cv2.filter2D(gray, -1, kernel_emboss)
     embossed = np.clip(embossed + 128, 0, 255).astype(np.uint8)
@@ -185,7 +185,7 @@ def analyze_filtering(bgr: np.ndarray) -> dict[str, Any]:
             "original_gray":   _encode_png(gray),
             "gaussian_blur_3": _encode_png(blur_3),
             "gaussian_blur_7": _encode_png(blur_7),
-            "gaussian_blur_15":_encode_png(blur_15),
+            "gaussian_blur_15": _encode_png(blur_15),
             "sharpened":       _encode_png(sharpened),
             "embossed":        _encode_png(embossed),
             "laplacian":       _encode_png(laplacian_abs),
@@ -211,24 +211,26 @@ def analyze_edges(bgr: np.ndarray) -> dict[str, Any]:
     gray = cv2.GaussianBlur(_to_gray(bgr), (5, 5), 0)
 
     # Sobel
-    sobel_x  = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
-    sobel_y  = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
+    sobel_x = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
+    sobel_y = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
     magnitude = np.sqrt(sobel_x**2 + sobel_y**2)
     direction = np.arctan2(sobel_y, sobel_x) * 180 / math.pi
 
     sx_abs = np.clip(np.abs(sobel_x), 0, 255).astype(np.uint8)
     sy_abs = np.clip(np.abs(sobel_y), 0, 255).astype(np.uint8)
-    mag_norm = ((magnitude / magnitude.max()) * 255).astype(np.uint8) if magnitude.max() > 0 else np.zeros_like(gray)
+    mag_norm = ((magnitude / magnitude.max()) *
+                255).astype(np.uint8) if magnitude.max() > 0 else np.zeros_like(gray)
 
     # Direction visualized: map -180..180 → 0..255
     dir_vis = ((direction + 180) / 360 * 255).astype(np.uint8)
 
     # Canny — different threshold pairs
-    canny_tight  = cv2.Canny(gray, 100, 200)
+    canny_tight = cv2.Canny(gray, 100, 200)
     canny_medium = cv2.Canny(gray, 50, 150)
-    canny_loose  = cv2.Canny(gray, 20, 80)
+    canny_loose = cv2.Canny(gray, 20, 80)
 
-    edge_density = float(np.count_nonzero(canny_medium)) / (gray.shape[0] * gray.shape[1])
+    edge_density = float(np.count_nonzero(canny_medium)) / \
+        (gray.shape[0] * gray.shape[1])
 
     return {
         "technique": "Edge Detection (Sobel + Canny)",
@@ -270,7 +272,7 @@ def analyze_morphology(bgr: np.ndarray) -> dict[str, Any]:
     Morphological operations use a structuring element (kernel) to modify shapes.
     Critical for cleaning binary masks in workpiece segmentation.
     """
-    gray   = _to_gray(bgr)
+    gray = _to_gray(bgr)
     _, binary = cv2.threshold(
         cv2.GaussianBlur(gray, (5, 5), 0), 0, 255,
         cv2.THRESH_BINARY + cv2.THRESH_OTSU
@@ -279,12 +281,12 @@ def analyze_morphology(bgr: np.ndarray) -> dict[str, Any]:
     kernel_3 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
     kernel_7 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
 
-    eroded   = cv2.erode(binary,   kernel_3, iterations=2)
-    dilated  = cv2.dilate(binary,  kernel_3, iterations=2)
-    opened   = cv2.morphologyEx(binary, cv2.MORPH_OPEN,     kernel_7)
-    closed   = cv2.morphologyEx(binary, cv2.MORPH_CLOSE,    kernel_7)
+    eroded = cv2.erode(binary,   kernel_3, iterations=2)
+    dilated = cv2.dilate(binary,  kernel_3, iterations=2)
+    opened = cv2.morphologyEx(binary, cv2.MORPH_OPEN,     kernel_7)
+    closed = cv2.morphologyEx(binary, cv2.MORPH_CLOSE,    kernel_7)
     gradient = cv2.morphologyEx(binary, cv2.MORPH_GRADIENT, kernel_3)
-    tophat   = cv2.morphologyEx(binary, cv2.MORPH_TOPHAT,   kernel_7)
+    tophat = cv2.morphologyEx(binary, cv2.MORPH_TOPHAT,   kernel_7)
     blackhat = cv2.morphologyEx(binary, cv2.MORPH_BLACKHAT, kernel_7)
 
     return {
@@ -309,9 +311,9 @@ def analyze_morphology(bgr: np.ndarray) -> dict[str, Any]:
             "blackhat":      _encode_png(blackhat),
         },
         "metrics": {
-            "binary_fill_pct":   round(float(np.count_nonzero(binary))   / binary.size * 100, 2),
-            "eroded_fill_pct":   round(float(np.count_nonzero(eroded))   / binary.size * 100, 2),
-            "dilated_fill_pct":  round(float(np.count_nonzero(dilated))  / binary.size * 100, 2),
+            "binary_fill_pct":   round(float(np.count_nonzero(binary)) / binary.size * 100, 2),
+            "eroded_fill_pct":   round(float(np.count_nonzero(eroded)) / binary.size * 100, 2),
+            "dilated_fill_pct":  round(float(np.count_nonzero(dilated)) / binary.size * 100, 2),
             "gradient_px_count": int(np.count_nonzero(gradient)),
         },
     }
@@ -368,7 +370,7 @@ def analyze_keypoints(bgr: np.ndarray) -> dict[str, Any]:
             "sift_keypoints_count":     len(kp_sift),
             "orb_keypoints_count":      len(kp_orb),
             "sift_descriptor_shape":    list(desc_sift.shape) if desc_sift is not None else [0, 128],
-            "orb_descriptor_shape":     list(desc_orb.shape)  if desc_orb  is not None else [0, 32],
+            "orb_descriptor_shape":     list(desc_orb.shape) if desc_orb is not None else [0, 32],
             "sift_mean_keypoint_size":  round(float(np.mean(sift_sizes)), 2) if sift_sizes else 0.0,
             "sift_mean_response":       round(float(np.mean(sift_responses)), 4) if sift_responses else 0.0,
         },
@@ -396,10 +398,12 @@ def analyze_optical_flow(frame1: np.ndarray, frame2: np.ndarray) -> dict[str, An
         winSize=(15, 15), maxLevel=3,
         criteria=(cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 30, 0.01)
     )
-    p1, st, _ = cv2.calcOpticalFlowPyrLK(gray1, gray2, corners, None, **lk_params)
+    p1, st, _ = cv2.calcOpticalFlowPyrLK(
+        gray1, gray2, corners, None, **lk_params)
 
-    good_old = corners[st == 1] if corners is not None and p1 is not None else np.array([])
-    good_new = p1[st == 1]      if p1 is not None else np.array([])
+    good_old = corners[st == 1] if corners is not None and p1 is not None else np.array([
+    ])
+    good_new = p1[st == 1] if p1 is not None else np.array([])
 
     lk_vis = frame2.copy()
     for new, old in zip(good_new, good_old):
@@ -423,7 +427,7 @@ def analyze_optical_flow(frame1: np.ndarray, frame2: np.ndarray) -> dict[str, An
     dense_vis = cv2.cvtColor(hsv_flow, cv2.COLOR_HSV2BGR)
 
     mean_motion = float(mag.mean())
-    max_motion  = float(mag.max())
+    max_motion = float(mag.max())
 
     return {
         "technique": "Optical Flow (Lucas-Kanade Sparse + Farneback Dense)",
@@ -463,17 +467,65 @@ def analyze_hog(bgr: np.ndarray) -> dict[str, Any]:
     # Resize to standard HOG input size
     target_h, target_w = 128, 64
     resized = cv2.resize(bgr, (target_w, target_h))
-    gray_r  = _to_gray(resized)
+    gray_r = _to_gray(resized)
 
-    win_size    = (target_w, target_h)
-    block_size  = (16, 16)
-    block_stride= (8, 8)
-    cell_size   = (8, 8)
-    n_bins      = 9
+    win_size = (target_w, target_h)
+    block_size = (16, 16)
+    block_stride = (8, 8)
+    cell_size = (8, 8)
+    n_bins = 9
 
-    hog = cv2.HOGDescriptor(win_size, block_size, block_stride, cell_size, n_bins)
-    descriptor = hog.compute(gray_r)
-    descriptor = descriptor.flatten()
+    hog = None
+    if hasattr(cv2, "HOGDescriptor"):
+        hog = cv2.HOGDescriptor(win_size, block_size,
+                                block_stride, cell_size, n_bins)
+        descriptor = hog.compute(gray_r).flatten()
+    else:
+        # Portable fallback for headless or stripped OpenCV builds that omit
+        # cv2.HOGDescriptor.  This reproduces the standard 128x64 HOG layout:
+        # 7x15 overlapping 16x16 blocks, 4 cells/block, 9 bins/cell.
+        gx = cv2.Sobel(gray_r, cv2.CV_32F, 1, 0, ksize=3)
+        gy = cv2.Sobel(gray_r, cv2.CV_32F, 0, 1, ksize=3)
+        magnitude = cv2.magnitude(gx, gy)
+        orientation = cv2.phase(gx, gy, angleInDegrees=True) % 180.0
+
+        cell_histograms: list[np.ndarray] = []
+        for r in range(0, target_h, cell_size[1]):
+            row_histograms: list[np.ndarray] = []
+            for c in range(0, target_w, cell_size[0]):
+                mag_cell = magnitude[r:r + cell_size[1], c:c + cell_size[0]]
+                ang_cell = orientation[r:r + cell_size[1], c:c + cell_size[0]]
+                histogram = np.zeros(n_bins, dtype=np.float32)
+                for y in range(ang_cell.shape[0]):
+                    for x in range(ang_cell.shape[1]):
+                        position = float(ang_cell[y, x]) / (180.0 / n_bins)
+                        low = int(position) % n_bins
+                        high = (low + 1) % n_bins
+                        fraction = position - int(position)
+                        mag = float(mag_cell[y, x])
+                        histogram[low] += mag * (1.0 - fraction)
+                        histogram[high] += mag * fraction
+                row_histograms.append(histogram)
+            cell_histograms.append(row_histograms)
+
+        normalized_blocks: list[np.ndarray] = []
+        block_h = block_size[1] // cell_size[1]
+        block_w = block_size[0] // cell_size[0]
+        for r in range(0, target_h - block_size[1] + 1, block_stride[1]):
+            for c in range(0, target_w - block_size[0] + 1, block_stride[0]):
+                top = r // cell_size[1]
+                left = c // cell_size[0]
+                block = np.concatenate([
+                    cell_histograms[row][col]
+                    for row in range(top, top + block_h)
+                    for col in range(left, left + block_w)
+                ])
+                norm = float(np.sqrt(np.dot(block, block) + 1e-6))
+                normalized_blocks.append(block / norm)
+
+        # The previous loop covers all valid block origins for 128x64:
+        # rows 0..6 and columns 0..14, yielding 105 36-dim blocks.
+        descriptor = np.concatenate(normalized_blocks).astype(np.float32)
 
     # HOG visualization: draw gradient arrows per cell
     hog_vis = resized.copy()
@@ -489,10 +541,11 @@ def analyze_hog(bgr: np.ndarray) -> dict[str, Any]:
             gx = cv2.Sobel(cell, cv2.CV_64F, 1, 0, ksize=3).mean()
             gy = cv2.Sobel(cell, cv2.CV_64F, 0, 1, ksize=3).mean()
             angle = math.atan2(gy, gx)
-            mag   = min(math.hypot(gx, gy), cell_h // 2 - 1)
+            mag = min(math.hypot(gx, gy), cell_h // 2 - 1)
             ex = int(cx + mag * math.cos(angle))
             ey = int(cy + mag * math.sin(angle))
-            cv2.arrowedLine(hog_vis, (cx, cy), (ex, ey), (0, 255, 255), 1, tipLength=0.4)
+            cv2.arrowedLine(hog_vis, (cx, cy), (ex, ey),
+                            (0, 255, 255), 1, tipLength=0.4)
 
     return {
         "technique": "HOG — Histogram of Oriented Gradients",
@@ -573,8 +626,10 @@ def extract_keyframes(
             interval_ok = (frame_idx - last_kf_idx) >= min_interval_frames
 
             if diff > diff_threshold and interval_ok:
-                edge_map = cv2.Canny(cv2.GaussianBlur(gray, (5, 5), 0), 50, 150)
-                edge_density = float(np.count_nonzero(edge_map)) / edge_map.size
+                edge_map = cv2.Canny(
+                    cv2.GaussianBlur(gray, (5, 5), 0), 50, 150)
+                edge_density = float(
+                    np.count_nonzero(edge_map)) / edge_map.size
                 sharpness = float(cv2.Laplacian(gray, cv2.CV_64F).var())
                 keyframes.append(KeyframeResult(
                     frame_index=frame_idx,
@@ -621,8 +676,8 @@ def extract_keyframes(
             "total_frames_scanned":     frame_idx,
             "keyframes_extracted":      len(keyframes),
             "mean_inter_frame_diff":    round(float(np.mean([k["inter_frame_diff"] for k in encoded])), 2) if encoded else 0.0,
-            "mean_edge_density_pct":    round(float(np.mean([k["edge_density_pct"]  for k in encoded])), 3) if encoded else 0.0,
-            "mean_sharpness":           round(float(np.mean([k["sharpness"]          for k in encoded])), 2) if encoded else 0.0,
+            "mean_edge_density_pct":    round(float(np.mean([k["edge_density_pct"] for k in encoded])), 3) if encoded else 0.0,
+            "mean_sharpness":           round(float(np.mean([k["sharpness"] for k in encoded])), 2) if encoded else 0.0,
         },
     }
 
@@ -640,12 +695,12 @@ def run_full_ivp_pipeline(bgr: np.ndarray, bgr2: np.ndarray | None = None) -> di
     results: dict[str, Any] = {}
 
     results["color_spaces"] = analyze_color_spaces(bgr)
-    results["histograms"]   = analyze_histograms(bgr)
-    results["filtering"]    = analyze_filtering(bgr)
-    results["edges"]        = analyze_edges(bgr)
-    results["morphology"]   = analyze_morphology(bgr)
-    results["keypoints"]    = analyze_keypoints(bgr)
-    results["hog"]          = analyze_hog(bgr)
+    results["histograms"] = analyze_histograms(bgr)
+    results["filtering"] = analyze_filtering(bgr)
+    results["edges"] = analyze_edges(bgr)
+    results["morphology"] = analyze_morphology(bgr)
+    results["keypoints"] = analyze_keypoints(bgr)
+    results["hog"] = analyze_hog(bgr)
 
     if bgr2 is not None:
         results["optical_flow"] = analyze_optical_flow(bgr, bgr2)

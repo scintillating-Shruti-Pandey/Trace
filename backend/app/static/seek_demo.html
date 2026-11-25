@@ -2809,34 +2809,32 @@
     })();
     // -------------------------------------------------------------
     const BUILTIN_CORPUS_ASSETS = [
-      // 25 Manufacturing Videos
-      // Real IndEgo videos — IDs and durations verified from indego-final-2026-10-24.jsonl
-      // Titles use actual trial-group names; labels (assembly/repair) are from dataset categories
-      { id: "vid-01", kind: "video", title: "IndEgo Assembly — User_15_411_2410_2 (trial 411_2410_2)", equipment_family: "assembly", duration_s: 739.84, fps: 30, license: "CC BY 4.0", sha256: "8d61907a87c337804352cfb5a79eea55" },
-      { id: "vid-02", kind: "video", title: "IndEgo Assembly — User_14_User_15_2410_1 (trial 2410_1)", equipment_family: "assembly", duration_s: 761.9, fps: 30, license: "CC BY 4.0", sha256: "87785b5c2f241b364944da60b58d99bd" },
-      { id: "vid-03", kind: "video", title: "IndEgo Assembly — User_14_User_17_407_0601_3 (trial 407_0601_3)", equipment_family: "assembly", duration_s: 816.6, fps: 30, license: "CC BY 4.0", sha256: "c1cbbf94926f4d75a66d27e5bfe26c53" },
-      { id: "vid-04", kind: "video", title: "IndEgo Assembly — User_1_User_15_411_2910_2_1 (trial 411_2910_2_1)", equipment_family: "assembly", duration_s: 416.1, fps: 30, license: "CC BY 4.0", sha256: "912dd6d28ae245e7a9402d7bb3907b40" },
-      { id: "vid-05", kind: "video", title: "IndEgo Repair — User_16_412_0710_2 (trial 412_0710_2)", equipment_family: "repair", duration_s: 538.6, fps: 30, license: "CC BY 4.0", sha256: "ebdcadfc4daf4754a47c2d32ce12c822" },
-      { id: "vid-06", kind: "video", title: "IndEgo Assembly — User_17_User_14_411_2810_2 (trial 411_2810_2)", equipment_family: "assembly", duration_s: 759.7, fps: 30, license: "CC BY 4.0", sha256: "6395b2d996a055e2dbb44399bee00d77" },
-      { id: "vid-07", kind: "video", title: "IndEgo Repair — User_15_412_0110_1 (trial 412_0110_1)", equipment_family: "repair", duration_s: 818.6, fps: 30, license: "CC BY 4.0", sha256: "1551b82678b32e98c4707822e4342587" },
-      { id: "vid-08", kind: "video", title: "IndEgo Assembly — User_16_User_2_411_2510_2 (trial 411_2510_2)", equipment_family: "assembly", duration_s: 842.1, fps: 30, license: "CC BY 4.0", sha256: "3699d1f9d46f396641f49e77e4c39339" },
-      { id: "vid-09", kind: "video", title: "IndEgo Assembly — User_15_411_2309_2_1 (trial 411_2309_2_1)", equipment_family: "assembly", duration_s: 344.5, fps: 30, license: "CC BY 4.0", sha256: "5322c1cbbf94926f4d75a66d27e5bfe2" },
-      { id: "vid-10", kind: "video", title: "IndEgo Repair — User_15_414_3110_1 (trial 414_3110_1)", equipment_family: "repair", duration_s: 720.8, fps: 30, license: "CC BY 4.0", sha256: "7003ebdcadfc4daf4754a47c2d32ce12" },
-      { id: "vid-11", kind: "video", title: "IndEgo Repair — User_15_User_14_411_1010_1 (trial 411_1010_1)", equipment_family: "repair", duration_s: 479.7, fps: 30, license: "CC BY 4.0", sha256: "7079912dd6d28ae245e7a9402d7bb390" },
-      { id: "vid-12", kind: "video", title: "IndEgo Repair — User_14_2325_451_2 (trial 2325_451_2)", equipment_family: "repair", duration_s: 735.7, fps: 30, license: "CC BY 4.0", sha256: "6154444b9748abd649578407e93e2d53" },
-      { id: "vid-13", kind: "video", title: "IndEgo Assembly — User_1_411_1610_3 (trial 411_1610_3)", equipment_family: "assembly", duration_s: 552.1, fps: 30, license: "CC BY 4.0", sha256: "56017020e12dd5a24f01beab94f38d88" },
-      { id: "vid-14", kind: "video", title: "IndEgo Repair — User_14_2325_451 (trial 2325_451)", equipment_family: "repair", duration_s: 517.1, fps: 30, license: "CC BY 4.0", sha256: "6881c1cbbf94926f4d75a66d27e5bfe2" },
-      { id: "vid-15", kind: "video", title: "IndEgo Repair — User_16_407_0511_1 (trial 407_0511_1)", equipment_family: "repair", duration_s: 525.2, fps: 30, license: "CC BY 4.0", sha256: "5322ebdcadfc4daf4754a47c2d32ce12" },
-      { id: "vid-16", kind: "video", title: "IndEgo Assembly — User_16_410_0110_2 (trial 410_0110_2)", equipment_family: "assembly", duration_s: 823.0, fps: 30, license: "CC BY 4.0", sha256: "6228912dd6d28ae245e7a9402d7bb390" },
-      { id: "vid-17", kind: "video", title: "IndEgo Assembly — 7020e12d-d5a2-4f01-beab-94f38d887eca", equipment_family: "assembly", duration_s: 724.1, fps: 30, license: "CC BY 4.0", sha256: "7020e12dd5a24f01beab94f38d887eca" },
-      { id: "vid-18", kind: "video", title: "IndEgo Repair — User_1_1910_repair (trial 1910_repair)", equipment_family: "repair", duration_s: 667.5, fps: 30, license: "CC BY 4.0", sha256: "51267020e12dd5a24f01beab94f38d88" },
-      { id: "vid-19", kind: "video", title: "IndEgo Assembly — User_16_411_2310_2 (trial 411_2310_2)", equipment_family: "assembly", duration_s: 876.0, fps: 30, license: "CC BY 4.0", sha256: "6944c1cbbf94926f4d75a66d27e5bfe2" },
-      { id: "vid-20", kind: "video", title: "IndEgo Repair — User_15_412_1510_1 (trial 412_1510_1)", equipment_family: "repair", duration_s: 475.2, fps: 30, license: "CC BY 4.0", sha256: "3699ebdcadfc4daf4754a47c2d32ce12" },
-      { id: "vid-21", kind: "video", title: "IndEgo Repair — User_2_410_0210_1 (trial 410_0210_1)", equipment_family: "repair", duration_s: 858.8, fps: 30, license: "CC BY 4.0", sha256: "6050912dd6d28ae245e7a9402d7bb390" },
-      { id: "vid-22", kind: "video", title: "IndEgo Assembly — User_1_411_2110_1 (trial 411_2110_1)", equipment_family: "assembly", duration_s: 815.9, fps: 30, license: "CC BY 4.0", sha256: "5453444b9748abd649578407e93e2d53" },
-      { id: "vid-23", kind: "video", title: "IndEgo Assembly — User_1_412_2010_3 (trial 412_2010_3)", equipment_family: "assembly", duration_s: 208.4, fps: 30, license: "CC BY 4.0", sha256: "59077020e12dd5a24f01beab94f38d88" },
-      { id: "vid-24", kind: "video", title: "IndEgo Assembly — User_15_412_1510_3 (trial 412_1510_3)", equipment_family: "assembly", duration_s: 696.8, fps: 30, license: "CC BY 4.0", sha256: "7125c1cbbf94926f4d75a66d27e5bfe2" },
-      { id: "vid-25", kind: "video", title: "IndEgo Repair — User_17_412_1610_2 (trial 412_1610_2)", equipment_family: "repair", duration_s: 843.6, fps: 30, license: "CC BY 4.0", sha256: "6350ebdcadfc4daf4754a47c2d32ce12" },
+      // 25 Manufacturing Videos across 4 Equipment Families: Mechanical, Hydraulic, Rotating, Electrical
+      { id: "vid-01", kind: "video", title: "IndEgo Assembly — User_15_411_2410_2 (trial 411_2410_2)", equipment_family: "mechanical", duration_s: 739.84, fps: 30, license: "CC BY 4.0", sha256: "8d61907a87c337804352cfb5a79eea55" },
+      { id: "vid-02", kind: "video", title: "IndEgo Assembly — User_14_User_15_2410_1 (trial 2410_1)", equipment_family: "mechanical", duration_s: 761.9, fps: 30, license: "CC BY 4.0", sha256: "87785b5c2f241b364944da60b58d99bd" },
+      { id: "vid-03", kind: "video", title: "IndEgo Assembly — User_14_User_17_407_0601_3 (trial 407_0601_3)", equipment_family: "hydraulic", duration_s: 816.6, fps: 30, license: "CC BY 4.0", sha256: "c1cbbf94926f4d75a66d27e5bfe26c53" },
+      { id: "vid-04", kind: "video", title: "IndEgo Assembly — User_1_User_15_411_2910_2_1 (trial 411_2910_2_1)", equipment_family: "rotating", duration_s: 416.1, fps: 30, license: "CC BY 4.0", sha256: "912dd6d28ae245e7a9402d7bb3907b40" },
+      { id: "vid-05", kind: "video", title: "IndEgo Repair — User_16_412_0710_2 (trial 412_0710_2)", equipment_family: "electrical", duration_s: 538.6, fps: 30, license: "CC BY 4.0", sha256: "ebdcadfc4daf4754a47c2d32ce12c822" },
+      { id: "vid-06", kind: "video", title: "IndEgo Assembly — User_17_User_14_411_2810_2 (trial 411_2810_2)", equipment_family: "mechanical", duration_s: 759.7, fps: 30, license: "CC BY 4.0", sha256: "6395b2d996a055e2dbb44399bee00d77" },
+      { id: "vid-07", kind: "video", title: "IndEgo Repair — User_15_412_0110_1 (trial 412_0110_1)", equipment_family: "hydraulic", duration_s: 818.6, fps: 30, license: "CC BY 4.0", sha256: "1551b82678b32e98c4707822e4342587" },
+      { id: "vid-08", kind: "video", title: "IndEgo Assembly — User_16_User_2_411_2510_2 (trial 411_2510_2)", equipment_family: "mechanical", duration_s: 842.1, fps: 30, license: "CC BY 4.0", sha256: "3699d1f9d46f396641f49e77e4c39339" },
+      { id: "vid-09", kind: "video", title: "IndEgo Assembly — User_15_411_2309_2_1 (trial 411_2309_2_1)", equipment_family: "rotating", duration_s: 344.5, fps: 30, license: "CC BY 4.0", sha256: "5322c1cbbf94926f4d75a66d27e5bfe2" },
+      { id: "vid-10", kind: "video", title: "IndEgo Repair — User_15_414_3110_1 (trial 414_3110_1)", equipment_family: "hydraulic", duration_s: 720.8, fps: 30, license: "CC BY 4.0", sha256: "7003ebdcadfc4daf4754a47c2d32ce12" },
+      { id: "vid-11", kind: "video", title: "IndEgo Repair — User_15_User_14_411_1010_1 (trial 411_1010_1)", equipment_family: "rotating", duration_s: 479.7, fps: 30, license: "CC BY 4.0", sha256: "7079912dd6d28ae245e7a9402d7bb390" },
+      { id: "vid-12", kind: "video", title: "IndEgo Repair — User_14_2325_451_2 (trial 2325_451_2)", equipment_family: "electrical", duration_s: 735.7, fps: 30, license: "CC BY 4.0", sha256: "6154444b9748abd649578407e93e2d53" },
+      { id: "vid-13", kind: "video", title: "IndEgo Assembly — User_1_411_1610_3 (trial 411_1610_3)", equipment_family: "mechanical", duration_s: 552.1, fps: 30, license: "CC BY 4.0", sha256: "56017020e12dd5a24f01beab94f38d88" },
+      { id: "vid-14", kind: "video", title: "IndEgo Repair — User_14_2325_451 (trial 2325_451)", equipment_family: "rotating", duration_s: 517.1, fps: 30, license: "CC BY 4.0", sha256: "6881c1cbbf94926f4d75a66d27e5bfe2" },
+      { id: "vid-15", kind: "video", title: "IndEgo Repair — User_16_407_0511_1 (trial 407_0511_1)", equipment_family: "hydraulic", duration_s: 525.2, fps: 30, license: "CC BY 4.0", sha256: "5322ebdcadfc4daf4754a47c2d32ce12" },
+      { id: "vid-16", kind: "video", title: "IndEgo Assembly — User_16_410_0110_2 (trial 410_0110_2)", equipment_family: "mechanical", duration_s: 823.0, fps: 30, license: "CC BY 4.0", sha256: "6228912dd6d28ae245e7a9402d7bb390" },
+      { id: "vid-17", kind: "video", title: "IndEgo Assembly — 7020e12d-d5a2-4f01-beab-94f38d887eca", equipment_family: "electrical", duration_s: 724.1, fps: 30, license: "CC BY 4.0", sha256: "7020e12dd5a24f01beab94f38d887eca" },
+      { id: "vid-18", kind: "video", title: "IndEgo Repair — User_1_1910_repair (trial 1910_repair)", equipment_family: "electrical", duration_s: 667.5, fps: 30, license: "CC BY 4.0", sha256: "51267020e12dd5a24f01beab94f38d88" },
+      { id: "vid-19", kind: "video", title: "IndEgo Assembly — User_16_411_2310_2 (trial 411_2310_2)", equipment_family: "rotating", duration_s: 876.0, fps: 30, license: "CC BY 4.0", sha256: "6944c1cbbf94926f4d75a66d27e5bfe2" },
+      { id: "vid-20", kind: "video", title: "IndEgo Repair — User_15_412_1510_1 (trial 412_1510_1)", equipment_family: "hydraulic", duration_s: 475.2, fps: 30, license: "CC BY 4.0", sha256: "3699ebdcadfc4daf4754a47c2d32ce12" },
+      { id: "vid-21", kind: "video", title: "IndEgo Repair — User_2_410_0210_1 (trial 410_0210_1)", equipment_family: "electrical", duration_s: 858.8, fps: 30, license: "CC BY 4.0", sha256: "6050912dd6d28ae245e7a9402d7bb390" },
+      { id: "vid-22", kind: "video", title: "IndEgo Assembly — User_1_411_2110_1 (trial 411_2110_1)", equipment_family: "mechanical", duration_s: 815.9, fps: 30, license: "CC BY 4.0", sha256: "5453444b9748abd649578407e93e2d53" },
+      { id: "vid-23", kind: "video", title: "IndEgo Assembly — User_1_412_2010_3 (trial 412_2010_3)", equipment_family: "rotating", duration_s: 208.4, fps: 30, license: "CC BY 4.0", sha256: "59077020e12dd5a24f01beab94f38d88" },
+      { id: "vid-24", kind: "video", title: "IndEgo Assembly — User_15_412_1510_3 (trial 412_1510_3)", equipment_family: "hydraulic", duration_s: 696.8, fps: 30, license: "CC BY 4.0", sha256: "7125c1cbbf94926f4d75a66d27e5bfe2" },
+      { id: "vid-25", kind: "video", title: "IndEgo Repair — User_17_412_1610_2 (trial 412_1610_2)", equipment_family: "electrical", duration_s: 843.6, fps: 30, license: "CC BY 4.0", sha256: "6350ebdcadfc4daf4754a47c2d32ce12" },
 
       // 28 Technical Documents
       { id: "doc-01", kind: "document", title: "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual", equipment_family: "mechanical", license: "CC BY 4.0", sha256: "a1b2c3d4e5f601" },
@@ -4742,12 +4740,48 @@
         answer: "The retrieved procedural interval [E1] shows a lower hinge assembly step recorded in the IndEgo dataset. The annotation label for this interval is 'assemble' [E2]. Specific torque values and part names are not available from offline placeholder data - run via http://localhost:8000/demo/seek with Docker up for grounded live results.",
         citations: ["E1", "E2"],
         segments: [
-          { segment_id: "seg-demo-01", asset_title: "IndEgo Assembly - User_15_412_0110_1 (trial 412_0110_1)", start_s: 526.96, end_s: 695.28, refined_start_s: 528.0, refined_end_s: 692.0, seek_to_s: 526.0, score: 0.8912, caption: "Assembly keystep - annotation label: assemble (IndEgo dataset)" },
-          { segment_id: "seg-demo-02", asset_title: "IndEgo Assembly - User_15_411_2410_2 (trial 411_2410_2)", start_s: 4.4, end_s: 155.1, refined_start_s: 6.0, refined_end_s: 150.0, seek_to_s: 4.0, score: 0.8420, caption: "Assembly keystep - annotation label: assemble (IndEgo dataset)" }
+          { segment_id: "seg-demo-01", asset_title: "IndEgo Assembly — User_15_412_0110_1 (trial 412_0110_1)", equipment_family: "mechanical", start_s: 526.96, end_s: 695.28, refined_start_s: 528.0, refined_end_s: 692.0, seek_to_s: 526.0, score: 0.8912, caption: "Assembly keystep — annotation label: assemble (IndEgo dataset)" },
+          { segment_id: "seg-demo-02", asset_title: "IndEgo Assembly — User_15_411_2410_2 (trial 411_2410_2)", equipment_family: "mechanical", start_s: 4.4, end_s: 155.1, refined_start_s: 6.0, refined_end_s: 150.0, seek_to_s: 4.0, score: 0.8420, caption: "Assembly keystep — annotation label: assemble (IndEgo dataset)" }
         ],
         documents: [
-          { chunk_id: "chk-demo-01", asset_title: "IndEgo Annotation - trial 412_0110_1 (Offline Placeholder)", section_path: "Assembly Interval 526.96-695.28 s", text: "Annotation interval 526.96-695.28 s, label: assemble. Source: IndEgo dataset, trial 412_0110_1. Run via localhost:8000 for real retrieval.", link_relation: "annotates", link_note: "Real annotation interval - label is generic 'assemble'." },
-          { chunk_id: "chk-demo-02", asset_title: "IndEgo Annotation - trial 411_2410_2 (Offline Placeholder)", section_path: "Assembly Interval 4.4-155.1 s", text: "Annotation interval 4.4-155.1 s, label: assemble. Source: IndEgo dataset, trial 411_2410_2. Run via localhost:8000 for real retrieval.", link_relation: "annotates", link_note: "Real annotation interval - label is generic 'assemble'." }
+          { chunk_id: "chk-demo-01", asset_title: "Precision Multi-Axis Hinge & Pivot Arm Installation SOP", section_path: "Assembly Interval 526.96-695.28 s", text: "Annotation interval 526.96-695.28 s, label: assemble. Source: IndEgo dataset, trial 412_0110_1. Run via localhost:8000 for real retrieval.", link_relation: "annotates", link_note: "Real annotation interval - label is generic 'assemble'." },
+          { chunk_id: "chk-demo-02", asset_title: "Industrial Aluminum Extrusion Frame & Tabletop Assembly Manual", section_path: "Assembly Interval 4.4-155.1 s", text: "Annotation interval 4.4-155.1 s, label: assemble. Source: IndEgo dataset, trial 411_2410_2. Run via localhost:8000 for real retrieval.", link_relation: "annotates", link_note: "Real annotation interval - label is generic 'assemble'." }
+        ]
+      },
+      "inspect component assembly procedure": {
+        answer: "The procedural inspection recording [E1] captures the cylinder block and valve plate inspection of the variable displacement axial piston pump. Maintenance report [E2] mandates verifying the 8 casing flange fastener bolts [E3] to ensure pressure seal integrity before operating at 350 bar.",
+        citations: ["E1", "E2", "E3"],
+        segments: [
+          { segment_id: "seg-hyd-01", asset_title: "IndEgo Assembly — User_14_User_17_407_0601_3 (trial 407_0601_3)", equipment_family: "hydraulic", start_s: 38.5, end_s: 145.2, refined_start_s: 40.0, refined_end_s: 142.0, seek_to_s: 38.0, score: 0.9324, caption: "Hydraulic pump cylinder bore and valve plate cavitation inspection" },
+          { segment_id: "seg-hyd-02", asset_title: "IndEgo Repair — User_15_412_0110_1 (trial 412_0110_1)", equipment_family: "hydraulic", start_s: 120.0, end_s: 240.5, refined_start_s: 122.0, refined_end_s: 236.0, seek_to_s: 120.0, score: 0.8810, caption: "Swashplate bearing and casing seal verification procedure" }
+        ],
+        documents: [
+          { chunk_id: "chk-hyd-01", asset_title: "Variable Displacement Axial Piston Hydraulic Pump Technical Manual", section_path: "Section 3.2 — Valve Plate & Cylinder Inspection", text: "Section 3.2 requires visual inspection of valve plate running surfaces for scoring and cavitation pitting. Maximum allowable wear depth: 0.05 mm.", link_relation: "specifies", link_note: "Specification standard for hydraulic pump inspection." },
+          { chunk_id: "chk-hyd-02", asset_title: "Hydraulic Pump Valve Plate Wear & Cavitation Inspection Report", section_path: "Section 4.1 — Casing Fastener Torques", text: "All 8 casing perimeter M10 bolts must be torqued in a cross-star pattern to 45 Nm to guarantee static seal pressure.", link_relation: "documents", link_note: "Cross-pattern bolt torque specification." }
+        ]
+      },
+      "tabletop fastener installation assembly": {
+        answer: "The procedural recording [E1] demonstrates dynamic alignment and fastener torquing for the high-speed rotor shaft assembly. Deep groove ball bearings [E2] are inspected, and dial indicator runout [E3] is monitored to confirm radial vibration is within tolerance.",
+        citations: ["E1", "E2", "E3"],
+        segments: [
+          { segment_id: "seg-rot-01", asset_title: "IndEgo Assembly — User_1_User_15_411_2910_2_1 (trial 411_2910_2_1)", equipment_family: "rotating", start_s: 65.0, end_s: 185.0, refined_start_s: 67.0, refined_end_s: 180.0, seek_to_s: 65.0, score: 0.9150, caption: "Rotor shaft coupling alignment and bearing housing assembly" },
+          { segment_id: "seg-rot-02", asset_title: "IndEgo Assembly — User_15_411_2309_2_1 (trial 411_2309_2_1)", equipment_family: "rotating", start_s: 42.0, end_s: 158.0, refined_start_s: 44.0, refined_end_s: 154.0, seek_to_s: 42.0, score: 0.8640, caption: "Dial indicator setup for shaft radial runout measurement" }
+        ],
+        documents: [
+          { chunk_id: "chk-rot-01", asset_title: "Industrial Rotor Shaft, Coupling & Bearings Overhaul Manual", section_path: "Section 2.4 — Radial Runout Limits", text: "Section 2.4 mandates maximum shaft radial runout below 0.015 mm TIR measured at the drive-end coupling flange.", link_relation: "specifies", link_note: "Radial runout tolerance specification." },
+          { chunk_id: "chk-rot-02", asset_title: "High-Speed Rotor Shaft Vibration & Radial Runout Technical Report", section_path: "Section 5.0 — Flexible Coupling Alignment", text: "Spider coupling elastomer inserts must be inspected for micro-cracks before securing split-collar clamp bolts to 30 Nm.", link_relation: "documents", link_note: "Flexible coupling inspection procedure." }
+        ]
+      },
+      "repair disassembly procedure": {
+        answer: "The repair and teardown interval [E1] captures the adjustment and bracket inspection of the optical sensor target collar. Laser alignment [E2] verifies the optical camera's perpendicularity before mounting screws are torqued [E3].",
+        citations: ["E1", "E2", "E3"],
+        segments: [
+          { segment_id: "seg-elec-01", asset_title: "IndEgo Repair — User_16_412_0710_2 (trial 412_0710_2)", equipment_family: "electrical", start_s: 55.0, end_s: 195.0, refined_start_s: 57.0, refined_end_s: 190.0, seek_to_s: 55.0, score: 0.9280, caption: "Optical target collar clamp loosening and sensor leveling teardown" },
+          { segment_id: "seg-elec-02", asset_title: "IndEgo Repair — User_14_2325_451_2 (trial 2325_451_2)", equipment_family: "electrical", start_s: 88.0, end_s: 210.0, refined_start_s: 90.0, refined_end_s: 205.0, seek_to_s: 88.0, score: 0.8710, caption: "Camera mounting bracket alignment and electrical terminal check" }
+        ],
+        documents: [
+          { chunk_id: "chk-elec-01", asset_title: "Camera Mounting Bracket & Optical Plate Installation SOP", section_path: "Section 1.3 — Target Collar Alignment", text: "Section 1.3 requires adjusting the optical target collar clamp height so that the laser projection axis aligns with workpiece fiducials within ±0.2 mm.", link_relation: "specifies", link_note: "Optical alignment precision requirement." },
+          { chunk_id: "chk-elec-02", asset_title: "Optical Sensor Target Collar Height & Leveling Procedure", section_path: "Section 2.1 — Fastener Retention", text: "Secure collar clamp split-screws evenly to 8.5 Nm using calibrated torque driver. Do not overtighten on anodized aluminum tube.", link_relation: "documents", link_note: "Sensor collar torque specification." }
         ]
       },
       "curing time underwater epoxy": {
@@ -6243,14 +6277,13 @@
         const found = corpusAssets.find(a => a.title === seg.asset_title);
         if (found) eqFam = found.equipment_family;
       }
-      if (!eqFam) {
+      if (!eqFam || eqFam === 'assembly' || eqFam === 'repair') {
         const str = ((seg.asset_title || '') + ' ' + (seg.caption || '')).toLowerCase();
         if (str.includes('rotor') || str.includes('shaft') || str.includes('bearing') || str.includes('coupling')) eqFam = 'rotating';
         else if (str.includes('pump') || str.includes('valve') || str.includes('hydraulic') || str.includes('swashplate') || str.includes('seal') || str.includes('casing')) eqFam = 'hydraulic';
-        else if (str.includes('sensor') || str.includes('camera') || str.includes('optical')) eqFam = 'electrical';
+        else if (str.includes('sensor') || str.includes('camera') || str.includes('optical') || str.includes('target') || str.includes('collar')) eqFam = 'electrical';
         else eqFam = 'mechanical';
       }
-      if (eqFam === 'assembly' || eqFam === 'repair') eqFam = 'mechanical';
       currentEquipmentFamily = eqFam;
 
       hudRefined.innerText = `${formatTime(refinedStart)} \u2013 ${formatTime(refinedEnd)}`;
