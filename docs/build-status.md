@@ -1,11 +1,203 @@
 # Trace progress report
 
-Last updated: **2026-11-21 11:48 (Asia/Calcutta)**.
+Last updated: **2026-11-26 (Asia/Calcutta)**.
 Project work started: 2026-10-04.
 
 This is the running progress report for Trace. Update it after meaningful project work,
 verification, decisions, or blockers, preserving the dated history below. Status describes
 the last verified state, not a live service monitor.
+
+**Follow-up memory screenshot from user (2026-11-26, Asia/Calcutta):** Task Manager now shows
+13.4/15.6 GB RAM in use (86%) and 2.2 GB available, an improvement from the earlier 1.1 GB
+reading but still a high memory load. This is user-provided screenshot evidence, not a fresh
+system query. The current machine continues to show Intel Iris Xe graphics; WSL/container GPU
+access remains unverified/absent. The large-model pilot remains paused.
+
+**Read-only accelerator capability check (2026-11-26, Asia/Calcutta):** In the running API
+container, OpenCV reports version 5.1.0, `cv2.ocl.haveOpenCL() == False`, and
+`cv2.ocl.useOpenCL() == False`. Thus the current IVP container cannot dispatch OpenCV
+operations through OpenCL to the host Intel Iris Xe. Combined with the WSL GPU adapter failure,
+there is no current GPU execution path in this container. No code, dependencies, services,
+models, or data were changed. CUDA is not available on the Intel GPU; a native Windows Intel
+path such as OpenVINO or an OpenCL-enabled OpenCV build would require separate implementation
+and measured validation.
+
+**Hardware evidence update from user screenshot (2026-11-26, Asia/Calcutta):** Task Manager
+shows Intel Iris Xe integrated graphics (shared GPU memory 1.7/7.8 GB in use at capture) and
+system RAM 14.4/15.6 GB in use. This user-provided screenshot establishes an available GPU on
+the Windows host, but it conflicts with the earlier RTX 4050 hardware assumption and does not
+show a discrete NVIDIA adapter. The WSL Docker probe independently failed to find an exposed
+GPU adapter. Ollama is native on the host, but current Windows documentation does not verify
+Intel Iris Xe acceleration. CPU ASR remains unsafe at the observed ~1.1 GiB free RAM. No model
+weights or media were downloaded/accessed, and no inference was attempted. The earlier model
+pilot is still paused pending lower memory pressure and a compatible, verified runtime path.
+
+**Standalone IVP report prepared (2026-11-26, Asia/Calcutta):** Created
+`docs/TRACE_IVP_Project_Report.docx` and the standard-library generator
+`scripts/build_ivp_report.py`. The report presents the verified real-IndEgo frame/window
+workflow, classical image-processing methods, recorded single-case results, provenance,
+and limitations. It clearly marks AI captions/ASR as unrun and avoids presenting one interval
+as a benchmark. The content draws on the previous 2026-11-26 live verification record; no new
+service or dataset requests were made for this document. DOCX ZIP integrity passed and all
+seven XML/rels parts parsed successfully. Browser/Word rendering was not separately checked.
+
+**Teacher presentation guide prepared (2026-11-26, Asia/Calcutta):** Added
+`docs/TEACHER_PRESENTATION_GUIDE.md` with the project narrative, corpus and architecture,
+real-video IVP methods, paced demo flow, metric/split caveats, likely questions, and an
+implemented-versus-not-active inventory. It reconciles the final evaluation audit with the
+current source code and labels historical results as historical. Documentation only; no new
+service checks, model calls, data access, or tests were run.
+
+**Three-course master handoff prepared (2026-11-26, Asia/Calcutta):** Added
+`docs/THREE_COURSE_MASTER_HANDOFF.md` to support one shared submission for IVP, Intelligent
+Model Design, and Applications of AI. It includes a report-ready abstract, course mapping,
+architecture/corpus/IVP/retrieval details, honest evaluation and implementation status,
+startup/stop steps, viva answers, ZIP hygiene, and a copy/paste Claude prompt for a report and
+Gamma slide outline. It preserves historical/current runtime distinctions. Documentation only;
+no new service check, model execution, dataset access, or project tests were performed.
+
+**Visual Intelligence Studio extension (2026-11-26):** Added a standalone page at `/ivp`
+backed by the existing real-IndEgo frame and segment analysis endpoints. It provides video/timestamp
+selection, source-frame display, single-frame OpenCV outputs, and short-window keyframe
+and motion analysis. Live check: `/ivp` returned HTTP 200; the media proxy returned HTTP 206
+for a 1,024-byte range from a pinned IndEgo MP4 (43,477,513 bytes total); after rebuilding
+the approved API image with its already-declared dependencies, the catalogue returned all
+25 videos and `/api/v1/ivp/frame` decoded a real 480-wide frame at 23.76s to a 233,400-byte
+PNG. The frame response included `X-Trace-Source: indego` and `Cache-Control: no-store`.
+The page, catalogue, real-frame endpoint, and both analysis endpoints are verified by live
+HTTP requests; browser-side rendering and button interaction were not separately exercised.
+Single-frame analysis returned all eight technique results in 234.9 ms on the selected real
+frame. The real 8-second video-window request sampled 16 frames and selected 3 keyframes;
+it returned optical-flow images and motion metrics. This is a diagnostic demonstration on
+one short interval, not a corpus benchmark. Frame analysis stays in memory. Single-frame
+results intentionally omit optical flow in the UI because that endpoint's single-frame API
+uses a translated synthetic companion frame; actual video motion is shown only by the segment
+endpoint, which samples consecutive source frames. No notebook or dataset media files were
+changed.
+
+**IEEE report implementation audit (2026-11-26, Asia/Calcutta):** Compared
+`TRACE_IEEE_Format_Report.docx` claims with the implementation and prior recorded evidence.
+Text vectorization is implemented: local BGE-M3 indexes segment/window text and document
+chunks; local SigLIP 2 embeds 114 extracted real-video keyframes and their existing IndEgo
+caption text with 50/50 visual/text fusion. The captions are IndEgo human keystep
+annotations, and 30-second window text is constructed from metadata/annotations; there is
+no VLM caption-generation stage. No Whisper/ASR transcription implementation was found in
+the backend or ingestion scripts, and transcript values are not generated by the pipeline.
+Normal multimodal search combines dense video text, hybrid dense+lexical document retrieval
+(RRF), and evidence-link expansion; image search is separately available. It does not
+globally RRF-fuse four video/document/image lanes. Temporal refinement uses lexical overlap
+against captions and a heuristic sliding window, not ASR timestamps or visual similarity.
+The report's LLM reranking, local cross-encoder, and query decomposition are not implemented
+in the audited search/ablation paths; A6 is a linked-score heuristic and A7/A8 are identical
+(see `docs/eval-reports/final.md`). Generation is configured for local Ollama Llama 3.2 3B
+with template fallback, but runtime model availability was not checked here; citation
+validation checks IDs against retrieved IDs, not semantic support. No tests or live services
+were run for this source audit; conclusions are code inspection plus the existing evidence
+summarized above. The attached report was not edited.
+
+**Optional local AI enrichment code (2026-11-26, Asia/Calcutta):** Added a disabled-by-default
+in-memory `/api/v1/ivp/enrich` path for real source-video frame captioning through local Ollama
+and word-timestamp ASR through optional faster-whisper. Added bounded query rewrites and local
+LLM reranking adapters, optional RRF over query variants and the existing visual/text segment
+indices, and a timestamp-aware refinement path for compact timed transcript payloads. Runtime
+flags default off, preserving current search behavior; caption/transcript output is returned
+with `persisted: false`. The implementation does not generate captions/transcripts for the
+existing corpus, update text vectors, or change evidence records. `faster-whisper` is not in
+the installed project requirements (the optional dependency is documented but not installed);
+Ollama vision/ASR weights and cache availability are unknown. Activating the endpoint also
+requires a compatible local vision model, and retrieval use requires a separately approved,
+bounded indexing/migration plan. No model calls, downloads, indexing, or live service changes
+were made. `git diff --check` completed cleanly after passing the workspace as a temporary
+safe-directory argument; pre-existing unrelated worktree changes were left intact.
+
+**Offline implementation checks (2026-11-26, Asia/Calcutta):** Python AST parsing passed for
+the six changed backend modules. An offline mocked smoke check passed for bounded query rewrite
+parsing, candidate reordering by model grade/RRF score, timestamp-aware refinement, and timed-word
+data construction. The focused existing pytest files could not run because `pytest` is not
+installed in `.venv`; Ruff lint could not run because `ruff` is not installed there. Neither
+tool was installed. These checks do not validate model compatibility, end-to-end API behavior,
+database integration, or runtime GPU capacity. The running API/DB/Redis containers remained
+healthy during the read-only runtime check; the API process has not loaded the new modules because
+it was not restarted and does not use autoreload.
+
+**Zero-spend model plan revision (2026-11-26, Asia/Calcutta):** Updated
+`docs/model-runtime-plan.md` to supersede its paid caption-provider proposal and define a
+local-only staged path. Current runtime evidence: API, PostgreSQL and Redis are healthy;
+Ollama has text-only `llama3.2:3b`; BGE and SigLIP service ports refuse connections from the
+API container; `.venv` lacks faster-whisper and ML/test/lint packages; current VRAM availability
+is unknown. The new features remain disabled and no services, dependencies, model weights or
+corpus data were changed. The plan now gates exact model selection/download, a <=3-interval
+in-memory feasibility pilot, and any PostgreSQL persistence/indexing behind separate approval.
+Next phase requires approval for exact zero-cost package/model acquisition; no such approval
+has been given.
+
+**Read-only model cache/launch audit (2026-11-26, Asia/Calcutta):** The standard user Hugging
+Face cache contains no BGE-M3, SigLIP 2, or faster-whisper model directory; only unrelated
+text models were present. No `HF_HOME`, Hugging Face cache override, or `OLLAMA_MODELS`
+override is configured. The Ollama inventory confirms only `llama3.2:3b` (Q4_K_M, 3.2B
+parameters; text completion/tools capability). The `.venv` Torch checkpoint folder contains
+only EfficientNet V2 S weights. BGE and SigLIP launch scripts load public model IDs through
+`SentenceTransformer.from_pretrained` / `AutoProcessor.from_pretrained` without forcing
+offline mode; because their caches are absent from the standard location, the scripts were
+not launched to avoid unintended downloads. No model services are configured as Compose
+containers; API-side checks previously showed connection refused. Decision: do not resume
+these launchers until cache paths are confirmed or the user approves exact zero-cost package
+and weight downloads. This completes the cache/launch inspection. No install, model load,
+service start, or corpus change occurred.
+
+**Acquisition list prepared (2026-11-26, Asia/Calcutta):** Added exact model/runtime candidates
+to `docs/model-runtime-plan.md`, based on official Ollama, faster-whisper/PyPI documentation and
+the repository's pinned Hugging Face model inventory. Diagnostic pilot candidate: Qwen3-VL
+2B Q4_K_M (~1.9 GB) plus faster-whisper 1.2.1 / CTranslate2 4.9.1 and pinned large-v3 weights
+(3,090,835,702 bytes), about 4.99 GB of model payload before unresolved transitive package
+downloads/install overhead. Full retrieval restoration adds pinned BGE-M3 and SigLIP 2 model
+payloads for about 11.87 GB total model payload. These are proposed acquisitions, not approved
+or downloaded. Exact transitive wheel resolution and current free disk remain unverified.
+The new list requires sequential single-model inference, unload/context controls, and a <=3
+interval in-memory diagnostic pilot before any persistence. No paid inference, install, model
+download, restart, or data write occurred.
+
+**Read-only package/storage preflight (2026-11-26, Asia/Calcutta):** C: reports 213.93 GiB
+free of 542.5 GiB. PyPI metadata inspection found faster-whisper 1.2.1's 1.1 MB universal
+wheel and a CPython 3.12 Windows x86-64 PyAV 19.0.2 wheel of 28.2 MB; this is not the full
+dependency closure. Complete transitive resolution was not attempted because it can require
+package artifact downloads, outside this metadata-only approval. Exact wheel set and install
+footprint therefore remain unverified. No package or model artifact was downloaded or installed;
+no service, index or data was changed. The storage figure is a point-in-time volume reading and
+does not establish model/GPU fit. Any downloads/install and diagnostic inference pilot require
+their own approval.
+
+**Approved ASR setup and pilot resource gate (2026-11-26, Asia/Calcutta):** Following user
+approval for local package/model acquisition and a <=3-interval in-memory diagnostic pilot,
+installed `faster-whisper==1.2.1`, `ctranslate2==4.9.1`, and resolved binary dependencies into
+the isolated workspace `.venv`. `pip check` reports no broken requirements; versions verified:
+faster-whisper 1.2.1, CTranslate2 4.9.1, PyAV 19.0.2, huggingface-hub 2.4.0. Host reports
+1,142 MiB available RAM. Ollama 0.40.17 is reachable and lists only text-only `llama3.2:3b`;
+Qwen and Whisper weights were not downloaded. Host GPU query was denied, and the existing API
+container lacks `nvidia-smi`, so current VRAM is unknown. Large-v3 CPU loading may exceed free
+RAM; Qwen GPU/CPU placement cannot be verified. Stopped before model downloads or inference.
+No video/audio was accessed in this attempted pilot, and no service, index, or database data
+was changed. Existing media evidence remains the earlier verified catalogue of 25 reachable
+IndEgo videos and prior real-frame/segment decoding checks; this is not a new ASR/VLM result.
+Next prerequisite: safe RAM/GPU telemetry and capacity, then resume the same approved pilot
+without changing model choice.
+
+**Engineering compliance audit (2026-11-26, Asia/Calcutta):** Corrected the `/eval` scorecard,
+final report, report generator, README, handover, defense guide, slides, and study guide against
+`records/ENGINEERING_SPEC.md` §1.4 and the recorded evaluation evidence. The six §1.4 criteria are video segment Recall@5, document Recall@5,
+faithfulness, temporal IoU, measurable lift over text-only, and full-loop UI p95 latency.
+Current evidence establishes 2/6 held-out targets (document Recall@5 100.0%; faithfulness
+90.4%), one below target (video Recall@5 63.3%, 19/30; target 70%), and three without the
+required evidence (locked-test temporal IoU, held-out lift comparison, and UI p95). Temporal
+IoU 0.7477 and +46.7 percentage-point lift are dev results; 381.1 ms is mean latency, not p95.
+Abstention 10/10 is a separate Phase 5 result. The ablation implementation was also reconciled
+against its labels: A6 is a heuristic linked-segment score multiplier (not a cross-encoder or
+RRF reranker), and A7/A8 execute identical paths (so the query-analysis ablation is not valid).
+The A5/A4 top-5 paired result is -3.3 pp (95% CI -10.0 to 0.0 pp, p=0.3598), not a significant
+improvement. A7/A1 is a dev-only runner comparison; zero exceedances in 10,000 bootstrap samples
+are reported as p<0.0001, not p=0. The published matrix's raw per-query scores are not archived,
+so its individual numerical cells were not independently recomputed in this audit. Test status
+remains historical (160 passing recorded 2026-10-24); no tests were run during this documentation audit.
 
 **Review resolution (2026-10-24, Asia/Calcutta):** Phase 1 evaluation corrections implemented
 and verified with offline fixtures and live dev benchmark rerun. The evaluator (`eval/evaluator.py`,
@@ -17,8 +209,7 @@ decides gate status. Test suite increased to **160 passed tests** (unit + integr
 All latencies and metrics are reconciled directly from evaluation reports.
 The full item-by-item resolution audit is documented in [phase1-review-and-fixes.md](phase1-review-and-fixes.md).
 
-**Current position:** All development phases (0 through 7) are implemented, benchmarked, and formally verified
-against the Engineering Contract (`records/ENGINEERING_SPEC.md` §1.4 Definition of Done, §13 Evaluation, §16 Phase Gates, and §18 DoD Checklist):
+**Current position:** The project phases are implemented, while verification is criterion-specific; the §1.4 acceptance status is summarized in the 2026-11-26 audit above. Phase-specific results below remain separate from held-out §1.4 acceptance evidence:
 
 - **Phase 0 (Linked Corpus & Evidence Links §16.1)**: **154 human-authored multi-hop evidence links** (85 documents, 41 specifies, 16 depicts, 12 contradicts) connecting 114 manual keysteps across 25 videos to 67 document chunks across 28 documents (Spec Gate >= 100 links: **PASSED / MET**). Complete evaluation set authored with 111 dev + 95 locked test queries = **206 total queries** (Spec Gate >= 120 queries: **PASSED / MET**).
 - **Phase 1 (Whole-Video Retrieval §16.2)**: Deduplicated whole-video BGE-M3 dense retrieval achieves
@@ -50,11 +241,11 @@ against the Engineering Contract (`records/ENGINEERING_SPEC.md` §1.4 Definition
   - **Generation Latency**: Mean **246.9 ms**, p95 **284.2 ms** (< 2,500 ms target: **PASSED**)
   - Full report published in [docs/eval-report-phase5.md](eval-report-phase5.md).
 - **Phase 6 (Evaluation, Full Ablation Matrix A0–A10, & Held-Out Test Benchmarking §16.7 & §18)**:
-  - **Full Ablation Matrix ($A_0$–$A_{10}$)**: Evaluated all 11 configurations on multi-hop dev set ($n=30$) with 10,000 bootstrap CI rounds. Connective layer ($A_5$) lifts Joint Recall@10 from 70.0% to **73.3%** and lifts MRR from 0.7620 to **0.7759**.
-  - **System Lift over Text-Only RAG ($A_7$ vs $A_1$)**: Full multi-modal pipeline achieves **+46.7% Joint Recall@5** [95% CI: +30.0% to +63.3%] ($p = 0.0000$), demonstrating statistically significant superiority over document-only search.
+  - **Full Ablation Matrix ($A_0$–$A_{10}$)**: Evaluated all 11 configurations on multi-hop dev set ($n=30$) with 10,000 bootstrap CI rounds. A5 is descriptively higher than A4 in Joint Recall@10 (73.3% vs 70.0%) and Joint MRR@20 (0.7759 vs 0.7620); paired tests for these metrics were not computed, and Joint Recall@5 was lower by 3.3 pp (p=0.3598).
+  - **System Lift over Text-Only RAG ($A_7$ vs $A_1$)**: On multi-hop dev queries ($n=30$), the paired difference is **+46.7 percentage points Joint Recall@5** [95% CI: +30.0 to +63.3 pp] (bootstrap p<0.0001; 0/10,000 resamples at or beyond the null); this does not establish held-out lift.
   - **3-Run Test Benchmark ($n=95$)**: 3 fixed-seed runs on locked test split (`test_queries.json`, SHA-256 sealed in `docs/test-split-lock.json`): Document Recall@5 = **100.0%**, Grounded Answer Faithfulness = **90.4%**, Abstention = **100.0%**, Mean Latency = **381.1 ms**.
   - **Judge Calibration (§13.4)**: Local rubric spot-checked across 30 reference items achieved **93.3% agreement** and Cohen's $\kappa = \mathbf{0.8667}$ (Spec Gate $\ge 0.70$: **PASSED**).
-  - **Section 1.4 Definition of Done**: All 6 acceptance targets satisfied.
+  - **Section 1.4 Definition of Done**: 2/6 held-out targets met; video Recall@5 is below target; locked-test temporal IoU, held-out lift, and full-loop p95 remain unreported.
   - **Comprehensive Final Report**: Published in [docs/eval-reports/final.md](eval-reports/final.md) with mandatory caveats and circularity disclosures preceding results (§18).
 - **Phase 7 (Demo UI)**: Interactive moment seeking player with connected technical document evidence panel and live SSE streaming
   grounded answer generation verified in live browser at `http://localhost:8000/demo/seek`.
@@ -91,7 +282,7 @@ against the Engineering Contract (`records/ENGINEERING_SPEC.md` §1.4 Definition
 
 **Latest milestone:** Phase 6 Full Ablation Matrix ($A_0$–$A_{10}$) & Locked Held-Out Test Benchmarks Completed & Verified:
 
-- **DoD Targets (§1.4) Met**: Document R@5 = 100.0% (target >= 80%), Faithfulness = 90.4% (target >= 85%), Lift over text-only = +46.7% (p=0.0000), Temporal Mean IoU = 0.7477 (target >= 0.40), Abstention = 100.0% (target >= 70%), UI latency = 381.1 ms (target < 5,000 ms).
+- **Superseded §1.4 summary**: See the 2026-11-26 compliance audit above; the earlier checklist incorrectly treated dev results, abstention, and mean latency as DoD evidence.
 - **Judge Agreement (§13.4) Met**: 93.3% agreement, $\kappa = 0.8667 \ge 0.70$.
 - **Test Suite**: **160 passed tests** in Docker Compose (`scripts/dev.ps1 test`).
 - Full report published in [docs/eval-reports/final.md](eval-reports/final.md).
@@ -109,7 +300,7 @@ Zero paid inference APIs called; zero persistent media files or dataset caches o
 | 3 — Image retrieval         | Implemented & Verified (§16.4 Gate Met)        | 114 keyframes extracted in RAM, SigLIP 2 multi-modal fusion, dev Recall@5 = 90.0%, MRR = 0.8167                                                                        | None (Verified on dev and test) |
 | 4 — Document retrieval      | Implemented & Verified (§16.5 Gates Met)       | 28 docs, 67 chunks, GIN BM25 + BGE-M3 dense + RRF, dev Recall@5 = 100.0%, MRR = 0.9333, hybrid beats single lanes                                                      | None (Verified on dev and test) |
 | 5 — Fusion and generation   | Implemented & Verified (§16.6 Gates Met)       | Grounded answer generator (Appendix D), strict citation validator, SSE stream endpoint, Faithfulness = 85.9%, Abstention = 100%                                        | None (Verified on dev and test) |
-| 6 — Evaluation and ablation | Implemented & Verified (§16.7 & §18 Gates Met) | Full ablation matrix (A0–A10), 10,000 bootstrap CIs, paired tests (A5 vs A4, A7 vs A1), 3-run locked test split benchmark, judge calibration (κ=0.8667), DoD checklist | None (Final report emitted)     |
+| 6 — Evaluation and ablation | Evaluation recorded; §1.4 partially evidenced | Dev ablation matrix and 3-run test benchmark recorded; A6/A7/A8 implementation mismatches and missing held-out DoD metrics are documented in the 2026-11-26 audit | Reconcile ablation runner with spec; obtain missing held-out metrics |
 | 7 — Demo UI                 | Implemented & Verified (§11.2 & §18 Gates Met) | Full multi-tab app at /: Search & Seek, Corpus Explorer (/corpus), Eval Dashboard (/eval), Debug Trace ⚙ drawer, 160 tests passing, fallback recording made            | None (Complete)                 |
 
 Acceptance criteria remain governed by [the engineering spec](../records/ENGINEERING_SPEC.md),
@@ -185,13 +376,13 @@ derived segments, 200–400 images, 25–40 reports, 15–30 manual/SOP excerpts
 
 ### What is Completed (Phases 0 through 7: 100% Core Scope Met)
 
-1. **Phase 0 (Linked Corpus & Ground Truth)**: 25 IndEgo manufacturing videos (4.60h, 1,205 segments), 28 technical documents (67 chunks), 114 workpiece keyframes, 154 human evidence links, and 206 total evaluation queries (111 dev + 95 locked test). All 6 acceptance gates met.
+1. **Phase 0 (Linked Corpus & Ground Truth)**: 25 IndEgo manufacturing videos (4.60h, 1,205 segments), 28 technical documents (67 chunks), 114 workpiece keyframes, 154 human evidence links, and 206 total evaluation queries (111 dev + 95 locked test). Corpus and annotation gates met; §1.4 status is corrected in the 2026-11-26 audit above.
 2. **Phase 1 (Whole-Video Retrieval)**: Deduplicated BGE-M3 whole-video retrieval (Recall@5 = 96.2%, MRR = 0.8910).
 3. **Phase 2 (Temporal Grounding & Refinement)**: 1,091 30s windows, coarse-to-fine temporal refinement (§8.7), Mean IoU = 0.7477, seek latency = 0.8–1.1 ms.
 4. **Phase 3 (Keyframe Visual Retrieval)**: 114 keyframes extracted in RAM, SigLIP 2 multi-modal fusion, Recall@5 = 90.0%, MRR = 0.8167.
 5. **Phase 4 (Document Hybrid RAG)**: GIN BM25 lexical + BGE-M3 dense + RRF fusion, Recall@5 = 100.0%, MRR = 0.9333.
 6. **Phase 5 (Grounded Generation & Streaming)**: Appendix D grounded generator, strict API citation validation (100% precision, zero invalid citations), SSE streaming, faithfulness = 85.9%, abstention = 100.0%.
-7. **Phase 6 (Comprehensive Evaluation & DoD)**: Full 11-configuration ablation matrix ($A_0$–$A_{10}$) with 10,000 bootstrap CIs, paired significance tests (+46.7% over text-only RAG, $p=0.0000$), 3-run locked test split benchmark (faithfulness = 90.4%), judge calibration (agreement = 93.3%, Cohen's $\kappa = 0.8667 \ge 0.70$), and formal report in `docs/eval-reports/final.md`.
+7. **Phase 6 (Comprehensive Evaluation & DoD)**: Full 11-configuration ablation matrix ($A_0$–$A_{10}$) with 10,000 bootstrap CIs, paired dev-set significance comparison (+46.7 percentage points over text-only RAG, $bootstrap p<0.0001 (0/10,000 resamples at or beyond the null)$), 3-run locked test split benchmark (faithfulness = 90.4%), judge calibration (agreement = 93.3%, Cohen's $\kappa = 0.8667 \ge 0.70$), and formal report in `docs/eval-reports/final.md`.
 8. **Phase 7 (Multi-Tab UI & Demo)**: Live interactive UI mounted at `/`, `/demo/seek`, `/corpus` (Asset Explorer), `/eval` (Ablation Dashboard), and ⚙ Debug Trace drawer. Rehearsed demo guide in `docs/demo-script.md` and session video recorded.
 9. **Automated Test Suite**: 160 passed tests in Docker Compose (`scripts/dev.ps1 test`); 143 passed unit tests in host Python.
 10. **Architectural Decision Records (ADRs D1–D8, Spec §19)**: Formally documented in `docs/decisions/` (`0003-d1-job-queue-arq.md` through `0010-d8-observability-structured-logging.md`) covering all 8 settled decisions: D1 (`arq` job queue), D2 (`BGE-M3` text embedder), D3 (structure-aware chunking & OCR), D4 (visual lane retention), D5 (`pgvector` single-DB), D6 (`/eval` UI dashboard), D7 (LoVR benchmark protocol & deferral), and D8 (structured JSON logs).
@@ -201,13 +392,13 @@ derived segments, 200–400 images, 25–40 reports, 15–30 manual/SOP excerpts
 
 ### What is Completed (Phases 0 through 7: 100% Core Scope Met)
 
-1. **Phase 0 (Linked Corpus & Ground Truth)**: 25 IndEgo manufacturing videos (4.60h, 1,205 segments), 28 technical documents (67 chunks), 114 workpiece keyframes, 154 human evidence links, and 206 total evaluation queries (111 dev + 95 locked test). All 6 acceptance gates met.
+1. **Phase 0 (Linked Corpus & Ground Truth)**: 25 IndEgo manufacturing videos (4.60h, 1,205 segments), 28 technical documents (67 chunks), 114 workpiece keyframes, 154 human evidence links, and 206 total evaluation queries (111 dev + 95 locked test). Corpus and annotation gates met; §1.4 status is corrected in the 2026-11-26 audit above.
 2. **Phase 1 (Whole-Video Retrieval)**: Deduplicated BGE-M3 whole-video retrieval (Recall@5 = 96.2%, MRR = 0.8910).
 3. **Phase 2 (Temporal Grounding & Refinement)**: 1,091 30s windows, coarse-to-fine temporal refinement (§8.7), Mean IoU = 0.7477, seek latency = 0.8–1.1 ms.
 4. **Phase 3 (Keyframe Visual Retrieval)**: 114 keyframes extracted in RAM, SigLIP 2 multi-modal fusion, Recall@5 = 90.0%, MRR = 0.8167.
 5. **Phase 4 (Document Hybrid RAG)**: GIN BM25 lexical + BGE-M3 dense + RRF fusion, Recall@5 = 100.0%, MRR = 0.9333.
 6. **Phase 5 (Grounded Generation & Streaming)**: Appendix D grounded generator, strict API citation validation (100% precision, zero invalid citations), SSE streaming, faithfulness = 85.9%, abstention = 100.0%.
-7. **Phase 6 (Comprehensive Evaluation & DoD)**: Full 11-configuration ablation matrix ($A_0$–$A_{10}$) with 10,000 bootstrap CIs, paired significance tests (+46.7% over text-only RAG, $p=0.0000$), 3-run locked test split benchmark (faithfulness = 90.4%), judge calibration (agreement = 93.3%, Cohen's $\kappa = 0.8667 \ge 0.70$), and formal report in `docs/eval-reports/final.md`.
+7. **Phase 6 (Comprehensive Evaluation & DoD)**: Full 11-configuration ablation matrix ($A_0$–$A_{10}$) with 10,000 bootstrap CIs, paired dev-set significance comparison (+46.7 percentage points over text-only RAG, $bootstrap p<0.0001 (0/10,000 resamples at or beyond the null)$), 3-run locked test split benchmark (faithfulness = 90.4%), judge calibration (agreement = 93.3%, Cohen's $\kappa = 0.8667 \ge 0.70$), and formal report in `docs/eval-reports/final.md`.
 8. **Phase 7 (Multi-Tab UI & Demo)**: Live interactive UI mounted at `/`, `/demo/seek`, `/corpus` (Asset Explorer), `/eval` (Ablation Dashboard), and ⚙ Debug Trace drawer. Rehearsed demo guide in `docs/demo-script.md` and session video recorded.
 9. **Automated Test Suite**: 160 passed tests in Docker Compose (`scripts/dev.ps1 test`); 143 passed unit tests in host Python.
 10. **Architectural Decision Records (ADRs D1–D8, Spec §19)**: Formally documented in `docs/decisions/` (`0003-d1-job-queue-arq.md` through `0010-d8-observability-structured-logging.md`) covering all 8 settled decisions: D1 (`arq` job queue), D2 (`BGE-M3` text embedder), D3 (structure-aware chunking & OCR), D4 (visual lane retention), D5 (`pgvector` single-DB), D6 (`/eval` UI dashboard), D7 (LoVR benchmark protocol & deferral), and D8 (structured JSON logs).
@@ -216,6 +407,62 @@ derived segments, 200–400 images, 25–40 reports, 15–30 manual/SOP excerpts
 13. **Production Hardening (Auth, RBAC & Security Headers)**: Implemented enterprise multi-tenant RBAC with API Key and Bearer token authentication ([`backend/app/auth.py`](file:///c:/Users/Shruti%20Pandey/OneDrive%20-%20BENNETT%20UNIVERSITY/trace-main/backend/app/auth.py)), endpoint role guards (`ADMIN` for ingestion, `ENGINEER` for retrieval), and HTTP security headers (`nosniff`, `SAMEORIGIN`, `1; mode=block`). Verified via unit test suites ([`backend/tests/unit/test_auth.py`](file:///c:/Users/Shruti%20Pandey/OneDrive%20-%20BENNETT%20UNIVERSITY/trace-main/backend/tests/unit/test_auth.py), [`backend/tests/unit/test_security_headers.py`](file:///c:/Users/Shruti%20Pandey/OneDrive%20-%20BENNETT%20UNIVERSITY/trace-main/backend/tests/unit/test_security_headers.py)).
 
 ## Dated history
+
+### 2026-11-26 (Asia/Calcutta) — Visual Intelligence Studio presentation page
+
+- Added `backend/app/static/ivp_lab.html`, completing the existing `/ivp` route's missing
+  page. It loads the verified IndEgo catalogue, lets a presenter choose a source video and
+  timestamp, displays the remotely decoded real frame with source metadata, and calls the
+  existing single-frame and short-video-window analysis endpoints.
+- The page renders returned OpenCV image outputs and metrics, plus real-video keyframes
+  and optical-flow visualizations. It distinguishes a still-frame analysis from temporal
+  processing and does not show the single-frame endpoint's synthetic optical-flow pair as
+  measured video motion.
+- Renamed the visible feature to **Visual Intelligence Studio** in the page title, heading,
+  main navigation, and README. The existing `/ivp` URL and `/api/v1/ivp/*` routes remain
+  unchanged for compatibility.
+- Changed the real-frame response cache policy from `private, max-age=600` to `no-store`
+  to align browser handling with the no-persistent-dataset-cache requirement.
+- **Status: live data and analysis endpoints verified; browser interaction not separately verified.**
+  On 2026-11-26, `GET /ivp` returned 200. Before rebuild, `GET /api/v1/ivp/catalog` returned
+  500 because the running image lacked `cv2`; the API log confirmed
+  `ModuleNotFoundError: No module named 'cv2'`. A 1,024-byte Range request through
+  `/api/v1/media/proxy` returned `206 Partial Content`, `video/mp4`, and
+  `Content-Range: bytes 0-1023/43477513`. With user approval, the existing API image was
+  rebuilt from `backend/Dockerfile` and its declared `opencv-python-headless` dependency,
+  then only the API container was recreated. The catalogue then returned 25 videos at
+  pinned revision `c822468b5e0c9c42ebbf2939d3be936c2b203704`; a real frame request for
+  `User_15_411_2410_2` at 23.76s returned HTTP 200, `image/png`, 233,400 bytes,
+  `X-Trace-Source: indego`, and `Cache-Control: no-store`. The frame decoded successfully;
+  `GET /api/v1/ivp/analyze-frame` then returned all eight technique results on that real
+  frame in 234.9 ms. `GET /api/v1/ivp/segment` over 23.76–31.76s returned 16 sampled frames,
+  3 selected keyframes, mean inter-frame difference 14.895, mean flow magnitude 8.2979,
+  and the four optical-flow visualizations. This short interval is an access/operation
+  diagnostic, not a benchmark. These endpoints were called directly; browser-side button
+  interaction was not separately exercised. No automated test suite was run.
+- Notebook untouched; no dataset media downloaded or persisted; no paid services used.
+- Cleanup: removed the one-off `tmp_*` probes and the empty `tmp_frame.png`. Promoted the
+  useful manifest-generation logic to [`scripts/build_indego_manifest.py`](../scripts/build_indego_manifest.py),
+  documented its bounded 256-byte-per-video checks, and made its input/output paths
+  independent of the caller's working directory. This script was not run during cleanup.
+  Removed the generated PowerShell `ModuleAnalysisCache` file; its now-empty parent
+  directories could not be removed due to a filesystem access denial and were left in place.
+
+### 2026-11-25 (Asia/Calcutta) — Real IndEgo video playback restored in web demo
+
+- Fixed source-vs-blueprint rendering logic in `backend/app/static/seek_demo.html`: the previous `setViewMode()` implementation forced blueprint mode even when a playable source URI existed.
+- Added explicit source playback mode (`LIVE INDEGO SOURCE FOOTAGE`) with fallback to CAD reconstruction only when source playback is unavailable.
+- Updated `seekToSegment()` to consume both `asset_source_uri` and `source_uri`, then resolve Hugging Face IndEgo links through a same-origin proxy URL.
+- Removed dead relative media fallbacks (`/demo/media/*.mp4`) in `seekToSegment()` and added deterministic IndEgo URI inference from segment/asset titles for offline/demo segment objects that lack explicit `source_uri`.
+- Added backend streaming proxy endpoint `GET /api/v1/media/proxy` in `backend/app/main.py`:
+  - Restricts sources to `https://huggingface.co/datasets/FraunhoferIPK/IndEgo/resolve/...`
+  - Forwards `Range` headers for seekable HTML5 playback
+  - Streams upstream bytes and preserves key media headers (`content-type`, `content-length`, `content-range`, `accept-ranges`).
+- Added 404 recovery in the media proxy: when a URL fails in one IndEgo category directory, it retries the mirrored path in the alternate directory (`1_Assembly` <-> `2_Inspection_Repair`) to handle mislabeled demo titles.
+- Added frontend playback resilience in `seek_demo.html`: if proxied media fails, the player retries the original direct Hugging Face source URL once before falling back to CAD reconstruction.
+- Validation status:
+  - `backend/app/main.py`: no diagnostics errors reported.
+  - `backend/app/static/seek_demo.html`: existing inline-style lint warnings remain project-wide; no new blocker introduced by this change.
 
 ### 2026-11-23 (Asia/Calcutta) — Portable HOG fallback
 
@@ -947,8 +1194,8 @@ derived segments, 200–400 images, 25–40 reports, 15–30 manual/SOP excerpts
     - $A_9$ (`oracle-evidence`): Ground truth injected directly; verifies generation faithfulness in isolation.
     - $A_{10}$ (`adversarial`): Injected 2 irrelevant distractors into evidence pool; generator achieved **100% citation precision** with zero distractor citations.
 - **Statistical Hypothesis Significance Testing (10,000 Paired Bootstrap Resamples §13.6)**:
-  - **Connective Layer ($A_5$ vs $A_4$)**: Evidence links lift Full-Set Joint Recall@10 by **+3.3%** (73.3% vs 70.0%) and lift Joint MRR@20 by **+0.0139** (0.7759 vs 0.7620). Top-5 paired delta is -3.3% [95% CI: -10.0% to 0.0%, $p=0.3598$] due to cross-modal candidate interleaving.
-  - **Full Multi-Modal Pipeline vs Text-Only RAG ($A_7$ vs $A_1$)**: Full system achieves a statistically decisive **+46.7% Joint Recall@5** [95% CI: +30.0% to +63.3%] ($p = 0.0000$), demonstrating profound measurable utility over PDF-only question answering.
+  - **A5 vs A4 (evidence-link expansion)**: Joint Recall@10 differs by +3.3 pp and MRR@20 by +0.0139 (descriptive; no paired tests for these metrics). Top-5 delta is -3.3 pp [95% CI: -10.0 to 0.0 pp, p=0.3598], not significant.
+  - **Full Multi-Modal Pipeline vs Text-Only RAG ($A_7$ vs $A_1$)**: Full system achieves a statistically decisive **+46.7 percentage points Joint Recall@5** [95% CI: +30.0 to +63.3 pp] (bootstrap p<0.0001; 0/10,000 resamples at or beyond the null) on multi-hop dev queries ($n=30$); no held-out comparison was reported.
 - **Three-Run Locked Held-Out Test Split Benchmark ($n=95$, §13.6)**:
   - Run 1: Video R@5 = 63.3%, Doc R@5 = 100.0%, Joint R@5 = 60.0%, Faithfulness = 90.4%, Abstain = 100.0%, Latency = 381.0 ms.
   - Run 2: Video R@5 = 63.3%, Doc R@5 = 100.0%, Joint R@5 = 60.0%, Faithfulness = 90.4%, Abstain = 100.0%, Latency = 379.6 ms.
@@ -959,12 +1206,19 @@ derived segments, 200–400 images, 25–40 reports, 15–30 manual/SOP excerpts
   - **Observed Agreement Rate**: **93.3%** (28 / 30 atomic claim verdicts matching).
   - **Cohen's $\kappa$**: **0.8667** (Spec Gate $\ge 0.70$: **PASSED / MET**).
 - **Definition of Done (§1.4) & Section 18 Checklist Verification**:
-  - Video Segment Recall@5: 88.5% (Dev) / 63.3% (Test) (**PASSED**).
+  - Video Segment Recall@5: 63.3% (19/30, locked test; below the 70% target); dev was 88.5%.
   - Document Chunk Recall@5: 100.0% (target $\ge 80.0\%$: **PASSED**).
   - Grounded Answer Faithfulness: 90.4% on test (target $\ge 85.0\%$: **PASSED**).
-  - Temporal IoU: Mean 0.7477 (target $\ge 0.40$: **PASSED**).
-  - Measurable Lift over Text-Only RAG: +46.7% ($p = 0.0000$) (**PASSED**).
-  - Full loop UI latency: 381.1 ms (target < 5,000 ms: **PASSED**).
+  - Temporal IoU: Mean 0.7477 on dev (n=26); locked-test result not reported.
+  - Measurable Lift over Text-Only RAG: +46.7 pp on dev only; held-out comparison not reported.
+  - Full loop UI latency: three-run mean 381.1 ms; p95 not reported, so the §1.4 latency criterion is not established.
 - **Final Evaluation Report Published**:
   - Emitted to `docs/eval-reports/final.md`.
   - Mandatory caveats and circularity disclosures placed in Section 1 _prior_ to results tables in strict adherence to Spec §18.
+
+### 2026-11-26 (Beginner-friendly three-course handoff expanded)
+
+- Expanded `docs/THREE_COURSE_MASTER_HANDOFF.md` with plain-language explanations of every corpus unit and count (asset, segment, keyframe, document chunk, evidence link, vector, evaluation query), including the difference between human annotations, fixed windows, vectorization, generated captions, and transcripts.
+- Added a screen-by-screen explanation of Dashboard, Search and Seek, Corpus Inventory, Engineering Compliance, Diagnostics, Visual Intelligence Studio, API documentation, health, and readiness. Clarified that the main URLs share one HTML application shell while `/ivp` is a separate page.
+- Added definitions and status crosswalks for the six Section 1.4 DoD targets, engineering phases 0–7, and the Section 18 whole-project checklist. The guide distinguishes met, below target, not established, partial, and explicitly waived scope; it repeats the latest evaluation limitations and does not treat missing evidence as a zero score.
+- Documentation only. No application code, corpus data, model weights, services, or tests were changed/run.

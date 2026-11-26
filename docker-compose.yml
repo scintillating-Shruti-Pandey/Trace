@@ -17,6 +17,14 @@ x-app: &app
     VISUAL_ENDPOINT: ${VISUAL_ENDPOINT:-http://host.docker.internal:8002}
     LLM_ENDPOINT: ${LLM_ENDPOINT:-http://host.docker.internal:11434}
     LLM_MODEL: ${LLM_MODEL:-llama3.2:3b}
+    IVP_AI_ENABLED: ${IVP_AI_ENABLED:-false}
+    IVP_CAPTION_MODEL: ${IVP_CAPTION_MODEL:-llava:7b}
+    ASR_MODEL: ${ASR_MODEL:-large-v3}
+    ASR_DEVICE: ${ASR_DEVICE:-cpu}
+    ASR_COMPUTE_TYPE: ${ASR_COMPUTE_TYPE:-int8}
+    QUERY_ANALYSIS_ENABLED: ${QUERY_ANALYSIS_ENABLED:-false}
+    RERANK_ENABLED: ${RERANK_ENABLED:-false}
+    VISUAL_SEGMENT_FUSION_ENABLED: ${VISUAL_SEGMENT_FUSION_ENABLED:-false}
   volumes:
     - ./data/incoming:/data/incoming:ro
 

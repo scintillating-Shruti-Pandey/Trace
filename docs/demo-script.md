@@ -66,11 +66,11 @@ Trace is an industrial multi-modal evidence search and grounded question-answeri
 ### View B: Evaluation & Ablation Dashboard (`/eval`)
 - Navigate to the **Evaluation & Ablation** tab in the top header.
 - **What to Observe**:
-  - The Definition of Done scorecard confirms all 6 acceptance criteria met.
+  - The scorecard reports 2/6 held-out targets met, one below target, and three lacking required evidence.
   - The full 11-configuration ablation matrix ($A_0$–$A_{10}$) table with 10,000 bootstrap confidence intervals.
   - Key finding highlight cards:
-    - **Connective Layer ($A_5$)**: $+3.3\%$ lift in Joint Recall@10 and $+0.0139$ lift in MRR over isolated retrieval.
-    - **Multi-Modal Lift ($A_7$ vs $A_1$)**: $+46.7\%$ Joint Recall@5 ($p = 0.0000$) over text-only RAG.
+    - **A5 vs A4**: Joint Recall@10 differs by +3.3 percentage points and MRR by +0.0139 on dev; these differences have no paired test, while Joint Recall@5 decreases by 3.3 points (p=0.3598).
+    - **Runner comparison ($A_7$ vs $A_1$)**: +46.7 percentage points Joint Recall@5 (bootstrap estimate p < 0.0001; 0/10,000 resamples at or beyond the null) on multi-hop dev queries (n=30); this is not held-out lift evidence.
   - Judge validation: $93.3\%$ agreement and Cohen's $\kappa = 0.8667 \ge 0.70$.
 
 ### View C: Debug Retrieval Trace (⚙ Overlay)

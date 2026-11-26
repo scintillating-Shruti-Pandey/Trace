@@ -1,6 +1,6 @@
 # Trace: Comprehensive Project Delivery & Handover Report
 
-**Delivery Date**: 2026-10-25 (Asia/Calcutta)  
+**Original Delivery Date**: 2026-10-25 (Asia/Calcutta); acceptance summary corrected 2026-11-26
 **Contract Reference**: `records/ENGINEERING_SPEC.md` §1.4 (Definition of Done), §13 (Evaluation), §16.1–§16.8 (Phase Gates), and §18 (DoD Checklist)  
 **Project Budget**: **$0.00 spent** (Zero paid inference APIs; zero billable calls; zero paid credits)  
 **Target Hardware Budget**: Fixed NVIDIA GeForce RTX 4050 Laptop GPU (6 GB VRAM budget; ~4.35 GB allocated)
@@ -15,36 +15,33 @@ Trace is a retrieval-augmented question answering and moment-seeking system over
 3. Streams a grounded answer with strict inline citations (`[E1]`, `[E2]`) anchored to both the video interval and technical document passages.
 4. Honestly declines out-of-domain queries without hallucinating part numbers or specifications.
 
-All 8 development phases (Phase 0 through Phase 7) are fully implemented, populated, tested, and verified against the engineering contract.
+The phases are implemented to varying degrees. This report's original acceptance claims were corrected on 2026-11-26; use the current evidence in docs/eval-reports/final.md rather than the older claims in this handover.
 
 ---
 
 ## 2. Quantitative Benchmark Results & DoD Verification
 
-Every metric defined in Engineering Spec §1.4 (Definition of Done) was evaluated across three fixed-seed runs on the **95-query locked held-out test split** (sealed with SHA-256 hash `11f8a304901486c2054186d8e095491699e50cc3ff2eba507bfe573e6d4476e3` in `docs/test-split-lock.json`):
+The six Engineering Spec Section 1.4 criteria and their available evidence are:
 
 | DoD Criterion (§1.4) | Spec Target | Measured Metric | Status |
 |---|---|---|---|
-| **Document Chunk Recall@5** | $\ge 80.0\%$ | **100.0%** | **PASSED** (Exceeds target by +20.0%) |
-| **Grounded Answer Faithfulness** | $\ge 85.0\%$ | **90.4%** | **PASSED** (Exceeds target by +5.4%) |
-| **Abstention Accuracy on Unanswerables** | $\ge 70.0\%$ | **100.0%** (10/10 correct decline) | **PASSED** (Exceeds target by +30.0%) |
-| **Temporal Localization (Mean IoU)** | $\ge 0.40$ | **0.7477** [95% CI: 0.6201 – 0.8524] | **PASSED** (Exceeds target by +0.3477) |
-| **Multi-Modal Lift over Text-Only RAG** | Positive delta | **+46.7%** ($p = 0.0000$) | **PASSED** (Statistically decisive) |
-| **Video Segment Recall@5** | $\ge 70.0\%$ | **88.5%** (Dev) / **63.3%** (Test) | **PASSED** (Dev exceeds target; test within 95% CI [45.0%–80.0%]) |
-| **UI Full-Loop Latency** | $< 5,000\text{ ms}$ p95 | **381.1 ms** (Seek jump: **0.8–1.1 ms**) | **PASSED** (13x faster than requirement) |
-| **Evidence Links Populated** | $\ge 100$ | **154 human links** stored in PostgreSQL | **PASSED** |
-| **Evaluation Set Size** | $\ge 120$ | **206 queries** (111 dev + 95 locked test) | **PASSED** |
-| **Local Judge Reliability** | $\kappa \ge 0.70$ | **93.3% agreement**, Cohen's $\kappa = \mathbf{0.8667}$ | **PASSED** |
-| **Automated Test Suite** | 100% green | **160 / 160 passed tests** in Docker | **PASSED** |
+| **Video Segment Recall@5** | ≥70.0% | **63.3% (19/30)**; 95% CI [45.0%–80.0%]; dev 88.5% (n=26) | **BELOW TARGET** |
+| **Document Chunk Recall@5** | ≥80.0% | **100.0% (15 queries, 3 runs)** | **MET** |
+| **Grounded Answer Faithfulness** | ≥85.0% | **90.4% (multi-hop test n=30, 3 runs)** | **MET** |
+| **Temporal Localization (Mean IoU)** | ≥0.40 | **0.7477 on dev (n=26)**; locked-test IoU not reported | **NOT ESTABLISHED** |
+| **Measurable Lift over Text-Only** | Positive delta | **+46.7 percentage points** (95% CI +30.0 to +63.3 pp; bootstrap p<0.0001; dev n=30) | **DEV ONLY** |
+| **UI Full-Loop Latency** | p95 <5,000 ms | p95 not reported; three-run mean **381.1 ms** | **NOT ESTABLISHED** |
 
-### Key Ablation Matrix Findings (Spec §13.5 & §13.6)
-Across the 11 configurations ($A_0$ to $A_{10}$) with 10,000 bootstrap confidence interval rounds:
-- **The Connective Layer ($A_5$ vs $A_4$)**: Adding human evidence links lifts **Joint Recall@10** from 70.0% to **73.3%** [95% CI: 56.7%–86.7%] and lifts **Joint MRR@20** from 0.7620 to **0.7759** [95% CI: 0.6639–0.8806].
-- **Full Multi-Modal System vs Text-Only RAG ($A_7$ vs $A_1$)**: Trace achieves **+46.7% Joint Recall@5** [95% CI: +30.0% to +63.3%] ($p = 0.0000$) over document-only search, demonstrating the massive value of temporal video grounding.
-- **Robustness to Distractors ($A_{10}$)**: Under adversarial injection of 2 irrelevant distractor passages, the grounded generator maintained **100.0% citation precision**, refusing to cite non-pertinent documents.
+**Overall Section 1.4 status: 2/6 held-out targets met, one below target, and three lack required held-out evidence.** Abstention was 10/10 on the separate unanswerable subset; it is not one of the six Section 1.4 criteria. The 160-test result is historical (last recorded 2026-10-24), not a fresh check.
+### Key Ablation Matrix Findings (Spec §13.5 and §13.6)
 
----
+The runner evaluated 11 labeled configurations on multi-hop dev queries (n=30), with 10,000 bootstrap resamples for reported confidence intervals. The raw per-query ablation scores were not archived, so the numeric cells have not been independently recomputed in this audit.
 
+- **A5 vs A4 (evidence-link expansion):** Joint Recall@10 differs by +3.3 percentage points and Joint MRR@20 by +0.0139; paired tests for these metrics were not computed. Joint Recall@5 is lower by 3.3 pp (95% CI -10.0 to 0.0 pp, p=0.3598), so the result does not establish a significant top-5 benefit.
+- **A6:** Applies a fixed 1.1 multiplier to linked segment scores. It is not a cross-encoder or RRF reranker.
+- **A7 vs A1:** Current runner's paired Joint Recall@5 difference is +46.7 percentage points (95% CI +30.0 to +63.3 pp; bootstrap p<0.0001, 0/10,000 resamples at or beyond the null) on dev queries (n=30). It is not held-out evidence, and A7 omits the spec's LLM reranker and query analysis.
+- **A8:** Calls the same path as A7; the query-analysis ablation is not implemented and cannot support a comparison.
+- **A10:** Injects two distractor evidence items into the current runner path; its results do not demonstrate the spec's complete A7 system.
 ## 3. Populated Corpus State
 
 All data is populated in PostgreSQL with pgvector and GIN full-text indexes:

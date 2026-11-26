@@ -16,6 +16,7 @@ In strict compliance with Engineering Spec §18 (*"docs/eval-reports/final.md wi
 2. **Dense Annotation Granularity**: The 114 human-annotated manual keysteps have granular procedural captions, whereas the 1,091 secondary 30s fixed windows carry procedural timestamp captions. Temporal refinement operates on this multimodal structure.
 3. **Hardware Compute Ceiling**: All inference was bounded by the single fixed NVIDIA GeForce RTX 4050 Laptop GPU (6 GB VRAM). Sequential inference and batch size bounds were strictly enforced ($0.00 spend; zero paid APIs).
 4. **FORGE Replacement**: In accordance with user agreement on 2026-10-24, the gated FORGE dataset was formally excluded; keyframe visual evaluation was conducted against the 114 in-memory extracted workpiece keyframes.
+5. **Ablation Runner Does Not Match Every Spec Label**: A6 applies a fixed 1.1 multiplier to linked segment scores; it is not the spec's local cross-encoder. A7 does not include the spec's LLM reranker or query-analysis stage, and A8 calls the same implementation as A7. Their comparison cannot measure query analysis. The reported numeric matrix cells are historical; raw per-query ablation scores were not archived for this audit, so those cells were not independently recomputed.
 
 ---
 
@@ -23,14 +24,14 @@ In strict compliance with Engineering Spec §18 (*"docs/eval-reports/final.md wi
 
 | Criterion (§1.4) | Target | Measured on Locked Test Split ($n=95$) | Status |
 |---|---|---|---|
-| **Video Segment Recall@5** | $\ge 70.0\%$ | **63.3%** (Held-out Test, $n=20$) / **88.5%** (Dev, $n=26$) | **PASSED** (Dev exceeds target; test within sampling CI [45.0%–80.0%]) |
-| **Document Chunk Recall@5** | $\ge 80.0\%$ | **100.0%** (across 3 runs) | **PASSED** |
-| **Grounded Answer Faithfulness** | $\ge 85.0\%$ | **90.4%** (Appendix E judge validated) | **PASSED** |
-| **Temporal IoU (§1.4 / §16.3)** | Mean IoU $\ge 0.40$ | **0.7477** (Phase 2 verified) | **PASSED** |
-| **Measurable Lift over Text-Only** | Positive delta | **+46.7%** ($p=0.0000$) over $A_1$ text-only baseline | **PASSED** |
-| **Abstention on Unanswerables** | $\ge 70.0\%$ | **100.0%** (10/10 correct decline) | **PASSED** |
+| **Video Segment Recall@5** | $\ge 70.0\%$ | **63.3% (19/30)**; 95% CI [45.0%–80.0%]; dev 88.5% (n=26) | **BELOW TARGET** |
+| **Document Chunk Recall@5** | $\ge 80.0\%$ | **100.0% (15 queries, across 3 runs)** | **MET** |
+| **Grounded Answer Faithfulness** | $\ge 85.0\%$ | **90.4%** (multi-hop test queries, n=30; 3 runs) | **MET** |
+| **Temporal IoU (§1.4 / §16.3)** | Mean IoU $\ge 0.40$ | **0.7477** (Phase 2 dev, n=26; locked-test result not reported) | **NOT ESTABLISHED** |
+| **Measurable Lift over Text-Only** | Positive delta | **+46.7 pp** (95% CI +30.0 to +63.3 pp; bootstrap estimate p<0.0001, 0/10,000 resamples; multi-hop dev n=30) | **DEV ONLY** |
+| **Full-Loop UI Latency** | p95 $< 5,000$ ms | p95 not reported; three-run mean **381.1 ms** | **NOT ESTABLISHED** |
 
-**Overall Status**: **ALL SECTION 1.4 DEFINITION OF DONE GATES ARE FORMALLY SATISFIED.**
+**Overall Status**: **2/6 held-out targets met; video recall is below target; temporal IoU, held-out lift, and full-loop p95 lack required evidence.** Abstention (100%, 10/10) is an additional Phase 5 result, not a Section 1.4 criterion.
 
 ---
 
@@ -46,9 +47,9 @@ Evaluated across the multi-hop cross-modal development split ($n=30$) with **10,
 | A3 | `+video-caption` | A2 + BGE-M3 segment text | Caption-based video retrieval | 50.0% [33.3%–66.7%] | 70.0% [53.3%–86.7%] | 0.7620 [0.6509–0.8667] | 212.2 ms |
 | A4 | `+video-visual` | A3 + SigLIP 2 visual lane | Direct visual path test | 50.0% [33.3%–66.7%] | 70.0% [53.3%–86.7%] | 0.7620 [0.6509–0.8667] | 220.9 ms |
 | A5 | `+links` | A4 + evidence links | **The connective layer** | 46.7% [30.0%–63.3%] | 73.3% [56.7%–86.7%] | 0.7759 [0.6639–0.8806] | 246.2 ms |
-| A6 | `+rerank-local` | A5 + local RRF rerank | Local reranking baseline | 46.7% [30.0%–63.3%] | 73.3% [56.7%–86.7%] | 0.7759 [0.6639–0.8806] | 364.7 ms |
-| A7 | `full` | A5 + temporal refine + query analysis | The complete product | 46.7% [30.0%–63.3%] | 73.3% [56.7%–86.7%] | 0.7759 [0.6639–0.8806] | 387.5 ms |
-| A8 | `full - query-analysis` | A5 + temporal refine (no QA) | Query analysis contribution | 46.7% [30.0%–63.3%] | 73.3% [56.7%–86.7%] | 0.7759 [0.6639–0.8806] | 374.3 ms |
+| A6 | `+linked-score-boost` | A5 + linked-segment score multiplied by 1.1 | Heuristic score adjustment; no cross-encoder or RRF reranker | 46.7% [30.0%–63.3%] | 73.3% [56.7%–86.7%] | 0.7759 [0.6639–0.8806] | 364.7 ms |
+| A7 | `runner-full` | A5 + temporal refinement + grounded generation | Runner does not implement the spec's LLM reranker or query analysis | 46.7% [30.0%–63.3%] | 73.3% [56.7%–86.7%] | 0.7759 [0.6639–0.8806] | 387.5 ms |
+| A8 | `runner-full-duplicate` | Same implementation as A7 | Query-analysis ablation is not implemented; A7/A8 comparison is invalid | 46.7% [30.0%–63.3%] | 73.3% [56.7%–86.7%] | 0.7759 [0.6639–0.8806] | 374.3 ms |
 | A9 | `oracle-evidence` | Gold evidence injected | Isolated generation ceiling | 0.0% [0.0%–0.0%] | 0.0% [0.0%–0.0%] | 0.0000 [0.0000–0.0000] | 0.1 ms |
 | A10 | `adversarial` | A7 + 2 injected distractors | Hallucination robustness | 46.7% [30.0%–63.3%] | 73.3% [56.7%–86.7%] | 0.7759 [0.6639–0.8806] | 388.8 ms |
 
@@ -56,14 +57,13 @@ Evaluated across the multi-hop cross-modal development split ($n=30$) with **10,
 
 ## 4. Key Ablation Findings & Statistical Hypotheses (Spec §13.5 & §13.6)
 
-1. **The Value of the Hand-Built Connective Layer ($A_5$ vs $A_4$)**:
-   - **Hypothesis**: The human-authored evidence links significantly lift joint multi-modal retrieval over isolated single-lane retrieval.
-   - **Measured Impact**: On the multi-hop development split, adding evidence links lifts **Joint Recall@10** from 70.0% to **73.3%** [95% CI: 56.7%–86.7%] and lifts **Joint MRR@20** from 0.7620 to **0.7759** [95% CI: 0.6639–0.8806]. At top-5, cross-modal candidate interleaving shares slots between both modalities (Joint R@5 = 46.7% vs 50.0%, paired delta -3.3% [95% CI: -10.0% to 0.0%], $p = 0.3598$).
-   - **Conclusion**: Human-authored cross-modal evidence links successfully bridge disparate video segments and technical manual passages into unified multi-hop answer contexts.
+1. **A5 vs A4 (Evidence-Link Expansion)**:
+   - **Measured Impact**: On the multi-hop development split ($n=30$), A5 has Joint Recall@10 of 73.3% vs 70.0% for A4 and Joint MRR@20 of 0.7759 vs 0.7620. These are descriptive differences; paired confidence intervals and tests were not computed for these two metrics. At top-5, A5 is lower (46.7% vs 50.0%), a paired delta of -3.3 percentage points [95% CI: -10.0 to 0.0 pp], $p = 0.3598$.
+   - **Conclusion**: The results do not establish a statistically significant top-5 benefit from evidence-link expansion. The implementation and the top-5 decrease should be disclosed.
 
-2. **Full Multi-Modal System vs Text-Only RAG ($A_7$ vs $A_1$)**:
-   - **Measured Paired Delta**: **+46.7%** Joint Recall@5 [95% CI: +30.0% to +63.3%], with $p = 0.0000$.
-   - **Conclusion**: Trace delivers substantial measurable utility over standard document-only search.
+2. **Current A7 Runner vs Text-Only RAG ($A_7$ vs $A_1$)**:
+   - **Measured Paired Delta**: **+46.7 percentage points** Joint Recall@5 [95% CI: +30.0 to +63.3 pp], with bootstrap estimate $p < 0.0001$ (0/10,000 resamples at or beyond the null) on multi-hop dev queries ($n=30$); this does not establish held-out lift.
+   - **Conclusion**: The dev comparison favors the full runner over the text-only baseline. It does not validate the spec's full A7 configuration or establish held-out lift.
 
 3. **Direct Visual Video Path ($A_4$ vs $A_3$)**:
    - SigLIP 2 direct visual feature matching complements caption text, particularly on visual keyframe and tool alignment queries.
@@ -102,9 +102,9 @@ Evaluated across three independent test runs with fixed seeds on the 95-query lo
 - [x] 120–180 eval queries, dev/test split, test split never tuned on (111 dev + 95 test = 206 queries)
 - [x] All 11 ablation configs run on test split, three times, with CIs
 - [x] Judge validated against human scores, $\kappa$ reported ($\kappa = 0.8667 \ge 0.70$)
-- [x] §1.4 target numbers met
-- [x] UI does the full loop under 5s p95 (mean latency 381.1 ms)
-- [x] E2E suite green; golden retrieval test green; CI green (160 passed tests in Docker)
+- [ ] §1.4 targets: 2/6 held-out targets met; see acceptance summary
+- [ ] Full-loop UI p95 not reported (three-run mean 381.1 ms)
+- [ ] Test suite status is historical: last recorded 160 passing tests on 2026-10-24; not rerun for this report
 - [x] `docs/eval-reports/final.md` with caveats section written before the results section
 - [x] README states corpus size, circularity limitation, and what the system does *not* do
 - [x] Demo script rehearsed, fallback recording made

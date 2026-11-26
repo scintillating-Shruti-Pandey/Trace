@@ -473,7 +473,7 @@
             • <strong>Structure-Aware Chunking</strong>: Keeps tables and headers intact with breadcrumbs (§3.0 > §3.2).<br>
             • <strong>Multi-Modal</strong>: Uses vision AI (SigLIP 2) to look at video frames + text AI (BGE-M3) to understand spoken words.<br>
             • <strong>Evidence Graph</strong>: 154 pre-audited bridges connecting video timestamps to manual sections.<br>
-            • Gets <strong>73.3% accuracy</strong> (+46.7% boost!).
+            • A7 runner gets <strong>73.3% Joint Recall@10</strong> on multi-hop dev queries (n=30); A1 baseline is 0.0%. This is a runner comparison, not an effect attributable only to evidence links.
           </p>
         </div>
       </div>
@@ -676,7 +676,7 @@
           <div class="answer-script">
             <strong>Say this to the teacher:</strong><br>
             "The 154 evidence links represent a pre-audited cross-modal relational graph connecting procedural video intervals directly to authoritative manual chunks.<br><br>
-            In our ablation study, we proved that retrieval alone only scored 0.0% joint recall because colloquial spoken language in videos (`'tighten down outer bolts'`) diverges completely from formal engineering text (`'M10 casing bolt 24.5 Nm'`). By traversing this 1-hop evidence graph during search (Link Expansion), our system achieved an immediate <strong>+46.7% retrieval lift</strong>, raising Joint Recall@10 from 0% to 73.3%."
+            Our A5-vs-A4 ablation on 30 multi-hop dev queries found Joint Recall@10 of 73.3% vs 70.0%, and Joint MRR@20 of 0.7759 vs 0.7620; paired tests were not computed for those metrics. Joint Recall@5 decreased by 3.3 percentage points (p=0.3598). These results do not prove a significant retrieval gain from graph expansion."
           </div>
         </div>
       </div>
@@ -756,7 +756,7 @@
           <div class="answer-script">
             <strong>Say this to the teacher:</strong><br>
             "We evaluated our frozen, unchanged BGE-M3 dense retriever against an external out-of-domain benchmark: <strong>LoVR (Long Video Reasoning)</strong> with 200 held-out industrial equipment inspection caption-query pairs held strictly in RAM.<br><br>
-            Trace achieved an impressive <strong>84.5% Top-1 accuracy</strong>, <strong>96.0% Top-5 accuracy</strong>, and an MRR of <strong>0.892</strong> on completely unseen external machinery without any fine-tuning. This proves that our dense representations capture genuine procedural mechanics rather than memorizing our dataset."
+            On a 200-item LoVR subset, the unchanged off-the-shelf BGE-M3 retriever recorded <strong>64.5% Recall@1</strong>, <strong>89.0% Recall@5</strong>, <strong>95.5% Recall@10</strong>, and <strong>0.7512 MRR@20</strong>. This is a zero-shot retrieval result, not evidence of a Trace-trained model."
           </div>
         </div>
       </div>

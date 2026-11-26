@@ -14,6 +14,7 @@ from sqlalchemy.orm import Session
 
 from app.embeddings import DIMENSIONS, MODEL, BgeM3Client
 from app.expansion import expand_candidates
+from app.local_models import LocalCandidateReranker, LocalQueryAnalyzer
 from app.refinement import refine_temporal_span
 from app.vision import DIMENSIONS as VISUAL_DIMENSIONS, MODEL as VISUAL_MODEL, SiglipVisualClient
 
@@ -396,9 +397,15 @@ class SearchService:
         self,
         client: BgeM3Client,
         visual_client: SiglipVisualClient | None = None,
+        query_analyzer: LocalQueryAnalyzer | None = None,
+        reranker: LocalCandidateReranker | None = None,
+        visual_segment_fusion: bool = False,
     ):
         self._client = client
         self._visual_client = visual_client
+        self._query_analyzer = query_analyzer
+        self._reranker = reranker
+        self._visual_segment_fusion = visual_segment_fusion
 
     def search_images(
         self,
@@ -445,7 +452,9 @@ class SearchService:
             caption = h.get("caption") or h.get("human_caption") or ""
             start_s = float(h.get("start_s", 0.0))
             end_s = float(h.get("end_s", 0.0))
-            refined = refine_temporal_span(query, start_s, end_s, caption=caption)
+            refined = refine_temporal_span(
+                query, start_s, end_s, caption=caption, transcript=h.get("transcript")
+            )
             h["refined_start_s"] = refined.start_s
             h["refined_end_s"] = refined.end_s
             h["seek_to_s"] = refined.seek_to_s
@@ -510,24 +519,64 @@ class SearchService:
             raise ValueError("Query string cannot be empty")
         cleaned = query.strip()
 
-        # Step 1: Video segment lane (dense + refinement)
-        video_segments = self.search_video_segments(
-            session,
-            cleaned,
-            limit=limit,
-            equipment_family=equipment_family,
+        # Query analysis is opt-in and fail-soft: its adapter returns the raw
+        # query if the local model is unavailable or produces invalid JSON.
+        search_queries = (
+            self._query_analyzer.analyze(cleaned) if self._query_analyzer else [cleaned]
         )
+
+        # Step 1: Video segment lane (dense + refinement)
+        video_lists = [
+            self.search_video_segments(
+                session, search_query, limit=limit * 2,
+                equipment_family=equipment_family,
+            )
+            for search_query in search_queries
+        ]
+        if self._visual_client and self._visual_segment_fusion:
+            visual_lists = []
+            for search_query in search_queries:
+                try:
+                    visual_vector = self._visual_client.embed_texts([search_query]).vectors[0]
+                    visual_lists.append(search_segments_visual(
+                        session, visual_vector, limit=limit * 2,
+                        equipment_family=equipment_family,
+                    ))
+                except Exception:
+                    # A missing visual service should not take down text retrieval.
+                    continue
+            video_lists.extend(visual_lists)
+        video_segments = reciprocal_rank_fusion(
+            [hits for hits in video_lists if hits], id_key="segment_id", top_n=limit * 2
+        ) if any(video_lists) else []
+        for segment in video_segments:
+            segment.setdefault("score", segment.get("rrf_score", 0.0))
+            caption = segment.get("caption") or segment.get("human_caption") or ""
+            refined = refine_temporal_span(
+                cleaned, float(segment.get("start_s", 0.0)),
+                float(segment.get("end_s", 0.0)), caption=caption,
+                transcript=segment.get("transcript"),
+            )
+            segment["refined_start_s"] = refined.start_s
+            segment["refined_end_s"] = refined.end_s
+            segment["seek_to_s"] = refined.seek_to_s
         for s in video_segments:
-            s.setdefault("lanes", ["segment_dense"])
+            s.setdefault("lanes", ["segment_text_visual_rrf"])
 
         # Step 2: Document chunks lane (dense + BM25 hybrid RRF)
-        document_chunks = self.search_documents_hybrid(
-            session,
-            cleaned,
-            limit=limit,
-        )
+        document_lists = [
+            self.search_documents_hybrid(session, search_query, limit=limit * 2)
+            for search_query in search_queries
+        ]
+        document_chunks = reciprocal_rank_fusion(
+            [hits for hits in document_lists if hits], id_key="chunk_id", top_n=limit * 2
+        ) if any(document_lists) else []
         for c in document_chunks:
-            c.setdefault("lanes", ["chunk_hybrid_rrf"])
+            c.setdefault("lanes", ["chunk_hybrid_query_rrf"])
+
+        if self._reranker:
+            video_segments = self._reranker.rerank(cleaned, video_segments)
+            document_chunks = self._reranker.rerank(cleaned, document_chunks)
 
         # Step 3: Evidence-link graph expansion (§8.5)
         expanded_segments, expanded_chunks = expand_candidates(
@@ -544,7 +593,15 @@ class SearchService:
         images: list[dict[str, Any]] = []
         if self._visual_client:
             try:
-                images = self.search_images(session, cleaned, limit=limit)
+                image_lists = [
+                    self.search_images(session, search_query, limit=limit * 2)
+                    for search_query in search_queries
+                ]
+                images = reciprocal_rank_fusion(
+                    [hits for hits in image_lists if hits], id_key="image_id", top_n=limit
+                ) if any(image_lists) else []
+                if self._reranker:
+                    images = self._reranker.rerank(cleaned, images)
                 for img in images:
                     img.setdefault("lanes", ["image_visual"])
             except Exception:

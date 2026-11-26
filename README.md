@@ -11,16 +11,24 @@ Phase 0 (Linked corpus & human evidence links), Phase 1 (Whole-video dense retri
 Phase 2 (Temporal / Segment retrieval), Phase 3 (Keyframe Image Retrieval),
 Phase 4 (Document / Hybrid RAG retrieval), Phase 5 (Cross-Modal Fusion & Grounded Answer Generation),
 Phase 6 (Comprehensive Evaluation, Full Ablation Matrix $A_0$–$A_{10}$, and Held-Out Test Benchmarks),
-and Phase 7 (Interactive Moment Seeking Demo UI) are implemented, populated, and formally verified
-against engineering spec §1.4, §13, §16.1–§16.7, and §18 exit gates on the
+and Phase 7 (Interactive Moment Seeking Demo UI) are implemented on the
 **25-video IndEgo corpus (4.60 hours, 1,205 segments)**, **28 technical documents (67 chunks)**,
 **114 keyframes**, and **154 human evidence links**:
+- **Visual Intelligence Studio (2026-11-26; real data and analysis endpoints verified)**: standalone
+  `/ivp` lab displays real IndEgo frames and exposes OpenCV processing, keyframe selection, and
+  optical flow on short video windows. The API image was rebuilt with its declared OpenCV dependency;
+  browser-side button rendering has not been separately exercised. Media is read on demand and is not persisted.
+- **Optional local AI enrichment (code prepared, not activated)**: an in-memory IndEgo segment
+  endpoint can combine locally hosted VLM captioning with word-timestamp ASR; optional query
+  rewrites, local LLM reranking, visual/text segment RRF, and timestamp-aware refinement are
+  wired behind off-by-default flags. No models were downloaded or outputs indexed. ASR needs
+  the optional `faster-whisper` dependency and locally cached weights.
 - **Phase 6 Comprehensive Evaluation & DoD (§1.4, §13, §16.7, §18)**:
-  - **Full Ablation Matrix ($A_0$–$A_{10}$)**: 11 retrieval configurations evaluated on multi-hop dev set ($n=30$) with 10,000 bootstrap CI rounds. Connective layer ($A_5$) lifts Joint Recall@10 from 70.0% to **73.3%** and lifts Joint MRR from 0.7620 to **0.7759**.
-  - **Paired Hypothesis Significance Testing (§13.6)**: Full multi-modal pipeline ($A_7$) achieves **+46.7% Joint Recall@5** [95% CI: +30.0% to +63.3%] ($p = 0.0000$) over text-only RAG ($A_1$), proving statistically decisive lift over PDF search alone.
+  - **Ablation runner ($A_0$–$A_{10})**: 11 labeled configurations evaluated on multi-hop dev set ($n=30$) with 10,000 bootstrap resamples. A5/A4 R@10 and MRR differences are descriptive; paired tests were not computed for them. A6 is a heuristic linked-score boost, and A7/A8 currently run identical code; see the report caveat.
+  - **Dev-set paired comparison (§13.6)**: The current A7 runner has **+46.7 percentage-point Joint Recall@5** [95% CI: +30.0 to +63.3 pp] (bootstrap estimate $p < 0.0001$, 0/10,000 resamples at or beyond the null) over text-only RAG ($A_1$) on multi-hop dev queries ($n=30$); no held-out lift comparison is reported. The runner omits parts of the spec's A7 configuration; see the audit caveat in [the final report](docs/eval-reports/final.md).
   - **Locked Held-Out Test Benchmark ($n=95$)**: Evaluated across 3 fixed-seed runs on cryptographically sealed test split (SHA-256 in `docs/test-split-lock.json`): Document Recall@5 = **100.0%**, Answer Faithfulness = **90.4%**, Abstention = **100.0%**, Mean Latency = **381.1 ms**.
   - **Judge Agreement (§13.4)**: Evaluated across 30 human-scored reference items: **93.3% agreement** and Cohen's $\kappa = \mathbf{0.8667} \ge 0.70$.
-  - **Definition of Done Checklist (§18)**: All §1.4 targets satisfied. Complete evaluation report in [docs/eval-reports/final.md](docs/eval-reports/final.md) with mandatory caveats and circularity disclosures preceding results.
+  - **Definition of Done (§1.4)**: 2/6 held-out targets met; video Recall@5 is below target; locked-test temporal IoU, held-out lift, and full-loop p95 are not reported. See [docs/eval-reports/final.md](docs/eval-reports/final.md) and [docs/build-status.md](docs/build-status.md).
 - **Phase 5 Grounded Answer Generation (§16.6)**: Appendix D-compliant grounded generation with strict API-layer citation validation and SSE streaming:
   - **Faithfulness Rate**: **85.9%** [95% CI: 80.4% – 91.1%] (Spec §16.6 Gate 1 ≥ 80.0%: **PASSED**).
   - **Abstention Rate on Unanswerables**: **10/10 (100.0%)** [95% CI: 100.0% – 100.0%] (Spec §16.6 Gate 2 ≥ 7/10: **PASSED**).
@@ -34,14 +42,14 @@ against engineering spec §1.4, §13, §16.1–§16.7, and §18 exit gates on th
 - **Phase 0 Evidence Links & Corpus (§16.1)**: **154 human evidence links** stored in PostgreSQL `evidence_links` table across 4 spec relations (85 documents, 41 specifies, 16 depicts, 12 contradicts; Spec §16.1 gate ≥ 100: **PASSED / MET**). 206 total evaluation queries (111 dev + 95 locked test).
 - **Doc-Only Recall@5**: **100.0%** [95% CI: 100.0% – 100.0%] (Spec §16.5 Gate ≥ 80.0%: **PASSED**).
 - **Hybrid RRF Ranking**: **MRR@20 = 0.9333**; beats Dense-alone (+0.0200 MRR) and BM25-alone (+80.0% R@5, +0.7333 MRR) (**PASSED**).
-- **Temporal Retrieval**: Mean IoU = **0.7477** (Gate ≥ 0.40: **PASSED**); `R@1 | IoU ≥ 0.30` = **76.9%** (Gate ≥ 50.0%: **PASSED**).
-- **Segment-Level Recall@5**: **88.5%** [95% CI: 73.1% – 100.0%] (Spec §16.3 Gate ≥ 60.0%: **PASSED**).
+- **Temporal Retrieval (dev)**: Mean IoU = **0.7477**; the locked-test IoU result is not reported.
+- **Segment-Level Recall@5**: **88.5%** on dev (n=26); locked-test Recall@5 is **63.3%** (19/30), below the §1.4 target of 70%.
 - **Whole-Video Recall@5**: **96.2%** [95% CI: 88.5% – 100.0%] (Spec §16.2 Gate ≥ 60.0%: **PASSED**).
 - **Timestamp Seeking Latency**: **0.8–1.1 ms** execution latency verified at `/demo/seek` (Spec §16.3 Gate < 300 ms: **PASSED**).
 - **Interactive Multi-Modal Demo UI**: Live at `http://localhost:8000/` and `/demo/seek` combining video moment playback, refined span HUD, connected technical document cards, real-time SSE streaming grounded answers with clickable citation badges, Corpus Explorer (`/corpus`), Evaluation Dashboard (`/eval`), and ⚙ Debug Retrieval Trace overlay. Rehearsed demo guide in [docs/demo-script.md](docs/demo-script.md).
 - **Corpus Populated**: 53 assets stored in PostgreSQL (25 video assets with 1,205 segments + 28 document assets with 67 chunks) + 114 keyframes.
 - **Local GPU Embeddings**: 1,386 dense vectors generated locally on RTX 4050 Laptop GPU (CUDA 12.1) across BGE-M3 (1024-d, port 8001) and SigLIP 2 (1152-d, port 8002) in pgvector (`vec_segment_text`, `vec_chunk`, `vec_image`, `vec_segment_visual`).
-- **Test Suite**: **160 passing tests** in Docker (`scripts/dev.ps1 test`). Full audit and ablation report in
+- **Test Suite**: **160 passing tests last recorded 2026-10-24** in Docker (`scripts/dev.ps1 test`); not rerun for this compliance audit. Full audit and ablation report in
   [docs/eval-reports/final.md](docs/eval-reports/final.md) and handover guide in [docs/PROJECT_DELIVERY_AND_HANDOVER.md](docs/PROJECT_DELIVERY_AND_HANDOVER.md).
 - See the [progress report](docs/build-status.md) for full tracking details.
 
@@ -97,6 +105,7 @@ Once started, navigate to:
 | **Search & Seek Demo** | [http://localhost:8000/](http://localhost:8000/) or `/demo/seek` | Primary UI: natural language query, HTML5 video seeking with 2s lead-in, live SSE streaming answers with interactive citation badges (`[E1]`), and Debug Trace drawer (⚙). |
 | **Corpus Explorer** | [http://localhost:8000/corpus](http://localhost:8000/corpus) | Browse all 25 manufacturing videos, 28 documents, 114 keyframes, and 154 cross-modal evidence links. |
 | **Evaluation Dashboard** | [http://localhost:8000/eval](http://localhost:8000/eval) | View live Definition of Done (DoD) verification tables, ablation matrices, and latency charts. |
+| **Visual Intelligence Studio** | [http://localhost:8000/ivp](http://localhost:8000/ivp) | Display real IndEgo frames and run visual analysis, keyframe selection, and optical flow on short source-video windows. |
 | **API Documentation** | [http://localhost:8000/docs](http://localhost:8000/docs) | Interactive OpenAPI/Swagger developer documentation. |
 | **Corpus Health Status** | [http://localhost:8000/api/v1/status](http://localhost:8000/api/v1/status) | API health check and PostgreSQL index counts. |
 

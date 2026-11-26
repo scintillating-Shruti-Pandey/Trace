@@ -1,14 +1,138 @@
 # Model runtime and persistence plan
 
-> Superseded recommendation, 2026-10-24: see [dependency audit](dependency-audit.md).
-> The system Python already contains torch/transformers; the earlier check only
-> covered the project venv and API container. The proposed 8 GB software allowance
-> is withdrawn as the next step. Prefer existing software and verified hosted APIs;
-> no installation or model download is approved. Historical file-size evidence below
-> remains useful, but is not a required download list.
+> Historical dependency note (2026-10-24), retained here as a dated environment finding:
+> That audit found torch/transformers in system Python but not in the project venv or API
+> container. Any recommendation below for hosted inference, paid APIs, or downloads is
+> superseded by the 2026-11-26 zero-spend plan and is not authorized. The dated model-file
+> inventory remains historical sizing evidence, not a required download list.
 
 Prepared 2026-10-24 (Asia/Calcutta). **Proposal, not installation approval.**
 The running status remains [build-status.md](build-status.md).
+
+## Revised zero-spend plan (2026-11-26)
+
+This section supersedes the paid caption-provider recommendation and all proposed
+paid pilots/costs later in this document. The user's current hard constraint is **$0
+spend**: no hosted inference, paid APIs, credits, or purchases. The user approved
+local diagnostic acquisition and a <=3 interval pilot on 2026-11-26. That approval
+does not include persistence, indexing, or paid services.
+
+### Current runtime evidence
+
+- Read-only check on 2026-11-26: Docker Compose reports `api`, `db`, and `redis` up
+  and healthy; `/healthz` is `ok` and `/readyz` reports `ready`.
+- The API container cannot connect to the configured BGE (`host.docker.internal:8001`)
+  or SigLIP (`:8002`) endpoints (connection refused). Their search stages are therefore
+  not presently available from the running API, despite `search_enabled=true`.
+- The local Ollama endpoint lists only `llama3.2:3b` (about 2.02 GB); no model was
+  loaded at inspection. This is available for text-only query analysis/reranking after
+  code activation, but is not a video/image captioner.
+- The workspace `.venv` is Python 3.12.4 and lacks `httpx`, `pytest`, `ruff`,
+  `faster-whisper`, PyTorch, Transformers and OpenCV. The running API image is separate
+  and healthy. `nvidia-smi` was unavailable in the inspection shell, so current GPU free
+  memory is unknown; the previously measured laptop budget remains 6,141 MiB VRAM.
+- The newly added AI routes and search paths have not been loaded by the running API:
+  it was not restarted and is not configured for autoreload. All new feature flags are
+  false by default.
+
+### Proposed exact acquisition list (prepared, not approved)
+
+All choices below are local-only and have **$0 model/API fees**. They still use network
+bandwidth and local disk, so this is not download/install authorization.
+
+| Stage | Package/model | Version or pinned identifier | Payload / constraints | Status |
+|---|---|---|---|---|
+| Captioning pilot | Ollama `qwen3-vl:2b-instruct-q4_K_M` | Ollama tag; 1.72B parameter Q4_K_M; Apache-2.0 | Ollama lists about **1.9 GB**; text+image input; needs Ollama >= 0.12.7. Local Ollama is **0.40.17**, so the version floor is already met. | Best first VLM candidate; industrial action-caption quality and 6 GB fit are untested. |
+| ASR runtime | `faster-whisper==1.2.1` | PyPI release | Wheel **1.1 MB**; Python >=3.9. | Candidate for current Python 3.12.4 venv; not installed. |
+| ASR runtime | `ctranslate2==4.9.1` | PyPI release | CPython 3.12 Windows x64 wheel **23.1 MB**. | Candidate CPU runtime; compatibility with this exact dependency set is untested. |
+| ASR runtime deps | `av>=11`, `huggingface_hub>=0.23`, `tokenizers>=0.13,<1`, `onnxruntime>=1.14,<2`, `tqdm` | Requirements declared by faster-whisper | Resolved versions and wheel sizes still need an approved dry-run; do not install the unpinned ranges directly into the app environment. | Required package set; resolve in an isolated environment. |
+| ASR weights | `Systran/faster-whisper-large-v3` | revision `edaa852ec7e145841d8ffdb056a99866b5f0a478` | **3,090,835,702 bytes** selected files (3.091 GB), MIT. CPU `int8`, word timestamps, one <=60s clip at a time. | Existing engineering-spec model; weights absent from the standard cache. CPU latency unmeasured. |
+| Text embeddings (restore search) | `BAAI/bge-m3` | revision `5617a9f61b028005a4858fdac845db406aefb181` | **2,293,315,801 bytes** (2.293 GB), MIT. | Needed for live dense text queries; not needed for the isolated caption/ASR pilot. |
+| Visual embeddings (restore search) | `google/siglip2-so400m-patch14-384` | revision `e8e487298228002f3d8a82e0cd5c8ea9c567f57f` | **4,582,795,867 bytes** (4.583 GB), Apache-2.0. | Needed for live visual queries; not needed for the isolated caption/ASR pilot. |
+
+The proposed **diagnostic pilot** requires about **4.99 GB of model payload** (Qwen's
+Ollama-reported ~1.9 GB plus the exact 3.091 GB Whisper files), plus Python wheels and
+installation/cache overhead. The two known direct ASR wheels total about 24.2 MB; the
+remaining transitive wheel sizes have not been resolved. Restoring both embedding services
+adds **6.876 GB** of exact model files, bringing the full new model payload to about
+**11.87 GB**. These totals exclude the already-present Llama 3.2 3B weights (about 2.02 GB),
+package/container duplication, temporary download buffers, and caches. Actual free disk was
+not established in this environment; check it before any acquisition. The previous 20 GB
+allowance was a planning estimate for an earlier BGE-only stage, not a verified guarantee for
+this larger set.
+
+The Qwen3-VL pilot candidate is published in Ollama's model library and its registry
+reports text/image input, an approximately 1.9 GB Q4_K_M package, and Apache-2.0 terms
+([Ollama model tag](https://ollama.com/library/qwen3-vl%3A2b-instruct-q4_K_M)). Ollama's
+model API supports `keep_alive: 0` to unload after a call ([Ollama chat API](https://docs.ollama.com/api/chat));
+before activation, TRACE must set an explicit bounded context and unload behavior so the VLM,
+existing Llama model, and embedding services are not left resident together. Model-file size
+does not prove GPU memory fit. The existing `llava:7b` setting is only a placeholder and
+should be changed to the selected tag only after approval and pilot review.
+
+The faster-whisper project documents Python >=3.9, CPU `int8`, word-level timestamps, and
+its package requirements ([official README](https://github.com/SYSTRAN/faster-whisper),
+[PyPI 1.2.1](https://pypi.org/project/faster-whisper/1.2.1/)). Its GPU path additionally
+requires CUDA/cuBLAS/cuDNN compatibility; the proposal uses CPU first to avoid competing for
+6 GB VRAM. No performance estimate is made for CPU transcription.
+
+### Proposed implementation sequence
+
+1. **Approve the acquisition manifest.** User approval is needed for the named Qwen tag,
+   pinned Whisper revision, package set, and exact transfer/install limits before anything is
+   pulled. No hosted inference is in the plan.
+2. **Run the diagnostic pilot.** After acquisition approval, run at most three short remote
+   IndEgo intervals, using bounded in-memory frames/audio and no persistent output. If its
+   results are poor or fit fails, stop and report rather than scale up.
+3. **Restore current retrieval prerequisites separately.** BGE-M3 and SigLIP 2 are absent
+   from the inspected standard cache; their launch scripts can download by default. Their
+   packages/weights need their own approved setup and GPU compatibility check before endpoints
+   are started. Confirm service health from inside the API container before claiming retrieval
+   works.
+4. **Keep inference sequential and bounded.** Process one segment at a time and sample at
+   most eight frames from an interval no longer than 60 seconds. Run transcription and
+   captioning sequentially; do not keep BGE, SigLIP, ASR, VLM, and Llama resident together on
+   the 6 GB GPU. Measure peak GPU/RAM, latency, errors, and quality; stop on memory pressure.
+5. **Review outputs before persistence.** Keep machine captions distinct from IndEgo human
+   labels. Before indexing, prepare a migration/data contract with separate machine-caption
+   provenance and word-timestamp fields; define which text is embedded and how it joins the
+   existing corpus. Obtain explicit approval before any database migration, caption/ASR
+   persistence, vector replacement/addition, or full-corpus indexing.
+6. **Evaluate before changing claims.** After persistence is approved, run a bounded dev
+   comparison against the current search path; do not change the locked test split. Report
+   caption/ASR failure rates, retrieval metrics, latency, hardware use, and limitations.
+   Only update the paper/report after those results exist.
+
+### What can be reused without new weights
+
+- Existing local `llama3.2:3b` can back optional query analysis and text-only candidate
+  reranking; verify the Ollama model call after a controlled API restart.
+- Existing BGE-M3/SigLIP 2 model definitions and indexed vectors can support optional
+  query-variant and text/visual segment RRF once their endpoints are reachable. No claim is
+  made that their current host services or cached weights exist until inspected.
+- Timed ASR results are currently returned in memory. The search refinement adapter accepts
+  a compact word-timestamp payload, but the existing corpus contains no generated timed
+  transcripts. Persistence and re-embedding remain unimplemented and gated as above.
+
+**Current decision (updated 2026-11-26):** prepared local-only code is not activated. The
+read-only cache check found no BGE-M3, SigLIP 2, or Whisper model directories in the standard
+Hugging Face cache; no matching model-cache environment variable is set. Ollama contains only
+the text-only Llama 3.2 3B model. After the user approved named ASR/VLM acquisition for a <=3
+interval in-memory pilot, the pinned ASR package set was installed into the isolated workspace
+`.venv`; `pip check` reports no broken requirements. The host memory query observed 1,142 MiB
+free; a later user-provided Task Manager screenshot shows Intel Iris Xe integrated
+graphics using shared memory (1.7/7.8 GB at capture) and system memory at 14.4/15.6 GB. This
+differs from the earlier project-plan assumption of a discrete RTX 4050; the hardware identity
+and runtime are not reconciled. The current WSL Docker probe reports no GPU adapter. Ollama
+0.40.17 responds locally, but Qwen was not downloaded; its Windows documentation lists NVIDIA
+and AMD support, not a verified Intel Iris Xe path. [Ollama Windows documentation](https://github.com/ollama/ollama/blob/main/docs/windows.mdx)
+The running API container's OpenCV 5.1.0 reports OpenCL unavailable (`haveOpenCL=False`,
+`useOpenCL=False`); consequently its current classical IVP path is CPU-only as well.
+Large-v3 CPU inference may exceed available RAM; the user's latest screenshot shows 2.2 GB
+available (13.4/15.6 GB used, 86%), still a high memory load. Therefore no model weights were downloaded
+or loaded and the pilot is paused before inference for resource safety. No service restart,
+corpus read, or derived-data persistence occurred. Resume after memory pressure is relieved
+and the runtime/model accelerator is verified; do not silently substitute a smaller model.
 
 ## Verified environment and limits
 
@@ -143,6 +267,19 @@ required by the original pipeline conflicts with the current no-media-copy prefe
 and must be agreed before that part is implemented.
 
 ## Next approval and acceptance evidence
+
+### Read-only package and storage preflight (2026-11-26)
+
+The workspace `C:` volume reports **213.93 GiB free of 542.5 GiB**. This is ample
+for the proposed diagnostic payload on raw capacity alone, but does not account for
+other consumers, package installation overhead, model duplication, or a GPU/RAM fit.
+Metadata inspection confirms a 1.1 MB universal wheel for faster-whisper 1.2.1 and
+a CPython 3.12 Windows x86-64 PyAV 19.0.2 wheel of 28.2 MB; these are examples, not
+the complete dependency closure. No complete transitive wheel resolution was performed:
+the approved preflight explicitly stopped before fetching package artifacts. The user
+subsequently approved the bounded pilot; the pinned ASR package set was installed and its
+runtime resolution is documented in the current decision above. Model weight downloads remain
+paused pending safe hardware capacity evidence.
 
 Recommended next step: **install only the text runtime and BGE-M3**, under the allowance
 above, and implement its adapter. No paid captioning, full corpus indexing, ASR or image

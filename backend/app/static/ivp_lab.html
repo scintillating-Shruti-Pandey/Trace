@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2a">
+  <title>TRACE · Visual Intelligence Studio</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1220;--panel:#121d2e;--panel2:#17253a;--line:#293b54;--text:#e8eef7;--muted:#91a4bd;--mint:#52dfb0;--blue:#7db8ff;--amber:#f1bd68;--red:#ff8181;font:15px/1.5 Inter,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 10% 0,#183453 0,transparent 42%),var(--bg);color:var(--text)}button,select,input{font:inherit}a{color:inherit;text-decoration:none}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px max(22px,calc((100vw - 1440px)/2));border-bottom:1px solid var(--line);background:#0b1220dd;position:sticky;top:0;z-index:2;backdrop-filter:blur(12px)}.brand{font-weight:800;letter-spacing:.14em}.brand small{display:block;color:var(--muted);font-weight:500;letter-spacing:0;font-size:12px}.toplink{color:var(--blue);font-size:14px}
+    main{max-width:1440px;margin:auto;padding:30px 22px 60px}.eyebrow{color:var(--mint);font:600 12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}.intro{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:22px}.intro h1{font-size:clamp(28px,4vw,44px);line-height:1.08;margin:8px 0}.intro p{max-width:720px;color:var(--muted);margin:8px 0}.badge{border:1px solid #23694f;background:#103328;color:var(--mint);border-radius:999px;padding:7px 12px;white-space:nowrap;font:600 12px ui-monospace,monospace}
+    .controls,.card{background:linear-gradient(145deg,#152339,#101a2a);border:1px solid var(--line);border-radius:16px}.controls{padding:18px;display:grid;grid-template-columns:minmax(240px,2fr) minmax(130px,.8fr) minmax(220px,1.4fr) auto;gap:14px;align-items:end;margin-bottom:18px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.field select,.field input[type=number]{width:100%;border:1px solid var(--line);border-radius:9px;background:#0b1422;color:var(--text);padding:10px 11px}.sliderrow{display:flex;align-items:center;gap:12px}.sliderrow input{width:100%;accent-color:var(--mint)}.sliderrow output{font:12px ui-monospace,monospace;color:var(--mint);min-width:56px}.buttons{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#1a2a40;color:var(--text);padding:10px 13px;border-radius:9px;cursor:pointer;font-weight:650}.btn.primary{background:var(--mint);border-color:var(--mint);color:#07251b}.btn:hover{filter:brightness(1.1)}.btn:disabled{opacity:.55;cursor:wait}
+    .status{display:none;padding:10px 13px;border-radius:9px;margin:0 0 18px;background:#17283c;color:var(--muted);border:1px solid var(--line)}.status.show{display:block}.status.error{background:#351c25;color:#ffc2c2;border-color:#71333c}.status.ok{background:#102e29;color:#a8f2d7;border-color:#23694f}
+    .layout{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(0,1.35fr);gap:18px;align-items:start}.card{padding:18px}.card h2{font-size:17px;margin:0 0 4px}.sub{color:var(--muted);font-size:13px;margin:0 0 14px}.framebox{background:#070c14;border:1px solid var(--line);border-radius:12px;min-height:300px;display:grid;place-items:center;overflow:hidden}.framebox img{display:block;max-width:100%;max-height:62vh;object-fit:contain}.placeholder{padding:32px;text-align:center;color:var(--muted)}.metadata{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.chip{background:#1a2a40;border:1px solid var(--line);padding:4px 8px;border-radius:999px;color:#c8d5e5;font-size:11px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.result{background:#0d1726;border:1px solid var(--line);border-radius:11px;padding:10px;min-width:0}.result h3{font-size:13px;margin:0 0 7px}.result img{width:100%;aspect-ratio:1.25;object-fit:contain;background:#050a11;border-radius:7px}.result .cap{color:var(--muted);font-size:11px;margin-top:7px;overflow-wrap:anywhere}.section-title{display:flex;justify-content:space-between;align-items:baseline;margin:24px 0 12px}.section-title h2{margin:0;font-size:20px}.metrics{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}.metric{background:#0c1624;border:1px solid var(--line);padding:8px 10px;border-radius:9px;color:var(--muted);font-size:12px}.metric strong{display:block;color:var(--text);font:600 15px ui-monospace,monospace}.empty{color:var(--muted);font-size:13px;padding:12px 0}.footnote{color:var(--muted);font-size:12px;margin-top:18px}.spinner{display:inline-block;width:13px;height:13px;border:2px solid #8294aa;border-top-color:var(--mint);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:7px}@keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:900px){.controls{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}}@media(max-width:560px){header{padding:14px 16px}.intro{display:block}.badge{display:inline-block;margin-top:6px}.controls{grid-template-columns:1fr}.framebox{min-height:220px}main{padding:22px 14px 44px}}
+  </style>
+</head>
+<body>
+  <header><a class="brand" href="/">TRACE<small>Industrial Evidence Intelligence</small></a><a class="toplink" href="/demo/seek">← Search &amp; Seek</a></header>
+  <main>
+    <section class="intro"><div><div class="eyebrow">Visual analysis · live source data</div><h1>Visual Intelligence Studio</h1><p>Choose a real IndEgo video and timestamp. TRACE fetches only the needed byte ranges, decodes frames in memory, and runs OpenCV operations on the actual source footage.</p></div><div class="badge">REAL SOURCE · CC BY 4.0</div></section>
+    <section class="controls" aria-label="Frame selection">
+      <div class="field"><label for="video">IndEgo video</label><select id="video" disabled><option>Loading verified catalogue…</option></select></div>
+      <div class="field"><label for="time">Timestamp (seconds)</label><input id="time" type="number" min="0" step="0.25" value="0"></div>
+      <div class="field"><label for="timeline">Scrub video timeline <span id="duration-label"></span></label><div class="sliderrow"><input id="timeline" type="range" min="0" max="1" value="0" step="0.25" disabled><output id="time-label">0.00s</output></div></div>
+      <div class="buttons"><button class="btn" id="load-frame">Load frame</button><button class="btn primary" id="analyze">Analyze frame</button></div>
+    </section>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <section class="layout">
+      <article class="card"><h2>Source frame</h2><p class="sub">Decoded from the pinned FraunhoferIPK/IndEgo release</p><div id="framebox" class="framebox"><div class="placeholder">Choose a video and load a frame to begin.</div></div><div id="metadata" class="metadata"></div></article>
+      <article class="card"><h2>Frame processing</h2><p class="sub">Color transforms, contrast, filters, edges, morphology, features, and motion</p><div id="frame-results" class="empty">Analyze a frame to display the OpenCV outputs.</div></article>
+    </section>
+    <section class="card" style="margin-top:18px"><div class="section-title"><div><h2>Video processing</h2><p class="sub" style="margin:4px 0 0">Sample a short real-video interval for difference keyframes and optical flow.</p></div><button class="btn primary" id="analyze-range">Analyze next 8 seconds</button></div><div id="range-results" class="empty">Select a timestamp, then analyze a video interval.</div></section>
+    <p class="footnote">Remote availability depends on Hugging Face and the local FFmpeg/OpenCV runtime. Frames are held in bounded memory only; this lab does not download or persist dataset media. Analysis is deterministic and may take a few seconds.</p>
+  </main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const videoSelect = $('video'), timeInput = $('time'), timeline = $('timeline');
+  const status = $('status'), frameBox = $('framebox'), metadata = $('metadata');
+  let videos = [], selected = null;
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const seconds = n => `${Number(n).toFixed(2)}s`;
+  function message(text, kind='') { status.className = `status show ${kind}`; status.textContent = text; }
+  function busy(button, on, label) { button.disabled = on; button.innerHTML = on ? `<span class="spinner"></span>${label}` : label; }
+  function syncTime(value) {
+    const max = selected ? Math.max(0, selected.duration_s - .05) : 0;
+    const t = Math.max(0, Math.min(Number(value) || 0, max));
+    timeInput.value = t.toFixed(2); timeline.value = String(t); $('time-label').textContent = seconds(t);
+  }
+  function chooseVideo(stem) {
+    selected = videos.find(v => v.stem === stem) || videos[0]; if (!selected) return;
+    timeInput.max = Math.max(0, selected.duration_s - .05); timeline.max = String(Math.max(0, selected.duration_s - .05));
+    $('duration-label').textContent = `· ${Math.floor(selected.duration_s/60)} min ${Math.round(selected.duration_s%60)} sec`;
+    syncTime(0); $('frame-results').innerHTML = '<div class="empty">Analyze a frame to display the OpenCV outputs.</div>';
+    $('range-results').innerHTML = '<div class="empty">Select a timestamp, then analyze a video interval.</div>';
+    frameBox.innerHTML = '<div class="placeholder">Video selected. Load a timestamp to fetch a real frame.</div>'; metadata.innerHTML = '';
+  }
+  function b64Image(b64, alt='Processed frame') { return `<img alt="${esc(alt)}" src="data:image/png;base64,${b64}">`; }
+  function renderMetrics(target, metrics) {
+    if (!metrics || typeof metrics !== 'object') return;
+    const pairs = Object.entries(metrics).filter(([,v]) => typeof v === 'number' || typeof v === 'boolean').slice(0,12);
+    if (pairs.length) target.insertAdjacentHTML('beforeend', `<div class="metrics">${pairs.map(([k,v])=>`<div class="metric">${esc(k.replaceAll('_',' '))}<strong>${typeof v==='number'?Number(v).toFixed(3):String(v)}</strong></div>`).join('')}</div>`);
+  }
+  function renderTechniqueSet(target, source) {
+    const techniques = Object.entries(source || {}).filter(([,v]) => v && typeof v === 'object');
+    if (!techniques.length) { target.innerHTML = '<div class="empty">No processing results returned.</div>'; return; }
+    target.innerHTML = techniques.filter(([key]) => key !== 'optical_flow').map(([key, result]) => {
+      const images = result.images && typeof result.images === 'object' ? Object.entries(result.images).filter(([,v])=>typeof v==='string') : [];
+      const cards = images.map(([name,b64])=>`<div class="result"><h3>${esc(name.replaceAll('_',' '))}</h3>${b64Image(b64,name)}<div class="cap">${esc(result.technique || key)}</div></div>`).join('');
+      const metrics = Object.entries(result.metrics || {}).filter(([,v])=>typeof v==='number'||typeof v==='boolean').slice(0,8);
+      return `<section><div class="section-title"><div><h2>${esc(result.technique || key)}</h2><p class="sub">${esc(result.description || '')}</p></div></div><div class="metrics">${metrics.map(([k,v])=>`<div class="metric">${esc(k.replaceAll('_',' '))}<strong>${typeof v==='number'?Number(v).toFixed(3):String(v)}</strong></div>`).join('')}</div>${cards?`<div class="grid">${cards}</div>`:''}</section>`;
+    }).join('') + '<p class="footnote">Optical flow is shown in Video Processing, where it is computed from consecutive real source frames. A single still image cannot provide real temporal motion.</p>';
+  }
+  async function request(url, options) {
+    const response = await fetch(url, options); if (!response.ok) { let detail=''; try {const body=await response.json();detail=body.detail||'';}catch{} throw new Error(detail || `Request failed (${response.status})`); } return response;
+  }
+  async function loadFrame() {
+    if (!selected) return; const t=Number(timeInput.value)||0, button=$('load-frame'); busy(button,true,'Loading frame…'); message('Fetching the requested frame from the remote video and decoding in memory.');
+    try { const response=await request(`/api/v1/ivp/frame?stem=${encodeURIComponent(selected.stem)}&t=${encodeURIComponent(t)}&w=720`); const blob=await response.blob(); const url=URL.createObjectURL(blob); const old=frameBox.querySelector('img')?.src; frameBox.innerHTML=`<img alt="Real IndEgo source frame at ${seconds(t)}" src="${url}">`; if(old?.startsWith('blob:')) URL.revokeObjectURL(old); metadata.innerHTML=`<span class="chip">REAL INDEGO FRAME</span><span class="chip">${esc(selected.title)}</span><span class="chip">${seconds(t)}</span><span class="chip">${esc(selected.category)}</span><span class="chip">${esc(selected.license)}</span>`; syncTime(t); message('Real source frame loaded successfully.', 'ok'); }
+    catch(error){message(`${error.message}. Check the local API, FFmpeg, network, and Hugging Face availability.`, 'error');}
+    finally{busy(button,false,'Load frame');}
+  }
+  async function analyzeFrame() {
+    if (!selected) return; const button=$('analyze'); busy(button,true,'Analyzing…'); message('Running the classical IVP pipeline on this real source frame.');
+    try { const response=await request(`/api/v1/ivp/analyze-frame?stem=${encodeURIComponent(selected.stem)}&t=${encodeURIComponent(Number(timeInput.value)||0)}&w=640`); const data=await response.json(); renderTechniqueSet($('frame-results'),data.techniques); message(`Frame analyzed · ${data.source.width}×${data.source.height} · ${seconds(data.source.timestamp_s)} · ${data.elapsed_ms} ms OpenCV processing.`, 'ok'); }
+    catch(error){message(`${error.message}. No synthetic substitute is shown when the real frame is unavailable.`, 'error');}
+    finally{busy(button,false,'Analyze frame');}
+  }
+  async function analyzeRange() {
+    if (!selected) return; const button=$('analyze-range'), start=Number(timeInput.value)||0, end=Math.min(start+8,selected.duration_s); if(end-start<1){message('Choose a timestamp with at least one second remaining in the video.','error');return;}
+    busy(button,true,'Processing video…'); message('Sampling this real video interval for motion and keyframes.');
+    try { const response=await request(`/api/v1/ivp/segment?stem=${encodeURIComponent(selected.stem)}&start=${start}&end=${end}&fps=2&w=480`); const data=await response.json(); const target=$('range-results'); const keyframes=data.keyframes||[]; target.innerHTML=`<div class="metrics"><div class="metric">frames analyzed<strong>${data.range.frames_analyzed}</strong></div><div class="metric">keyframes selected<strong>${data.metrics.keyframes_selected}</strong></div><div class="metric">mean frame difference<strong>${data.metrics.mean_inter_frame_diff}</strong></div><div class="metric">mean flow magnitude<strong>${data.metrics.mean_flow_magnitude}</strong></div><div class="metric">motion active<strong>${data.metrics.motion_active}</strong></div></div><h3>Selected keyframes</h3>${keyframes.length?`<div class="grid">${keyframes.map(k=>`<div class="result"><h3>${seconds(k.timestamp_s)} · frame ${k.frame_index}</h3>${b64Image(k.image_png_b64,'Selected real video keyframe')}<div class="cap">Difference ${k.inter_frame_diff} · edge density ${k.edge_density_pct}% · sharpness ${k.sharpness}</div></div>`).join('')}</div>`:'<p class="empty">No frame crossed the configured difference threshold in this interval. Try another timestamp.</p>'}<h3 style="margin-top:18px">Optical flow</h3><div class="grid">${Object.entries(data.motion.images||{}).map(([name,b64])=>`<div class="result"><h3>${esc(name.replaceAll('_',' '))}</h3>${b64Image(b64,name)}</div>`).join('')}</div>`; message(`Video interval processed · ${data.range.frames_analyzed} real frames sampled from ${seconds(start)} to ${seconds(end)}.`, 'ok'); }
+    catch(error){message(`${error.message}. No synthetic video frames are substituted.`, 'error');}
+    finally{busy(button,false,'Analyze next 8 seconds');}
+  }
+  $('load-frame').addEventListener('click',loadFrame); $('analyze').addEventListener('click',analyzeFrame); $('analyze-range').addEventListener('click',analyzeRange);
+  timeline.addEventListener('input',()=>syncTime(timeline.value)); timeInput.addEventListener('input',()=>syncTime(timeInput.value)); videoSelect.addEventListener('change',()=>chooseVideo(videoSelect.value));
+  (async()=>{try{const response=await request('/api/v1/ivp/catalog');const catalog=await response.json();if(!catalog.dataset_available)throw new Error(catalog.dataset?.error||'The verified dataset manifest is unavailable.');videos=catalog.dataset.videos||[];if(!videos.length)throw new Error('The verified IndEgo catalogue is empty.');videoSelect.innerHTML=videos.map(v=>`<option value="${esc(v.stem)}">${esc(v.title)} · ${esc(v.category)}</option>`).join('');videoSelect.disabled=false;const params=new URLSearchParams(location.search);chooseVideo(params.get('stem')||videos[0].stem);if(params.has('t'))syncTime(params.get('t'));message(`${videos.length} verified IndEgo videos available · pinned revision ${catalog.dataset.revision}. Media is decoded on demand.`, 'ok');}catch(error){videoSelect.innerHTML='<option>Dataset catalogue unavailable</option>';message(`${error.message}. The application needs its local API and verified dataset manifest.`, 'error');}})();
+})();
+</script>
+</body>
+</html>

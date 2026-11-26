@@ -42,6 +42,17 @@ class Settings(BaseSettings):
     llm_model: str = "llama3.2:3b"
     llm_timeout: float = 60.0
 
+    # Optional local-only video understanding and retrieval stages. These remain
+    # off until model/runtime setup and corpus indexing receive explicit approval.
+    ivp_ai_enabled: bool = False
+    ivp_caption_model: str = "llava:7b"
+    asr_model: str = "large-v3"
+    asr_device: str = "cpu"
+    asr_compute_type: str = "int8"
+    query_analysis_enabled: bool = False
+    rerank_enabled: bool = False
+    visual_segment_fusion_enabled: bool = False
+
     @field_validator("database_url")
     @classmethod
     def postgres_only(cls, value: str) -> str:

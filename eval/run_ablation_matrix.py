@@ -8,9 +8,9 @@ Strictly adheres to records/ENGINEERING_SPEC.md §1.2, §1.4, §8.5, §8.7, §13
   A3: +video-caption (A2 + BGE-M3 segment-text lane)
   A4: +video-visual (A3 + SigLIP 2 segment-visual lane - tests visual vs caption hypothesis)
   A5: +links (A4 + evidence-link graph expansion - tests value of connective layer)
-  A6: +rerank-local (A5 + cross-modal RRF rerank)
-  A7: full (A5 + temporal refinement + query analysis)
-  A8: full - query-analysis (A7 without query decomposition)
+  A6: linked-segment score boost (A5 + 1.1 multiplier on linked segments)
+  A7: runner-full (A5 + temporal refinement + grounded generation)
+  A8: currently duplicates A7; query-analysis ablation is not implemented
   A9: oracle-evidence (gold evidence directly injected - isolates generation quality)
   A10: adversarial (A7 + 2 injected distractors - robustness against hallucination)
 - Runs across both dev split and locked held-out test split.
@@ -113,6 +113,13 @@ def paired_bootstrap_test(scores_a: list[float], scores_b: list[float], n_rounds
     return mean_diff, lower, upper, p_val
 
 
+def format_bootstrap_p(p_value: float) -> str:
+    """Avoid presenting zero observed bootstrap exceedances as a true p=0."""
+    if p_value == 0.0:
+        return "<0.0001 (0/10,000 resamples)"
+    return f"{p_value:.4f}"
+
+
 class AblationEngine:
     """Executes search under each of the 11 Section 13.5 ablation configurations."""
 
@@ -202,11 +209,11 @@ class AblationEngine:
             return {"config": config_name, "video_segments": exp_segs[:limit], "document_chunks": exp_chunks[:limit], "images": images, "latency_ms": latency}
 
         # -------------------------------------------------------------
-        # Config A6: +rerank-local (A5 + cross-modal RRF rerank)
+        # Config A6: heuristic linked-segment score multiplier (not a learned reranker)
         # -------------------------------------------------------------
         if config_name == "A6_plus_rerank_local":
             res_a5 = self.run_config("A5_plus_links", query, query_record, limit=limit)
-            # Apply cross-modal RRF reranking
+            # Apply a fixed 1.1 multiplier to linked segments, then sort segments only.
             segs = res_a5["video_segments"]
             for s in segs:
                 s["rerank_score"] = float(s.get("score", 0.0)) * 1.1 if s.get("via_link") else float(s.get("score", 0.0))
@@ -215,7 +222,7 @@ class AblationEngine:
             return {"config": config_name, "video_segments": segs, "document_chunks": res_a5["document_chunks"], "images": res_a5["images"], "latency_ms": latency}
 
         # -------------------------------------------------------------
-        # Config A7: full (A5 + temporal refinement + query analysis)
+        # Config A7: current runner path (A5 + temporal refinement + generation)
         # -------------------------------------------------------------
         if config_name == "A7_full":
             # Multi-modal search with temporal refinement
@@ -235,7 +242,7 @@ class AblationEngine:
             }
 
         # -------------------------------------------------------------
-        # Config A8: full - query-analysis (A7 without query decomposition)
+        # Config A8 currently duplicates A7; no query-analysis toggle is applied.
         # -------------------------------------------------------------
         if config_name == "A8_full_no_query_analysis":
             mm = self.svc.search_multimodal(self.session, cleaned, limit=limit, link_expansion=True)
@@ -530,19 +537,19 @@ def run_full_benchmark():
         # Part B: Statistical Paired Tests (Spec §13.5 & §13.6)
         # -------------------------------------------------------------
         print("\n[2/3] Computing Paired Statistical Significance Deltas (10,000 bootstrap resamples)...")
-        # Test 1: A5 (+links) vs A4 (+video-visual) -> The value of the connective layer
+        # Test 1: A5 (+links) vs A4 (+video-visual) -> paired evidence-link comparison
         d_a5_a4, d_a5_a4_l, d_a5_a4_h, p_a5_a4 = paired_bootstrap_test(
             ablation_results["A5_plus_links"]["raw_jr5"],
             ablation_results["A4_plus_video_visual"]["raw_jr5"],
         )
-        print(f"  A5 vs A4 (Connective Layer Contribution): Delta Joint R@5 = +{d_a5_a4*100:.1f}% [95% CI: {d_a5_a4_l*100:.1f}% to {d_a5_a4_h*100:.1f}%], p={p_a5_a4:.4f}")
+        print(f"  A5 vs A4 (Evidence-Link Expansion): Delta Joint R@5 = {d_a5_a4*100:.1f} pp [95% CI: {d_a5_a4_l*100:.1f} to {d_a5_a4_h*100:.1f} pp], p={format_bootstrap_p(p_a5_a4)}")
 
-        # Test 2: A7 (full product) vs A1 (text-only RAG) -> System lift over PDF chatbot
+        # Test 2: current runner A7 vs A1 (text-only RAG), on dev only
         d_a7_a1, d_a7_a1_l, d_a7_a1_h, p_a7_a1 = paired_bootstrap_test(
             ablation_results["A7_full"]["raw_jr5"],
             ablation_results["A1_text_only"]["raw_jr5"],
         )
-        print(f"  A7 vs A1 (Full System vs Text-Only RAG):   Delta Joint R@5 = +{d_a7_a1*100:.1f}% [95% CI: {d_a7_a1_l*100:.1f}% to {d_a7_a1_h*100:.1f}%], p={p_a7_a1:.4f}")
+        print(f"  A7 vs A1 (Runner Full vs Text-Only RAG): Delta Joint R@5 = +{d_a7_a1*100:.1f} pp [95% CI: +{d_a7_a1_l*100:.1f} to +{d_a7_a1_h*100:.1f} pp], p={format_bootstrap_p(p_a7_a1)}")
 
         # -------------------------------------------------------------
         # Part C: Three-Run Locked Test Split Benchmark (Spec §13.6)
@@ -640,7 +647,10 @@ def generate_final_report(ablation_results, test_run_metrics, paired_a5_a4, pair
     dod_video = test_vid_r5 >= 0.70
     dod_doc = test_doc_r5 >= 0.80
     dod_faith = test_faith >= 0.85
-    dod_lift = d_a7_a1 > 0.0
+    # Lift is measured on dev only; temporal test IoU and UI p95 are unavailable.
+    dod_temporal_test = None
+    dod_lift_test = None
+    dod_ui_p95 = None
 
     report = f"""# Trace Final Evaluation Report: Full Ablation Matrix & Held-Out Test Benchmarks
 
@@ -660,6 +670,7 @@ In strict compliance with Engineering Spec §18 (*"docs/eval-reports/final.md wi
 2. **Dense Annotation Granularity**: The 114 human-annotated manual keysteps have granular procedural captions, whereas the 1,091 secondary 30s fixed windows carry procedural timestamp captions. Temporal refinement operates on this multimodal structure.
 3. **Hardware Compute Ceiling**: All inference was bounded by the single fixed NVIDIA GeForce RTX 4050 Laptop GPU (6 GB VRAM). Sequential inference and batch size bounds were strictly enforced ($0.00 spend; zero paid APIs).
 4. **FORGE Replacement**: In accordance with user agreement on 2026-10-24, the gated FORGE dataset was formally excluded; keyframe visual evaluation was conducted against the 114 in-memory extracted workpiece keyframes.
+5. **Ablation Runner Scope**: A6 applies a fixed 1.1 multiplier to linked segment scores, not a local cross-encoder. A7 omits the spec's LLM reranker and query-analysis stage; A8 calls the same implementation as A7, so their comparison cannot measure query analysis. Raw per-query ablation scores were not archived for this audit, so matrix values were not independently recomputed.
 
 ---
 
@@ -667,14 +678,14 @@ In strict compliance with Engineering Spec §18 (*"docs/eval-reports/final.md wi
 
 | Criterion (§1.4) | Target | Measured on Locked Test Split ($n=95$) | Status |
 |---|---|---|---|
-| **Video Segment Recall@5** | $\\ge 70.0\\%$ | **{test_vid_r5*100:.1f}%** (across 3 runs) | **PASSED** |
-| **Document Chunk Recall@5** | $\\ge 80.0\\%$ | **{test_doc_r5*100:.1f}%** (across 3 runs) | **PASSED** |
-| **Grounded Answer Faithfulness** | $\\ge 85.0\\%$ | **{test_faith*100:.1f}%** (Appendix E judge validated) | **PASSED** |
-| **Temporal IoU (§1.4 / §16.3)** | Mean IoU $\\ge 0.40$ | **0.7477** (Phase 2 verified) | **PASSED** |
-| **Measurable Lift over Text-Only** | Positive delta | **+{d_a7_a1*100:.1f}%** ($p={p_a7_a1:.4f}$) over $A_1$ text-only baseline | **PASSED** |
-| **Abstention on Unanswerables** | $\\ge 70.0\\%$ | **{test_unans*100:.1f}%** (10/10 correct decline) | **PASSED** |
+| **Video Segment Recall@5** | target >=70% | **{test_vid_r5*100:.1f}% (19/30; dev 88.5%, n=26)** | **{"MET" if dod_video else "BELOW TARGET"}** |
+| **Document Chunk Recall@5** | target >=80% | **{test_doc_r5*100:.1f}% (15 queries; 3 runs)** | **{"MET" if dod_doc else "BELOW TARGET"}** |
+| **Grounded Answer Faithfulness** | target >=85% | **{test_faith*100:.1f}% (multi-hop test n=30; 3 runs)** | **{"MET" if dod_faith else "BELOW TARGET"}** |
+| **Temporal IoU** | Mean IoU >=0.40 | **0.7477 (Phase 2 dev n=26; locked-test result not reported)** | **NOT ESTABLISHED** |
+| **Measurable Lift over Text-Only** | Positive delta | **+{d_a7_a1*100:.1f} pp (95% CI +{d_a7_a1_l*100:.1f} to +{d_a7_a1_h*100:.1f} pp; p={p_a7_a1:.4f}; dev n=30)** | **DEV ONLY** |
+| **Full-Loop UI Latency** | p95 <5,000 ms | **p95 not reported; mean {test_lat:.1f} ms** | **NOT ESTABLISHED** |
 
-**Overall Status**: **ALL SECTION 1.4 DEFINITION OF DONE GATES ARE FORMALLY SATISFIED.**
+**Overall Status**: **2/6 held-out targets met; video recall is below target; temporal IoU, held-out lift, and full-loop p95 lack required evidence.** Abstention ({test_unans*100:.1f}%, 10/10) is an additional Phase 5 result, not a Section 1.4 criterion.
 
 ---
 
@@ -692,9 +703,9 @@ Evaluated across the multi-hop cross-modal development split ($n=30$) with **10,
         "A3_plus_video_caption": ("A3", "`+video-caption`", "A2 + BGE-M3 segment text", "Caption-based video retrieval"),
         "A4_plus_video_visual": ("A4", "`+video-visual`", "A3 + SigLIP 2 visual lane", "Direct visual path test"),
         "A5_plus_links": ("A5", "`+links`", "A4 + evidence links", "**The connective layer**"),
-        "A6_plus_rerank_local": ("A6", "`+rerank-local`", "A5 + local RRF rerank", "Local reranking baseline"),
-        "A7_full": ("A7", "`full`", "A5 + temporal refine + query analysis", "The complete product"),
-        "A8_full_no_query_analysis": ("A8", "`full - query-analysis`", "A5 + temporal refine (no QA)", "Query analysis contribution"),
+        "A6_plus_rerank_local": ("A6", "`+linked-score-boost`", "A5 + 1.1 multiplier on linked segments", "Heuristic score adjustment; not a reranker"),
+        "A7_full": ("A7", "`runner-full`", "A5 + temporal refinement + grounded generation", "Current runner; no spec LLM reranker or query analysis"),
+        "A8_full_no_query_analysis": ("A8", "`runner-full-duplicate`", "Same implementation as A7", "Query-analysis ablation not implemented"),
         "A9_oracle_evidence": ("A9", "`oracle-evidence`", "Gold evidence injected", "Isolated generation ceiling"),
         "A10_adversarial": ("A10", "`adversarial`", "A7 + 2 injected distractors", "Hallucination robustness"),
     }
@@ -713,14 +724,13 @@ Evaluated across the multi-hop cross-modal development split ($n=30$) with **10,
 
 ## 4. Key Ablation Findings & Statistical Hypotheses (Spec §13.5 & §13.6)
 
-1. **The Value of the Hand-Built Connective Layer ($A_5$ vs $A_4$)**:
-   - **Hypothesis**: The human-authored evidence links significantly lift joint multi-modal retrieval.
-   - **Measured Paired Delta**: **+{d_a5_a4*100:.1f}%** Joint Recall@5 [95% CI: +{d_a5_a4_l*100:.1f}% to +{d_a5_a4_h*100:.1f}%], with $p = {p_a5_a4:.4f}$.
-   - **Conclusion**: Statistically significant evidence that cross-modal evidence links bridge the gap between video actions and technical documentation.
+1. **A5 vs A4 (Evidence-Link Expansion)**:
+   - **Measured Paired Delta**: **{d_a5_a4*100:.1f} pp** Joint Recall@5 [95% CI: {d_a5_a4_l*100:.1f} to {d_a5_a4_h*100:.1f} pp], with $p = {format_bootstrap_p(p_a5_a4)}$ on the multi-hop dev set ($n=30$).
+   - **Conclusion**: The reported top-5 comparison does not show a statistically significant benefit from evidence-link expansion. The implementation and the top-5 decrease should be disclosed.
 
-2. **Full Multi-Modal System vs Text-Only RAG ($A_7$ vs $A_1$)**:
-   - **Measured Paired Delta**: **+{d_a7_a1*100:.1f}%** Joint Recall@5 [95% CI: +{d_a7_a1_l*100:.1f}% to +{d_a7_a1_h*100:.1f}%], with $p = {p_a7_a1:.4f}$.
-   - **Conclusion**: Trace delivers substantial measurable utility over standard document-only search.
+2. **Current A7 Runner vs Text-Only RAG ($A_7$ vs $A_1$)**:
+   - **Measured Paired Delta**: **+{d_a7_a1*100:.1f} pp** Joint Recall@5 [95% CI: +{d_a7_a1_l*100:.1f} to +{d_a7_a1_h*100:.1f} pp], with bootstrap estimate $p = {format_bootstrap_p(p_a7_a1)}$ on multi-hop dev queries ($n=30$); this does not establish held-out lift.
+   - **Conclusion**: The dev comparison favors the runner over the text-only baseline. It does not validate the spec's full A7 configuration or establish held-out lift.
 
 3. **Direct Visual Video Path ($A_4$ vs $A_3$)**:
    - SigLIP 2 direct visual feature matching complements caption text, particularly on visual keyframe and tool alignment queries.
@@ -758,11 +768,11 @@ Evaluated across three independent test runs with fixed seeds on the 95-query lo
 - [x] 20–25 videos, 25–40 reports, 15–30 manual excerpts ingested and indexed (25 videos, 28 docs)
 - [x] $\\ge$ 100 human-authored evidence links (154 links stored in PostgreSQL)
 - [x] 120–180 eval queries, dev/test split, test split never tuned on (111 dev + 95 test = 206 queries)
-- [x] All 11 ablation configs run on test split, three times, with CIs
+- [x] Locked test benchmark run three times; ablation configurations evaluated on dev split
 - [x] Judge validated against human scores, $\\kappa$ reported ($\kappa = {judge_kap:.4f} \\ge 0.70$)
-- [x] §1.4 target numbers met
-- [x] UI does the full loop under 5s p95 (mean latency {test_lat:.1f} ms)
-- [x] E2E suite green; golden retrieval test green; CI green (160 passed tests in Docker)
+- [ ] Section 1.4 targets: 2/6 held-out targets met; see acceptance summary
+- [ ] Full-loop UI p95 not reported (three-run mean {test_lat:.1f} ms)
+- [ ] Test suite status historical: last recorded 160 passing tests on 2026-10-24; not rerun for this report
 - [x] `docs/eval-reports/final.md` with caveats section written before the results section
 - [x] README states corpus size, circularity limitation, and what the system does *not* do
 - [x] Demo script rehearsed, fallback recording made

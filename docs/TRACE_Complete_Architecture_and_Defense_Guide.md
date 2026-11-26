@@ -134,21 +134,22 @@ In `backend/app/generation.py`:
 
 ## 4. Empirical Evaluation & Honest Benchmark Results
 
-The system was evaluated against the formal **Definition of Done (DoD)** gates specified in the engineering contract.
+As of 2026-11-26, the six Section 1.4 criteria have this evidence:
 
 | Gate | Criterion | Spec Target | Measured Performance | Status |
 |---|---|---|---|---|
-| **DoD Gate 1** | Whole-Video Recall@5 | $\ge 60.0\%$ | **96.2%** | **PASSED** |
-| **DoD Gate 2** | Temporal Mean IoU | $\ge 0.4000$ | **0.7477** (p50: 0.8125, R@1\|IoU$\ge$0.3: 76.9%) | **PASSED** |
-| **DoD Gate 3** | Document Chunk Recall@5 | $\ge 80.0\%$ | **96.7%** (29/30 queries, 95% CI: [90.0%–100.0%]) | **PASSED** |
-| **DoD Gate 4** | Grounded Answer Faithfulness | $\ge 85.0\%$ | **90.4%** (Zero unverified claims admitted) | **PASSED** |
-| **DoD Gate 5** | Multi-Hop Lift over Text-Only | $> 0.0\%$ | **+46.7%** Joint Recall@5 ($p = 0.0000$) | **PASSED** |
-| **DoD Gate 6** | End-to-End p95 Latency | $< 5,000$ ms | **381.1 ms** (Warm execution on RTX 4050) | **PASSED** |
+| 1 | Video Segment Recall@5 | ≥70% | 63.3% (19/30; test); dev 88.5% (n=26) | Below target |
+| 2 | Document Chunk Recall@5 | ≥80% | 100.0% (15 queries; 3 runs) | Met |
+| 3 | Grounded Answer Faithfulness | ≥85% | 90.4% (multi-hop test n=30; 3 runs) | Met |
+| 4 | Temporal Mean IoU | ≥0.40 | 0.7477 on dev (n=26); locked-test result not reported | Not established |
+| 5 | Lift over text-only | Positive delta | +46.7 percentage points on dev (n=30); held-out comparison not reported | Dev only |
+| 6 | Full-loop UI latency | p95 <5,000 ms | p95 not reported; three-run mean 381.1 ms | Not established |
 
+Current result: 2/6 held-out targets met, one below target, and three lacking required held-out evidence. Abstention (10/10) is a separate Phase 5 result. The 160-test result is historical (last recorded 2026-10-24).
 ### Additional Quality Controls:
 - **Honesty Gate:** **10 / 10** held-out unanswerable safety probes correctly triggered abstention without hallucinating.
-- **Judge-Human Agreement:** Evaluated using Cohen’s kappa $\kappa = \mathbf{0.8667}$ (exceeds the $\ge 0.70$ calibration threshold), ensuring LLM evaluation scores match human expert grading.
-- **Automated Regression Suite:** **160 / 160** unit and integration tests passing in Docker Compose.
+- **Judge-Human Agreement:** Evaluated using Cohen’s kappa $\kappa = \mathbf{0.8667}$ (exceeds the $\ge 0.70$ calibration threshold), with measured 93.3% agreement on the 30-item spot-check.
+- **Automated Regression Suite:** **160 / 160** unit and integration tests last recorded on 2026-10-24; not rerun for this audit.
 
 ---
 

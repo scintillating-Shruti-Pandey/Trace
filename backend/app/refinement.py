@@ -93,6 +93,7 @@ def refine_temporal_span(
     start_s: float,
     end_s: float,
     caption: str = "",
+    transcript: str | None = None,
     *,
     window_size_s: float = DEFAULT_WINDOW_SIZE_S,
     stride_s: float = DEFAULT_STRIDE_S,
@@ -127,6 +128,29 @@ def refine_temporal_span(
         )
 
     query_terms = tokenize_terms(query)
+
+    # Optional ASR payload convention: ``[absolute_start,absolute_end] token``.
+    # Word-level hits take precedence because they provide measured timing;
+    # the current corpus has no such payload until ASR indexing is approved.
+    timed_hits: list[tuple[float, float]] = []
+    for match in re.finditer(
+        r"\[(\d+(?:\.\d+)?),(\d+(?:\.\d+)?)\]\s*([^\s]+)", transcript or ""
+    ):
+        word_start, word_end = float(match.group(1)), float(match.group(2))
+        word_terms = tokenize_terms(match.group(3))
+        if word_start < word_end and word_terms.intersection(query_terms):
+            timed_hits.append((word_start, word_end))
+    if timed_hits:
+        hit_start = max(start_s, min(start for start, _ in timed_hits) - 1.0)
+        hit_end = min(end_s, max(end for _, end in timed_hits) + 1.0)
+        if hit_end > hit_start:
+            return RefinedSpan(
+                start_s=round(hit_start, 2),
+                end_s=round(hit_end, 2),
+                seek_to_s=round(max(0.0, hit_start - lead_in_s), 2),
+                confidence=1.0,
+            )
+
     clauses = parse_action_clauses(caption)
 
     # Allocate sub-intervals for each action clause across the coarse segment

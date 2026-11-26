@@ -186,7 +186,7 @@
   * Trace implements a pre-audited relational graph of **154 human evidence links**.
   * Formally links video timestamps to manual section IDs, exact page breadcrumbs, and engineering notes.
   * When a user searches for an assembly step in a video, the system performs **1-hop graph expansion**, automatically pulling the connected technical manual section into the generation context!
-* **Quantified Impact**: Graph expansion delivers a massive **+46.7% lift** in Joint Recall@10 over isolated retrieval lanes.
+* **Measured A5 vs A4 Dev Difference (n=30)**: Joint Recall@10 is +3.3 percentage points and MRR@20 is +0.0139; no paired tests were computed for these metrics. Joint Recall@5 is -3.3 pp (p=0.3598), so the result does not establish a significant top-5 gain.
 
 ---
 
@@ -277,12 +277,12 @@
 ---
 
 # Slide 15: Benchmark Highlights & Performance Metrics
-### Statistical Superiority Over Traditional Architectures
+### Dev Results; Held-Out DoD Evidence Is Incomplete
 
 ```
        JOINT RECALL@10 COMPARISON                 KEY PERFORMANCE INDICATORS
   100% ┌───────────────────────────────┐     ┌───────────────────────────────────┐
-       │                               │     │  +46.7% Retrieval Lift           │
+       │                               │     │  +46.7 pp Joint Recall@5 (dev, n=30)           │
    75% │                     █████████ │     │  Over naive text-only baseline    │
        │                     █████████ │     ├───────────────────────────────────┤
    50% │           █████████ █████████ │     │  100.0% Honesty Precision         │
@@ -294,12 +294,7 @@
            (0.0%)     (70.0%)    (73.3%)     └───────────────────────────────────┘
 ```
 
-* **End-to-End Latency**: Under **387.5 ms** total latency on local laptop hardware:
-  * Dense embedding generation: 12.4 ms
-  * Visual SigLIP 2 alignment: 14.8 ms
-  * Vector search & RRF fusion: 42.3 ms
-  * Graph link expansion: 4.6 ms
-  * Temporal window refinement: 0.9 ms
+* **Latency**: A7 runner reported a **387.5 ms mean** on the multi-hop dev evaluation; p95 was not reported. The earlier stage-by-stage breakdown is not supported by the final benchmark report.
 
 ---
 
@@ -312,10 +307,10 @@
   * 200 held-out equipment inspection caption-query pairs held strictly in RAM.
   * Evaluated against frozen, unchanged Trace `BGE-M3` dense representations.
 * **Results**:
-  * **Top-1 Retrieval Accuracy**: **84.5%**
-  * **Top-5 Retrieval Accuracy**: **96.0%**
-  * **Mean Reciprocal Rank (MRR)**: **0.892**
-* **Conclusion**: Proves that dense representations learned by Trace generalize robustly to unseen industrial equipment, different camera angles, and novel maintenance tasks with zero fine-tuning.
+  * **Top-1 Retrieval Accuracy**: **64.5%**
+  * **Top-5 Retrieval Accuracy**: **89.0%**
+  * **Recall@10**: **95.5%**; **MRR@20**: **0.7512**
+* **Conclusion**: Provides a zero-shot retrieval result using the unchanged, off-the-shelf BGE-M3 encoder; it does not show a model trained by Trace generalizing to unseen industrial equipment, different camera angles, and novel maintenance tasks with zero fine-tuning.
 
 ---
 
@@ -388,7 +383,7 @@
 ### Key Takeaways for Intelligent Model Design using AI
 
 1. **Multi-Modal Grounding is Non-Negotiable**: In physical engineering, text alone is insufficient. True intelligence requires binding visual pixels, timecode spans, and technical text into a unified representation.
-2. **Structure Beats Brute Force**: Adding hierarchical headings, breadcrumb trails, and pre-audited evidence links outperformed scaling model parameters, delivering a **+46.7% retrieval boost**.
+2. **Evidence links show mixed dev results**: A5 vs A4 differs by +3.3 pp in Joint Recall@10 and +0.0139 MRR@20 (descriptive only); Joint Recall@5 falls by 3.3 pp (p=0.3598).
 3. **Honesty is a Core Feature**: In high-stakes manufacturing, knowing when to abstain is just as important as knowing the answer.
 4. **Deployable on the Edge**: High-accuracy multi-modal intelligence does not require massive cloud supercomputers—Trace operates entirely within a **6 GB laptop GPU budget at $0.00 cost**.
 

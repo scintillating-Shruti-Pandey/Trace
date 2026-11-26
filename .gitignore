@@ -6,6 +6,10 @@ __pycache__/
 .ruff_cache/
 *.egg-info/
 .env
+# One-off local media decode probes; never commit downloaded source media.
+tmp_check_media/
+tmp_check_media_*/
+tmp_frame.png
 data/*
 !data/incoming/
 data/incoming/*

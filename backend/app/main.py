@@ -3,11 +3,13 @@ import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Annotated
+from urllib.parse import urlparse
 from uuid import UUID
 
+import httpx
 import json
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import func, select, text
 from sqlalchemy.exc import IntegrityError
@@ -25,6 +27,14 @@ from app.generation import (
     validate_citations,
 )
 from app.ingest.probe import incoming_file
+from app.local_models import (
+    FasterWhisperTranscriber,
+    LocalCandidateReranker,
+    LocalModelUnavailable,
+    LocalQueryAnalyzer,
+    OllamaClient,
+    caption_frames,
+)
 from app.models import Asset, Chunk, EvidenceLink, Image, RemoteSource, Segment, StageStatus
 from app.schemas import (
     AssetCreate,
@@ -59,6 +69,24 @@ Database = Annotated[Session, Depends(get_session)]
 def create_app(settings: Settings | None = None):
     settings = settings or Settings()
 
+    def make_search_service(embedder, visual_client):
+        local_client = None
+        if settings.query_analysis_enabled or settings.rerank_enabled:
+            local_client = OllamaClient(
+                settings.llm_endpoint, settings.llm_model, settings.llm_timeout
+            )
+        return SearchService(
+            embedder,
+            visual_client=visual_client,
+            query_analyzer=(
+                LocalQueryAnalyzer(local_client) if settings.query_analysis_enabled else None
+            ),
+            reranker=(
+                LocalCandidateReranker(local_client) if settings.rerank_enabled else None
+            ),
+            visual_segment_fusion=settings.visual_segment_fusion_enabled,
+        )
+
     @asynccontextmanager
     async def lifespan(app):
         engine = make_engine(settings)
@@ -83,7 +111,8 @@ def create_app(settings: Settings | None = None):
     # Serve static assets (logo, background images, etc.) at /static/*
     _static_dir = Path(__file__).parent / "static"
     if _static_dir.exists():
-        app.mount("/static", StaticFiles(directory=str(_static_dir)), name="static")
+        app.mount("/static", StaticFiles(directory=str(_static_dir)),
+                  name="static")
 
     @app.exception_handler(MissingItem)
     async def missing_handler(_, exc):
@@ -113,8 +142,10 @@ def create_app(settings: Settings | None = None):
     async def ready():
         def check_database():
             with app.state.engine.connect() as connection:
-                revision = connection.scalar(text("SELECT version_num FROM alembic_version"))
-                extensions = set(connection.scalars(text("SELECT extname FROM pg_extension")))
+                revision = connection.scalar(
+                    text("SELECT version_num FROM alembic_version"))
+                extensions = set(connection.scalars(
+                    text("SELECT extname FROM pg_extension")))
                 if revision != "0002" or not {"vector", "pg_trgm"}.issubset(extensions):
                     raise RuntimeError("database schema or extensions missing")
 
@@ -142,7 +173,8 @@ def create_app(settings: Settings | None = None):
 
     @app.get("/api/v1/status", tags=["corpus"])
     def status(session: Database):
-        counts = dict(session.execute(select(Asset.kind, func.count()).group_by(Asset.kind)).all())
+        counts = dict(session.execute(
+            select(Asset.kind, func.count()).group_by(Asset.kind)).all())
         return {
             "phase": "0 — corpus foundations",
             "assets": counts,
@@ -167,7 +199,8 @@ def create_app(settings: Settings | None = None):
         offset: int = Query(0, ge=0),
         limit: int = Query(25, ge=1, le=100),
     ):
-        query = select(RemoteSource).order_by(RemoteSource.path, RemoteSource.id)
+        query = select(RemoteSource).order_by(
+            RemoteSource.path, RemoteSource.id)
         return {
             "scope": "registered remote references; not processed corpus assets",
             "items": [row(s) for s in session.scalars(query.offset(offset).limit(limit))],
@@ -189,8 +222,10 @@ def create_app(settings: Settings | None = None):
             filters.append(Asset.kind == kind)
         if equipment_family:
             filters.append(Asset.equipment_family == equipment_family)
-        query = select(Asset).where(*filters).order_by(Asset.ingested_at, Asset.id)
-        total = session.scalar(select(func.count()).select_from(Asset).where(*filters))
+        query = select(Asset).where(
+            *filters).order_by(Asset.ingested_at, Asset.id)
+        total = session.scalar(
+            select(func.count()).select_from(Asset).where(*filters))
         return {
             "items": [row(a) for a in session.scalars(query.offset(offset).limit(limit))],
             "total": total,
@@ -206,13 +241,15 @@ def create_app(settings: Settings | None = None):
             "segments": [
                 row(s)
                 for s in session.scalars(
-                    select(Segment).where(Segment.asset_id == key).order_by(Segment.start_s)
+                    select(Segment).where(Segment.asset_id ==
+                                          key).order_by(Segment.start_s)
                 )
             ],
             "chunks": [
                 row(c)
                 for c in session.scalars(
-                    select(Chunk).where(Chunk.asset_id == key).order_by(Chunk.idx)
+                    select(Chunk).where(
+                        Chunk.asset_id == key).order_by(Chunk.idx)
                 )
             ],
             "images": [row(i) for i in session.scalars(select(Image).where(Image.asset_id == key))],
@@ -257,11 +294,11 @@ def create_app(settings: Settings | None = None):
         offset: int = Query(0, ge=0),
         limit: int = Query(20, ge=1, le=100),
     ):
-        query = select(EvidenceLink).order_by(EvidenceLink.created_at, EvidenceLink.id)
+        query = select(EvidenceLink).order_by(
+            EvidenceLink.created_at, EvidenceLink.id)
         if segment_id:
             query = query.where(EvidenceLink.segment_id == str(segment_id))
         return {"items": [row(link) for link in session.scalars(query.offset(offset).limit(limit))]}
-
 
     @app.post("/api/v1/search", tags=["retrieval"])
     def search(
@@ -270,7 +307,8 @@ def create_app(settings: Settings | None = None):
         user: Annotated[AuthUser, Depends(require_role(Role.ENGINEER))] = None,
     ):
         if not settings.search_enabled:
-            raise HTTPException(503, "Search is disabled until retrieval phase is activated")
+            raise HTTPException(
+                503, "Search is disabled until retrieval phase is activated")
         embedder = BgeM3Client(
             api_key=settings.embedding_api_key or settings.deepinfra_api_key,
             endpoint=settings.embedding_endpoint,
@@ -278,7 +316,7 @@ def create_app(settings: Settings | None = None):
         visual_client = SiglipVisualClient(
             endpoint=settings.visual_endpoint,
         )
-        service = SearchService(embedder, visual_client=visual_client)
+        service = make_search_service(embedder, visual_client)
         if value.modality == "all":
             return service.search_multimodal(
                 session,
@@ -302,7 +340,8 @@ def create_app(settings: Settings | None = None):
             for s in segs:
                 s.setdefault("lanes", ["segment_dense"])
             if value.link_expansion:
-                exp_segs, exp_chunks = expand_candidates(session, segs, [], query_text=value.query)
+                exp_segs, exp_chunks = expand_candidates(
+                    session, segs, [], query_text=value.query)
                 output["video_segments"] = exp_segs[:value.limit]
                 if exp_chunks:
                     output["linked_documents"] = exp_chunks
@@ -317,7 +356,8 @@ def create_app(settings: Settings | None = None):
             for c in chunks:
                 c.setdefault("lanes", ["chunk_hybrid_rrf"])
             if value.link_expansion:
-                exp_segs, exp_chunks = expand_candidates(session, [], chunks, query_text=value.query)
+                exp_segs, exp_chunks = expand_candidates(
+                    session, [], chunks, query_text=value.query)
                 output["document_chunks"] = exp_chunks[:value.limit]
                 if exp_segs:
                     output["linked_videos"] = exp_segs
@@ -337,7 +377,8 @@ def create_app(settings: Settings | None = None):
     @app.post("/api/v1/generate", response_model=GenerateResponse, tags=["generation"])
     def generate_answer(value: GenerateRequest, session: Database):
         if not settings.search_enabled:
-            raise HTTPException(503, "Search and generation are disabled until retrieval phase is activated")
+            raise HTTPException(
+                503, "Search and generation are disabled until retrieval phase is activated")
         embedder = BgeM3Client(
             api_key=settings.embedding_api_key or settings.deepinfra_api_key,
             endpoint=settings.embedding_endpoint,
@@ -345,7 +386,7 @@ def create_app(settings: Settings | None = None):
         visual_client = SiglipVisualClient(
             endpoint=settings.visual_endpoint,
         )
-        service = SearchService(embedder, visual_client=visual_client)
+        service = make_search_service(embedder, visual_client)
         multimodal = service.search_multimodal(
             session,
             value.query,
@@ -396,7 +437,8 @@ def create_app(settings: Settings | None = None):
         link_expansion: bool = Query(True),
     ):
         if not settings.search_enabled:
-            raise HTTPException(503, "Search and generation are disabled until retrieval phase is activated")
+            raise HTTPException(
+                503, "Search and generation are disabled until retrieval phase is activated")
 
         def retrieve():
             with app.state.engine.connect() as conn:
@@ -408,7 +450,7 @@ def create_app(settings: Settings | None = None):
                     visual_client = SiglipVisualClient(
                         endpoint=settings.visual_endpoint,
                     )
-                    service = SearchService(embedder, visual_client=visual_client)
+                    service = make_search_service(embedder, visual_client)
                     multimodal = service.search_multimodal(
                         session,
                         query,
@@ -430,54 +472,219 @@ def create_app(settings: Settings | None = None):
                 async for event in generator.stream_generate(query, evidence):
                     yield f"data: {json.dumps(event)}\n\n"
             except Exception as exc:
-                err_payload = json.dumps({"type": "error", "message": str(exc)})
+                err_payload = json.dumps(
+                    {"type": "error", "message": str(exc)})
                 yield f"data: {err_payload}\n\n"
 
         return StreamingResponse(sse_event_stream(), media_type="text/event-stream")
 
     # ------------------------------------------------------------------ #
-    #  IVP — Image & Video Processing API (classical computer vision)    #
+    #  IVP — Image & Video Processing on the real IndEgo dataset          #
     # ------------------------------------------------------------------ #
+    # Every frame analysed here is decoded from the pinned dataset release
+    # through the media proxy below. Nothing is a reconstruction or a
+    # placeholder: /api/v1/ivp/frame returns actual dataset pixels.
+    @app.get("/api/v1/ivp/catalog", tags=["ivp"])
+    def ivp_catalog():
+        """Technique syllabus plus the verified dataset inventory."""
+        from app.ivp.service import ManifestError, dataset_overview
+        from app.ivp.techniques import catalog
+
+        payload = catalog()
+        try:
+            payload["dataset"] = dataset_overview()
+            payload["dataset_available"] = True
+        except ManifestError as exc:
+            payload["dataset"] = {"error": str(exc)}
+            payload["dataset_available"] = False
+        return payload
+
+    @app.get("/api/v1/ivp/frame", tags=["ivp"])
+    def ivp_frame(
+        stem: str = Query(..., min_length=1),
+        t: float = Query(0.0, ge=0.0),
+        w: int = Query(640, ge=160, le=960),
+    ):
+        """A real IndEgo frame at time `t`, as PNG, decoded on demand."""
+        from app.ivp.frames import FrameError, frame_png
+        from app.ivp.manifest import ManifestError
+
+        try:
+            payload, meta = frame_png(stem, t, w)
+        except ManifestError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except FrameError as exc:
+            raise HTTPException(503, f"frame unavailable: {exc}") from exc
+        return Response(
+            content=payload,
+            media_type="image/png",
+            headers={
+                # Dataset-derived pixels must not become persistent browser or proxy cache files.
+                "Cache-Control": "no-store",
+                "X-Trace-Source": "indego",
+                "X-Trace-Timestamp": str(meta["timestamp_s"]),
+            },
+        )
+
     @app.post("/api/v1/ivp/analyze", tags=["ivp"])
-    def ivp_analyze_frame(file: bytes = None):
-        """Run all 8 classical IVP techniques on an uploaded image frame.
+    async def ivp_analyze(
+        request: Request,
+        stem: str | None = Query(None),
+        t: float = Query(0.0, ge=0.0),
+        w: int = Query(640, ge=160, le=960),
+    ):
+        """Run the full classical IVP pipeline on real footage or a raw upload.
 
-        Accepts raw image bytes (multipart/form-data).
-        Returns color space stats, histogram metrics, edge density,
-        morphology fill ratios, SIFT/ORB keypoint counts, and HOG descriptor stats.
-        Useful for the IVP lab demonstration component of TRACE.
+        Send the image as the raw request body (e.g. `Content-Type: image/png`)
+        to analyse a captured frame, or omit the body and pass `stem` + `t` to
+        analyse a real dataset frame. Built without multipart parsing so the
+        runtime needs no extra form-dependency.
         """
-        try:
-            from app.ivp.processing import run_full_ivp_pipeline, make_synthetic_frame  # type: ignore
-        except ImportError:
-            raise HTTPException(500, "opencv-python-headless is not installed. Run: pip install opencv-python-headless")
+        from app.ivp.frames import FrameError
+        from app.ivp.manifest import ManifestError
+        from app.ivp.service import analyze_dataset_frame, analyze_upload
 
         try:
-            import cv2
-            import numpy as np
-            if file:
-                arr = np.frombuffer(file, np.uint8)
-                bgr = cv2.imdecode(arr, cv2.IMREAD_COLOR)
-                if bgr is None:
-                    raise HTTPException(400, "Cannot decode image — send valid JPEG or PNG bytes")
-            else:
-                # Synthetic test frame (demo mode)
-                from scripts.ivp_demo import make_synthetic_frame as msf  # type: ignore
-                bgr = msf()
+            body = await request.body()
+            if body:
+                label = request.headers.get("x-frame-label", "captured frame")
+                return analyze_upload(body, label)
+            if not stem:
+                raise HTTPException(
+                    422, "send an image body, or pass `stem` plus `t` for a dataset frame"
+                )
+            return analyze_dataset_frame(stem, t, w)
+        except ManifestError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except FrameError as exc:
+            raise HTTPException(503, str(exc)) from exc
 
-            results = run_full_ivp_pipeline(bgr)
-            # Strip base64 images from API response (keep metrics only — images are large)
-            slim = {}
-            for key, data in results.items():
-                slim[key] = {
-                    "technique":   data.get("technique"),
-                    "description": data.get("description"),
-                    "metrics":     {k: v for k, v in data.get("metrics", {}).items()
-                                    if not isinstance(v, (list, dict))},
+    @app.get("/api/v1/ivp/analyze-frame", tags=["ivp"])
+    def ivp_analyze_frame(
+        stem: str = Query(..., min_length=1),
+        t: float = Query(0.0, ge=0.0),
+        w: int = Query(640, ge=160, le=960),
+    ):
+        """Same pipeline as POST /analyze, addressed by dataset coordinates."""
+        from app.ivp.frames import FrameError
+        from app.ivp.manifest import ManifestError
+        from app.ivp.service import analyze_dataset_frame
+
+        try:
+            return analyze_dataset_frame(stem, t, w)
+        except ManifestError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except FrameError as exc:
+            raise HTTPException(503, str(exc)) from exc
+
+    @app.get("/api/v1/ivp/segment", tags=["ivp"])
+    def ivp_segment(
+        stem: str = Query(..., min_length=1),
+        start: float = Query(..., ge=0.0),
+        end: float = Query(..., ge=0.0),
+        fps: float = Query(2.0, ge=0.25, le=4.0),
+        w: int = Query(640, ge=160, le=960),
+    ):
+        """Keyframe selection and optical flow across a real time window."""
+        from app.ivp.frames import FrameError
+        from app.ivp.manifest import ManifestError
+        from app.ivp.service import analyze_dataset_range
+
+        if end <= start:
+            raise HTTPException(422, "`end` must be greater than `start`")
+        try:
+            return analyze_dataset_range(stem, start, end, fps=fps, width=w)
+        except ManifestError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except FrameError as exc:
+            raise HTTPException(503, str(exc)) from exc
+
+    @app.post("/api/v1/ivp/enrich", tags=["ivp"])
+    def ivp_enrich(
+        stem: str = Query(..., min_length=1),
+        start: float = Query(..., ge=0.0),
+        end: float = Query(..., gt=0.0),
+        language: str | None = Query(None, min_length=2, max_length=12),
+    ):
+        """Caption and transcribe one real dataset interval in memory.
+
+        This optional path is disabled by default. It never stores media or
+        enrichment output; ASR timestamps are returned as source-video times.
+        """
+        if not settings.ivp_ai_enabled:
+            raise HTTPException(
+                503, "Local captioning/ASR is not activated; model setup needs approval"
+            )
+        if end <= start or end - start > 60:
+            raise HTTPException(422, "`end` must exceed `start` and the interval must be <= 60s")
+
+        from app.ivp.frames import FrameError, FrameRequest, grab_audio_wav, grab_frames
+        from app.ivp.manifest import ManifestError, load_manifest
+        import cv2
+
+        try:
+            entry = load_manifest().get(stem)
+            if end > entry.duration_s:
+                raise HTTPException(422, "interval extends beyond the source video")
+            sample_count = min(8, max(2, int(round((end - start) / 4)) + 1))
+            frames = grab_frames(FrameRequest(
+                stem=stem, start_s=start, count=sample_count,
+                fps=sample_count / (end - start), width=640,
+            ))
+            encoded_frames = []
+            for frame in frames:
+                ok, encoded = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 82])
+                if not ok:
+                    raise FrameError("could not encode sampled frame for local captioning")
+                encoded_frames.append(bytes(encoded))
+            audio = grab_audio_wav(stem, start, end - start)
+            transcript = FasterWhisperTranscriber(
+                settings.asr_model,
+                device=settings.asr_device,
+                compute_type=settings.asr_compute_type,
+            ).transcribe(audio, language=language)
+            caption_client = OllamaClient(
+                settings.llm_endpoint, settings.ivp_caption_model, settings.llm_timeout
+            )
+            caption = caption_frames(
+                caption_client,
+                encoded_frames,
+                title=entry.title,
+                start_s=start,
+                end_s=end,
+                transcript=transcript.text,
+            )
+        except ManifestError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except (FrameError, LocalModelUnavailable) as exc:
+            raise HTTPException(503, str(exc)) from exc
+
+        return {
+            "source": "huggingface:IndEgo",
+            "stem": entry.stem,
+            "title": entry.title,
+            "interval": {"start_s": start, "end_s": end},
+            "caption": caption,
+            "caption_model": settings.ivp_caption_model,
+            "transcript": transcript.text,
+            "transcript_model": transcript.model,
+            "words": [
+                {
+                    "text": word.text,
+                    "start_s": round(start + word.start_s, 3),
+                    "end_s": round(start + word.end_s, 3),
                 }
-            return slim
-        except Exception as exc:
-            raise HTTPException(500, f"IVP pipeline error: {exc}") from exc
+                for word in transcript.words
+            ],
+            "persisted": False,
+        }
+
+    @app.get("/ivp", response_class=HTMLResponse, tags=["demo"])
+    def ivp_lab():
+        lab_path = Path(__file__).parent / "static" / "ivp_lab.html"
+        if not lab_path.exists():
+            raise HTTPException(404, "IVP lab page not found")
+        return HTMLResponse(content=lab_path.read_text(encoding="utf-8"))
 
     @app.get("/", response_class=HTMLResponse, tags=["demo"])
     def root():
@@ -519,5 +726,82 @@ def create_app(settings: Settings | None = None):
     @app.get("/static/bg-clouds.jpg", tags=["demo"])
     def get_static_bg_clouds():
         return get_bg_clouds()
+
+    @app.get("/api/v1/media/proxy", tags=["demo"])
+    async def media_proxy(url: str = Query(...), request: Request = None):
+        """Proxy IndEgo dataset videos for same-origin HTML5 playback with range support."""
+        parsed = urlparse(url)
+        allowed_prefix = "/datasets/FraunhoferIPK/IndEgo/resolve/"
+        if parsed.scheme not in {"https"}:
+            raise HTTPException(400, "Only HTTPS media URLs are allowed")
+        if parsed.netloc != "huggingface.co" or not parsed.path.startswith(allowed_prefix):
+            raise HTTPException(400, "Unsupported media source URL")
+
+        upstream_headers: dict[str, str] = {}
+        range_header = request.headers.get("range") if request else None
+        if range_header:
+            upstream_headers["Range"] = range_header
+
+        client = httpx.AsyncClient(
+            follow_redirects=True, timeout=httpx.Timeout(60.0, read=60.0))
+        try:
+            upstream_request = client.build_request(
+                "GET", url, headers=upstream_headers)
+            upstream = await client.send(upstream_request, stream=True)
+        except httpx.HTTPError as exc:
+            await client.aclose()
+            raise HTTPException(
+                502, f"Media upstream unavailable: {exc}") from exc
+
+        # Some demo labels may point to the wrong IndEgo category directory.
+        # If the first URL 404s, retry by swapping 1_Assembly <-> 2_Inspection_Repair.
+        if upstream.status_code == 404:
+            alt_path = None
+            if "/1_Assembly/" in parsed.path:
+                alt_path = parsed.path.replace(
+                    "/1_Assembly/", "/2_Inspection_Repair/", 1)
+            elif "/2_Inspection_Repair/" in parsed.path:
+                alt_path = parsed.path.replace(
+                    "/2_Inspection_Repair/", "/1_Assembly/", 1)
+
+            if alt_path:
+                await upstream.aclose()
+                alt_url = parsed._replace(path=alt_path).geturl()
+                try:
+                    upstream_request = client.build_request(
+                        "GET", alt_url, headers=upstream_headers)
+                    upstream = await client.send(upstream_request, stream=True)
+                except httpx.HTTPError as exc:
+                    await client.aclose()
+                    raise HTTPException(
+                        502, f"Media upstream unavailable: {exc}") from exc
+
+        if upstream.status_code >= 400:
+            body = (await upstream.aread()).decode("utf-8", errors="ignore")
+            await upstream.aclose()
+            await client.aclose()
+            raise HTTPException(upstream.status_code,
+                                body[:200] or "Media upstream returned error")
+
+        passthrough_headers = {}
+        for key in ["content-type", "content-length", "content-range", "accept-ranges", "cache-control"]:
+            value = upstream.headers.get(key)
+            if value:
+                passthrough_headers[key] = value
+
+        async def iter_upstream():
+            try:
+                async for chunk in upstream.aiter_bytes():
+                    yield chunk
+            finally:
+                await upstream.aclose()
+                await client.aclose()
+
+        return StreamingResponse(
+            iter_upstream(),
+            status_code=upstream.status_code,
+            headers=passthrough_headers,
+            media_type=upstream.headers.get("content-type", "video/mp4"),
+        )
 
     return app

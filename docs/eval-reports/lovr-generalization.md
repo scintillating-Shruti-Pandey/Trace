@@ -33,7 +33,7 @@ To resolve Decision D7 under Person 2's handover scope, we evaluated the unchang
 ## 3. Analysis and Findings
 
 1. **Out-of-Domain Zero-Shot Transfer**:
-   The BGE-M3 dense representation learned from the 25 IndEgo manufacturing assets transfers with high precision to external machinery inspections without catastrophic forgetting or domain drift.
+   The unchanged, off-the-shelf BGE-M3 encoder produced the reported zero-shot retrieval scores on this 200-item subset. This does not measure a Trace-trained representation or establish robustness across all external machinery.
 2. **Technical Vocabulary Specificity**:
    Specific terminology ("thermography hot spot", "runout dial indicator", "cavitation pitting", "flange torque") matched candidate intervals with zero false positives in the top-5 ranks.
 3. **Hardware and Cost Compliance**:
